@@ -36,42 +36,46 @@ const Home = () => {
   return (
     <div className="space-y-20">
       <Motion.section
-        className="w-full min-h-screen flex items-center justify-center"
+        className="w-full min-h-screen flex items-center justify-center px-4 sm:px-6"
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
       >
         <Motion.div
-          className="relative w-full aspect-video overflow-visible"
+          className="relative w-full max-w-6xl aspect-video overflow-visible"
           whileHover={{ scale: 1.01 }}
         >
           <video
             ref={videoRef}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover rounded-lg"
             src={fishing}
             poster={main}
           />
 
+          {/* Fullscreen Button */}
           <button
             onClick={handleFullScreen}
-            className="absolute top-4 right-4 bg-white/20 hover:bg-white/30 text-white p-2 rounded-full"
+            className="absolute top-2 right-2 sm:top-4 sm:right-4 bg-white/20 hover:bg-white/30 text-white p-2 rounded-full"
           >
-            <AiOutlineFullscreen className="w-5 h-5" />
+            <AiOutlineFullscreen className="w-4 h-4 sm:w-5 sm:h-5" />
           </button>
 
+          {/* Play Button */}
           {!isPlaying && (
             <button
               onClick={handlePlayPause}
               aria-label="Play Video"
               className="absolute inset-0 flex items-center justify-center bg-black/40 hover:bg-black/30"
             >
-              <FaPlay className="w-12 h-12 text-white" />
+              <FaPlay className="w-10 h-10 sm:w-12 sm:h-12 text-white" />
             </button>
           )}
 
-          <div className="absolute -bottom-7 left-1/2 transform -translate-x-1/2">
-            <button className="flex px-6 py-4 bg-primary rounded-lg shadow-md hover:bg-primary/85">
-              Upload Your Video here <BiArrowFromBottom className="size-5" />
+          {/* Upload Button */}
+          <div className="absolute -bottom-6 sm:-bottom-7 left-1/2 transform -translate-x-1/2">
+            <button className="flex items-center gap-2 px-4 py-2 sm:px-6 sm:py-4 bg-primary rounded-lg text-white shadow-md hover:bg-primary/85 text-sm sm:text-base">
+              Upload Your Video here{" "}
+              <BiArrowFromBottom className="w-4 h-4 sm:w-5 sm:h-5" />
             </button>
           </div>
         </Motion.div>
@@ -172,26 +176,28 @@ const Home = () => {
       </section>
 
       <section className="w-full flex flex-col items-center justify-center gap-6">
-        <h2 className="text-3xl md:text-4xl font-bold text-titlecolor text-center mb-12">
+        <h2 className="text-2xl md:text-4xl font-bold text-titlecolor text-center mb-12">
           Top tour operators
         </h2>
         {tour.map((feature, index) => (
           <div
             key={index}
-            className="flex w-full max-w-3xl h-48 bg-background shadow-lg rounded-3xl overflow-hidden"
+            className="flex flex-col md:flex-row w-full max-w-3xl h-auto md:h-48 bg-background shadow-lg rounded-3xl overflow-hidden"
           >
             <img
               src={feature.image}
               alt={feature.text || "Tour Operator"}
-              className="rounded-3xl w-full h-auto object-cover"
+              className="rounded-3xl w-full md:w-1/3 h-48 md:h-auto object-cover"
             />
 
-            <div className="p-6 flex items-center border-r-primary">
+            <div className="p-6 flex items-center border-r-primary md:justify-start md:w-1/2">
               <p className="text-lg">{feature.text}</p>
             </div>
           </div>
         ))}
       </section>
+
+
       <section className="w-full flex flex-col items-center justify-center gap-6">
         <h2 className="text-3xl md:text-4xl font-bold text-titlecolor text-center mb-12">
           Our Services

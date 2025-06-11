@@ -36,7 +36,7 @@ const Footer = () => {
 
       <footer className="w-full pt-20 px-6 pb-10 bg-footerbackground">
         <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             <div className="flex flex-col items-start justify-center-safe space-y-2">
               <img src={WhiteLogo} alt="TravelMateVr" className="w-32 h-auto" />
             </div>
