@@ -28,14 +28,14 @@ const Navbar = () => {
     >
       <div className="flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-1 text-white font-semibold text-xl">
+        <Link to="/" className="flex items-center gap-1 text-white font-semibold text-xl">
          <img src={MainLogo} alt="TravelMateVr" className="w-20 h-auto" />
         </Link>
 
         {/* Navigation links */}
         <div className="flex gap-8 items-center text-sm font-medium">
           {navItems.map((item) => (
-            <Link key={item.label} href={item.href} className="text-primary hover:text-white transition">
+            <Link key={item.label} to={item.href} className="text-primary hover:text-white transition">
               {item.label}
             </Link>
           ))}
@@ -43,7 +43,7 @@ const Navbar = () => {
 
         {/* Sign in button */}
         <Link
-          href="/signin"
+          to="/signin"
           className="text-primary hover:text-white transition font-semibold"
         >
           Sign in

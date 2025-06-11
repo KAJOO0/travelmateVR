@@ -7,6 +7,10 @@ import Tours from "./pages/tours";
 import Login from "./pages/login";
 import Blog from "./pages/blog";
 import Services from "./pages/services";
+import Cultural from "./pages/cultural";
+import Landscape from "./pages/landscape";
+import Wildlife from "./pages/wildlife";
+import FAQS from "./pages/faqs";
 
 function App() {
   return (
@@ -23,6 +27,10 @@ function App() {
           <Route path="privacypolicy" element={<Tours />} />
           <Route path="signIn" element={<Login />} />
           <Route path="blog" element={<Blog />} />
+          <Route path="faqs" element={<FAQS />} />
+          <Route path="cultural-heritage" element={<Cultural />} />
+          <Route path="landscape" element={<Landscape />} />
+          <Route path="wild-animals" element={<Wildlife />} />
         </Route>
       </Routes>
     </Router>

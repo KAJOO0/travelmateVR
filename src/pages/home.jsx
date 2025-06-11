@@ -1,5 +1,7 @@
 import React, { useRef, useState } from "react";
-import WhiteLogo from "../assets/img/TmVr_white_logo.png";
+import { motion as Motion } from "framer-motion";
+import main from "../assets/img/mainImage.png";
+import fishing from "../assets/videos/fishing.mp4";
 import { BiArrowFromBottom } from "react-icons/bi";
 import { FaFacebook, FaPlay } from "react-icons/fa6";
 import { AiOutlineEye, AiOutlineFullscreen } from "react-icons/ai";
@@ -32,17 +34,24 @@ const Home = () => {
   };
 
   return (
-    <div className="space-y-10">
-      <section className="w-full min-h-screen flex items-center justify-center bg-transparent">
-        <div className="relative w-full aspect-video bg-amber-50 rounded-4xl overflow-hidden shadow-xl">
+    <div className="space-y-20">
+      <Motion.section
+        className="w-full min-h-screen flex items-center justify-center"
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1 }}
+      >
+        <Motion.div
+          className="relative w-full aspect-video overflow-visible"
+          whileHover={{ scale: 1.01 }}
+        >
           <video
             ref={videoRef}
             className="w-full h-full object-cover"
-            src="your-video.mp4"
-            poster="your-poster.jpg"
+            src={fishing}
+            poster={main}
           />
 
-          {/* Fullscreen button */}
           <button
             onClick={handleFullScreen}
             className="absolute top-4 right-4 bg-white/20 hover:bg-white/30 text-white p-2 rounded-full"
@@ -50,7 +59,6 @@ const Home = () => {
             <AiOutlineFullscreen className="w-5 h-5" />
           </button>
 
-          {/* Play button */}
           {!isPlaying && (
             <button
               onClick={handlePlayPause}
@@ -61,14 +69,13 @@ const Home = () => {
             </button>
           )}
 
-          {/* Bottom center button */}
-          <div className="absolute -bottom-5 left-1/2 transform -translate-x-1/2">
-            <button className="flex px-6 py-2 bg-primary rounded-lg shadow-md hover:bg-primary/45">
+          <div className="absolute -bottom-7 left-1/2 transform -translate-x-1/2">
+            <button className="flex px-6 py-4 bg-primary rounded-lg shadow-md hover:bg-primary/85">
               Upload Your Video here <BiArrowFromBottom className="size-5" />
             </button>
           </div>
-        </div>
-      </section>
+        </Motion.div>
+      </Motion.section>
 
       <section className="space-y-5">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
@@ -82,36 +89,44 @@ const Home = () => {
           sections.map((section, index) => {
             const isEven = index % 2 === 0;
             return (
-              <div
+              <Motion.div
                 key={index}
                 className="flex flex-col md:flex-row w-full max-w-5xl mx-auto items-center gap-10 pb-10"
+                initial={{ opacity: 0, x: isEven ? -50 : 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8 }}
               >
-                <div
-                  className={`w-full md:w-1/2 mb-6 md:mb-0 ${
+                <Motion.div
+                  className={`w-full md:w-1/2 ${
                     isEven ? "md:order-1" : "md:order-2"
                   }`}
+                  whileHover={{ scale: 1.02 }}
                 >
                   <img
                     src={section.img}
-                    alt={section.title || "Image"}
+                    alt={section.title}
                     className="rounded-3xl w-full h-auto object-cover"
                   />
-                </div>
-
-                <div
-                  className={`w-full md:w-1/2 text-center md:text-left px-4 ${
+                </Motion.div>
+                <Motion.div
+                  className={`w-full md:w-1/2 px-4 ${
                     isEven ? "md:order-2" : "md:order-1"
                   }`}
+                  whileHover={{ scale: 1.02 }}
                 >
                   <h3 className="text-2xl font-semibold mb-4">
                     {section.title}
                   </h3>
                   <p className="mb-6">{section.text}</p>
-                  <button className="bg-primary text-white px-6 py-2 rounded-lg hover:bg-primary/45 transition">
+                  <Motion.button
+                    whileTap={{ scale: 0.95 }}
+                    className="bg-primary text-white px-6 py-2 rounded-lg hover:bg-primary/45 transition"
+                  >
                     Watch More
-                  </button>
-                </div>
-              </div>
+                  </Motion.button>
+                </Motion.div>
+              </Motion.div>
             );
           })}
       </section>
@@ -121,15 +136,18 @@ const Home = () => {
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
           {items.map((item, index) => (
-            <div
+            <Motion.div
               key={index}
               className="relative group h-80 rounded-4xl overflow-hidden shadow-lg bg-cover bg-center"
               style={{ backgroundImage: `url(${item.image})` }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              whileHover={{ scale: 1.03 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
             >
-              {/* Overlay on hover */}
               <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10" />
 
-              {/* Top-left badges */}
               <div className="absolute top-4 left-4 z-20 flex gap-2">
                 {item.badges.map((badge, i) => (
                   <span
@@ -141,7 +159,6 @@ const Home = () => {
                 ))}
               </div>
 
-              {/* Bottom-left content */}
               <div className="absolute bottom-4 left-4 z-20 text-white max-w-[80%]">
                 <h3 className="text-xl font-bold mb-1">{item.title}</h3>
                 <p className="text-sm mb-3">{item.text}</p>
@@ -149,7 +166,7 @@ const Home = () => {
                   Learn More
                 </button>
               </div>
-            </div>
+            </Motion.div>
           ))}
         </div>
       </section>
@@ -163,14 +180,12 @@ const Home = () => {
             key={index}
             className="flex w-full max-w-3xl h-48 bg-background shadow-lg rounded-3xl overflow-hidden"
           >
-            {/* Image section */}
             <img
               src={feature.image}
               alt={feature.text || "Tour Operator"}
               className="rounded-3xl w-full h-auto object-cover"
             />
 
-            {/* Text section */}
             <div className="p-6 flex items-center border-r-primary">
               <p className="text-lg">{feature.text}</p>
             </div>
@@ -206,7 +221,7 @@ const Home = () => {
                     isEven ? "md:order-2" : "md:order-1"
                   }`}
                 >
-                  <h3 className="text-2xl font-semibold mb-4">
+                  <h3 className="inline-block text-2xl font-semibold mb-4 py-2 border-b-4 border-primary">
                     {section.title}
                   </h3>
                   <p className="mb-6">{section.text}</p>
@@ -269,8 +284,6 @@ const Home = () => {
                 Create an account
               </h2>
             </div>
-
-            {/* Social Buttons */}
             <div className="flex space-x-4">
               <button className="flex-1 flex items-center justify-center gap-2 bg-blue-100 p-2 rounded-md hover:bg-blue-200 transition text-primary">
                 <FcGoogle size={20} />
@@ -281,15 +294,11 @@ const Home = () => {
                 Facebook
               </button>
             </div>
-
-            {/* OR Divider */}
             <div className="flex items-center space-x-2 text-gray-400 text-sm">
               <div className="flex-grow border-t" />
               <span>Or</span>
               <div className="flex-grow border-t" />
             </div>
-
-            {/* Form Fields */}
             <form className="space-y-4">
               <div>
                 <label className="text-sm font-medium text-gray-700">
@@ -319,16 +328,15 @@ const Home = () => {
                   <AiOutlineEye className="absolute top-1/2 right-3 -translate-y-1/2 text-gray-400 cursor-pointer" />
                 </div>
               </div>
-
-              <button
-                type="submit"
-                className="w-full bg-primary py-2 rounded-md hover:bg-primary/45 transition"
+              <Motion.button
+                whileTap={{ scale: 0.95 }}
+                whileHover={{ backgroundColor: "#0D1F2Az" }}
+                transition={{ type: "spring", stiffness: 300 }}
+                className="w-full bg-primary py-2 rounded-md hover:bg-primary/85 transition"
               >
                 Create account
-              </button>
+              </Motion.button>
             </form>
-
-            {/* Footer Link */}
             <p className="text-xs text-center text-gray-600">
               Already Have An Account?{" "}
               <a href="#" className="text-primary hover:underline">

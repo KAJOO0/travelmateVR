@@ -8,7 +8,7 @@ const MainLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div className="relative min-h-screen flex flex-col bg-gray-100 overflow-x-hidden z-0">
+    <div className="relative min-h-screen flex flex-col bg-secondary overflow-x-hidden z-0">
       {/* Background */}
       <div className="absolute inset-0 -z-10">
         <BackgroundCircles />
