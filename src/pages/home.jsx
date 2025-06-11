@@ -36,7 +36,7 @@ const Home = () => {
   return (
     <div className="space-y-20">
       <Motion.section
-        className="w-full min-h-screen flex items-center justify-center px-4 sm:px-6"
+        className="w-full min-h-screen flex items-center justify-center px-4"
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
@@ -55,9 +55,9 @@ const Home = () => {
           {/* Fullscreen Button */}
           <button
             onClick={handleFullScreen}
-            className="absolute top-2 right-2 sm:top-4 sm:right-4 bg-white/20 hover:bg-white/30 text-white p-2 rounded-full"
+            className="absolute md:top-2 md:right-2 top-4 right-4 bg-white/20 hover:bg-white/30 text-white p-2 rounded-full"
           >
-            <AiOutlineFullscreen className="w-4 h-4 sm:w-5 sm:h-5" />
+            <AiOutlineFullscreen className="w-5 h-5" />
           </button>
 
           {/* Play Button */}
@@ -67,15 +67,14 @@ const Home = () => {
               aria-label="Play Video"
               className="absolute inset-0 flex items-center justify-center bg-black/40 hover:bg-black/30"
             >
-              <FaPlay className="w-10 h-10 sm:w-12 sm:h-12 text-white" />
+              <FaPlay className="w-12 h-12 text-white" />
             </button>
           )}
 
           {/* Upload Button */}
-          <div className="absolute -bottom-6 sm:-bottom-7 left-1/2 transform -translate-x-1/2">
-            <button className="flex items-center gap-2 px-4 py-2 sm:px-6 sm:py-4 bg-primary rounded-lg text-white shadow-md hover:bg-primary/85 text-sm sm:text-base">
-              Upload Your Video here{" "}
-              <BiArrowFromBottom className="w-4 h-4 sm:w-5 sm:h-5" />
+          <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2">
+            <button className="flex items-center gap-2 px-4 py-2 bg-primary rounded-lg text-white shadow-md hover:bg-primary/85 text-sm sm:text-base">
+              Upload Your Video here <BiArrowFromBottom className="w-5 h-5" />
             </button>
           </div>
         </Motion.div>
@@ -196,7 +195,6 @@ const Home = () => {
           </div>
         ))}
       </section>
-
 
       <section className="w-full flex flex-col items-center justify-center gap-6">
         <h2 className="text-3xl md:text-4xl font-bold text-titlecolor text-center mb-12">
