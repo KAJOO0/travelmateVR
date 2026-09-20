@@ -1,16 +1,16 @@
 import React, { useRef, useState } from "react";
 import { motion as Motion } from "framer-motion";
-import main from "../assets/img/mainImage.png";
-import fishing from "../assets/videos/fishing.mp4";
 import { BiArrowFromBottom } from "react-icons/bi";
 import { FaFacebook, FaPlay } from "react-icons/fa6";
 import { AiOutlineEye, AiOutlineFullscreen } from "react-icons/ai";
-import { items, sections, services, tour } from "../utils/constants";
 import { FcGoogle } from "react-icons/fc";
+import { useSiteContent } from "../context/SiteContentContext";
 
 const Home = () => {
   const videoRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const { hero, content } = useSiteContent();
+  const { sections, items, tour, services } = content;
 
   const handlePlayPause = () => {
     if (!videoRef.current) return;
@@ -48,8 +48,8 @@ const Home = () => {
           <video
             ref={videoRef}
             className="w-full h-full object-cover rounded-lg"
-            src={fishing}
-            poster={main}
+            src={hero.videoSrc}
+            poster={hero.posterSrc}
           />
 
           {/* Fullscreen Button */}
@@ -281,7 +281,7 @@ const Home = () => {
           Sign up to Upload <br /> Your Content
         </h2>
         <div className="w-full flex items-center justify-center bg-background border border-primary rounded-3xl py-10 px-4">
-          <div className="bg-white rounded-3xl p-8 space-y-6 w-full max-w-md md:max-w-lg lg:max-w-xl">
+          <div className="bg-white rounded-3xl p-8 space-y-6 w-full max-w-2xl md:max-w-3xl lg:max-w-4xl">
             <div>
               <p className="text-sm text-gray-500">Welcome back</p>
               <h2 className="text-2xl font-bold text-gray-800">
@@ -304,32 +304,34 @@ const Home = () => {
               <div className="flex-grow border-t" />
             </div>
             <form className="space-y-4">
-              <div>
-                <label className="text-sm font-medium text-gray-700">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  placeholder="you@example.com"
-                  className="mt-1 w-full border border-mutedText rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary"
-                  defaultValue=""
-                />
-              </div>
-
-              <div>
-                <label className="text-sm font-medium text-gray-700 flex justify-between items-center">
-                  Password
-                  <a href="#" className="text-xs text-primary hover:underline">
-                    Forgot ?
-                  </a>
-                </label>
-                <div className="relative mt-1">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="text-sm font-medium text-gray-700">
+                    Email
+                  </label>
                   <input
-                    type="password"
-                    placeholder="Enter your password"
-                    className="w-full border border-mutedText rounded-md px-3 py-2 text-sm pr-10 focus:outline-none focus:ring-2 focus:ring-primary"
+                    type="email"
+                    placeholder="you@example.com"
+                    className="mt-1 w-full border border-mutedText rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary"
+                    defaultValue=""
                   />
-                  <AiOutlineEye className="absolute top-1/2 right-3 -translate-y-1/2 text-gray-400 cursor-pointer" />
+                </div>
+
+                <div>
+                  <label className="text-sm font-medium text-gray-700 flex justify-between items-center">
+                    Password
+                    <a href="#" className="text-xs text-primary hover:underline">
+                      Forgot ?
+                    </a>
+                  </label>
+                  <div className="relative mt-1">
+                    <input
+                      type="password"
+                      placeholder="Enter your password"
+                      className="w-full border border-mutedText rounded-md px-3 py-2 text-sm pr-10 focus:outline-none focus:ring-2 focus:ring-primary"
+                    />
+                    <AiOutlineEye className="absolute top-1/2 right-3 -translate-y-1/2 text-gray-400 cursor-pointer" />
+                  </div>
                 </div>
               </div>
               <Motion.button

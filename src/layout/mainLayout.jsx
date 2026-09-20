@@ -19,7 +19,7 @@ const MainLayout = () => {
 
       {/* Main content */}
       <main className="flex-grow w-full overflow-x-hidden z-10 relative">
-        <div className="w-[90%] max-w-7xl mx-auto py-10 text-white">
+        <div className="w-[90%] max-w-7xl mx-auto pt-28 pb-10 text-white">
           <Outlet />
         </div>
       </main>
