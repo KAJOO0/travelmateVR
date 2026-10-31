@@ -262,7 +262,13 @@
     "attemptsLeft_other": "Noch {{count}} Versuche, bevor die Anmeldung gesperrt wird.",
     "locked": "Zu viele erfolglose Anmeldeversuche. Zu deiner Sicherheit ist die Anmeldung bis {{time}} gesperrt.",
     "errRegister": "Mit diesen Angaben konnten wir kein Konto anlegen. Hast du schon eins? Dann melde dich einfach an.",
-    "errGeneric": "Da ist etwas schiefgelaufen. Versuch es bitte noch einmal."
+    "errGeneric": "Da ist etwas schiefgelaufen. Versuch es bitte noch einmal.",
+    "confirmTitle": "Schau in dein Postfach",
+    "confirmHint": "Wir haben einen Bestätigungscode an {{email}} gesendet. Gib ihn unten ein, um dein Konto fertig einzurichten.",
+    "code": "Bestätigungscode",
+    "errCode": "Gib den 6-stelligen Code ein, den wir dir geschickt haben.",
+    "confirmSubmit": "Bestätigen und weiter",
+    "backToSignIn": "Zurück zur Anmeldung"
   },
   "help": {
     "title": "Hilfe-Center",

@@ -15,12 +15,13 @@ export default function SignInPage() {
   const [params] = useSearchParams();
   const next = params.get('next')?.startsWith('/') ? params.get('next')! : '/account';
   const user = useSession();
-  const [mode, setMode] = useState<'signin' | 'register'>(params.get('mode') === 'register' ? 'register' : 'signin');
+  const [mode, setMode] = useState<'signin' | 'register' | 'confirm'>(params.get('mode') === 'register' ? 'register' : 'signin');
   const [name, setName] = useState('');
   const lang = useLocale();
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [code, setCode] = useState('');
   const [busy, setBusy] = useState(false);
   const [touched, setTouched] = useState(false);
   const [formError, setFormError] = useState<{ key: string; params?: Record<string, unknown> } | null>(null);
@@ -29,8 +30,10 @@ export default function SignInPage() {
   usePageTitle(mode === 'signin' ? t('common:nav.signIn') : t('account:signin.register'));
   // Sign-in takes an email or a username; registration needs an email and allows an optional username.
   const errs = mode === 'signin'
-    ? { name: false, email: !(isEmail(email) || isUsername(email)), username: false, password: password.length === 0 }
-    : { name: name.trim().length < 2, email: !isEmail(email), username: !!username.trim() && !isUsername(username), password: !isAcceptablePassword(password) };
+    ? { name: false, email: !(isEmail(email) || isUsername(email)), username: false, password: password.length === 0, code: false }
+    : mode === 'register'
+    ? { name: name.trim().length < 2, email: !isEmail(email), username: !!username.trim() && !isUsername(username), password: !isAcceptablePassword(password), code: false }
+    : { name: false, email: false, username: false, password: false, code: code.trim().length !== 6 };
   const lockedUntil = mode === 'signin' && guard.lockedUntil && Date.parse(guard.lockedUntil) > now ? guard.lockedUntil : undefined;
   useEffect(() => {
     if (!lockedUntil) return;
@@ -44,13 +47,23 @@ export default function SignInPage() {
     if (lockedUntil || Object.values(errs).some(Boolean)) return;
     setBusy(true);
     try {
-      if (mode === 'signin') await auth.signIn(email, password); else await auth.register(name, email, password, username.trim() || undefined);
+      if (mode === 'signin') await auth.signIn(email, password);
+      else if (mode === 'confirm') await auth.confirmRegistration(email, password, code.trim());
+      else await auth.register(name, email, password, username.trim() || undefined);
       navigate(next, { replace: true });
     } catch (err) {
+      if (err instanceof AuthError && err.code === 'confirmation_required') {
+        // Keep the password in state — confirmRegistration needs it to finish signing in,
+        // and Cognito's confirm step doesn't accept it again.
+        setMode('confirm'); setTouched(false); setFormError(null);
+        setBusy(false);
+        return;
+      }
       setPassword('');
       if (err instanceof AuthError) {
         if (err.code === 'locked') { setNow(Date.now()); setFormError(null); }
         else if (err.code === 'invalid_credentials') setFormError({ key: 'account:signin.errCredentials', params: err.attemptsLeft !== undefined && err.attemptsLeft <= 2 ? { left: err.attemptsLeft } : undefined });
+        else if (mode === 'confirm') setFormError({ key: 'account:signin.errCode' });
         else setFormError({ key: 'account:signin.errRegister' });
       } else setFormError({ key: 'account:signin.errGeneric' });
     } finally {
@@ -64,6 +77,30 @@ export default function SignInPage() {
         <Notice tone="ok" icon="check">{t('account:signin.already', { email: user.email })}</Notice>
         <div className="chip-row"><Link className="btn solid sm" to="/account">{t('account:title')}</Link><button type="button" className="btn ghost sm" onClick={() => auth.signOut()}>{t('account:security.signOut')}</button></div>
       </section></div>
+    );
+  }
+
+  if (mode === 'confirm') {
+    return (
+      <div className="page">
+        <section className="auth">
+          <div className="pic"><Media id="safari-crew" sizes="520px" priority alt={t('account:signin.photoAlt')} /></div>
+          <form onSubmit={submit} noValidate>
+            <h1>{t('account:signin.confirmTitle')}</h1>
+            <p style={{ color: 'var(--muted)' }}>{t('account:signin.confirmHint', { email })}</p>
+            {formError && <div role="alert"><Notice tone="warn">{t(formError.key)}</Notice></div>}
+            <label className="field">
+              <span>{t('account:signin.code')}</span>
+              <input value={code} maxLength={6} inputMode="numeric" autoComplete="one-time-code" onChange={e => setCode(e.target.value)} aria-invalid={touched && errs.code} />
+              {touched && errs.code && <span className="err">{t('account:signin.errCode')}</span>}
+            </label>
+            <button type="submit" className="btn solid" disabled={busy}>{busy ? t('account:signin.working') : t('account:signin.confirmSubmit')}</button>
+            <p style={{ fontSize: 'var(--fs-small)' }}>
+              <button type="button" className="tlink" onClick={() => { setMode('signin'); setTouched(false); setFormError(null); setCode(''); }}><span>{t('account:signin.backToSignIn')}</span></button>
+            </p>
+          </form>
+        </section>
+      </div>
     );
   }
 

@@ -262,7 +262,13 @@
     "attemptsLeft_other": "{{count}} attempts left before sign-in is paused.",
     "locked": "Too many unsuccessful sign-in attempts. For your security, sign-in is paused until {{time}}.",
     "errRegister": "We couldn’t create an account with these details. If you already have one, sign in instead.",
-    "errGeneric": "Something went wrong. Please try again."
+    "errGeneric": "Something went wrong. Please try again.",
+    "confirmTitle": "Check your email",
+    "confirmHint": "We emailed a verification code to {{email}}. Enter it below to finish creating your account.",
+    "code": "Verification code",
+    "errCode": "Enter the 6-digit code we emailed you.",
+    "confirmSubmit": "Confirm and continue",
+    "backToSignIn": "Back to sign in"
   },
   "help": {
     "title": "Help Center",

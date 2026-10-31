@@ -38,6 +38,14 @@ export async function http<T>(path: string, init: RequestInit & { json?: unknown
 
 export const DATA_SOURCE: 'mock' | 'http' = import.meta.env.VITE_DATA_SOURCE === 'http' && BASE ? 'http' : 'mock';
 
+/**
+ * Separate from DATA_SOURCE on purpose: ai.ts/messaging.ts/payments.ts still gate on
+ * DATA_SOURCE (which requires VITE_API_BASE_URL, a REST base URL) and are untouched by the
+ * real-backend rollout. catalog.ts/account.ts use the real AWS backend (Amplify Data/Auth,
+ * configured from amplify_outputs.json, not a REST base URL) and gate on this instead.
+ */
+export const REAL_BACKEND: boolean = import.meta.env.VITE_DATA_SOURCE === 'http';
+
 /** Simulated network latency for the demo data layer, so loading states are exercised. */
 export function demoLatency(min = 180, max = 520): Promise<void> {
   return new Promise(r => setTimeout(r, min + Math.random() * (max - min)));

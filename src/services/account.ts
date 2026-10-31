@@ -1,9 +1,17 @@
 import type { AppNotification, LocalizedText, MessageThread, Review, Role, SupportTicket, TravelDocument, TravellerProfile, User } from '@/domain/types';
 import { createStore, nowIso, uid, useStore } from '@/lib/store';
-import { AppError, DATA_SOURCE, demoLatency, http } from './http';
+import { AppError, DATA_SOURCE, REAL_BACKEND, demoLatency, http } from './http';
 import { cleanText, hashPassword, isAcceptablePassword, isEmail, isUsername, normalizeEmail, normalizeUsername, verifyPassword } from '@/lib/security';
 import { platformStore } from './platform';
 import type { Channel } from './messaging';
+import {
+  confirmSignUp as cognitoConfirmSignUp,
+  fetchUserAttributes,
+  getCurrentUser,
+  signIn as cognitoSignIn,
+  signOut as cognitoSignOut,
+  signUp as cognitoSignUp
+} from 'aws-amplify/auth';
 
 // ---------------- Session and sign-in ----------------
 // Production: the backend validates and normalises every field, hashes passwords with Argon2id,
@@ -15,7 +23,7 @@ export const sessionStore = createStore<{ user: User | null }>('tm.session', () 
 
 /** Sign-in and registration failures. Messages never say which field was wrong. */
 export class AuthError extends Error {
-  constructor(public code: 'invalid_credentials' | 'locked' | 'register_failed' | 'invalid_input', public lockedUntil?: string, public attemptsLeft?: number) {
+  constructor(public code: 'invalid_credentials' | 'locked' | 'register_failed' | 'invalid_input' | 'confirmation_required', public lockedUntil?: string, public attemptsLeft?: number) {
     super(code);
     this.name = 'AuthError';
   }
@@ -53,6 +61,14 @@ export const useLoginGuard = () => useStore(guardStore);
 
 const startSession = (user: User) => { loginGuard.reset(); sessionStore.set({ user }); return user; };
 
+/** After a Cognito signIn()/confirmSignUp()+signIn() call has already succeeded: read the
+ *  authenticated user's attributes and land them in the app's session, same shape as every
+ *  other sign-in path. */
+async function finishRealSignIn(fallbackEmail: string): Promise<User> {
+  const [{ userId }, attrs] = await Promise.all([getCurrentUser(), fetchUserAttributes()]);
+  return startSession({ id: userId, name: attrs.name ?? fallbackEmail, email: attrs.email ?? fallbackEmail, provider: 'email', roles: ['traveller'], createdAt: nowIso() });
+}
+
 export const auth = {
   /** Sign in with an email address or a username. Wrong credentials always produce the same error. */
   async signIn(identifier: string, password: string): Promise<User> {
@@ -72,6 +88,22 @@ export const auth = {
         throw e;
       }
     }
+    if (REAL_BACKEND) {
+      // Real mode is email-only this phase — a username identifier fails the same generic
+      // way as a wrong password, never revealing that usernames aren't supported yet.
+      if (!isEmail(id)) throw loginGuard.fail();
+      try {
+        const { isSignedIn, nextStep } = await cognitoSignIn({ username: id, password });
+        if (!isSignedIn) {
+          if (nextStep?.signInStep === 'CONFIRM_SIGN_UP') throw new AuthError('confirmation_required');
+          throw loginGuard.fail();
+        }
+      } catch (e) {
+        if (e instanceof AuthError) throw e;
+        throw loginGuard.fail();
+      }
+      return finishRealSignIn(id);
+    }
     await demoLatency(400, 800);
     const account = wellFormed ? accountStore.get().find(a => a.email === id || a.username === id) : undefined;
     // verifyPassword always does the full hashing work, so an unknown account takes as long as a wrong password.
@@ -90,6 +122,20 @@ export const auth = {
       } catch (e) {
         if (e instanceof AppError && (e.code === 'validation' || e.status === 409)) throw new AuthError('register_failed');
         throw e;
+      }
+    }
+    if (REAL_BACKEND) {
+      try {
+        const { nextStep } = await cognitoSignUp({ username: clean.email, password, options: { userAttributes: { email: clean.email, name: clean.name } } });
+        if (nextStep.signUpStep === 'CONFIRM_SIGN_UP') throw new AuthError('confirmation_required');
+        // A pool configured to skip confirmation lands here directly — sign in immediately.
+        await cognitoSignIn({ username: clean.email, password });
+        const user = await finishRealSignIn(clean.email);
+        pushNotification({ kind: 'support', i18n: { title: 'notif.welcome.title', body: 'notif.welcome.body' }, href: '/account/preferences' });
+        return user;
+      } catch (e) {
+        if (e instanceof AuthError) throw e;
+        throw new AuthError('register_failed');
       }
     }
     await demoLatency(500, 900);
@@ -121,7 +167,18 @@ export const auth = {
     sessionStore.set({ user });
     return user;
   },
-  signOut() { sessionStore.set({ user: null }); },
+  /** Completes registration after the "enter the code we emailed you" step (real mode only). */
+  async confirmRegistration(email: string, password: string, code: string): Promise<User> {
+    await cognitoConfirmSignUp({ username: email, confirmationCode: code });
+    await cognitoSignIn({ username: email, password });
+    const user = await finishRealSignIn(email);
+    pushNotification({ kind: 'support', i18n: { title: 'notif.welcome.title', body: 'notif.welcome.body' }, href: '/account/preferences' });
+    return user;
+  },
+  async signOut() {
+    if (REAL_BACKEND) { try { await cognitoSignOut(); } catch { /* best-effort: clear the local session regardless */ } }
+    sessionStore.set({ user: null });
+  },
   update(patch: Partial<Pick<User, 'name' | 'email'>>) {
     const clean: Partial<Pick<User, 'name' | 'email'>> = {};
     if (patch.name !== undefined) { const n = cleanText(patch.name, 80); if (n.length >= 2) clean.name = n; }

@@ -266,7 +266,13 @@
     "attemptsLeft_other": "Il reste {{count}} tentatives avant la suspension de la connexion.",
     "locked": "Trop de tentatives de connexion infructueuses. Pour votre sécurité, la connexion est suspendue jusqu’à {{time}}.",
     "errRegister": "Nous n’avons pas pu créer de compte avec ces informations. Vous en avez déjà un ? Connectez-vous simplement.",
-    "errGeneric": "Un souci est survenu. Réessayez dans un instant."
+    "errGeneric": "Un souci est survenu. Réessayez dans un instant.",
+    "confirmTitle": "Consultez vos e-mails",
+    "confirmHint": "Nous avons envoyé un code de vérification à {{email}}. Saisissez-le ci-dessous pour terminer la création de votre compte.",
+    "code": "Code de vérification",
+    "errCode": "Saisissez le code à 6 chiffres que nous vous avons envoyé.",
+    "confirmSubmit": "Confirmer et continuer",
+    "backToSignIn": "Retour à la connexion"
   },
   "help": {
     "title": "Centre d’aide",

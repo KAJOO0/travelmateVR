@@ -258,7 +258,13 @@
     "attemptsLeft_other": "再尝试 {{count}} 次失败后，登录将被暂停。",
     "locked": "登录失败次数过多。为保障您的安全，登录已暂停至 {{time}}。",
     "errRegister": "无法使用这些信息创建账户。如果您已有账户，请直接登录。",
-    "errGeneric": "出现问题，请重试。"
+    "errGeneric": "出现问题，请重试。",
+    "confirmTitle": "请查收邮件",
+    "confirmHint": "我们已将验证码发送至 {{email}}。请在下方输入验证码以完成账户创建。",
+    "code": "验证码",
+    "errCode": "请输入我们发送给您的 6 位验证码。",
+    "confirmSubmit": "确认并继续",
+    "backToSignIn": "返回登录"
   },
   "help": {
     "title": "帮助中心",

@@ -266,7 +266,13 @@
     "attemptsLeft_other": "Ancora {{count}} tentativi prima che l’accesso venga sospeso.",
     "locked": "Troppi tentativi di accesso non riusciti. Per la tua sicurezza l’accesso è sospeso fino alle {{time}}.",
     "errRegister": "Non è stato possibile creare un account con questi dati. Se ne hai già uno, accedi.",
-    "errGeneric": "Si è verificato un errore. Riprova."
+    "errGeneric": "Si è verificato un errore. Riprova.",
+    "confirmTitle": "Controlla la tua email",
+    "confirmHint": "Abbiamo inviato un codice di verifica a {{email}}. Inseriscilo qui sotto per completare la creazione dell'account.",
+    "code": "Codice di verifica",
+    "errCode": "Inserisci il codice a 6 cifre che ti abbiamo inviato.",
+    "confirmSubmit": "Conferma e continua",
+    "backToSignIn": "Torna all'accesso"
   },
   "help": {
     "title": "Centro assistenza",
