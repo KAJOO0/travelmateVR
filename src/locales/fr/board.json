@@ -1,0 +1,253 @@
+{
+  "shell": {
+    "title": "Portail offices de tourisme",
+    "nav": "Sections du portail offices de tourisme",
+    "viewSite": "Voir les destinations"
+  },
+  "gate": {
+    "title": "Une porte d’entrée numérique pour votre destination",
+    "text": "Publiez les contenus de destination, menez des campagnes, comprenez l’intérêt des visiteurs et soutenez vos entreprises touristiques, au même endroit.",
+    "demo": "Ouvrir le compte office de démonstration",
+    "demoNote": "Le compte de démonstration appartient à une organisation fictive, « Demo Tourism Board · Tanzania ». Il ne représente aucune autorité réelle et ses chiffres sont des données d’exemple.",
+    "noAccount": "Vous représentez un office de tourisme, une OGD, un parc ou une organisation de conservation ?",
+    "apply": "Demander un accès"
+  },
+  "nav": {
+    "overview": "Aperçu",
+    "destinations": "Destinations",
+    "content": "Contenus",
+    "campaigns": "Campagnes",
+    "visitors": "Intérêt des visiteurs",
+    "attractions": "Attractions",
+    "trends": "Tendances touristiques",
+    "partners": "Écosystème partenaires",
+    "sustainability": "Durabilité"
+  },
+  "kpi": {
+    "interest": "Intérêt des visiteurs",
+    "vrViews": "Vues 360°",
+    "destinations": "Destinations",
+    "partners": "Entreprises touristiques",
+    "verified_one": "{{count}} vérifiée",
+    "verified_other": "{{count}} vérifiées",
+    "drafts": "Brouillons à publier",
+    "verified_many": "{{count}} vérifiées"
+  },
+  "overview": {
+    "title": "Bienvenue, {{name}}",
+    "text": "{{org}} : intérêt pour les destinations, campagnes et contenus en un coup d’œil.",
+    "demoNote": "Organisation de démonstration. Les chiffres signalés comme données d’exemple sont générés à titre d’illustration et ne sont pas des statistiques officielles.",
+    "sampleNote": "concerne l’intérêt des visiteurs et les vues 360°.",
+    "top": "Destinations les plus consultées",
+    "liveCampaigns": "Campagnes en cours"
+  },
+  "destinations": {
+    "text": "Les destinations de votre territoire. Modifiez leurs contenus et publiez des mises à jour sur TravelMateVR.",
+    "bestTime": "Meilleurs mois",
+    "content": "Contenu",
+    "posts_one": "{{count}} mise à jour en ligne",
+    "posts_other": "{{count}} mises à jour en ligne",
+    "state": {
+      "catalogue": "Texte TravelMateVR",
+      "published": "Votre version, en ligne",
+      "draft": "Brouillon"
+    },
+    "interestNote": "L’intérêt des visiteurs est un indice combinant vues des pages destination, vues 360° et recherches sur 12 mois (données d’exemple).",
+    "editText": "Mettez à jour la description, les conseils de sécurité et de voyage responsable et les meilleurs mois. Les modifications publiées apparaissent immédiatement sur la page publique.",
+    "viewPublic": "Voir la page publique",
+    "summary": "Résumé",
+    "overview": "Présentation",
+    "accuracy": "Vous êtes responsable de l’exactitude des informations publiées. Renvoyez vers les sources officielles pour la sécurité et les conditions d’entrée lorsque c’est possible.",
+    "draftSaved": "Brouillon enregistré.",
+    "published": "Publié. La page publique de la destination est à jour.",
+    "publish": "Publier",
+    "revert": "Revenir au texte TravelMateVR",
+    "reverted": "Retour au texte TravelMateVR.",
+    "draftNote": "Brouillon non publié enregistré le {{date}}. Les voyageurs voient encore la version précédente.",
+    "publishedNote": "Votre version est en ligne (mise à jour le {{date}}).",
+    "managePosts": "Mises à jour et événements de cette destination",
+    "posts_many": "{{count}} mises à jour en ligne"
+  },
+  "content": {
+    "text": "Actualités, événements, alertes voyage et récits affichés sur les pages destination sous « Actualités de la destination ».",
+    "new": "Nouvelle mise à jour",
+    "edit": "Modifier la mise à jour",
+    "kind": "Type",
+    "kinds": {
+      "news": "Actualité",
+      "event": "Événement",
+      "alert": "Alerte voyage",
+      "story": "Récit"
+    },
+    "titleLabel": "Titre",
+    "body": "Texte",
+    "eventDate": "Date de l’événement",
+    "visibleFrom": "Date (facultative)",
+    "expires": "Masquer après le",
+    "dates": "Dates",
+    "until": "jusqu’au {{date}}",
+    "expired": "Expirée",
+    "status": {
+      "draft": "Brouillon",
+      "published": "Publiée"
+    },
+    "publish": "Publier",
+    "unpublish": "Dépublier",
+    "publishedToast": "Publiée sur la page destination.",
+    "draftToast": "Brouillon enregistré.",
+    "errTitle": "Ajoutez un titre d’au moins 4 caractères.",
+    "errBody": "Ajoutez au moins 20 caractères de texte.",
+    "errDate": "Les événements doivent avoir une date.",
+    "alertNote": "Les alertes voyage apparaissent en premier sur la page destination. Utilisez-les pour la sécurité, l’accès ou les fermetures, et citez la source officielle dans le texte.",
+    "publishNote": "Les mises à jour publiées apparaissent sur la page publique de la destination dans la langue de rédaction, avec la mention de votre organisation.",
+    "emptyTitle": "Pas encore de mises à jour",
+    "emptyText": "Publiez actualités, événements ou alertes voyage pour vos destinations."
+  },
+  "campaigns": {
+    "text": "Promouvez vos destinations auprès des marchés et centres d’intérêt de votre choix, partout sur TravelMateVR.",
+    "new": "Nouvelle campagne",
+    "edit": "Modifier la campagne",
+    "markets": "Marchés émetteurs",
+    "interests": "Centres d’intérêt des voyageurs",
+    "channel": {
+      "homepage": "Page d’accueil",
+      "explore": "Pages Explorer et destination",
+      "ai": "Suggestions de l’IA TravelMate",
+      "newsletter": "Newsletter",
+      "partners": "Co-marketing avec les partenaires"
+    },
+    "note": "Les contenus de campagne sont signalés comme promus par votre organisation. TravelMateVR vérifie les campagnes avant leur lancement.",
+    "schedule": "Programmer",
+    "scheduled": "Campagne programmée.",
+    "draftSaved": "Campagne enregistrée en brouillon.",
+    "status": {
+      "draft": "Brouillon",
+      "scheduled": "Programmée",
+      "live": "En cours",
+      "ended": "Terminée"
+    },
+    "progress": "Avancement de la campagne",
+    "saves": "enregistrements",
+    "none": "Aucune campagne pour le moment."
+  },
+  "visitors": {
+    "text": "D’où vient l’intérêt pour vos destinations et ce que recherchent les voyageurs.",
+    "interest": "Intérêt des visiteurs par mois",
+    "byDestination": "Intérêt par destination",
+    "interestDef": "L’intérêt combine vues des pages destination, vues 360° et recherches.",
+    "markets": "Marchés émetteurs (part)",
+    "interests": "Centres d’intérêt des voyageurs",
+    "searches": "Recherches principales",
+    "searchesNote": "Recherches mentionnant vos destinations, dans la langue saisie par les voyageurs."
+  },
+  "attractions": {
+    "text": "Performances de chaque destination et expérience immersive.",
+    "pageViews": "Vues de page",
+    "avgVr": "Durée 360° moyenne",
+    "seconds_one": "{{count}} s",
+    "seconds_other": "{{count}} s",
+    "saves": "Enregistrements",
+    "experiences": "Expériences immersives",
+    "experience": "Expérience",
+    "format": "Format",
+    "completion": "Vue jusqu’au bout",
+    "captureTip_one": "{{count}} expérience utilise encore un aperçu panoramique. De vraies captures 360° retiennent plus longtemps les voyageurs.",
+    "captureTip_other": "{{count}} expériences utilisent encore un aperçu panoramique. De vraies captures 360° retiennent plus longtemps les voyageurs.",
+    "seconds_many": "{{count}} s",
+    "captureTip_many": "{{count}} expériences utilisent encore un aperçu panoramique. De vraies captures 360° retiennent plus longtemps les voyageurs."
+  },
+  "trends": {
+    "text": "Saisonnalité, durée de séjour et comportements de réservation sur votre territoire.",
+    "avgStay": "Durée moyenne du voyage",
+    "leadTime": "Délai moyen de réservation",
+    "partySize": "Taille moyenne des groupes",
+    "repeat": "Visiteurs fidèles",
+    "seasonality": "Destinations en haute saison",
+    "seasonalityNote": "Part de vos destinations dans leurs meilleurs mois, par mois.",
+    "lengthOfStay": "Durée de séjour",
+    "daysRange": "{{range}} jours",
+    "monthly": "Intérêt total des visiteurs par mois"
+  },
+  "partners": {
+    "text": "Les entreprises touristiques présentes sur TravelMateVR dans votre territoire.",
+    "invite": "Inviter des entreprises",
+    "verified": "Vérifiées",
+    "founding": "Partenaires fondateurs",
+    "community": "Communautaires ou détenues localement",
+    "ofListings": "des annonces",
+    "byType": "Par type",
+    "unverified": "Non vérifiée",
+    "note": "Les entreprises marquées « Annonce d’exemple » sont fictives et illustrent la place de marché. Invitez les vraies entreprises de votre territoire à postuler."
+  },
+  "sustainability": {
+    "text": "Contributions, certifications et retombées communautaires sur votre territoire.",
+    "contributions": "Contributions conservation et communautés",
+    "contributionsHint_one": "Issues de {{count}} réservation",
+    "contributionsHint_other": "Issues de {{count}} réservations",
+    "ecoListings": "Annonces écocertifiées",
+    "ofListings_one": "sur {{count}} annonce",
+    "ofListings_other": "sur {{count}} annonces",
+    "community": "Communautaires ou détenues localement",
+    "ecoDestinations": "Destinations écocertifiées",
+    "dataNote": "Les contributions sont additionnées à partir des réservations de la démo (y compris les clients d’exemple). Les parts certifiées proviennent des données des annonces.",
+    "transport": "Comment les visiteurs se déplacent entre les destinations",
+    "road": "Route",
+    "flight": "Avion",
+    "ferry": "Ferry",
+    "notes": "Conseils de voyage responsable",
+    "claims": "Les engagements de durabilité ne sont affichés que si les partenaires fournissent des preuves. Les offices peuvent publier des conseils sur les pages destination.",
+    "contributionsHint_many": "Issues de {{count}} réservations",
+    "ofListings_many": "sur {{count}} annonces"
+  },
+  "landing": {
+    "eyebrow": "Pour les offices de tourisme",
+    "title": "Une porte d’entrée numérique vers votre destination",
+    "lede": "Pour les offices de tourisme, OGD, autorités touristiques, parcs nationaux et organisations de conservation : publiez, promouvez et comprenez votre destination sur TravelMateVR.",
+    "requestDemo": "Demander une démonstration",
+    "openDemo": "Ouvrir le portail de démonstration",
+    "forTitle": "Ce que vous pouvez faire",
+    "forText": "Un tableau de bord unique pour gérer la présentation de votre destination et voir ce que recherchent les voyageurs.",
+    "caps": {
+      "content": {
+        "t": "Publication de contenus",
+        "d": "Tenez à jour descriptions, conseils de sécurité et meilleures saisons, et publiez actualités, événements et alertes."
+      },
+      "campaigns": {
+        "t": "Campagnes",
+        "d": "Promouvez vos destinations auprès des marchés et centres d’intérêt de votre choix."
+      },
+      "interest": {
+        "t": "Intérêt des visiteurs",
+        "d": "Voyez la demande par mois, marché et centre d’intérêt, et ce que recherchent les voyageurs."
+      },
+      "attractions": {
+        "t": "Performance des attractions",
+        "d": "Comparez destinations et expériences 360° selon les vues, l’engagement et les réservations."
+      },
+      "partners": {
+        "t": "Écosystème partenaires",
+        "d": "Connaissez les entreprises touristiques de votre territoire et invitez-en de nouvelles."
+      },
+      "sustainability": {
+        "t": "Indicateurs de durabilité",
+        "d": "Suivez les contributions, certifications et le tourisme communautaire."
+      }
+    },
+    "contactTitle": "Demander une démonstration",
+    "org": "Organisation",
+    "type": "Type d’organisation",
+    "types": {
+      "board": "Office de tourisme",
+      "dmo": "Organisation de gestion de destination",
+      "government": "Autorité touristique publique",
+      "park": "Parc national",
+      "conservation": "Organisation de conservation"
+    },
+    "message": "Que souhaitez-vous accomplir ?",
+    "messagePh": "Destinations gérées, marchés prioritaires, calendrier…",
+    "send": "Envoyer la demande",
+    "subject": "Demande d’office de tourisme",
+    "sent": "Merci. Votre demande {{id}} est parvenue à notre équipe partenariats ; nous répondons sous deux jours ouvrés.",
+    "track": "Suivre votre demande"
+  }
+}

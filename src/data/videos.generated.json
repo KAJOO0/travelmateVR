@@ -1,0 +1,32 @@
+{
+  "bled-timelapse": {
+    "name": "Video 360°. Timelapse. Bled Lake in Slovenia.",
+    "author": "Fabio Casati",
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Video_360%C2%B0._Timelapse._Bled_Lake_in_Slovenia..webm",
+    "src": "/video/bled-timelapse-2560.mp4",
+    "poster": "/video/bled-timelapse-poster.jpg",
+    "width": 2560,
+    "height": 1280,
+    "duration": 8.5,
+    "audio": true,
+    "bytes": 6856772,
+    "modified": "Transcoded to H.264/MP4 and resized for web playback"
+  },
+  "madeira-cabo-girao": {
+    "name": "Não veja este video 360 se tiver vertigens! Madeira - Cabo Girão",
+    "author": "Vasco Marques",
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:N%C3%A3o_veja_este_video_360_se_tiver_vertigens!_Madeira_-_Cabo_Gir%C3%A3o.webm",
+    "src": "/video/madeira-cabo-girao-1920.mp4",
+    "poster": "/video/madeira-cabo-girao-poster.jpg",
+    "width": 1920,
+    "height": 960,
+    "duration": 33.1,
+    "audio": true,
+    "bytes": 12734153,
+    "modified": "Transcoded to H.264/MP4 and resized for web playback"
+  }
+}

@@ -1,0 +1,306 @@
+{
+  "serengeti-herds": {
+    "caption": "Serengeti National Park, Tanzania",
+    "title": "Wildebeest Migration in Serengeti National Park, Tanzania.jpg",
+    "author": "Daniel Rosengren",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Wildebeest_Migration_in_Serengeti_National_Park,_Tanzania.jpg"
+  },
+  "serengeti-crossing": {
+    "caption": "Mara River crossing, Serengeti ecosystem",
+    "title": "Serengeti wildebeest migration JF.jpg",
+    "author": "Wolves201",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Serengeti_wildebeest_migration_JF.jpg"
+  },
+  "ngorongoro": {
+    "caption": "Ngorongoro Crater, Tanzania",
+    "title": "Ngorongoro landscape (crater rim).jpg",
+    "author": "Jerry Michalski",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Ngorongoro_landscape_(crater_rim).jpg"
+  },
+  "ngorongoro-elephant": {
+    "caption": "Game drive in Ngorongoro Crater, Tanzania",
+    "title": "Nature of Ngorongoro Conservation Area (129).jpg",
+    "author": "Zenith4237",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Nature_of_Ngorongoro_Conservation_Area_(129).jpg"
+  },
+  "kilimanjaro": {
+    "caption": "Mount Kilimanjaro seen across the plains",
+    "title": "Kilimanjaro from Amboseli.jpg",
+    "author": "Sergey Pesterev",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Kilimanjaro_from_Amboseli.jpg"
+  },
+  "kilimanjaro-trek": {
+    "caption": "Giant groundsels on Mount Kilimanjaro",
+    "title": "Senecio kilimanjari Tanzania.jpg",
+    "author": "Stig Nygaard from Copenhagen, Denmark",
+    "license": "CC BY 2.5",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.5",
+    "source": "https://commons.wikimedia.org/wiki/File:Senecio_kilimanjari_Tanzania.jpg"
+  },
+  "tarangire": {
+    "caption": "Elephant in Tarangire National Park, Tanzania",
+    "title": "Elephants, Tarangire National Park (12) (28417034820).jpg",
+    "author": "Richard Mortel from Riyadh, Saudi Arabia",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Elephants,_Tarangire_National_Park_(12)_(28417034820).jpg"
+  },
+  "ruaha": {
+    "caption": "Great Ruaha River, Ruaha National Park, Tanzania",
+    "title": "Ruaha River, Ruaha National Park (9) (29028717505).jpg",
+    "author": "Richard Mortel from Riyadh, Saudi Arabia",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Ruaha_River,_Ruaha_National_Park_(9)_(29028717505).jpg"
+  },
+  "katavi": {
+    "caption": "Katavi National Park, Tanzania",
+    "title": "Katavi sunset.jpg",
+    "author": "Calle v H",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Katavi_sunset.jpg"
+  },
+  "tanganyika": {
+    "caption": "Shores of Lake Tanganyika",
+    "title": "Lake shore in Kagongo Ward.jpg",
+    "author": "Halidtz",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Lake_shore_in_Kagongo_Ward.jpg"
+  },
+  "stonetown-door": {
+    "caption": "Carved door, Stone Town, Zanzibar",
+    "title": "Door in the Corner - Old building in Zanzibar Stone Town.jpg",
+    "author": "Eric Kilby",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Door_in_the_Corner_-_Old_building_in_Zanzibar_Stone_Town.jpg"
+  },
+  "stonetown-street": {
+    "caption": "Street in Stone Town, Zanzibar",
+    "title": "Stone Town, Zanzibar (13) (28822228250).jpg",
+    "author": "Richard Mortel from Riyadh, Saudi Arabia",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Stone_Town,_Zanzibar_(13)_(28822228250).jpg"
+  },
+  "kenya-mara": {
+    "caption": "Maasai Mara National Reserve, Kenya",
+    "title": "Buffalo herd in misty morning on savanna seen from balloon, Maasai Mara, Kenya.jpg",
+    "author": "Daniel Case",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Buffalo_herd_in_misty_morning_on_savanna_seen_from_balloon,_Maasai_Mara,_Kenya.jpg"
+  },
+  "kenya-lion": {
+    "caption": "Lion in the Maasai Mara, Kenya",
+    "title": "Male lion resting Maasai Mara Kenya.jpg",
+    "author": "Smtunli",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Male_lion_resting_Maasai_Mara_Kenya.jpg"
+  },
+  "uganda-gorilla": {
+    "caption": "Mountain gorilla, Bwindi, Uganda",
+    "title": "Gorila de montaña (Gorilla beringei beringei), parque nacional de la Selva Impenetrable de Bwindi, Uganda, 2024-02-02, DD 80.jpg",
+    "author": "Diego Delso",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Gorila_de_monta%C3%B1a_(Gorilla_beringei_beringei),_parque_nacional_de_la_Selva_Impenetrable_de_Bwindi,_Uganda,_2024-02-02,_DD_80.jpg"
+  },
+  "rwanda-volcanoes": {
+    "caption": "Virunga volcanoes, Rwanda",
+    "title": "Volcanoes National Park Rwanda.jpg",
+    "author": "Nina R",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Volcanoes_National_Park_Rwanda.jpg"
+  },
+  "southafrica-capetown": {
+    "caption": "Table Mountain, Cape Town, South Africa",
+    "title": "Cape Town (ZA), Table Mountain -- 2024 -- 3437.jpg",
+    "author": "Dietmar Rabich",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Cape_Town_(ZA),_Table_Mountain_--_2024_--_3437.jpg"
+  },
+  "botswana-okavango": {
+    "caption": "Mokoro canoes in the Okavango Delta, Botswana",
+    "title": "Vista aérea del delta del Okavango, Botsuana, 2018-08-01, DD 42.jpg",
+    "author": "Diego Delso",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Vista_a%C3%A9rea_del_delta_del_Okavango,_Botsuana,_2018-08-01,_DD_42.jpg"
+  },
+  "namibia-sossusvlei": {
+    "caption": "Dunes of Sossusvlei, Namibia",
+    "title": "006 Dune 45 in Sossusvlei at sunrise Photo by Giles Laurent.jpg",
+    "author": "Giles Laurent",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:006_Dune_45_in_Sossusvlei_at_sunrise_Photo_by_Giles_Laurent.jpg"
+  },
+  "zambia-vicfalls": {
+    "caption": "Victoria Falls on the Zambezi",
+    "title": "Cataratas Victoria, Zambia-Zimbabue, 2018-07-27, DD 30-34 PAN.jpg",
+    "author": "Diego Delso",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Cataratas_Victoria,_Zambia-Zimbabue,_2018-07-27,_DD_30-34_PAN.jpg"
+  },
+  "zimbabwe-manapools": {
+    "caption": "Zambezi River at Mana Pools, Zimbabwe",
+    "title": "Island in the Zambezi River at Mana Pools National Park.jpg",
+    "author": "Babakathy",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "source": "https://commons.wikimedia.org/wiki/File:Island_in_the_Zambezi_River_at_Mana_Pools_National_Park.jpg"
+  },
+  "zimbabwe-greatzim": {
+    "caption": "Great Zimbabwe National Monument",
+    "title": "Great-Zimbabwe-still-standing strong.jpg",
+    "author": "Simonchihanga",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Great-Zimbabwe-still-standing_strong.jpg"
+  },
+  "bali-rice": {
+    "caption": "Rice terraces in Tabanan Regency, Bali, Indonesia",
+    "title": "Tabanan-Regency Indonesia Rice-paddies-05.jpg",
+    "author": "CEphoto, Uwe Aranas",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Tabanan-Regency_Indonesia_Rice-paddies-05.jpg"
+  },
+  "bali-temple": {
+    "caption": "Pura Ulun Danu Bratan on Lake Bratan, Bali",
+    "title": "Brantan Bali Pura-Ulun-Danu-Bratan-01.jpg",
+    "author": "CEphoto, Uwe Aranas",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Brantan_Bali_Pura-Ulun-Danu-Bratan-01.jpg"
+  },
+  "halong-bay": {
+    "caption": "Limestone islands of Ha Long Bay from Titov Island, Vietnam",
+    "title": "View of sea from Titov Island, Ha Long Bay, Vietnam, 20240128 1337 3732.jpg",
+    "author": "Jakub Hałun",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:View_of_sea_from_Titov_Island,_Ha_Long_Bay,_Vietnam,_20240128_1337_3732.jpg"
+  },
+  "halong-boat": {
+    "caption": "Fishing boat near Cat Ba Island, Vietnam",
+    "title": "Fisherman boat near Cat Ba Island, Vietnam, 20240131 1434 4709.jpg",
+    "author": "Jakub Hałun",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Fisherman_boat_near_Cat_Ba_Island,_Vietnam,_20240131_1434_4709.jpg"
+  },
+  "angkor-wat": {
+    "caption": "Angkor Wat reflected in the lotus pond, Cambodia",
+    "title": "Angkor Wat with its reflection.jpg",
+    "author": "Satdeep Gill",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Angkor_Wat_with_its_reflection.jpg"
+  },
+  "angkor-gallery": {
+    "caption": "Angkor Wat, Siem Reap, Cambodia",
+    "title": "2016 Angkor, Angkor Wat, Brama Angkor Wat (21).jpg",
+    "author": "Marcin Konsek",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:2016_Angkor,_Angkor_Wat,_Brama_Angkor_Wat_(21).jpg"
+  },
+  "petra-monastery": {
+    "caption": "Ad Deir (the Monastery), Petra, Jordan",
+    "title": "The Monastery, Petra, Jordan4.jpg",
+    "author": "Diego Delso",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:The_Monastery,_Petra,_Jordan4.jpg"
+  },
+  "wadi-rum": {
+    "caption": "Sandstone mountains of Wadi Rum, Jordan",
+    "title": "Wadi rum desert.jpg",
+    "author": "Peter Chisholm",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "source": "https://commons.wikimedia.org/wiki/File:Wadi_rum_desert.jpg"
+  },
+  "dubai-skyline": {
+    "caption": "Dubai skyline with the Burj Khalifa, UAE",
+    "title": "Dubai skyline unsplash.jpg",
+    "author": "Robert Bock",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "source": "https://commons.wikimedia.org/wiki/File:Dubai_skyline_unsplash.jpg"
+  },
+  "dubai-dunes": {
+    "caption": "Desert dunes at Al Qudra near Dubai, UAE",
+    "title": "Al Qudra Desert Dunes.jpg",
+    "author": "JSPhotography2016",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Al_Qudra_Desert_Dunes.jpg"
+  },
+  "muscat-bay": {
+    "caption": "Al Mirani bay and forts, Old Muscat, Oman",
+    "title": "Bahía de Al Mirani, Mascate, Omán, 2024-08-14, DD 44.jpg",
+    "author": "Diego Delso",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Bah%C3%ADa_de_Al_Mirani,_Mascate,_Om%C3%A1n,_2024-08-14,_DD_44.jpg"
+  },
+  "wahiba-sands": {
+    "caption": "Wahiba Sands desert, Oman",
+    "title": "Desierto de Wahiba, Omán, 2024-08-17, DD 18.jpg",
+    "author": "Diego Delso",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Desierto_de_Wahiba,_Om%C3%A1n,_2024-08-17,_DD_18.jpg"
+  },
+  "santorini-oia": {
+    "caption": "Blue domes of Oia, Santorini, Greece",
+    "title": "1000 Three domes of Oia in Santorini Photo by Giles Laurent.jpg",
+    "author": "Giles Laurent",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:1000_Three_domes_of_Oia_in_Santorini_Photo_by_Giles_Laurent.jpg"
+  },
+  "bled-lake": {
+    "caption": "Bled Island and Bled Castle, Slovenia",
+    "title": "Bled Island and Bled Castle, Slovenia, 20240504 0906 8331.jpg",
+    "author": "Jakub Hałun",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Bled_Island_and_Bled_Castle,_Slovenia,_20240504_0906_8331.jpg"
+  },
+  "madeira-cliffs": {
+    "caption": "Cabo Girão sea cliff, Madeira, Portugal",
+    "title": "Steilklippe Cabo Girao - Madeira.jpg",
+    "author": "Otto Domes",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Steilklippe_Cabo_Girao_-_Madeira.jpg"
+  },
+  "madeira-saolourenco": {
+    "caption": "Ponta de São Lourenço cliffs, Madeira",
+    "title": "Cliffs of São Lourenço. View from Porto da Cruz. Madeira, Portugal.jpg",
+    "author": "Ввласенко",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Cliffs_of_S%C3%A3o_Louren%C3%A7o._View_from_Porto_da_Cruz._Madeira,_Portugal.jpg"
+  }
+}

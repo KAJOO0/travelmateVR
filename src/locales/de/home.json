@@ -1,0 +1,282 @@
+{
+  "showcase": {
+    "browse": "Stöbern nach Kategorie",
+    "prev": "Vorherige Kategorie",
+    "next": "Nächste Kategorie",
+    "railLabel": "Kategorien: {{list}}. Mit den Pfeiltasten links und rechts wechselst du.",
+    "show": "{{name}} zeigen",
+    "pause": "Automatischen Wechsel anhalten",
+    "resume": "Automatischen Wechsel fortsetzen",
+    "featured": "Unser Tipp",
+    "play": "Tauch in 360° ein: {{name}}",
+    "nowExploring": "Gerade entdeckst du",
+    "previous": "Zurück",
+    "nextLbl": "Weiter"
+  },
+  "categories": {
+    "lifestyle": {
+      "name": "Lebensgefühl",
+      "text": "Langsame Morgen, Licht über dem Meer und der Takt des Insellebens.",
+      "hint": "Inseln, Strände und Zeit für dich"
+    },
+    "landscape": {
+      "name": "Landschaft",
+      "text": "Krater, Kraterseen und Horizonte, die einfach nicht aufhören.",
+      "hint": "Krater, Berge und Seen"
+    },
+    "cultural": {
+      "name": "Kultur",
+      "text": "Musik, Tanz und die Menschen, die ihre Traditionen lebendig halten.",
+      "hint": "Gemeinschaften, Musik und Altstädte"
+    },
+    "wildlife": {
+      "name": "Tierwelt",
+      "text": "Die Große Migration, Großkatzen und stille Stunden ganz nah an den Herden.",
+      "hint": "Pirschfahrten und die Migration"
+    }
+  },
+  "story": {
+    "quote": "Was wäre, wenn du dein Reiseziel erleben könntest, bevor du überhaupt aufbrichst?",
+    "p1": "TravelMateVR wird von Mates Technologies Limited in Mbeya, Tansania, entwickelt. Wir bringen Reisende, Tourismus-Unternehmen, Reiseziele und lokale Gemeinschaften zusammen, immersiv und mit KI.",
+    "p2": "Reisen beginnt mit Neugier, Vorfreude und Vertrauen, nicht mit einer Kasse. Deshalb kommt bei uns das Erlebnis zuerst, und Planen, Buchen und Verbundenbleiben fühlt sich ganz leicht an.",
+    "journeyLabel": "Deine Reise mit uns",
+    "journey": {
+      "experience": "Erleben",
+      "plan": "Planen",
+      "book": "Buchen",
+      "travel": "Reisen",
+      "connect": "Verbunden bleiben"
+    }
+  },
+  "hero": {
+    "eyebrow": "Mit Vertrauen reisen",
+    "title": "Sieh es, bevor du fährst.",
+    "text": "Betritt Reiseziele, Unterkünfte und Safaris, bevor du Flüge, Zimmer oder Touren buchst. Wisse genau, was du wählst, und reise mit gutem Gefühl.",
+    "explore": "Reiseziele entdecken",
+    "plan": "Meine Reise planen"
+  },
+  "trust": {
+    "label": "Warum du mit Vertrauen reisen kannst",
+    "verified": {
+      "title": "Geprüfte Partner",
+      "text": "Lizenzen werden vor dem Eintrag geprüft."
+    },
+    "local": {
+      "title": "Vertrauenswürdige Experten vor Ort",
+      "text": "Menschen, die den Ort am besten kennen."
+    },
+    "planning": {
+      "title": "Einfach planen",
+      "text": "Routen und Budgets in klaren Worten."
+    },
+    "immersive": {
+      "title": "Immersive Erlebnisse",
+      "text": "Schau dich um, bevor du entscheidest."
+    },
+    "pricing": {
+      "title": "Transparente Preise",
+      "text": "Der volle Preis, bevor du zahlst."
+    },
+    "africa": {
+      "title": "Wachsend in ganz Afrika",
+      "text": "Erst Tansania, dann weitere Länder."
+    }
+  },
+  "xp": {
+    "eyebrow": "Mehr als Fotos",
+    "title": "Nicht nur lesen. Erleben.",
+    "text": "Lauf am Ufer entlang. Steh am Kraterrand. Spür die Größe der Herden. Versteh einen Ort, bevor du Zeit und Geld investierst.",
+    "all": "Alle Erlebnisse",
+    "filter": "Erlebnisse filtern",
+    "cat": {
+      "all": "Alle",
+      "wildlife": "Tierwelt",
+      "culture": "Kultur",
+      "adventure": "Abenteuer",
+      "beaches": "Strände",
+      "cities": "Städte",
+      "luxury": "Luxus",
+      "conservation": "Naturschutz"
+    }
+  },
+  "why": {
+    "eyebrow": "Warum TravelMateVR",
+    "title": "Warum Reisende TravelMateVR wählen",
+    "know": {
+      "title": "Wisse, was du buchst",
+      "text": "Sieh Zimmer, Aussicht und Route, nicht nur den Prospekt."
+    },
+    "confidence": {
+      "title": "Reise mit Vertrauen",
+      "text": "Komm an einen Ort, der sich schon vertraut anfühlt."
+    },
+    "surprises": {
+      "title": "Keine bösen Überraschungen",
+      "text": "Kein Rätselraten, was dich wirklich erwartet."
+    },
+    "compare": {
+      "title": "Reiseziele visuell vergleichen",
+      "text": "Schau dir zwei Orte nebeneinander an, dann entscheide."
+    },
+    "smarter": {
+      "title": "Klüger planen",
+      "text": "Mach aus dem, was du gesehen hast, einen Tagesplan."
+    },
+    "trusted": {
+      "title": "Vertrauenswürdig buchen",
+      "text": "Geprüfte Partner vor Ort und klare, ehrliche Preise."
+    }
+  },
+  "how": {
+    "eyebrow": "So funktioniert’s",
+    "title": "Entdecken. Erleben. Buchen.",
+    "s1": {
+      "title": "Entdecken",
+      "text": "Finde Reiseziele, die zu deiner Traumreise passen."
+    },
+    "s2": {
+      "title": "Erleben",
+      "text": "Tauch in 360° ein, auf Handy, Computer oder Headset."
+    },
+    "s3": {
+      "title": "Planen",
+      "text": "Stell Route, Unterkünfte und Budget mit deinem KI-Begleiter zusammen."
+    },
+    "s4": {
+      "title": "Mit Vertrauen buchen",
+      "text": "Buch bei geprüften Partnern und wisse, was dich erwartet."
+    }
+  },
+  "dest": {
+    "eyebrow": "Reiseziele",
+    "title": "Afrikas immersives Tor zum Tourismus",
+    "text": "Wir verändern, wie die Welt afrikanische Reiseziele kennenlernt: indem man sie zuerst erlebt. Los geht’s in Tansania, und es geht weiter.",
+    "region": "Region",
+    "africa": "Afrika",
+    "world": "Über Afrika hinaus",
+    "worldNote": "Reiseziele außerhalb Afrikas gibt es vorerst nur als Vorschau: Entdeck sie schon heute in 360°, buchen kannst du, sobald wir dort starten."
+  },
+  "ai": {
+    "eyebrow": "Nachdem du dich umgesehen hast",
+    "title": "Dein persönlicher KI-Reisebegleiter",
+    "text": "Gefällt dir, was du gesehen hast? Erzähl deinem Begleiter, wie du gern reist. Er macht daraus Route, Unterkünfte, Budget und einen Tagesplan zum Anpassen, Speichern und Buchen.",
+    "example": "Ich habe 2.500 $, sieben Tage und möchte Tiere, Kultur und Strand.",
+    "cta": "Mit meinem Begleiter planen"
+  },
+  "partners": {
+    "eyebrow": "Für Tourismusunternehmen",
+    "title": "Fotos erzählen. VR beweist.",
+    "text": "Reisende zögern, wenn sie sich das Erlebnis nicht vorstellen können. Lass sie durch deine Lodge gehen, auf deiner Safari mitfahren oder an deinem Aussichtspunkt stehen, bevor sie ankommen. Weniger Zweifel. Bessere Buchungen.",
+    "b": {
+      "reach": "Erreiche Reisende weltweit",
+      "leads": "Gewinne Anfragen mit echter Kaufabsicht",
+      "confidence": "Gib Gästen die Sicherheit zu buchen",
+      "conversion": "Mach mehr Aufrufe zu Buchungen",
+      "showcase": "Zeig Unterkunft und Touren, wie sie wirklich sind",
+      "manage": "Buchungen, Auszahlungen und Inhalte an einem Ort"
+    },
+    "demo": "Demo anfragen"
+  },
+  "types": {
+    "eyebrow": "Partner",
+    "title": "Für alle im Tourismus gemacht",
+    "more": "Mehr erfahren",
+    "operators": {
+      "title": "Reiseveranstalter",
+      "text": "Lass Gäste deine Routen erleben, bevor sie sich festlegen. Füll mehr Plätze mit überzeugten Reisenden."
+    },
+    "hotels": {
+      "title": "Hotels & Lodges",
+      "text": "Zeig jedes Zimmer und jede Aussicht genau so, wie sie sind. Weniger Fragen, mehr Direktbuchungen."
+    },
+    "guides": {
+      "title": "Guides",
+      "text": "Teil dein Wissen schon vor der Reise und werde der Experte, den Reisende wählen."
+    },
+    "boards": {
+      "title": "Tourismusverbände",
+      "text": "Bring deine ganze Destination vor die Welt und sieh, wonach Reisende suchen."
+    },
+    "conservation": {
+      "title": "Naturschutzorganisationen",
+      "text": "Zeig die Orte, die du schützt, und mach aus Neugier verantwortungsvolle Besuche und Unterstützung."
+    },
+    "creators": {
+      "title": "Content Creator",
+      "text": "Film in 360° und verdien an jedem Aufruf und an den Abos mit."
+    }
+  },
+  "proof": {
+    "eyebrow": "Vertrauen",
+    "title": "Vertraut von Reisenden, Anbietern und Destinationen",
+    "stat": {
+      "destinations": "Reiseziele zum Entdecken",
+      "experiences": "immersive Erlebnisse",
+      "countries": "Länder",
+      "languages": "Sprachen"
+    },
+    "founding": "Unsere Gründungspartner",
+    "licensed": {
+      "title": "Jeder Partner geprüft",
+      "text": "Wir prüfen Lizenzen und Registrierungen, bevor ein Unternehmen Buchungen annehmen kann."
+    },
+    "reviews": {
+      "title": "Nur echte Bewertungen",
+      "text": "Bewerten können nur Reisende mit abgeschlossener Buchung."
+    },
+    "payments": {
+      "title": "Sichere Zahlungen",
+      "text": "Mobile Money und Karten über lizenzierte Anbieter. Deine PIN oder Kartennummer sehen wir nie."
+    },
+    "privacy": {
+      "title": "Deine Daten geschützt",
+      "text": "Verarbeitet nach dem tansanischen Datenschutzgesetz und internationalen Standards."
+    }
+  },
+  "vision": {
+    "title": "Die Zukunft des Reisens beginnt vor der Ankunft.",
+    "p1": "Reiseentscheidungen sollten auf Erfahrung beruhen, nicht auf Vermutungen. Heute geben Menschen viel Geld für Orte aus, die sie nur von ein paar Fotos kennen.",
+    "p2": "TravelMateVR ändert das. Entwickelt in Mbeya, Tansania, für Reisende überall, machen wir es selbstverständlich, ein Reiseziel zu betreten, bevor man es bucht.",
+    "journeyLabel": "Deine Reise",
+    "journey": {
+      "discover": "Entdecken",
+      "experience": "Erleben",
+      "plan": "Planen",
+      "book": "Buchen",
+      "travel": "Reisen"
+    }
+  },
+  "faq": {
+    "eyebrow": "Fragen",
+    "title": "Bevor du fragst",
+    "all": "Alle Fragen",
+    "q1": {
+      "q": "Was ist TravelMateVR?",
+      "a": "Eine Möglichkeit, Reiseziele vor der Reise zu erleben. Schau dir Orte, Unterkünfte und Touren in 360° an, plan deine Reise und buch dann vertrauenswürdige Partner vor Ort, mit gutem Gefühl."
+    },
+    "q2": {
+      "q": "Brauche ich ein VR-Headset?",
+      "a": "Nein. Alles funktioniert auf Handy oder Computer. Ein Headset macht es nur noch immersiver."
+    },
+    "q3": {
+      "q": "Ist das Entdecken kostenlos?",
+      "a": "Ja. Entdecken und Planen sind kostenlos. Du zahlst nur, wenn du eine Leistung buchst."
+    },
+    "q4": {
+      "q": "Wo kann ich buchen?",
+      "a": "Buchungen und Zahlungen sind in Tansania einschließlich Sansibar möglich. Andere Reiseziele gibt es als Vorschau, bis wir dort starten."
+    },
+    "q5": {
+      "q": "Wie bezahle ich?",
+      "a": "Mit M-Pesa, Airtel Money, Mixx by Yas, HaloPesa oder einer Visa- oder Mastercard jeder Bank."
+    },
+    "q6": {
+      "q": "Wie kann mein Unternehmen mitmachen?",
+      "a": "Wähl „Partner werden“ und erzähl uns von deinem Unternehmen. Wir prüfen deine Lizenz, helfen beim Einrichten, und schon kannst du mehr überzeugte Reisende empfangen."
+    }
+  },
+  "final": {
+    "title": "Reise mit Vertrauen.",
+    "text": "Erlebe Reiseziele, bevor du losfährst. Und dann fahr los und wisse genau, was dich erwartet."
+  }
+}

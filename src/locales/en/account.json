@@ -1,0 +1,429 @@
+{
+  "title": "My TravelMate",
+  "hello": "Hello, {{name}}",
+  "helloGuest": "Welcome to My TravelMate",
+  "guestNote": "You're using TravelMateVR as a guest. Everything is saved on this device; sign in to keep it with your account.",
+  "nav": {
+    "overview": "Overview",
+    "trips": "My Trips",
+    "bookings": "Bookings",
+    "wishlist": "Wishlist",
+    "itineraries": "Itineraries",
+    "reviews": "Reviews",
+    "messages": "Messages",
+    "notifications": "Notifications",
+    "documents": "Documents",
+    "preferences": "Travel preferences",
+    "security": "Privacy & security"
+  },
+  "overview": {
+    "upcoming": "Upcoming trip",
+    "openControl": "Open Trip Control Center",
+    "recent": "Recent notifications",
+    "allNotifications": "All notifications"
+  },
+  "bookings": {
+    "title": "Bookings",
+    "text": "Every reservation in one place, with confirmations, receipts and QR codes available offline.",
+    "filter": "Filter bookings",
+    "f": {
+      "all": "All",
+      "upcoming": "Upcoming",
+      "pending": "Awaiting confirmation",
+      "completed": "Completed",
+      "cancelled": "Cancelled"
+    },
+    "manage": "Manage",
+    "emptyTitle": "No bookings here yet",
+    "emptyText": "When you book a stay, safari or experience it will appear here.",
+    "browse": "Browse the marketplace"
+  },
+  "wishlist": {
+    "title": "Wishlist",
+    "text": "Destinations, experiences and places you've saved, organised into collections.",
+    "allSaved_one": "All saved ({{count}})",
+    "allSaved_other": "All saved ({{count}})",
+    "collections": "Collections",
+    "newCollection": "New collection",
+    "collectionName": "Collection name",
+    "collectionPh": "e.g. Honeymoon ideas",
+    "create": "Create",
+    "deleteCollection": "Delete collection",
+    "inCollection": "Add to or remove from collections",
+    "type": "Type",
+    "k": {
+      "all": "All",
+      "destination": "Destinations",
+      "experience": "Experiences",
+      "stay": "Stays",
+      "safari": "Safaris",
+      "activity": "Activities",
+      "restaurant": "Restaurants",
+      "event": "Events"
+    },
+    "emptyTitle": "Nothing saved yet",
+    "emptyText": "Tap the heart on any destination, experience or listing to save it here."
+  },
+  "notifications": {
+    "title": "Notifications",
+    "tab": {
+      "all": "All",
+      "unread": "Unread",
+      "settings": "Settings"
+    },
+    "markAll": "Mark all as read",
+    "markRead": "Mark as read",
+    "markUnread": "Mark as unread",
+    "delete": "Delete notification",
+    "emptyTitle": "You're all caught up",
+    "emptyText": "Booking updates, trip reminders and alerts will appear here.",
+    "settingsText": "Choose how we contact you for each type of update.",
+    "type": "Type",
+    "channelsNote": "Email, SMS, WhatsApp and push delivery start once your account is connected. In this preview, notifications appear in the app only.",
+    "kind": {
+      "booking": "Booking updates",
+      "reminder": "Trip reminders",
+      "itinerary": "Itinerary changes",
+      "partner": "Partner messages",
+      "promotion": "Offers",
+      "price": "Price alerts",
+      "alert": "Travel alerts",
+      "ai": "AI suggestions",
+      "support": "Support"
+    }
+  },
+  "channel": {
+    "inapp": "In app",
+    "email": "Email",
+    "sms": "SMS",
+    "whatsapp": "WhatsApp",
+    "push": "Push"
+  },
+  "prefs": {
+    "intro": "These preferences shape AI TravelMate's plans and your recommendations. They're stored on this device.",
+    "interests": "Interests",
+    "budget": "Budget level",
+    "style": "Travel style",
+    "pace": "Pace",
+    "destinations": "Dream destinations",
+    "noPreference": "No preference",
+    "adventure": "Adventure level",
+    "luxury": "Comfort level",
+    "sustainability": "Prefer sustainable and community-led options",
+    "accessibility": "Accessibility needs",
+    "consent": "Personalise my recommendations",
+    "consentHint": "You can turn this off at any time. We never sell your data.",
+    "reset": "Reset preferences",
+    "saved": "Preferences saved.",
+    "styles": {
+      "independent": "Independent",
+      "guided": "Guided",
+      "mixed": "A mix of both"
+    },
+    "paces": {
+      "relaxed": "Relaxed",
+      "balanced": "Balanced",
+      "packed": "Packed"
+    },
+    "access": {
+      "stepFree": "Step-free access",
+      "lowMobility": "Limited walking",
+      "visual": "Visual impairment",
+      "hearing": "Hearing impairment",
+      "dietary": "Dietary requirements"
+    }
+  },
+  "docs": {
+    "yours": "Your travel documents",
+    "add": "Add document",
+    "typeLabel": "Document type",
+    "label": "Label",
+    "labelPh": "e.g. Passport (Amina)",
+    "last4": "Last 4 characters of the number",
+    "last4Hint": "Optional. We never store full document numbers.",
+    "expiry": "Expiry date",
+    "trip": "Link to trip",
+    "noTrip": "No trip",
+    "file": "File (optional)",
+    "fileHint": "Files stay in this browser tab only and are not uploaded.",
+    "expires": "Expires {{date}}",
+    "expiringSoon": "Expires soon",
+    "remove": "Remove {{name}}",
+    "open": "Open",
+    "confirmations": "Booking confirmations",
+    "security": "Store copies of important documents securely and carry the originals when you travel.",
+    "emptyTitle": "No documents yet",
+    "emptyText": "Add passport, visa, insurance or vaccination details to keep them with your trips.",
+    "type": {
+      "passport": "Passport",
+      "visa": "Visa",
+      "ticket": "Ticket",
+      "insurance": "Travel insurance",
+      "vaccination": "Vaccination certificate",
+      "other": "Other"
+    }
+  },
+  "reviews": {
+    "title": "Reviews",
+    "count_one": "{{count}} review",
+    "count_other": "{{count}} reviews",
+    "sort": "Sort reviews",
+    "recent": "Most recent",
+    "high": "Highest rated",
+    "low": "Lowest rated",
+    "emptyTitle": "No reviews yet",
+    "emptyText": "Reviews come from travellers who booked through TravelMateVR.",
+    "write": "Write a review",
+    "writeFor": "Review {{name}}",
+    "yourRating": "Your rating",
+    "stars_one": "{{count}} star",
+    "stars_other": "{{count}} stars",
+    "name": "Name shown with your review",
+    "text": "Your review",
+    "submit": "Submit review",
+    "thanks": "Thank you! Your review will appear after moderation.",
+    "errRating": "Please choose a rating.",
+    "errText": "Please write at least 20 characters.",
+    "moderation": "Only travellers with a completed booking can review. Every review is checked before it's published.",
+    "yours": "Your reviews",
+    "awaiting": "Waiting for your review",
+    "pendingModeration": "Awaiting moderation",
+    "noneTitle": "No reviews to write",
+    "noneText": "After a completed booking, you can review it here.",
+    "responseFrom": "Response from {{partner}}",
+    "paused": "New reviews are paused for a short time. Please try again later.",
+    "published": "Published",
+    "rejected": "Not published (didn’t meet the review guidelines)"
+  },
+  "messages": {
+    "emptyTitle": "No messages yet",
+    "emptyText": "Conversations with partners start from a listing or booking.",
+    "write": "Write a message",
+    "send": "Send",
+    "whatsapp": "Hello, I'm writing about my conversation with {{partner}} on TravelMateVR.",
+    "note": "Messages are kept on this device in this preview. You can also reach us on",
+    "conversations": "Conversations",
+    "you": "You",
+    "back": "All conversations",
+    "booking": "Booking {{id}}",
+    "pick": "Choose a conversation to read it."
+  },
+  "thread": {
+    "started": "Conversation started. The partner usually replies within their stated response time.",
+    "autoAck": "Automatic reply: the partner has received your message and will answer soon."
+  },
+  "security": {
+    "signedInAs": "Signed in as {{email}} with {{provider}}.",
+    "emailPassword": "email and password",
+    "notSignedIn": "You're not signed in.",
+    "signin": "Sign in",
+    "signOut": "Sign out",
+    "signedOut": "You've been signed out.",
+    "p1": "Passwords are never stored as plain text, only as a salted hash.",
+    "p2": "Payments are handled by a PCI-compliant payment partner.",
+    "p3": "Your data is encrypted in transit.",
+    "devices": "Devices",
+    "current": "This device",
+    "thisBrowser": "This browser",
+    "thisPhone": "This phone",
+    "privacy": "Your data",
+    "privacyText": "Download a copy of what TravelMateVR stores on this device, or erase it.",
+    "export": "Download my data",
+    "erase": "Erase my data",
+    "eraseText": "This removes trips, bookings, preferences, documents and messages from this device. It can't be undone.",
+    "eraseConfirm": "Erase everything"
+  },
+  "signin": {
+    "welcome": "Welcome back",
+    "create": "Create your account",
+    "why": "Keep your trips, bookings and wishlist in one place, on all your devices.",
+    "google": "Continue with Google",
+    "or": "or",
+    "name": "Full name",
+    "password": "Password",
+    "passwordHint": "Use 8–128 characters.",
+    "errPassword": "Use 8–128 characters.",
+    "working": "Just a moment…",
+    "register": "Create account",
+    "noAccount": "New to TravelMateVR?",
+    "haveAccount": "Already have an account?",
+    "already": "You're signed in as {{email}}.",
+    "demo": "Preview sign-in: accounts are simulated on this device until the live service launches. Passwords are stored only as a secure hash. Don’t use a real password.",
+    "terms": "By continuing you agree to our",
+    "partner": "Are you a tourism business? Join as a partner",
+    "photoAlt": "A safari guide team standing beside their vehicle",
+    "identifier": "Email or username",
+    "username": "Username (optional)",
+    "usernameHint": "3–30 characters: letters, numbers, dot, underscore or hyphen.",
+    "errIdentifier": "Enter your email address or username.",
+    "errUsername": "Use 3–30 letters, numbers, dots, underscores or hyphens.",
+    "errCredentials": "Incorrect email, username or password.",
+    "attemptsLeft_one": "{{count}} attempt left before sign-in is paused.",
+    "attemptsLeft_other": "{{count}} attempts left before sign-in is paused.",
+    "locked": "Too many unsuccessful sign-in attempts. For your security, sign-in is paused until {{time}}.",
+    "errRegister": "We couldn’t create an account with these details. If you already have one, sign in instead.",
+    "errGeneric": "Something went wrong. Please try again."
+  },
+  "help": {
+    "title": "Help Center",
+    "text": "Answers about booking, payments, VR and your trips, with real people when you need them.",
+    "search": "Search help articles",
+    "faq": "Frequently asked questions",
+    "noResults": "No answers found",
+    "noResultsText": "Try different words, or contact our team.",
+    "ai": "Ask AI TravelMate",
+    "aiText": "Get instant answers about destinations, seasons and planning.",
+    "human": "Talk to a person",
+    "humanText": "Email {{email}} or call {{phone}}.",
+    "whatsapp": "WhatsApp us",
+    "waMessage": "Hello TravelMateVR, I need some help.",
+    "contact": "Contact us",
+    "open": "Open a support request",
+    "yourTickets": "Your support requests"
+  },
+  "faq": {
+    "booking": {
+      "title": "Booking",
+      "q1": "How do I book a stay or experience?",
+      "a1": "Open a listing, choose your dates and guests, add any extras and follow the steps. You'll see the full price, including taxes and fees, before you pay.",
+      "q2": "What's the difference between instant booking and request to book?",
+      "a2": "Instant bookings are confirmed straight away. With a request, the partner checks availability first and you're not charged until they confirm.",
+      "q3": "Where do I find my booking confirmation?",
+      "a3": "In Bookings and in your Trip Control Center. Each booking has an ID, a receipt and a QR code that also open offline."
+    },
+    "payment": {
+      "title": "Payments",
+      "q1": "Which payment methods can I use?",
+      "a1": "In Tanzania you can pay with M-Pesa, Airtel Money, Mixx by Yas, HaloPesa, or a Visa or Mastercard card from any bank. Prices are shown in US dollars, with an indicative amount in shillings for mobile money.",
+      "q2": "Can I pay a deposit?",
+      "a2": "For eligible bookings you can pay a deposit now and the balance later from your booking page.",
+      "q3": "Are there hidden fees?",
+      "a3": "No. The total you see includes taxes, the TravelMateVR service fee and any conservation contribution."
+    },
+    "cancel": {
+      "title": "Cancellations & refunds",
+      "q1": "How do I cancel a booking?",
+      "a1": "Open the booking and choose Cancel booking. You'll see exactly how much will be refunded before you confirm.",
+      "q2": "How much will I get back?",
+      "a2": "It depends on the cancellation policy shown on the listing: flexible, moderate or strict.",
+      "q3": "How long do refunds take?",
+      "a3": "Refunds go to your original payment method, usually within 5–10 business days depending on your provider."
+    },
+    "vr": {
+      "title": "360° & VR",
+      "q1": "Do I need a VR headset?",
+      "a1": "No. Every experience works on a phone or computer. A headset adds full immersion in WebXR browsers such as the Meta Quest Browser.",
+      "q2": "What's the difference between 360° and panoramic preview?",
+      "a2": "360° experiences are full spherical captures. Panoramic previews pan across a wide photo until we capture the place in 360°.",
+      "q3": "The viewer is slow. What can I do?",
+      "a3": "360° images are large. Try a stronger connection; once loaded, recently viewed experiences are kept for offline use."
+    },
+    "ai": {
+      "title": "AI TravelMate",
+      "q1": "How does AI TravelMate plan trips?",
+      "a1": "It uses your request and saved preferences to match destinations, stays and activities from our catalogue, and explains why it chose them.",
+      "q2": "Are AI prices final?",
+      "a2": "No. They're estimates. The exact price is shown when you book each item.",
+      "q3": "Can I change an AI plan?",
+      "a3": "Yes. Ask for changes in the chat, or save the plan and edit it day by day in the itinerary builder."
+    },
+    "account": {
+      "title": "Account & privacy",
+      "q1": "Do I need an account?",
+      "a1": "You can explore, plan and book as a guest. An account keeps your trips and bookings across devices.",
+      "q2": "How is my data used?",
+      "a2": "Only to provide your bookings and, if you agree, personalise recommendations. We never sell personal data.",
+      "q3": "How do I delete my data?",
+      "a3": "Go to My TravelMate › Privacy & security to download or erase your data."
+    },
+    "partners": {
+      "title": "Partners",
+      "q1": "Who are the partners on TravelMateVR?",
+      "a1": "Local operators, lodges, guides and community businesses. Founding partners and verified partners are labelled on their listings.",
+      "q2": "What does “Sample listing” mean?",
+      "a2": "Sample listings are fictional businesses that show how the marketplace works while partners are being onboarded.",
+      "q3": "How can my business join?",
+      "a3": "Visit For Partners to apply. Our team reviews every application before listings go live."
+    },
+    "safety": {
+      "title": "Safety",
+      "q1": "Where do I find emergency information?",
+      "a1": "Every destination page and your Trip Control Center show local emergency numbers and practical safety advice.",
+      "q2": "Can I reach TravelMateVR during my trip?",
+      "a2": "Yes, by WhatsApp, phone or email. Open a support request and mention your booking ID.",
+      "q3": "Are entry requirements up to date?",
+      "a3": "We review them regularly, but rules change. Always confirm with official government sources before you travel."
+    }
+  },
+  "contact": {
+    "title": "Contact us",
+    "text": "Our team in Mbeya, Tanzania, is here to help with bookings, trips and partnerships.",
+    "email": "Email",
+    "phone": "Phone",
+    "office": "Office",
+    "write": "Send us a message"
+  },
+  "ticket": {
+    "topicLabel": "Topic",
+    "topic": {
+      "booking": "Booking",
+      "payment": "Payment",
+      "trip": "During my trip",
+      "account": "Account",
+      "partner": "Partner",
+      "other": "Something else"
+    },
+    "booking": "Related booking",
+    "noBooking": "Not about a booking",
+    "subject": "Subject",
+    "message": "How can we help?",
+    "errMessage": "Please describe your question in at least 10 characters.",
+    "response": "We usually reply within one business day.",
+    "send": "Send request",
+    "sending": "Sending…",
+    "notFound": "We couldn't find that support request",
+    "team": "TravelMateVR support",
+    "reply": "Reply",
+    "closed": "This request is closed. Open a new one if you need more help.",
+    "close": "Close request",
+    "whatsapp": "Hello TravelMateVR, I'm following up on support request {{id}}.",
+    "autoAck": "Thanks, we have your request. A member of the TravelMateVR team usually replies within a few hours. For urgent help during a trip, message us on WhatsApp."
+  },
+  "notif": {
+    "welcome": {
+      "title": "Welcome to TravelMateVR",
+      "body": "Set your travel preferences to get more personal recommendations."
+    },
+    "ticket": {
+      "title": "Support request {{id}} received",
+      "body": "“{{subject}}”: we'll reply within one business day."
+    },
+    "requested": {
+      "title": "Booking request sent"
+    },
+    "booked": {
+      "title": "Booking confirmed",
+      "body": "{{title}} · booking {{id}}"
+    },
+    "paid": {
+      "title": "Payment received",
+      "body": "Your payment for booking {{id}} has been received."
+    },
+    "cancelled": {
+      "title": "Booking {{id}} cancelled",
+      "body": "Refund: {{amount}}."
+    },
+    "partnerConfirmed": {
+      "title": "Booking {{id}} confirmed by the partner",
+      "body": "Your request was accepted. Open the booking to pay and get your confirmation."
+    },
+    "partnerDeclined": {
+      "title": "Booking request {{id}} declined",
+      "body": "The partner can’t host you on these dates. Anything you paid will be refunded in full."
+    },
+    "ticketReply": {
+      "title": "New reply on request {{id}}",
+      "body": "The TravelMateVR team has replied to your support request."
+    }
+  }
+}

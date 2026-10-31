@@ -1,0 +1,282 @@
+{
+  "showcase": {
+    "browse": "Laissez-vous inspirer",
+    "prev": "Catégorie précédente",
+    "next": "Catégorie suivante",
+    "railLabel": "Catégories : {{list}}. Utilisez les flèches gauche et droite.",
+    "show": "Afficher {{name}}",
+    "pause": "Mettre le défilement automatique en pause",
+    "resume": "Reprendre le défilement automatique",
+    "featured": "Notre coup de cœur",
+    "play": "Plongez en 360° : {{name}}",
+    "nowExploring": "Vous explorez",
+    "previous": "Précédent",
+    "nextLbl": "Suivant"
+  },
+  "categories": {
+    "lifestyle": {
+      "name": "Art de vivre",
+      "text": "Matins sans hâte, lumière de l’océan et douceur de la vie sur l’île.",
+      "hint": "Îles, plages et voyage tout en douceur"
+    },
+    "landscape": {
+      "name": "Paysages",
+      "text": "Cratères, lacs volcaniques et horizons à perte de vue.",
+      "hint": "Cratères, montagnes et lacs"
+    },
+    "cultural": {
+      "name": "Culture",
+      "text": "Musique, danse et communautés qui font vivre leurs traditions.",
+      "hint": "Communautés, musique et vieilles villes"
+    },
+    "wildlife": {
+      "name": "Faune",
+      "text": "La Grande Migration, les grands félins et de longues heures paisibles auprès des troupeaux.",
+      "hint": "Safaris et Grande Migration"
+    }
+  },
+  "story": {
+    "quote": "Et si vous pouviez vivre votre destination avant même de partir ?",
+    "p1": "TravelMateVR est développé par Mates Technologies Limited à Mbeya, en Tanzanie. La plateforme relie voyageurs, entreprises touristiques, destinations et communautés locales dans un espace immersif doté d’IA.",
+    "p2": "Un voyage commence par la curiosité, l’envie et la confiance, pas par une page de paiement. Chez nous, l’expérience passe donc en premier, et préparer, réserver et rester en lien devient un jeu d’enfant.",
+    "journeyLabel": "Votre voyage avec nous",
+    "journey": {
+      "experience": "Vivre",
+      "plan": "Planifier",
+      "book": "Réserver",
+      "travel": "Voyager",
+      "connect": "Rester connecté"
+    }
+  },
+  "hero": {
+    "eyebrow": "Voyagez en toute confiance",
+    "title": "Voyez-le avant de partir.",
+    "text": "Entrez dans les destinations, les hébergements et les safaris avant de réserver vols, chambres ou circuits. Sachez exactement ce que vous choisissez, puis partez l’esprit tranquille.",
+    "explore": "Explorer les destinations",
+    "plan": "Planifier mon voyage"
+  },
+  "trust": {
+    "label": "Pourquoi voyager en confiance",
+    "verified": {
+      "title": "Partenaires vérifiés",
+      "text": "Licences contrôlées avant toute mise en ligne."
+    },
+    "local": {
+      "title": "Experts locaux de confiance",
+      "text": "Ceux qui connaissent le mieux les lieux."
+    },
+    "planning": {
+      "title": "Planification simple",
+      "text": "Itinéraires et budgets en mots simples."
+    },
+    "immersive": {
+      "title": "Expériences immersives",
+      "text": "Regardez autour de vous avant de décider."
+    },
+    "pricing": {
+      "title": "Prix transparents",
+      "text": "Le prix complet, avant de payer."
+    },
+    "africa": {
+      "title": "En plein essor en Afrique",
+      "text": "La Tanzanie d’abord, d’autres pays ensuite."
+    }
+  },
+  "xp": {
+    "eyebrow": "Au-delà des photos",
+    "title": "Ne vous contentez pas de lire. Vivez-le.",
+    "text": "Longez le rivage. Tenez-vous au bord du cratère. Ressentez l’ampleur des troupeaux. Comprenez un lieu avant d’y engager votre temps et votre argent.",
+    "all": "Toutes les expériences",
+    "filter": "Filtrer les expériences",
+    "cat": {
+      "all": "Tout",
+      "wildlife": "Faune",
+      "culture": "Culture",
+      "adventure": "Aventure",
+      "beaches": "Plages",
+      "cities": "Villes",
+      "luxury": "Luxe",
+      "conservation": "Conservation"
+    }
+  },
+  "why": {
+    "eyebrow": "Pourquoi TravelMateVR",
+    "title": "Pourquoi les voyageurs choisissent TravelMateVR",
+    "know": {
+      "title": "Sachez ce que vous réservez",
+      "text": "Voyez la chambre, la vue et l’itinéraire, pas seulement la brochure."
+    },
+    "confidence": {
+      "title": "Voyagez en confiance",
+      "text": "Arrivez dans un lieu qui vous semble déjà familier."
+    },
+    "surprises": {
+      "title": "Évitez les mauvaises surprises",
+      "text": "Plus de doute sur ce qui vous attend vraiment."
+    },
+    "compare": {
+      "title": "Comparez en images",
+      "text": "Explorez deux lieux côte à côte, puis choisissez."
+    },
+    "smarter": {
+      "title": "Planifiez plus malin",
+      "text": "Transformez ce que vous avez vu en programme jour par jour."
+    },
+    "trusted": {
+      "title": "Réservez en confiance",
+      "text": "Des partenaires locaux vérifiés et des prix clairs et honnêtes."
+    }
+  },
+  "how": {
+    "eyebrow": "Comment ça marche",
+    "title": "Découvrir. Vivre. Réserver.",
+    "s1": {
+      "title": "Découvrir",
+      "text": "Trouvez les destinations qui correspondent au voyage dont vous rêvez."
+    },
+    "s2": {
+      "title": "Vivre",
+      "text": "Entrez en 360° sur votre téléphone, votre ordinateur ou un casque."
+    },
+    "s3": {
+      "title": "Planifier",
+      "text": "Composez itinéraire, hébergements et budget avec votre compagnon IA."
+    },
+    "s4": {
+      "title": "Réserver en confiance",
+      "text": "Réservez auprès de partenaires vérifiés, en sachant à quoi vous attendre."
+    }
+  },
+  "dest": {
+    "eyebrow": "Destinations",
+    "title": "La porte d’entrée immersive du tourisme africain",
+    "text": "Nous construisons la façon dont le monde découvre les destinations africaines : en les vivant d’abord. Tout commence en Tanzanie, et la suite arrive.",
+    "region": "Région",
+    "africa": "Afrique",
+    "world": "Au-delà de l’Afrique",
+    "worldNote": "Les destinations hors d’Afrique sont pour l’instant en aperçu : explorez-les en 360° dès aujourd’hui, réservez dès notre lancement sur place."
+  },
+  "ai": {
+    "eyebrow": "Après votre visite",
+    "title": "Votre compagnon de voyage IA personnel",
+    "text": "Vous avez aimé ce que vous avez vu ? Dites à votre compagnon comment vous aimez voyager. Il en fait un itinéraire, des hébergements, un budget et un programme jour par jour, à ajuster, enregistrer et réserver.",
+    "example": "J’ai 2 500 $ et sept jours : je rêve d’animaux, de culture et de plages.",
+    "cta": "Planifier avec mon compagnon"
+  },
+  "partners": {
+    "eyebrow": "Pour les professionnels du tourisme",
+    "title": "Les photos racontent. La VR prouve.",
+    "text": "Les voyageurs hésitent quand ils n’arrivent pas à imaginer l’expérience. Laissez-les parcourir votre lodge, suivre votre safari ou admirer votre point de vue avant leur arrivée. Moins de doutes. De meilleures réservations.",
+    "b": {
+      "reach": "Touchez des voyageurs du monde entier",
+      "leads": "Recevez des demandes plus qualifiées",
+      "confidence": "Donnez confiance à vos clients pour réserver",
+      "conversion": "Transformez plus de visites en réservations",
+      "showcase": "Montrez votre établissement et vos circuits tels qu’ils sont",
+      "manage": "Gérez réservations, paiements et contenus au même endroit"
+    },
+    "demo": "Demander une démo"
+  },
+  "types": {
+    "eyebrow": "Partenaires",
+    "title": "Pensé pour chaque acteur du tourisme",
+    "more": "En savoir plus",
+    "operators": {
+      "title": "Voyagistes",
+      "text": "Faites vivre vos itinéraires avant l’engagement. Remplissez vos places avec des voyageurs confiants."
+    },
+    "hotels": {
+      "title": "Hôtels et lodges",
+      "text": "Montrez chaque chambre, chaque vue, tels qu’ils sont. Moins de questions, plus de réservations directes."
+    },
+    "guides": {
+      "title": "Guides",
+      "text": "Partagez votre savoir avant même le départ et devenez l’expert que les voyageurs choisissent."
+    },
+    "boards": {
+      "title": "Offices du tourisme",
+      "text": "Présentez toute votre destination au monde et découvrez ce que recherchent les voyageurs."
+    },
+    "conservation": {
+      "title": "Organisations de conservation",
+      "text": "Montrez les lieux que vous protégez et transformez la curiosité en visites responsables et en soutien."
+    },
+    "creators": {
+      "title": "Créateurs de contenu",
+      "text": "Filmez en 360° et gagnez à chaque vue et grâce aux abonnements."
+    }
+  },
+  "proof": {
+    "eyebrow": "Confiance",
+    "title": "La confiance des voyageurs, des opérateurs et des destinations",
+    "stat": {
+      "destinations": "destinations à explorer",
+      "experiences": "expériences immersives",
+      "countries": "pays",
+      "languages": "langues"
+    },
+    "founding": "Nos partenaires fondateurs",
+    "licensed": {
+      "title": "Chaque partenaire vérifié",
+      "text": "Nous contrôlons licences et enregistrements avant qu’une entreprise puisse recevoir des réservations."
+    },
+    "reviews": {
+      "title": "Uniquement des avis authentiques",
+      "text": "Seuls les voyageurs ayant effectué une réservation peuvent laisser un avis."
+    },
+    "payments": {
+      "title": "Paiements sécurisés",
+      "text": "Mobile money et cartes via des prestataires agréés. Nous ne voyons jamais votre code ni votre numéro de carte."
+    },
+    "privacy": {
+      "title": "Vos données protégées",
+      "text": "Traitées selon la loi tanzanienne sur la protection des données et les standards internationaux."
+    }
+  },
+  "vision": {
+    "title": "Le voyage de demain commence avant l’arrivée.",
+    "p1": "Choisir un voyage devrait reposer sur l’expérience, pas sur des suppositions. Aujourd’hui, on dépense beaucoup pour des lieux vus sur quelques photos seulement.",
+    "p2": "TravelMateVR change la donne. Conçu à Mbeya, en Tanzanie, pour les voyageurs du monde entier, il rend naturel le fait de parcourir une destination avant de la réserver.",
+    "journeyLabel": "Votre parcours",
+    "journey": {
+      "discover": "Découvrir",
+      "experience": "Vivre",
+      "plan": "Planifier",
+      "book": "Réserver",
+      "travel": "Voyager"
+    }
+  },
+  "faq": {
+    "eyebrow": "Questions",
+    "title": "Avant que vous ne demandiez",
+    "all": "Toutes les questions",
+    "q1": {
+      "q": "Qu’est-ce que TravelMateVR ?",
+      "a": "Un moyen de vivre une destination avant de partir. Explorez lieux, hébergements et circuits en 360°, planifiez votre voyage, puis réservez auprès de partenaires locaux de confiance."
+    },
+    "q2": {
+      "q": "Faut-il un casque VR ?",
+      "a": "Non. Tout fonctionne sur téléphone ou ordinateur. Un casque rend simplement l’expérience encore plus immersive."
+    },
+    "q3": {
+      "q": "L’exploration est-elle gratuite ?",
+      "a": "Oui. Explorer et planifier sont gratuits. Vous ne payez que lorsque vous réservez un service."
+    },
+    "q4": {
+      "q": "Où puis-je réserver ?",
+      "a": "Les réservations et paiements sont ouverts en Tanzanie, Zanzibar compris. Les autres destinations sont en aperçu jusqu’à notre lancement sur place."
+    },
+    "q5": {
+      "q": "Comment payer ?",
+      "a": "Avec M-Pesa, Airtel Money, Mixx by Yas, HaloPesa, ou une carte Visa ou Mastercard de n’importe quelle banque."
+    },
+    "q6": {
+      "q": "Comment mon entreprise peut-elle nous rejoindre ?",
+      "a": "Cliquez sur Devenir partenaire et présentez votre activité. Nous vérifions votre licence, vous accompagnons et vous accueillez bientôt des voyageurs plus confiants."
+    }
+  },
+  "final": {
+    "title": "Voyagez en toute confiance.",
+    "text": "Vivez les destinations avant de partir. Puis partez en sachant exactement ce qui vous attend."
+  }
+}

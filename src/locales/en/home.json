@@ -1,0 +1,282 @@
+{
+  "showcase": {
+    "browse": "Browse by category",
+    "prev": "Previous category",
+    "next": "Next category",
+    "railLabel": "Categories: {{list}}. Use the left and right arrow keys.",
+    "show": "Show {{name}}",
+    "pause": "Pause automatic sliding",
+    "resume": "Resume automatic sliding",
+    "featured": "Featured experience",
+    "play": "Enter the {{name}} experience in 360°",
+    "nowExploring": "Now exploring",
+    "previous": "Previous",
+    "nextLbl": "Next"
+  },
+  "categories": {
+    "lifestyle": {
+      "name": "Lifestyle",
+      "text": "Slow mornings, ocean light and the rhythm of island life.",
+      "hint": "Islands, beaches and slow travel"
+    },
+    "landscape": {
+      "name": "Landscape",
+      "text": "Craters, crater lakes and horizons that keep going.",
+      "hint": "Craters, mountains and lakes"
+    },
+    "cultural": {
+      "name": "Cultural",
+      "text": "Music, dance and the communities who keep traditions alive.",
+      "hint": "Communities, music and old towns"
+    },
+    "wildlife": {
+      "name": "Wildlife",
+      "text": "The Great Migration, big cats and quiet hours near the herds.",
+      "hint": "Safari drives and the Migration"
+    }
+  },
+  "story": {
+    "quote": "What if travellers could experience the destination before they ever travelled?",
+    "p1": "TravelMateVR is developed by Mates Technologies Limited in Mbeya, Tanzania. It connects travellers, tourism businesses, destinations and local communities in one immersive, AI-enabled platform.",
+    "p2": "Travel starts with curiosity, inspiration and confidence, not with a checkout page. So we put the experience first, and make planning, booking and staying connected feel effortless.",
+    "journeyLabel": "The traveller journey",
+    "journey": {
+      "experience": "Experience",
+      "plan": "Plan",
+      "book": "Book",
+      "travel": "Travel",
+      "connect": "Connect"
+    }
+  },
+  "hero": {
+    "eyebrow": "Travel with confidence",
+    "title": "See it before you go.",
+    "text": "Step inside destinations, stays and safaris before you book flights, rooms or tours. Know exactly what you're choosing, then travel with confidence.",
+    "explore": "Explore Destinations",
+    "plan": "Plan My Journey"
+  },
+  "trust": {
+    "label": "Why you can travel with confidence",
+    "verified": {
+      "title": "Verified Partners",
+      "text": "Licence-checked before they're listed."
+    },
+    "local": {
+      "title": "Trusted Local Experts",
+      "text": "People who know the place best."
+    },
+    "planning": {
+      "title": "Smart Planning",
+      "text": "Routes and budgets in plain language."
+    },
+    "immersive": {
+      "title": "Immersive Experiences",
+      "text": "Look around before you decide."
+    },
+    "pricing": {
+      "title": "Transparent Pricing",
+      "text": "The full price, before you pay."
+    },
+    "africa": {
+      "title": "Growing Across Africa",
+      "text": "Tanzania first, more countries next."
+    }
+  },
+  "xp": {
+    "eyebrow": "Explore beyond photos",
+    "title": "Don't just read about it. Experience it.",
+    "text": "Walk the shoreline. Stand at the crater rim. Feel the scale of the herds. Understand a place before you commit your time or money.",
+    "all": "All experiences",
+    "filter": "Filter experiences",
+    "cat": {
+      "all": "All",
+      "wildlife": "Wildlife",
+      "culture": "Culture",
+      "adventure": "Adventure",
+      "beaches": "Beaches",
+      "cities": "Cities",
+      "luxury": "Luxury",
+      "conservation": "Conservation"
+    }
+  },
+  "why": {
+    "eyebrow": "Why TravelMateVR",
+    "title": "Why travellers choose TravelMateVR",
+    "know": {
+      "title": "Know what you're booking",
+      "text": "See the room, the view and the route, not just the brochure."
+    },
+    "confidence": {
+      "title": "Travel with confidence",
+      "text": "Arrive somewhere that already feels familiar."
+    },
+    "surprises": {
+      "title": "Avoid surprises",
+      "text": "No guesswork about what's really there."
+    },
+    "compare": {
+      "title": "Compare destinations visually",
+      "text": "Look around two places side by side, then choose."
+    },
+    "smarter": {
+      "title": "Plan smarter",
+      "text": "Turn what you've seen into a day-by-day plan."
+    },
+    "trusted": {
+      "title": "Book trusted experiences",
+      "text": "Verified local partners and clear, honest prices."
+    }
+  },
+  "how": {
+    "eyebrow": "How it works",
+    "title": "Discover. Experience. Book.",
+    "s1": {
+      "title": "Discover",
+      "text": "Find destinations that match the trip you dream of."
+    },
+    "s2": {
+      "title": "Experience",
+      "text": "Step inside in 360° on your phone, computer or headset."
+    },
+    "s3": {
+      "title": "Plan",
+      "text": "Shape routes, stays and budget with your AI companion."
+    },
+    "s4": {
+      "title": "Book with confidence",
+      "text": "Reserve with verified partners, knowing what to expect."
+    }
+  },
+  "dest": {
+    "eyebrow": "Destinations",
+    "title": "Africa's immersive tourism gateway",
+    "text": "We're building the way the world gets to know African destinations: by experiencing them first. Start in Tanzania, then keep going.",
+    "region": "Region",
+    "africa": "Africa",
+    "world": "Beyond Africa",
+    "worldNote": "Destinations beyond Africa are preview-only for now: explore them in 360° today, book when we launch there."
+  },
+  "ai": {
+    "eyebrow": "After you've looked around",
+    "title": "Your personal AI travel companion",
+    "text": "Loved what you saw? Tell your companion how you like to travel. It turns it into routes, stays, budgets and a day-by-day plan you can change, save and book.",
+    "example": "I have $2,500, seven days and I want wildlife, culture and beaches.",
+    "cta": "Plan with my companion"
+  },
+  "partners": {
+    "eyebrow": "For tourism businesses",
+    "title": "Photos tell. VR proves.",
+    "text": "Travellers hesitate when they can't picture the experience. Let them walk your lodge, ride along on your safari or stand on your viewpoint before they arrive. Fewer doubts. Better bookings.",
+    "b": {
+      "reach": "Reach travellers around the world",
+      "leads": "Win higher-intent enquiries",
+      "confidence": "Give guests confidence to book",
+      "conversion": "Turn more views into bookings",
+      "showcase": "Show your property and tours as they really are",
+      "manage": "Run bookings, payouts and content in one place"
+    },
+    "demo": "Request a Demo"
+  },
+  "types": {
+    "eyebrow": "Partners",
+    "title": "Built for every tourism stakeholder",
+    "more": "Learn more",
+    "operators": {
+      "title": "Tour Operators",
+      "text": "Let guests ride along on your routes before they commit. Fill more seats with confident travellers."
+    },
+    "hotels": {
+      "title": "Hotels & Lodges",
+      "text": "Show every room, view and corner exactly as it is. Fewer questions, more direct bookings."
+    },
+    "guides": {
+      "title": "Guides",
+      "text": "Share your knowledge before the trip begins, and be the expert travellers choose."
+    },
+    "boards": {
+      "title": "Tourism Boards",
+      "text": "Put your whole destination in front of the world and see what travellers are looking for."
+    },
+    "conservation": {
+      "title": "Conservation Organisations",
+      "text": "Show the places you protect, and turn curiosity into responsible visits and support."
+    },
+    "creators": {
+      "title": "Content Creators",
+      "text": "Film in 360° and earn from every view and from subscriptions."
+    }
+  },
+  "proof": {
+    "eyebrow": "Trust",
+    "title": "Trusted by travellers, operators and destinations",
+    "stat": {
+      "destinations": "destinations to explore",
+      "experiences": "immersive experiences",
+      "countries": "countries",
+      "languages": "languages"
+    },
+    "founding": "Our founding partners",
+    "licensed": {
+      "title": "Every partner checked",
+      "text": "We verify licences and registrations before a business can take bookings."
+    },
+    "reviews": {
+      "title": "Honest reviews only",
+      "text": "Only travellers with a completed booking can leave a review."
+    },
+    "payments": {
+      "title": "Secure payments",
+      "text": "Mobile money and cards through licensed providers. We never see your PIN or card number."
+    },
+    "privacy": {
+      "title": "Your data protected",
+      "text": "Handled under Tanzania's data protection law and global standards."
+    }
+  },
+  "vision": {
+    "title": "The future of travel starts before you arrive.",
+    "p1": "Travel decisions should be based on experience, not guesswork. Today people spend real money on places they've only seen in a few photos.",
+    "p2": "TravelMateVR changes that. Built in Mbeya, Tanzania, for travellers everywhere, we're making it normal to walk a destination before you book it.",
+    "journeyLabel": "Your journey",
+    "journey": {
+      "discover": "Discover",
+      "experience": "Experience",
+      "plan": "Plan",
+      "book": "Book",
+      "travel": "Travel"
+    }
+  },
+  "faq": {
+    "eyebrow": "Questions",
+    "title": "Before you ask",
+    "all": "All questions",
+    "q1": {
+      "q": "What is TravelMateVR?",
+      "a": "A way to experience destinations before you travel. Look around places, stays and tours in 360°, plan your trip, then book trusted local partners with confidence."
+    },
+    "q2": {
+      "q": "Do I need a VR headset?",
+      "a": "No. Everything works on your phone or computer. A headset simply makes it even more immersive."
+    },
+    "q3": {
+      "q": "Is it free to explore?",
+      "a": "Yes. Exploring destinations and experiences and planning your trip are free. You only pay when you book a service."
+    },
+    "q4": {
+      "q": "Where can I book?",
+      "a": "Bookings and payments are open in Tanzania, including Zanzibar. Other destinations are preview-only until we launch there."
+    },
+    "q5": {
+      "q": "How do I pay?",
+      "a": "With M-Pesa, Airtel Money, Mixx by Yas, HaloPesa, or a Visa or Mastercard card from any bank."
+    },
+    "q6": {
+      "q": "How can my business join?",
+      "a": "Choose Become a Partner and tell us about your business. We check your licence, help you set up and you can start welcoming more confident travellers."
+    }
+  },
+  "final": {
+    "title": "Travel with confidence.",
+    "text": "Experience destinations before you travel. Then go, knowing exactly what's waiting for you."
+  }
+}

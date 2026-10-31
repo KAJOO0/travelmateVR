@@ -1,0 +1,241 @@
+{
+  "shell": {
+    "title": "旅游局后台",
+    "nav": "旅游局后台栏目",
+    "viewSite": "查看目的地"
+  },
+  "gate": {
+    "title": "通往您目的地的数字门户",
+    "text": "在一个地方发布目的地内容、开展推广活动、了解游客兴趣并支持本地旅游企业。",
+    "demo": "打开演示旅游局账户",
+    "demoNote": "演示账户属于一个虚构机构“Demo Tourism Board · Tanzania”。它不代表任何真实机构，其数据均为示例数据。",
+    "noAccount": "您代表旅游局、目的地管理组织、国家公园或保护组织？",
+    "apply": "申请开通"
+  },
+  "nav": {
+    "overview": "概览",
+    "destinations": "目的地",
+    "content": "内容",
+    "campaigns": "推广活动",
+    "visitors": "游客兴趣",
+    "attractions": "景点表现",
+    "trends": "旅游趋势",
+    "partners": "合作伙伴生态",
+    "sustainability": "可持续发展"
+  },
+  "kpi": {
+    "interest": "游客兴趣",
+    "vrViews": "360° 浏览",
+    "destinations": "目的地",
+    "partners": "旅游企业",
+    "verified_other": "{{count}} 家已认证",
+    "drafts": "待发布草稿"
+  },
+  "overview": {
+    "title": "欢迎，{{name}}",
+    "text": "{{org}}：目的地关注度、推广活动和内容一览。",
+    "demoNote": "演示机构。标注为示例数据的数字仅用于展示，并非官方统计。",
+    "sampleNote": "适用于游客兴趣和 360° 浏览量。",
+    "top": "浏览最多的目的地",
+    "liveCampaigns": "进行中的推广活动"
+  },
+  "destinations": {
+    "text": "您辖区内的目的地。编辑其内容并在 TravelMateVR 上发布更新。",
+    "bestTime": "最佳月份",
+    "content": "内容",
+    "posts_other": "{{count}} 条在线更新",
+    "state": {
+      "catalogue": "TravelMateVR 原文",
+      "published": "您的版本，已上线",
+      "draft": "草稿"
+    },
+    "interestNote": "游客兴趣是基于 12 个月内目的地页面浏览、360° 浏览和搜索得出的指数（示例数据）。",
+    "editText": "更新描述、安全与负责任旅行指引以及最佳旅行月份。发布后的修改会立即显示在公开页面上。",
+    "viewPublic": "查看公开页面",
+    "summary": "摘要",
+    "overview": "概述",
+    "accuracy": "您需对发布信息的准确性负责。安全和入境指引请尽可能链接官方来源。",
+    "draftSaved": "草稿已保存。",
+    "published": "已发布，公开的目的地页面已更新。",
+    "publish": "发布",
+    "revert": "恢复为 TravelMateVR 原文",
+    "reverted": "已恢复为 TravelMateVR 原文。",
+    "draftNote": "未发布的草稿保存于 {{date}}。旅行者看到的仍是之前的版本。",
+    "publishedNote": "您的版本已上线（更新于 {{date}}）。",
+    "managePosts": "此目的地的更新和活动"
+  },
+  "content": {
+    "text": "新闻、活动、旅行提示和故事，显示在目的地页面的“目的地最新动态”中。",
+    "new": "新建更新",
+    "edit": "编辑更新",
+    "kind": "类型",
+    "kinds": {
+      "news": "新闻",
+      "event": "活动",
+      "alert": "旅行提示",
+      "story": "故事"
+    },
+    "titleLabel": "标题",
+    "body": "正文",
+    "eventDate": "活动日期",
+    "visibleFrom": "日期（可选）",
+    "expires": "隐藏日期",
+    "dates": "日期",
+    "until": "至 {{date}}",
+    "expired": "已过期",
+    "status": {
+      "draft": "草稿",
+      "published": "已发布"
+    },
+    "publish": "发布",
+    "unpublish": "取消发布",
+    "publishedToast": "已发布到目的地页面。",
+    "draftToast": "草稿已保存。",
+    "errTitle": "请填写至少 4 个字符的标题。",
+    "errBody": "请填写至少 20 个字符的正文。",
+    "errDate": "活动需要填写日期。",
+    "alertNote": "旅行提示会优先显示在目的地页面。请将其用于安全、交通或关闭信息，并在正文中注明官方来源。",
+    "publishNote": "已发布的更新会以您撰写的语言显示在公开的目的地页面上，并标注您的机构名称。",
+    "emptyTitle": "还没有更新",
+    "emptyText": "为您的目的地发布新闻、活动或旅行提示。"
+  },
+  "campaigns": {
+    "text": "在 TravelMateVR 上向您选择的市场和兴趣人群推广目的地。",
+    "new": "新建推广活动",
+    "edit": "编辑推广活动",
+    "markets": "客源市场",
+    "interests": "旅行者兴趣",
+    "channel": {
+      "homepage": "首页",
+      "explore": "探索和目的地页面",
+      "ai": "AI 旅伴推荐",
+      "newsletter": "电子报",
+      "partners": "合作伙伴联合营销"
+    },
+    "note": "推广内容会标注为由您的机构推广。TravelMateVR 会在推广活动开始前进行审核。",
+    "schedule": "排期",
+    "scheduled": "推广活动已排期。",
+    "draftSaved": "推广活动已存为草稿。",
+    "status": {
+      "draft": "草稿",
+      "scheduled": "已排期",
+      "live": "进行中",
+      "ended": "已结束"
+    },
+    "progress": "推广进度",
+    "saves": "次收藏",
+    "none": "暂无推广活动。"
+  },
+  "visitors": {
+    "text": "对您目的地的兴趣来自哪里，以及旅行者在寻找什么。",
+    "interest": "每月游客兴趣",
+    "byDestination": "按目的地的兴趣",
+    "interestDef": "兴趣综合了目的地页面浏览、360° 浏览和搜索。",
+    "markets": "客源市场（占比）",
+    "interests": "旅行者感兴趣的内容",
+    "searches": "热门搜索",
+    "searchesNote": "提及您目的地的搜索，保留旅行者输入时使用的语言。"
+  },
+  "attractions": {
+    "text": "各目的地和沉浸式体验的表现。",
+    "pageViews": "页面浏览",
+    "avgVr": "平均 360° 时长",
+    "seconds_other": "{{count}} 秒",
+    "saves": "收藏",
+    "experiences": "沉浸式体验",
+    "experience": "体验",
+    "format": "形式",
+    "completion": "完整观看率",
+    "captureTip_other": "{{count}} 个体验仍在使用全景预览。真实的 360° 实景能让旅行者停留更久。"
+  },
+  "trends": {
+    "text": "您辖区内的季节性、停留时长和预订行为。",
+    "avgStay": "平均行程天数",
+    "leadTime": "平均提前预订天数",
+    "partySize": "平均出行人数",
+    "repeat": "回头客",
+    "seasonality": "处于最佳季节的目的地",
+    "seasonalityNote": "每月处于最佳月份的目的地占比。",
+    "lengthOfStay": "停留时长",
+    "daysRange": "{{range}} 天",
+    "monthly": "每月游客兴趣总量"
+  },
+  "partners": {
+    "text": "您辖区内入驻 TravelMateVR 的旅游企业。",
+    "invite": "邀请企业",
+    "verified": "已认证",
+    "founding": "创始合作伙伴",
+    "community": "社区主导或本地所有",
+    "ofListings": "的商品",
+    "byType": "按类型",
+    "unverified": "未认证",
+    "note": "标注“示例商品”的企业为虚构，用于展示市场。请邀请您辖区内的真实企业申请入驻。"
+  },
+  "sustainability": {
+    "text": "您辖区内的捐助、认证和社区受益情况。",
+    "contributions": "保护与社区捐助",
+    "contributionsHint_other": "来自 {{count}} 笔预订",
+    "ecoListings": "生态认证商品",
+    "ofListings_other": "共 {{count}} 个商品",
+    "community": "社区主导或本地所有",
+    "ecoDestinations": "生态认证目的地",
+    "dataNote": "捐助金额来自演示中的预订汇总（含示例客人）。认证占比来自商品数据。",
+    "transport": "游客在目的地之间的出行方式",
+    "road": "公路",
+    "flight": "航班",
+    "ferry": "渡轮",
+    "notes": "负责任旅行指引",
+    "claims": "只有在合作伙伴提供证明时才会展示可持续声明。旅游局可以在目的地页面发布指引。"
+  },
+  "landing": {
+    "eyebrow": "旅游局合作",
+    "title": "通往您目的地的数字门户",
+    "lede": "面向旅游局、目的地管理组织、政府旅游主管部门、国家公园和保护组织：在 TravelMateVR 上发布、推广并了解您的目的地。",
+    "requestDemo": "申请演示",
+    "openDemo": "打开演示后台",
+    "forTitle": "您可以做什么",
+    "forText": "一个控制台，管理目的地的展示方式，并了解旅行者在寻找什么。",
+    "caps": {
+      "content": {
+        "t": "内容发布",
+        "d": "及时更新目的地描述、安全指引和最佳季节，并发布新闻、活动和提示。"
+      },
+      "campaigns": {
+        "t": "推广活动",
+        "d": "向您选择的客源市场和兴趣人群推广目的地。"
+      },
+      "interest": {
+        "t": "游客兴趣",
+        "d": "按月份、市场和兴趣查看需求，以及旅行者的搜索内容。"
+      },
+      "attractions": {
+        "t": "景点表现",
+        "d": "按浏览、互动和预订比较各目的地和 360° 体验。"
+      },
+      "partners": {
+        "t": "合作伙伴生态",
+        "d": "了解辖区内的旅游企业并邀请新企业加入。"
+      },
+      "sustainability": {
+        "t": "可持续指标",
+        "d": "追踪捐助、认证和社区主导的旅游。"
+      }
+    },
+    "contactTitle": "申请演示",
+    "org": "机构名称",
+    "type": "机构类型",
+    "types": {
+      "board": "旅游局",
+      "dmo": "目的地管理组织",
+      "government": "政府旅游主管部门",
+      "park": "国家公园",
+      "conservation": "保护组织"
+    },
+    "message": "您希望实现什么？",
+    "messagePh": "管理的目的地、重点市场、时间安排…",
+    "send": "发送申请",
+    "subject": "旅游局咨询",
+    "sent": "谢谢。您的申请 {{id}} 已提交至合作团队，我们将在两个工作日内答复。",
+    "track": "查看申请进度"
+  }
+}

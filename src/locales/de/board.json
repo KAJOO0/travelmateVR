@@ -1,0 +1,247 @@
+{
+  "shell": {
+    "title": "Portal für Tourismusverbände",
+    "nav": "Bereiche des Verbandsportals",
+    "viewSite": "Reiseziele ansehen"
+  },
+  "gate": {
+    "title": "Dein digitales Tor zur Destination",
+    "text": "Veröffentliche Inhalte, starte Kampagnen, versteh das Interesse der Reisenden und unterstütze deine Tourismusbetriebe, alles an einem Ort.",
+    "demo": "Demo-Verbandskonto öffnen",
+    "demoNote": "Das Demokonto gehört einer erfundenen Organisation, „Demo Tourism Board · Tanzania“. Sie vertritt keine echte Behörde, und ihre Zahlen sind Beispieldaten.",
+    "noAccount": "Du vertrittst einen Tourismusverband, eine DMO, einen Park oder eine Naturschutzorganisation?",
+    "apply": "Zugang anfragen"
+  },
+  "nav": {
+    "overview": "Übersicht",
+    "destinations": "Reiseziele",
+    "content": "Inhalte",
+    "campaigns": "Kampagnen",
+    "visitors": "Besucherinteresse",
+    "attractions": "Attraktionen",
+    "trends": "Tourismustrends",
+    "partners": "Partner-Ökosystem",
+    "sustainability": "Nachhaltigkeit"
+  },
+  "kpi": {
+    "interest": "Besucherinteresse",
+    "vrViews": "360°-Aufrufe",
+    "destinations": "Reiseziele",
+    "partners": "Tourismusbetriebe",
+    "verified_one": "{{count}} verifiziert",
+    "verified_other": "{{count}} verifiziert",
+    "drafts": "Zu veröffentlichende Entwürfe"
+  },
+  "overview": {
+    "title": "Willkommen, {{name}}",
+    "text": "{{org}}: Interesse an Reisezielen, Kampagnen und Inhalte auf einen Blick.",
+    "demoNote": "Demo-Organisation. Als Beispieldaten markierte Zahlen dienen der Veranschaulichung und sind keine amtlichen Statistiken.",
+    "sampleNote": "gilt für Besucherinteresse und 360°-Aufrufe.",
+    "top": "Meistbesuchte Reiseziele",
+    "liveCampaigns": "Laufende Kampagnen"
+  },
+  "destinations": {
+    "text": "Die Reiseziele in deinem Gebiet. Bearbeite Inhalte und veröffentliche Neuigkeiten auf TravelMateVR.",
+    "bestTime": "Beste Monate",
+    "content": "Inhalt",
+    "posts_one": "{{count}} Meldung online",
+    "posts_other": "{{count}} Meldungen online",
+    "state": {
+      "catalogue": "TravelMateVR-Text",
+      "published": "Deine Version, live",
+      "draft": "Entwurf"
+    },
+    "interestNote": "Besucherinteresse ist ein Index aus Seitenaufrufen, 360°-Aufrufen und Suchen über 12 Monate (Beispieldaten).",
+    "editText": "Aktualisier Beschreibung, Sicherheits- und Nachhaltigkeitshinweise und die besten Reisemonate. Veröffentlichte Änderungen sind sofort auf der öffentlichen Seite zu sehen.",
+    "viewPublic": "Öffentliche Seite ansehen",
+    "summary": "Kurzbeschreibung",
+    "overview": "Überblick",
+    "accuracy": "Du bist dafür verantwortlich, dass veröffentlichte Infos stimmen. Verweis bei Sicherheit und Einreise am besten auf offizielle Quellen.",
+    "draftSaved": "Entwurf gespeichert.",
+    "published": "Veröffentlicht. Die öffentliche Reisezielseite ist aktualisiert.",
+    "publish": "Veröffentlichen",
+    "revert": "Zum TravelMateVR-Text zurück",
+    "reverted": "Zum TravelMateVR-Text zurückgesetzt.",
+    "draftNote": "Unveröffentlichter Entwurf vom {{date}}. Reisende sehen noch die vorherige Version.",
+    "publishedNote": "Deine Version ist live (aktualisiert am {{date}}).",
+    "managePosts": "Meldungen und Veranstaltungen für dieses Reiseziel"
+  },
+  "content": {
+    "text": "Neuigkeiten, Veranstaltungen, Reisehinweise und Geschichten, die auf Reisezielseiten unter „Aktuelles vom Reiseziel“ erscheinen.",
+    "new": "Neue Meldung",
+    "edit": "Meldung bearbeiten",
+    "kind": "Art",
+    "kinds": {
+      "news": "Neuigkeit",
+      "event": "Veranstaltung",
+      "alert": "Reisehinweis",
+      "story": "Geschichte"
+    },
+    "titleLabel": "Titel",
+    "body": "Text",
+    "eventDate": "Veranstaltungsdatum",
+    "visibleFrom": "Datum (optional)",
+    "expires": "Ausblenden nach",
+    "dates": "Daten",
+    "until": "bis {{date}}",
+    "expired": "Abgelaufen",
+    "status": {
+      "draft": "Entwurf",
+      "published": "Veröffentlicht"
+    },
+    "publish": "Veröffentlichen",
+    "unpublish": "Zurückziehen",
+    "publishedToast": "Auf der Reisezielseite veröffentlicht.",
+    "draftToast": "Entwurf gespeichert.",
+    "errTitle": "Gib einen Titel mit mindestens 4 Zeichen ein.",
+    "errBody": "Schreib mindestens 20 Zeichen Text.",
+    "errDate": "Veranstaltungen brauchen ein Datum.",
+    "alertNote": "Reisehinweise stehen ganz oben auf der Reisezielseite. Nutz sie für Sicherheit, Zugang oder Schließungen und nenn im Text die offizielle Quelle.",
+    "publishNote": "Veröffentlichte Meldungen erscheinen auf der öffentlichen Reisezielseite in der Sprache, in der du sie schreibst, mit dem Namen deiner Organisation.",
+    "emptyTitle": "Noch keine Meldungen",
+    "emptyText": "Veröffentliche Neuigkeiten, Veranstaltungen oder Reisehinweise für deine Reiseziele."
+  },
+  "campaigns": {
+    "text": "Mach deine Reiseziele auf TravelMateVR bekannt, in den Märkten und bei den Interessen deiner Wahl.",
+    "new": "Neue Kampagne",
+    "edit": "Kampagne bearbeiten",
+    "markets": "Quellmärkte",
+    "interests": "Interessen der Reisenden",
+    "channel": {
+      "homepage": "Startseite",
+      "explore": "Entdecken- und Reisezielseiten",
+      "ai": "Vorschläge von KI TravelMate",
+      "newsletter": "Newsletter",
+      "partners": "Co-Marketing mit Partnern"
+    },
+    "note": "Kampagneninhalte sind als von deiner Organisation beworben gekennzeichnet. TravelMateVR prüft Kampagnen vor dem Start.",
+    "schedule": "Planen",
+    "scheduled": "Kampagne geplant.",
+    "draftSaved": "Kampagne als Entwurf gespeichert.",
+    "status": {
+      "draft": "Entwurf",
+      "scheduled": "Geplant",
+      "live": "Läuft",
+      "ended": "Beendet"
+    },
+    "progress": "Kampagnenfortschritt",
+    "saves": "Merkungen",
+    "none": "Noch keine Kampagnen."
+  },
+  "visitors": {
+    "text": "Woher das Interesse an deinen Reisezielen kommt und wonach Reisende suchen.",
+    "interest": "Besucherinteresse pro Monat",
+    "byDestination": "Interesse nach Reiseziel",
+    "interestDef": "Interesse kombiniert Seitenaufrufe, 360°-Aufrufe und Suchen.",
+    "markets": "Quellmärkte (Anteil)",
+    "interests": "Wofür sich Reisende interessieren",
+    "searches": "Top-Suchanfragen",
+    "searchesNote": "Suchen, in denen deine Reiseziele vorkommen, in der Sprache, in der Reisende sie eingegeben haben."
+  },
+  "attractions": {
+    "text": "Wie jedes Reiseziel und jedes immersive Erlebnis abschneidet.",
+    "pageViews": "Seitenaufrufe",
+    "avgVr": "Ø 360°-Dauer",
+    "seconds_one": "{{count}} s",
+    "seconds_other": "{{count}} s",
+    "saves": "Merkungen",
+    "experiences": "Immersive Erlebnisse",
+    "experience": "Erlebnis",
+    "format": "Format",
+    "completion": "Bis zum Ende angesehen",
+    "captureTip_one": "{{count}} Erlebnis nutzt noch eine Panoramavorschau. Echte 360°-Aufnahmen halten Reisende länger.",
+    "captureTip_other": "{{count}} Erlebnisse nutzen noch eine Panoramavorschau. Echte 360°-Aufnahmen halten Reisende länger."
+  },
+  "trends": {
+    "text": "Saison, Aufenthaltsdauer und Buchungsverhalten in deinem Gebiet.",
+    "avgStay": "Durchschnittliche Reisedauer",
+    "leadTime": "Durchschnittliche Buchungsvorlaufzeit",
+    "partySize": "Durchschnittliche Gruppengröße",
+    "repeat": "Wiederkehrende Gäste",
+    "seasonality": "Reiseziele in ihrer besten Saison",
+    "seasonalityNote": "Anteil deiner Reiseziele in ihren besten Monaten, pro Monat.",
+    "lengthOfStay": "Aufenthaltsdauer",
+    "daysRange": "{{range}} Tage",
+    "monthly": "Gesamtes Besucherinteresse pro Monat"
+  },
+  "partners": {
+    "text": "Tourismusbetriebe auf TravelMateVR in deinem Gebiet.",
+    "invite": "Betriebe einladen",
+    "verified": "Verifiziert",
+    "founding": "Gründungspartner",
+    "community": "Gemeindegeführt oder lokal betrieben",
+    "ofListings": "der Angebote",
+    "byType": "Nach Art",
+    "unverified": "Nicht verifiziert",
+    "note": "Als „Beispielangebot“ markierte Betriebe sind erfunden und zeigen, wie der Marktplatz funktioniert. Lad echte Betriebe in deinem Gebiet zur Bewerbung ein."
+  },
+  "sustainability": {
+    "text": "Beiträge, Zertifizierungen und Nutzen für die Gemeinschaften in deinem Gebiet.",
+    "contributions": "Naturschutz- und Gemeindebeiträge",
+    "contributionsHint_one": "Aus {{count}} Buchung",
+    "contributionsHint_other": "Aus {{count}} Buchungen",
+    "ecoListings": "Öko-zertifizierte Angebote",
+    "ofListings_one": "von {{count}} Angebot",
+    "ofListings_other": "von {{count}} Angeboten",
+    "community": "Gemeindegeführt oder lokal betrieben",
+    "ecoDestinations": "Öko-zertifizierte Reiseziele",
+    "dataNote": "Beiträge werden aus den Demo-Buchungen summiert (einschließlich Beispielgästen). Zertifizierungsanteile stammen aus den Angebotsdaten.",
+    "transport": "Wie Besucher zwischen Reisezielen reisen",
+    "road": "Straße",
+    "flight": "Flug",
+    "ferry": "Fähre",
+    "notes": "Hinweise für verantwortungsvolles Reisen",
+    "claims": "Nachhaltigkeitsangaben erscheinen nur, wenn Partner Nachweise erbringen. Verbände können Hinweise auf Reisezielseiten veröffentlichen."
+  },
+  "landing": {
+    "eyebrow": "Für Tourismusverbände",
+    "title": "Dein digitales Tor zur Destination",
+    "lede": "Für Tourismusverbände, DMOs, staatliche Tourismusbehörden, Nationalparks und Naturschutzorganisationen: Zeig deine Destination auf TravelMateVR, mach sie bekannt und versteh, was Reisende suchen.",
+    "requestDemo": "Demo anfragen",
+    "openDemo": "Demo-Portal öffnen",
+    "forTitle": "Was du damit machen kannst",
+    "forText": "Ein Dashboard, mit dem du steuerst, wie deine Destination gezeigt wird, und siehst, wonach Reisende suchen.",
+    "caps": {
+      "content": {
+        "t": "Inhalte veröffentlichen",
+        "d": "Halte Beschreibungen, Sicherheitshinweise und beste Reisezeiten aktuell und veröffentliche Neuigkeiten, Veranstaltungen und Hinweise."
+      },
+      "campaigns": {
+        "t": "Kampagnen",
+        "d": "Mach Reiseziele in den Quellmärkten und bei den Interessen deiner Wahl bekannt."
+      },
+      "interest": {
+        "t": "Besucherinteresse",
+        "d": "Nachfrage nach Monat, Markt und Interesse sowie die Suchanfragen der Reisenden."
+      },
+      "attractions": {
+        "t": "Attraktionen im Vergleich",
+        "d": "Vergleich Reiseziele und 360°-Erlebnisse nach Aufrufen, Interaktion und Buchungen."
+      },
+      "partners": {
+        "t": "Partner-Ökosystem",
+        "d": "Lern die Tourismusbetriebe in deinem Gebiet kennen und lad neue ein."
+      },
+      "sustainability": {
+        "t": "Nachhaltigkeitskennzahlen",
+        "d": "Behalt Beiträge, Zertifizierungen und gemeinschaftlich geführten Tourismus im Blick."
+      }
+    },
+    "contactTitle": "Demo anfragen",
+    "org": "Organisation",
+    "type": "Art der Organisation",
+    "types": {
+      "board": "Tourismusverband",
+      "dmo": "Destination-Management-Organisation",
+      "government": "Staatliche Tourismusbehörde",
+      "park": "Nationalpark",
+      "conservation": "Naturschutzorganisation"
+    },
+    "message": "Was möchtest du erreichen?",
+    "messagePh": "Betreute Reiseziele, Schwerpunktmärkte, Zeitplan…",
+    "send": "Anfrage senden",
+    "subject": "Anfrage eines Tourismusverbands",
+    "sent": "Danke! Deine Anfrage {{id}} ist bei unserem Partnerteam angekommen. Wir melden uns innerhalb von zwei Werktagen.",
+    "track": "Anfrage verfolgen"
+  }
+}

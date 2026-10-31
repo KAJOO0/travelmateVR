@@ -1,0 +1,598 @@
+{
+  "shell": {
+    "title": "TravelMateVR Command Center",
+    "nav": "Sezioni del Command Center"
+  },
+  "gate": {
+    "title": "TravelMateVR Command Center",
+    "text": "Gestisci utenti, partner, contenuti, prenotazioni, IA, assistenza, ricavi e sicurezza della piattaforma.",
+    "demo": "Apri il Command Center demo",
+    "demoNote": "Accesso demo per la revisione. In produzione gli amministratori accedono con il proprio account e la verifica in due passaggi, e ogni permesso è applicato dal server.",
+    "role": "Accedi con i permessi di"
+  },
+  "roles": {
+    "traveller": "Viaggiatore",
+    "partner": "Partner",
+    "partner_staff": "Staff del partner",
+    "tourism_board": "Ente del turismo",
+    "government_dmo": "Ente pubblico / DMO",
+    "conservation_org": "Organizzazione per la conservazione",
+    "content_manager": "Responsabile contenuti",
+    "support_agent": "Operatore di assistenza",
+    "finance": "Amministrazione",
+    "admin": "Amministratore",
+    "super_admin": "Super amministratore"
+  },
+  "roleText": {
+    "super_admin": "Tutto, incluse impostazioni di sistema e sicurezza.",
+    "admin": "Gestione quotidiana della piattaforma; sicurezza in sola lettura, impostazioni di sistema nascoste.",
+    "content_manager": "Destinazioni, contenuti VR, recensioni, marketing e promozioni.",
+    "support_agent": "Richieste di assistenza, prenotazioni, recensioni; utenti in sola lettura.",
+    "finance": "Prenotazioni, statistiche e report; partner in sola lettura."
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "users": "Utenti",
+    "partners": "Partner",
+    "destinations": "Destinazioni",
+    "bookings": "Prenotazioni",
+    "vr": "Contenuti VR",
+    "ai": "IA",
+    "reviews": "Recensioni",
+    "marketing": "Marketing",
+    "promotions": "Promozioni",
+    "analytics": "Statistiche",
+    "sustainability": "Sostenibilità",
+    "support": "Assistenza",
+    "reports": "Report",
+    "security": "Sicurezza",
+    "settings": "Impostazioni di sistema"
+  },
+  "noAccess": {
+    "title": "Non hai accesso a questa sezione",
+    "text": "Il tuo ruolo non include quest’area. Chiedi a un super amministratore se ti serve l’accesso."
+  },
+  "readOnly": "Puoi vedere questa sezione, ma il tuo ruolo non consente modifiche.",
+  "kpi": {
+    "totalUsers": "Utenti totali",
+    "activeUsers": "Utenti attivi (mese)",
+    "partners": "Partner",
+    "destinations": "Destinazioni",
+    "bookings": "Prenotazioni",
+    "gmv": "Valore lordo delle prenotazioni",
+    "commission": "Commissione",
+    "subscriptions": "Ricavi da abbonamenti",
+    "advertising": "Ricavi pubblicitari",
+    "enterprise": "Ricavi enterprise",
+    "vr": "Esperienze VR",
+    "ai": "Interazioni IA",
+    "conversion": "Tasso di conversione",
+    "tickets": "Richieste di assistenza",
+    "sampleHint": "Dati di esempio",
+    "plusFees": "+ {{fees}} di commissioni di servizio dei viaggiatori",
+    "annualised": "Annualizzato (in parte esempio)",
+    "campaignBudgets": "Budget di campagna prenotati",
+    "thisDevice": "Registrate su questo dispositivo",
+    "open": "Aperte"
+  },
+  "dashboard": {
+    "title": "Bentornato, {{name}}",
+    "text": "Tutta la piattaforma a colpo d’occhio: persone, partner, prenotazioni, ricavi e assistenza.",
+    "dataNote": "Prenotazioni, valore lordo, commissione, mercati e rendimento dei partner derivano dalle prenotazioni. Utenti, conversione e ricavi non da commissione sono valori di esempio finché analisi e fatturazione non sono collegate.",
+    "growth": "Crescita degli utenti",
+    "newUsers": "Nuovi utenti",
+    "geo": "Da dove vengono i viaggiatori",
+    "geoNote": "Paese di residenza del viaggiatore principale nelle prenotazioni.",
+    "bookingTrends": "Prenotazioni per mese",
+    "revenueTrends": "Ricavi per fonte",
+    "revenueNote": "Commissione dalle prenotazioni; abbonamenti, pubblicità ed enterprise sono valori di esempio.",
+    "partnerPerformance": "Rendimento dei partner",
+    "destinationPopularity": "Popolarità delle destinazioni"
+  },
+  "users": {
+    "text": "Tutti gli account di TravelMateVR: viaggiatori, partner, enti del turismo e staff.",
+    "search": "Cerca per nome o email",
+    "allRoles": "Tutti i ruoli",
+    "count_one": "{{count}} utente",
+    "count_other": "{{count}} utenti",
+    "user": "Utente",
+    "role": "Ruolo",
+    "roleFor": "Ruolo di {{name}}",
+    "joined": "Iscrizione",
+    "lastActive": "Ultima attività",
+    "status": {
+      "active": "Attivo",
+      "suspended": "Sospeso"
+    },
+    "suspend": "Sospendi",
+    "reactivate": "Riattiva",
+    "suspended": "Account sospeso.",
+    "reactivated": "Account riattivato.",
+    "roleChanged": "Ruolo aggiornato.",
+    "resetMfa": "Reimposta 2FA",
+    "mfaReset": "Verifica in due passaggi reimpostata. L’utente la configurerà al prossimo accesso.",
+    "inviteStaff": "Invita un membro dello staff",
+    "inviteNote": "Lo staff deve attivare la verifica in due passaggi al primo accesso. Solo i super amministratori possono assegnare ruoli di amministratore.",
+    "count_many": "{{count}} utenti"
+  },
+  "partners": {
+    "text": "Elenco partner, verifica, commissioni e sospensioni, più candidature e nuovi annunci da revisionare.",
+    "tab": {
+      "directory": "Elenco",
+      "applications": "Candidature",
+      "listings": "Nuovi annunci"
+    },
+    "partner": "Partner",
+    "commissionFor": "Commissione di {{name}}",
+    "commissionSaved": "Commissione aggiornata.",
+    "verify": "Verifica",
+    "unverify": "Rimuovi verifica",
+    "suspend": "Sospendi",
+    "reinstate": "Riabilita",
+    "suspended": "Sospeso",
+    "suspendedToast": "{{name}} sospeso. I suoi annunci sono nascosti.",
+    "reinstated": "{{name}} riabilitato.",
+    "suspendNote": "Sospendere un partner nasconde subito tutti i suoi annunci. Le prenotazioni esistenti restano; controllale in Prenotazioni.",
+    "submitted": "Inviata",
+    "appStatus": {
+      "submitted": "Nuova",
+      "in_review": "In revisione",
+      "approved": "Approvata",
+      "rejected": "Respinta"
+    },
+    "noApplications": "Ancora nessuna candidatura. Arrivano dal modulo pubblico “Candida la tua attività”.",
+    "approve": "Approva",
+    "reject": "Respingi",
+    "startReview": "Metti in revisione",
+    "note": "Nota per il candidato (facoltativa)",
+    "notePh": "Motivo o prossimi passi",
+    "decided": {
+      "approved": "{{name}} approvato.",
+      "rejected": "{{name}} respinto.",
+      "in_review": "{{name}} è in revisione."
+    },
+    "checks": "Prima di approvare: verifica la licenza turistica presso l’autorità, controlla la registrazione e conferma il referente per telefono.",
+    "noListings": "Nessun nuovo annuncio da revisionare.",
+    "review": "Revisiona",
+    "publishListing": "Pubblica annuncio",
+    "listingPublished": "Annuncio pubblicato sul marketplace.",
+    "listingRejected": "Annuncio restituito al partner.",
+    "listingChecks": "Controlla che la descrizione sia accurata e specifica, il prezzo realistico e l’annuncio non sia un duplicato."
+  },
+  "destinations": {
+    "text": "Tutte le destinazioni con interesse, prenotazioni e contenuti pubblicati dagli enti del turismo.",
+    "revert": "Annulla modifiche dell’ente",
+    "interestNote": "L’interesse è un indice di esempio basato su visualizzazioni delle pagine, visualizzazioni 360° e ricerche.",
+    "posts": "Aggiornamenti di destinazione pubblicati",
+    "noPosts": "Nessun aggiornamento pubblicato.",
+    "unpublished": "Aggiornamento ritirato."
+  },
+  "bookings": {
+    "text": "Tutte le prenotazioni di tutti i partner. Gestisci qui contestazioni, rimborsi e reinvii.",
+    "allStatuses": "Tutti gli stati",
+    "allPartners": "Tutti i partner",
+    "count_one": "{{count}} prenotazione",
+    "count_other": "{{count}} prenotazioni",
+    "resend": "Reinvia conferma",
+    "resent": "Conferma reinviata a {{email}}.",
+    "cancelRefund": "Cancella con rimborso totale",
+    "confirmText": "La prenotazione verrà cancellata e quanto pagato ({{amount}}) rimborsato sul metodo di pagamento originale. Viaggiatore e partner verranno avvisati.",
+    "reason": "Motivo",
+    "reasons": {
+      "partner": "Il partner non può erogare il servizio",
+      "payment": "Contestazione del pagamento",
+      "duplicate": "Prenotazione duplicata",
+      "safety": "Problema di sicurezza o accesso",
+      "other": "Altro"
+    },
+    "confirm": "Cancella e rimborsa",
+    "cancelled": "Prenotazione {{id}} cancellata e rimborsata.",
+    "count_many": "{{count}} prenotazioni"
+  },
+  "vr": {
+    "text": "Tutte le esperienze immersive e il loro stato di pubblicazione. Solo quelle pubblicate sono visibili ai viaggiatori.",
+    "create": "Crea esperienza",
+    "edit": "Modifica esperienza",
+    "experience": "Esperienza",
+    "createdHere": "Creata nel Command Center",
+    "catalogue": "Catalogo",
+    "hotspotCount_one": "{{count}} punto di interesse",
+    "hotspotCount_other": "{{count}} punti di interesse",
+    "status": {
+      "draft": "Bozza",
+      "review": "In revisione",
+      "approved": "Approvata",
+      "published": "Pubblicata",
+      "archived": "Archiviata"
+    },
+    "action": {
+      "draft": "Torna in bozza",
+      "review": "Invia in revisione",
+      "approved": "Approva",
+      "published": "Pubblica",
+      "archived": "Archivia"
+    },
+    "moved": "“{{name}}” ora è: {{status}}.",
+    "tagline": "Descrizione breve",
+    "category": "Categoria",
+    "duration": "Durata (minuti)",
+    "pano": "Immagine 360°",
+    "noPano": "Nessuna (anteprima panoramica della foto)",
+    "photo": "Foto di copertina",
+    "upload": "Carica immagine o video 360°",
+    "uploadHint": "Immagine equirettangolare (2:1) o video 360°. I file passano dalla pipeline di elaborazione (controllo di unione, compressione, sfocatura dei volti); poi scegli sopra il media elaborato.",
+    "fileErr": "Usa un file JPG, PNG, WebP, TIFF, MP4, MOV o Insta360 inferiore a 2 GB.",
+    "queued": "In coda per l’elaborazione: {{name}}",
+    "startYaw": "Direzione iniziale (°)",
+    "narration": "Narrazione (letta nel visualizzatore)",
+    "narrationPh": "Testo letto ad alta voce dalla sintesi vocale del browser nella lingua del viaggiatore.",
+    "hotspots": "Punti di interesse",
+    "hsTitle": "Titolo del punto",
+    "hsText": "Testo del punto",
+    "hsKindLabel": "Tipo",
+    "hsKind": {
+      "info": "Informazioni",
+      "wildlife": "Fauna",
+      "culture": "Cultura",
+      "nearby": "Nei dintorni"
+    },
+    "addHotspot": "Aggiungi punto",
+    "bookable": "Prenotabile da questa esperienza",
+    "saved": "Esperienza salvata.",
+    "workflowNote": "Le nuove esperienze partono come bozze: invia in revisione, approva, poi pubblica. Quelle pubblicate compaiono nella libreria VR e nelle pagine destinazione.",
+    "partnerRequests": "Caricamenti e richieste di ripresa dei partner",
+    "hotspotCount_many": "{{count}} punti di interesse",
+    "video": "Video 360°",
+    "noVideo": "Nessun video 360°",
+    "videoHint": "Formato principale. La foto 360° qui sotto, se impostata, viene mostrata quando il video non può essere riprodotto."
+  },
+  "ai": {
+    "text": "Come i viaggiatori usano l’IA TravelMate: domande, piani, feedback, errori, sicurezza e costi.",
+    "dataNote": "{{count}} interazioni sono state registrate su questo dispositivo; il resto sono dati di esempio. Le richieste sono salvate anonimizzate.",
+    "interactions": "Interazioni",
+    "itineraries": "Itinerari generati",
+    "successRate": "Tasso di successo",
+    "satisfaction": "Valutazioni utili",
+    "ratings_one": "{{count}} valutazione",
+    "ratings_other": "{{count}} valutazioni",
+    "latency": "Tempo medio di risposta",
+    "flags": "Segnalazioni di sicurezza",
+    "sampleNote": "riguarda le interazioni non avvenute su questo dispositivo.",
+    "popular": "Domande frequenti",
+    "answerTypes": "Tipi di risposta",
+    "type": {
+      "plan": "Piani di viaggio",
+      "season": "Periodo migliore",
+      "compare": "Confronti",
+      "entry": "Requisiti d’ingresso",
+      "weather": "Meteo",
+      "error": "Non riuscite"
+    },
+    "recommendations": "Destinazioni più consigliate",
+    "recNote": "Destinazioni incluse nei piani generati.",
+    "failed": "Risposte non riuscite",
+    "noFailures": "Nessun errore registrato.",
+    "safety": "Segnalazioni di sicurezza",
+    "noFlags": "Nessuna richiesta segnalata.",
+    "prompt": "Richiesta (anonimizzata)",
+    "flag": "Segnalazione",
+    "when": "Quando",
+    "flagKind": {
+      "personal_data": "Dati personali",
+      "unsafe_request": "Richiesta non sicura",
+      "medical": "Consiglio medico",
+      "off_topic": "Fuori tema"
+    },
+    "redaction": "Email e numeri di telefono vengono rimossi prima del salvataggio. Le richieste segnalate ricevono una risposta generale e sicura.",
+    "models": "Uso dei modelli e costi",
+    "activeModel": "Modello attivo",
+    "rulesModel": "pianificatore a regole basato sul catalogo TravelMateVR",
+    "dataSource": "Esecuzione",
+    "gateway": "Tramite il gateway IA (server)",
+    "onDevice": "Nel browser (demo)",
+    "cost": "Costo di questo mese",
+    "costNote": "il pianificatore demo non ha costi per richiesta; i modelli ospitati riportano token e costi tramite il gateway",
+    "replaceable": "L’app comunica con l’IA tramite un’unica interfaccia di servizio (plan e respond). Un modello ospitato può sostituire il pianificatore demo sul server senza modificare le schermate.",
+    "ratings_many": "{{count}} valutazioni"
+  },
+  "reviews": {
+    "text": "Approva le nuove recensioni e nascondi quelle pubblicate che violano le linee guida.",
+    "tab": {
+      "queue": "In attesa di moderazione",
+      "published": "Pubblicate",
+      "hidden": "Nascoste"
+    },
+    "approve": "Approva",
+    "reject": "Respingi",
+    "approved": "Recensione approvata e pubblicata.",
+    "rejected": "Recensione respinta.",
+    "emptyQueue": "Nulla in attesa di moderazione.",
+    "hide": "Nascondi",
+    "hidden": "Recensione nascosta.",
+    "restore": "Ripristina",
+    "noneHidden": "Nessuna recensione nascosta.",
+    "hasReply": "il partner ha risposto",
+    "reason": "Motivo",
+    "reasons": {
+      "spam": "Spam",
+      "offensive": "Linguaggio offensivo",
+      "personal_data": "Contiene dati personali",
+      "not_genuine": "Soggiorno non autentico",
+      "off_topic": "Fuori tema"
+    },
+    "policy": "Le recensioni vengono rimosse solo se violano le linee guida, mai perché negative. Ogni decisione è registrata."
+  },
+  "marketing": {
+    "text": "Approva campagne, messe in evidenza e pacchetti dei partner e monitora tutto ciò che è attivo.",
+    "queue": "Da revisionare",
+    "emptyQueue": "Nulla da revisionare.",
+    "campaign": "Campagna",
+    "featured": "Messa in evidenza",
+    "package": "Pacchetto",
+    "approved": "Approvato.",
+    "return": "Restituisci al partner",
+    "returned": "Restituito al partner.",
+    "running": "Campagne attive e programmate",
+    "owner": "Titolare",
+    "labelling": "I contenuti promossi sono sempre indicati come “Promosso” o “In evidenza”. L’IA TravelMate non mette mai contenuti a pagamento sopra risultati più pertinenti senza dichiararlo."
+  },
+  "promotions": {
+    "text": "Tutte le offerte dei partner. Lo sconto massimo è del {{max}}%; modificalo nelle impostazioni di sistema.",
+    "overCap": "Oltre il limite attuale",
+    "note": "Metti in pausa le offerte ingannevoli (ad esempio prezzi “prima” gonfiati). Le offerte in pausa smettono subito di applicarsi al pagamento."
+  },
+  "analytics": {
+    "text": "Valore lordo, take rate, fonti di ricavo, domanda e destinazioni su tutta la piattaforma.",
+    "avgBooking": "Valore medio della prenotazione",
+    "takeRate": "Take rate",
+    "contributions": "Contributi per conservazione e comunità",
+    "gmvTrend": "Valore lordo e commissione per mese",
+    "streams": "Ricavi per fonte",
+    "streamsNote": "Commissione e commissioni di servizio dalle prenotazioni; le altre fonti sono in parte esempi.",
+    "fees": "Commissioni di servizio",
+    "byType": "Prenotazioni per tipo"
+  },
+  "sustainability": {
+    "text": "Contributi, certificazioni e offerta comunitaria su tutte le destinazioni.",
+    "contributing": "Annunci con contributo",
+    "byCountry": "Annunci certificati o comunitari per paese"
+  },
+  "support": {
+    "text": "Domande di viaggiatori e partner. Le risposte arrivano nella richiesta e nelle notifiche del viaggiatore.",
+    "tab": {
+      "active": "Attive",
+      "all": "Tutte"
+    },
+    "queue": "Coda delle richieste",
+    "high": "Priorità alta",
+    "afterReply": "Stato dopo la risposta",
+    "send": "Invia risposta",
+    "sent": "Risposta inviata.",
+    "statusSaved": "Stato aggiornato.",
+    "emptyTitle": "Nessuna richiesta",
+    "emptyText": "Le richieste di assistenza dal Centro assistenza compaiono qui.",
+    "macro": {
+      "received": "Ciao {{name}}, grazie per averci scritto. Stiamo verificando e ti aggiorniamo a breve.",
+      "receivedLabel": "Conferma ricezione",
+      "refund": "Ciao {{name}}, abbiamo emesso il rimborso sul metodo di pagamento originale. Di solito arriva entro 5–10 giorni lavorativi.",
+      "refundLabel": "Rimborso emesso",
+      "dates": "Ciao {{name}}, abbiamo chiesto al partner di cambiare le tue date e confermeremo appena risponde.",
+      "datesLabel": "Cambio date"
+    }
+  },
+  "reports": {
+    "text": "Scarica report CSV per amministrazione, partner e conformità. Ogni download è registrato nel registro di audit.",
+    "from": "Soggiorni dal",
+    "to": "Soggiorni al",
+    "rangeNote_one": "{{count}} prenotazione in questo periodo (vale per il report prenotazioni).",
+    "rangeNote_other": "{{count}} prenotazioni in questo periodo (vale per il report prenotazioni).",
+    "rows_one": "{{count}} riga",
+    "rows_other": "{{count}} righe",
+    "downloaded": "Report scaricato.",
+    "privacy": "I report possono contenere dati personali. Conservali in modo sicuro ed eliminali quando non servono più. Generato il {{date}}.",
+    "r": {
+      "bookings": {
+        "title": "Prenotazioni",
+        "text": "Tutte le prenotazioni con dettaglio del prezzo e stato del pagamento"
+      },
+      "commission": {
+        "title": "Ricavi: commissione",
+        "text": "Valore lordo e commissione mensili"
+      },
+      "subscriptions": {
+        "title": "Ricavi: abbonamenti partner",
+        "text": "Ricavi mensili da abbonamenti (esempio)"
+      },
+      "advertising": {
+        "title": "Ricavi: pubblicità",
+        "text": "Ricavi mensili da campagne e messe in evidenza (esempio)"
+      },
+      "enterprise": {
+        "title": "Ricavi: servizi enterprise",
+        "text": "Contratti con enti del turismo e aziende (esempio)"
+      },
+      "partners": {
+        "title": "Partner",
+        "text": "Rendimento e stato dei partner"
+      },
+      "destinations": {
+        "title": "Destinazioni",
+        "text": "Prenotazioni, valore lordo e interesse per destinazione"
+      },
+      "users": {
+        "title": "Utenti",
+        "text": "Account per ruolo e stato (senza nomi o email)"
+      },
+      "ai": {
+        "title": "Interazioni IA",
+        "text": "Richieste anonimizzate, tipi di risposta, latenza e feedback"
+      },
+      "audit": {
+        "title": "Registro di audit",
+        "text": "Tutte le azioni amministrative"
+      }
+    },
+    "rangeNote_many": "{{count}} prenotazioni in questo periodo (vale per il report prenotazioni).",
+    "rows_many": "{{count}} righe"
+  },
+  "security": {
+    "text": "Chi ha fatto cosa, attività insolite, richieste sulla protezione dei dati e permessi dei ruoli.",
+    "audit": "Registro attività degli amministratori",
+    "search": "Cerca nel registro",
+    "actor": "Amministratore",
+    "action": "Azione",
+    "target": "Oggetto",
+    "auditNote": "Il registro di audit è di sola aggiunta. In produzione è scritto dal server e conservato almeno 2 anni.",
+    "events": "Eventi di sicurezza",
+    "kind": {
+      "failed_login": "Accesso non riuscito",
+      "rate_limit": "Limite di richieste raggiunto",
+      "new_device": "Accesso da nuovo dispositivo",
+      "mfa_disabled": "2FA disattivata",
+      "permission_denied": "Permesso negato"
+    },
+    "sev": {
+      "low": "Bassa",
+      "medium": "Media",
+      "high": "Alta"
+    },
+    "dsr": "Richieste sulla protezione dei dati",
+    "dsrKind": {
+      "export": "Esportazione dati",
+      "erase": "Cancellazione",
+      "correct": "Rettifica"
+    },
+    "dsrStatus": {
+      "new": "Nuova",
+      "in_progress": "In corso",
+      "done": "Completata"
+    },
+    "due": "Scadenza {{date}}",
+    "dsrNote": "Le richieste vanno evase entro 30 giorni. La cancellazione conserva solo ciò che la legge impone (ad esempio le scritture contabili).",
+    "rbac": "Permessi dei ruoli",
+    "section": "Sezione",
+    "level": {
+      "read": "Visualizza",
+      "write": "Gestisce"
+    },
+    "enforced": "Questi permessi sono applicati dal server a ogni richiesta; l’interfaccia nasconde solo ciò che un ruolo non può usare."
+  },
+  "settings": {
+    "text": "Configurazione di tutta la piattaforma. Le modifiche si applicano subito e vengono registrate.",
+    "commerce": "Commissioni e pagamenti",
+    "fee": "Commissione di servizio per i viaggiatori (%)",
+    "feeHint": "Applicata a prezzo base ed extra; mostrata in ogni prenotazione.",
+    "deposit": "Acconto (%)",
+    "cap": "Sconto massimo dei partner (%)",
+    "features": "Funzionalità",
+    "flag": {
+      "aiPlanner": "IA TravelMate",
+      "headsetMode": "Modalità visore VR",
+      "partnerApplications": "Candidature partner",
+      "reviews": "Nuove recensioni",
+      "creatorApplications": "Candidature creator"
+    },
+    "flagText": {
+      "aiPlanner": "Pianificatore e domande su /ai. Se disattivato, i viaggiatori vedono un breve avviso.",
+      "headsetMode": "Pulsante del visore WebXR nel visualizzatore 360°.",
+      "partnerApplications": "Il modulo pubblico “Candida la tua attività”. Se disattivato, la pagina spiega che le candidature sono sospese.",
+      "reviews": "I viaggiatori possono lasciare una recensione dopo una prenotazione completata.",
+      "creatorApplications": "Accetta nuove candidature su /creators/apply."
+    },
+    "maintenance": "Banner di manutenzione",
+    "maintenanceOn": "Mostra un banner su tutto il sito viaggiatori",
+    "maintenanceMsg": "Testo del banner",
+    "maintenancePh": "es. Pagamenti brevemente non disponibili dalle 02:00 alle 03:00 (EAT).",
+    "security": "Sicurezza",
+    "require2fa": "Richiedi la verifica in due passaggi per lo staff",
+    "timeout": "Scadenza delle sessioni admin",
+    "minutes_one": "{{count}} minuto",
+    "minutes_other": "{{count}} minuti",
+    "attempts": "Accessi falliti prima del blocco",
+    "securityNote": "Le impostazioni di sicurezza sono applicate dal servizio di autenticazione; questa demo si limita a registrarle.",
+    "defaults": "Ripristina predefiniti",
+    "save": "Salva modifiche",
+    "saved": "Impostazioni salvate e applicate.",
+    "integrations": "Integrazioni",
+    "connected": "Collegato",
+    "demoMode": "Modalità demo",
+    "int": {
+      "api": {
+        "name": "API TravelMateVR",
+        "text": "Catalogo, prenotazioni e account. Imposta VITE_DATA_SOURCE=http e VITE_API_BASE_URL."
+      },
+      "payments": {
+        "name": "Pagamenti",
+        "text": "Carte e mobile money tramite un fornitore certificato PCI, configurato sul server."
+      },
+      "maps": {
+        "name": "Mappe",
+        "text": "Tile delle mappe. Imposta VITE_MAP_TILES_LIGHT/DARK con una chiave limitata al dominio."
+      },
+      "ai": {
+        "name": "Gateway IA",
+        "text": "Modello ospitato dietro l’interfaccia plan/respond, configurato sul server."
+      },
+      "messaging": {
+        "name": "Email, SMS e WhatsApp",
+        "text": "Fornitori di notifiche, configurati sul server."
+      },
+      "storage": {
+        "name": "Archivio media",
+        "text": "Caricamenti 360° e pipeline di elaborazione (unione, compressione, sfocatura)."
+      }
+    },
+    "secrets": "Chiavi e segreti dei fornitori restano solo sul server. Non vengono mai inseriti qui né distribuiti con l’app.",
+    "minutes_many": "{{count}} minuti",
+    "creators": "Programma creator",
+    "creatorShare": "Quota dei creator sugli abbonamenti (%)",
+    "creatorShareHint": "Versata ogni mese nel fondo creator e divisa in base al tempo di visione delle esperienze di ciascuno. Mostrata su /creators come condizione provvisoria.",
+    "lockout": "Blocco dopo il limite",
+    "lockoutHint": "Dopo questi tentativi falliti consecutivi l’accesso viene sospeso per questo tempo. Il server lo applica per account e per indirizzo IP.",
+    "lockoutValue_minutes_other": "{{count}} minuti",
+    "lockoutValue_hours_other": "{{count}} ore",
+    "lockoutValue_minutes_one": "{{count}} minuti",
+    "lockoutValue_hours_one": "{{count}} ora",
+    "lockoutValue_minutes_many": "{{count}} minuti",
+    "lockoutValue_hours_many": "{{count}} ore",
+    "viewRate": "Compenso ogni 1.000 visualizzazioni valide (USD)",
+    "viewRateHint": "Va al creator dell’esperienza, in aggiunta alla quota sugli abbonamenti.",
+    "qualifiedView": "Secondi per una visualizzazione valida",
+    "qualifiedViewHint": "Una visualizzazione conta quando qualcuno guarda almeno per questo tempo. Le visualizzazioni ripetute della stessa persona nello stesso giorno contano una volta.",
+    "payments": "Pagamenti e paesi di lancio",
+    "tzsRate": "Cambio indicativo TZS per USD",
+    "tzsRateHint": "Serve a mostrare gli importi in scellini al pagamento. L’importo finale lo conferma il fornitore di pagamento.",
+    "bookingCountries": "Paesi aperti a prenotazioni e pagamenti",
+    "bookingCountriesHint": "Altrove c’è solo l’anteprima: i viaggiatori esplorano e organizzano ma non prenotano né pagano, e i partner lì non ricevono pagamenti.",
+    "errCountries": "Lascia aperto almeno un paese."
+  },
+  "creators": {
+    "title": "Candidature creator",
+    "public": "Pagina del programma creator",
+    "creator": "Creator",
+    "places": "Luoghi",
+    "review": "Esamina",
+    "none": "Ancora nessuna candidatura creator.",
+    "reject": "Rifiuta",
+    "inReview": "Segna in revisione",
+    "approve": "Approva",
+    "id": "Riferimento",
+    "rights": "Diritti e consenso confermati",
+    "yes": "Sì",
+    "note": "Nota per il creator (facoltativa)",
+    "notePh": "es. Invia un campione 360° dal Wadi Rum",
+    "nextNote": "L’approvazione invia il contratto creator e apre un account creator per i caricamenti. In questa demo la decisione viene registrata qui e nel registro di audit.",
+    "status": {
+      "submitted": "Nuova",
+      "in_review": "In revisione",
+      "approved": "Approvata",
+      "rejected": "Rifiutata"
+    },
+    "decided": {
+      "submitted": "{{name}} riportato a «Nuova»",
+      "in_review": "{{name}} segnato in revisione",
+      "approved": "{{name}} approvato",
+      "rejected": "{{name}} rifiutato"
+    }
+  }
+}

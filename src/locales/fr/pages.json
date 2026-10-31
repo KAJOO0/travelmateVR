@@ -1,0 +1,424 @@
+{
+  "draft": "Projet en attente de validation juridique. Ce texte décrit le fonctionnement prévu du service et ne constitue pas encore un accord contraignant.",
+  "contactLine": "Des questions ? Contactez-nous à",
+  "about": {
+    "eyebrow": "À propos de TravelMateVR",
+    "title": "Vivez l’Afrique avant de partir",
+    "lede": "TravelMateVR est conçu par Mates Technologies Limited à Mbeya, en Tanzanie, pour aider les voyageurs à bien découvrir un lieu avant de s’engager, et aider les entreprises touristiques locales à être vues.",
+    "visionTitle": "Notre vision",
+    "vision": "Choisir un voyage ne devrait pas dépendre de quelques photos retouchées. Nous associons aperçus 360° immersifs, informations honnêtes et planificateur IA à une place de marché de partenaires locaux, pour que les voyageurs décident en confiance et qu’une plus grande part de la valeur du tourisme reste sur place.",
+    "pillars": [
+      {
+        "t": "Vivre avant de réserver",
+        "d": "Explorez hébergements, parcs et villes en 360° ou en aperçu panoramique avant de réserver."
+      },
+      {
+        "t": "IA TravelMate",
+        "d": "Décrivez votre voyage avec vos mots et obtenez un programme chiffré jour par jour, modifiable."
+      },
+      {
+        "t": "Partenaires locaux",
+        "d": "Opérateurs, lodges, guides et entreprises communautaires proposent directement leurs services."
+      },
+      {
+        "t": "Tourisme responsable",
+        "d": "Nous n’affichons les engagements écologiques et communautaires qu’avec preuves et mettons en avant les expériences communautaires."
+      },
+      {
+        "t": "Pour les voyageurs du monde entier",
+        "d": "Disponible en anglais, français, allemand, mandarin et italien, sur téléphone, ordinateur et casque VR."
+      },
+      {
+        "t": "Tout le voyage au même endroit",
+        "d": "Découverte, planification, réservation, documents et assistance pendant votre voyage."
+      }
+    ],
+    "sections": [
+      {
+        "h": "Pourquoi nous avons commencé",
+        "p": [
+          "Beaucoup de voyageurs réservent leur voyage en Afrique à distance, sans vraiment savoir à quoi ressembleront un lodge, une balade ou un quartier. Beaucoup d’excellentes entreprises locales n’ont pas de bon moyen de montrer ce qu’elles proposent.",
+          "TravelMateVR réunit les deux : des aperçus immersifs pour les voyageurs et une place de marché juste et transparente pour les partenaires."
+        ]
+      },
+      {
+        "h": "Comment ça marche",
+        "list": [
+          "Explorez destinations et expériences en 360°, sur tous les écrans.",
+          "Planifiez avec l’IA TravelMate ou construisez votre propre itinéraire.",
+          "Réservez hébergements, safaris, activités et transport avec le prix total affiché d’emblée.",
+          "Gardez tout pour votre voyage dans le centre de contrôle du voyage, disponible hors ligne."
+        ]
+      },
+      {
+        "h": "Où nous en sommes",
+        "p": [
+          "TravelMateVR en est à sa première version. Certaines annonces sont des entreprises d’exemple servant à illustrer la place de marché et sont clairement signalées. Les annonces de nos partenaires fondateurs affichent des prix indicatifs qu’ils confirment directement."
+        ]
+      }
+    ],
+    "ctaTitle": "Commencez à explorer",
+    "ctaText": "Trouvez une destination, regardez autour de vous et planifiez le voyage qui vous ressemble."
+  },
+  "sustainability": {
+    "eyebrow": "Durabilité",
+    "title": "Un tourisme qui redonne",
+    "lede": "Nous voulons que chaque réservation soutienne les personnes et les lieux qui donnent tout son sens à un voyage.",
+    "sections": [
+      {
+        "h": "Nos engagements",
+        "list": [
+          "Mettre en avant les entreprises communautaires et détenues localement.",
+          "Afficher de façon transparente dans le prix les contributions à la conservation et aux communautés.",
+          "Ne publier les engagements écologiques et communautaires que lorsque les partenaires fournissent des preuves.",
+          "Encourager les séjours plus longs et les options par la route lorsque c’est pertinent."
+        ]
+      },
+      {
+        "h": "Comment nous signalons les annonces",
+        "p": [
+          "« Communautaire » signifie que les hôtes perçoivent les revenus directement ou via un fonds communautaire. « Écocertifié » précise la certification détenue par le partenaire. Si une affirmation vous semble fausse, signalez-la via le Centre d’aide et nous l’examinerons."
+        ]
+      },
+      {
+        "h": "Voyager de façon responsable",
+        "list": [
+          "Faites appel à des guides locaux et gardez une distance respectueuse avec la faune.",
+          "Demandez avant de photographier les gens.",
+          "Réduisez le plastique à usage unique ; emportez une gourde réutilisable.",
+          "Respectez les tenues et coutumes locales, surtout dans les lieux de culte."
+        ]
+      }
+    ],
+    "cta1": "Expériences communautaires",
+    "cta2": "Destinations écocertifiées"
+  },
+  "privacy": {
+    "eyebrow": "Mentions légales",
+    "title": "Politique de confidentialité",
+    "lede": "Comment Mates Technologies Limited collecte, utilise et protège vos données personnelles lorsque vous utilisez TravelMateVR."
+  },
+  "terms": {
+    "eyebrow": "Mentions légales",
+    "title": "Conditions d’utilisation",
+    "lede": "Les règles d’utilisation de TravelMateVR et de réservation sur notre place de marché."
+  },
+  "security": {
+    "eyebrow": "Confiance",
+    "title": "Sécurité",
+    "lede": "Comment nous protégeons votre compte, vos paiements et vos données.",
+    "sections": [
+      {
+        "h": "Paiements",
+        "p": [
+          "Les paiements sont traités par un partenaire de paiement certifié PCI. Les données de carte sont saisies sur la page sécurisée du partenaire et ne parviennent jamais à TravelMateVR."
+        ]
+      },
+      {
+        "h": "Vos données",
+        "list": [
+          "Tout le trafic est chiffré en HTTPS.",
+          "L’accès aux données personnelles est limité au personnel et aux partenaires qui en ont besoin pour assurer votre réservation.",
+          "Nous ne conservons que le nécessaire, comme les quatre derniers caractères des numéros de documents."
+        ]
+      },
+      {
+        "h": "Protéger votre compte",
+        "list": [
+          "Utilisez un mot de passe unique, ou connectez-vous avec Google.",
+          "Nous ne vous demanderons jamais votre mot de passe ni votre numéro de carte complet par téléphone, e-mail ou WhatsApp.",
+          "Vérifiez que les messages concernant vos réservations mentionnent votre vrai numéro de réservation."
+        ]
+      },
+      {
+        "h": "Signaler un problème",
+        "p": [
+          "Si vous découvrez une faille de sécurité ou recevez un message suspect à notre nom, contactez-nous immédiatement. Nous examinons chaque signalement."
+        ]
+      }
+    ]
+  },
+  "creators": {
+    "eyebrow": "Programme créateurs",
+    "title": "Votre caméra peut emmener les gens partout. Soyez payé à chaque voyage.",
+    "lede": "TravelMateVR permet aux voyageurs d’entrer dans un lieu avant de partir. Filmez-le en 360° et gagnez deux fois : {{perK}} pour 1 000 vues de vos expériences, plus {{share}} % des revenus d’abonnement, répartis selon le temps de visionnage.",
+    "apply": "Postuler comme créateur",
+    "watch": "Voir les vidéos 360° ({{count}})",
+    "focus": "Vous venez de {{name}} : ce lieu fait partie de ceux que nous voulons filmer en 360°.",
+    "shareEyebrow": "Vos revenus",
+    "shareBig": "{{share}} %",
+    "shareText": "des revenus d’abonnement alimentent chaque mois la cagnotte des créateurs, partagée selon le temps passé à regarder votre travail.",
+    "example": "Exemple : une expérience vue {{views}} fois rapporte {{earn}} rien qu’avec les vues, avant votre part des abonnements.",
+    "draftTerms": "Conditions de lancement. Les taux définitifs, le mode et le calendrier de paiement sont confirmés dans votre contrat de créateur.",
+    "whoTitle": "Pour qui ?",
+    "type": {
+      "vlogger": "Vlogueur ou influenceur voyage",
+      "filmmaker": "Vidéaste 360° / VR",
+      "photographer": "Photographe 360°",
+      "drone": "Télépilote de drone",
+      "operator": "Opérateur ou guide local"
+    },
+    "typeText": {
+      "vlogger": "Vous filmez déjà vos voyages : ajoutez une caméra 360° et transformez-les en expériences rémunératrices.",
+      "filmmaker": "Vous tournez en vidéo sphérique et maîtrisez l’assemblage, la stabilisation et le son spatial.",
+      "photographer": "Vous réalisez des photos 360° haute résolution de lieux, de chambres et de points de vue.",
+      "drone": "Prises de vue aériennes 360° avec licence, là où la réglementation locale l’autorise.",
+      "operator": "Vous connaissez le lieu mieux que quiconque : filmez vos propres circuits, camps et lodges."
+    },
+    "getTitle": "Ce que vous obtenez",
+    "get": {
+      "share": {
+        "t": "Des revenus qui continuent",
+        "d": "{{perK}} pour 1 000 vues plus {{share}} % des revenus d’abonnement, partagés selon le temps de visionnage. Votre expérience rapporte tant qu’on la regarde."
+      },
+      "credit": {
+        "t": "Votre nom à chaque visionnage",
+        "d": "Mention « Filmé par » et lien vers votre chaîne sur l’expérience, dans les cinq langues."
+      },
+      "featured": {
+        "t": "Mise en avant",
+        "d": "Les nouvelles vidéos 360° apparaissent en premier dans la bibliothèque VR, sur les pages destinations et sur la page d’accueil."
+      },
+      "insights": {
+        "t": "Vues et revenus",
+        "d": "Voyez combien de personnes ont regardé, combien de temps elles sont restées et ce que vous avez gagné, expérience par expérience."
+      },
+      "support": {
+        "t": "Briefs et accompagnement",
+        "d": "Listes de plans, contacts sur place et aide de notre équipe contenu pour la vérification de l’assemblage et la publication."
+      },
+      "global": {
+        "t": "Un public international",
+        "d": "Les voyageurs naviguent en anglais, français, allemand, chinois et italien, sur téléphone, ordinateur et casque VR."
+      }
+    },
+    "howTitle": "Comment ça marche",
+    "steps": {
+      "s1": {
+        "t": "Postulez",
+        "d": "Dites-nous où vous pouvez filmer et partagez des liens vers votre travail."
+      },
+      "s2": {
+        "t": "Validez le brief",
+        "d": "Nous confirmons les lieux, la liste de plans et le contrat de créateur."
+      },
+      "s3": {
+        "t": "Filmez et envoyez",
+        "d": "Tournez en 360° et envoyez les fichiers originaux depuis votre compte créateur."
+      },
+      "s4": {
+        "t": "Nous vérifions et publions",
+        "d": "Notre équipe contrôle l’assemblage et la qualité, ajoute narration et points d’intérêt, puis publie."
+      },
+      "s5": {
+        "t": "Gagnez",
+        "d": "Chaque vue qualifiée et chaque minute regardée sont comptées. Les revenus sont versés chaque mois."
+      }
+    },
+    "wantedEyebrow": "Recherchés en priorité",
+    "wantedTitle": "Lieux en attente d’une prise de vue 360°",
+    "wantedText": "{{count}} expériences et destinations n’ont aujourd’hui qu’un aperçu photo. Elles passent en premier.",
+    "wantedDestinations": "Destinations encore sans contenu 360°",
+    "specTitle": "Consignes de tournage",
+    "specVideo": "Vidéo 360°",
+    "spec": {
+      "s1": "Équirectangulaire (2:1), au moins 4K ; 5,7K ou plus recommandé.",
+      "s2": "25 à 60 i/s, fichiers originaux H.264, H.265 ou ProRes ; stabilisés, horizon droit.",
+      "s3": "Caméra à hauteur des yeux (environ 1,6 m) sur trépied ou monopode ; masquez le support si possible.",
+      "s4": "Plans de 30 secondes à 3 minutes, avec une direction avant claire pour la première vue.",
+      "s5": "Son naturel ou spatial (ambisonique) ; pas de musique dont vous ne détenez pas les droits.",
+      "s6": "Évitez les mouvements de caméra rapides : les voyageurs regardent aussi avec un casque."
+    },
+    "specPhoto": "Photo 360°",
+    "specP": {
+      "p1": "Équirectangulaire (2:1), au moins 6000 × 3000 px ; 8K recommandé.",
+      "p2": "Exposition en bracketing ou HDR pour les ciels lumineux et les intérieurs sombres.",
+      "p3": "Aucune erreur d’assemblage visible ; nadir retouché ou masqué.",
+      "p4": "Une photo par point de vue ; plusieurs points de vue peuvent être reliés en visite."
+    },
+    "faqTitle": "Questions",
+    "faq": {
+      "rights": {
+        "q": "À qui appartiennent les images ?",
+        "a": "Vous conservez les droits d’auteur. Vous accordez à TravelMateVR une licence pour diffuser votre prise de vue sur la plateforme et dans sa communication, selon les termes du contrat de créateur."
+      },
+      "consent": {
+        "q": "Et les personnes filmées ?",
+        "a": "Obtenez le consentement des personnes reconnaissables et respectez les règles locales de tournage sur les sites religieux et culturels. Les visages et plaques d’immatriculation peuvent être floutés avant publication."
+      },
+      "payout": {
+        "q": "Comment et quand suis-je payé ?",
+        "a": "Chaque mois, vous gagnez {{perK}} pour 1 000 vues qualifiées plus votre part de la cagnotte des créateurs ({{share}} % des revenus d’abonnement, répartis selon le temps de visionnage). Le mode et le calendrier de paiement figurent dans le contrat de créateur."
+      },
+      "attribution": {
+        "q": "Qu’est-ce qui compte comme une vue ?",
+        "a": "Une vue compte dès qu’une personne a regardé votre expérience pendant {{seconds}} secondes ou plus. Les vues répétées d’une même personne le même jour comptent une fois, et le trafic automatisé est filtré."
+      },
+      "drones": {
+        "q": "Puis-je utiliser un drone ?",
+        "a": "Uniquement là où c’est légal et avec les autorisations exigées par le pays. De nombreux parcs et sites patrimoniaux interdisent les drones ; nous vous le signalerons."
+      },
+      "operators": {
+        "q": "J’organise des circuits. Puis-je filmer ma propre activité ?",
+        "a": "Oui. Les opérateurs peuvent rejoindre le programme comme créateurs et comme partenaires : publiez vos circuits sur la place de marché et filmez-les en 360° pour votre fiche."
+      }
+    },
+    "ctaTitle": "Le monde n’a pas encore vu votre coin de paradis. Changeons cela.",
+    "ctaText": "Postulez en cinq minutes : nous vous envoyons un brief, vous aidons pour votre premier envoi et mettons votre travail en avant. Des questions ? Écrivez à {{email}} ou sur WhatsApp.",
+    "whatsapp": "Bonjour TravelMateVR, je suis créateur et j’aimerais rejoindre le programme créateurs 360°.",
+    "applyTitle": "Postuler au programme créateurs",
+    "applyText": "Parlez-nous de vous et des lieux que vous pouvez filmer. Les créateurs retenus gagnent {{perK}} pour 1 000 vues plus {{share}} % des revenus d’abonnement, répartis selon le temps de visionnage.",
+    "back": "Retour au programme créateurs",
+    "closedTitle": "Les candidatures créateurs sont suspendues",
+    "closedText": "Nous n’acceptons pas de nouvelles candidatures pour le moment. Écrivez à {{email}} et nous vous préviendrons à la réouverture.",
+    "doneTitle": "Candidature reçue",
+    "doneText": "Merci. Votre référence est {{id}}. Notre équipe contenu répondra à {{email}} sous cinq jours ouvrés.",
+    "audience": {
+      "none": "Je débute",
+      "lt10k": "Moins de 10 000 abonnés",
+      "10k100k": "10 000 à 100 000 abonnés",
+      "100k1m": "100 000 à 1 million d’abonnés",
+      "gt1m": "Plus d’un million d’abonnés"
+    },
+    "form": {
+      "you": "À propos de vous",
+      "name": "Votre nom ou nom de chaîne",
+      "type": "Je suis",
+      "base": "Où vous êtes basé",
+      "basePh": "ex. Ubud, Indonésie",
+      "places": "Lieux que vous pouvez filmer",
+      "destinations": "Destinations sur TravelMateVR",
+      "africa": "Afrique",
+      "other": "Autres lieux",
+      "otherPh": "ex. Luang Prabang, Wadi Shab, lac Kivu",
+      "otherHint": "Les lieux qui ne sont pas encore sur TravelMateVR sont aussi les bienvenus.",
+      "errPlaces": "Choisissez au moins une destination ou indiquez un autre lieu.",
+      "work": "Votre travail",
+      "formats": "Formats que vous pouvez livrer",
+      "errFormats": "Choisissez au moins un format.",
+      "links": "Liens vers votre chaîne ou portfolio",
+      "linksHint": "Un ou plusieurs liens https://, séparés par des espaces.",
+      "errLinks": "Ajoutez au moins un lien commençant par https://.",
+      "audience": "Taille de l’audience",
+      "gear": "Caméra et matériel",
+      "gearPh": "ex. Insta360 X4, GoPro Max, Kandao Qoocam 3 Ultra",
+      "about": "Parlez-nous de votre travail",
+      "aboutPh": "Ce que vous filmez, où vous avez déjà tourné, et les lieux que vous filmeriez en premier.",
+      "errAbout": "Écrivez au moins 40 caractères.",
+      "termsNote": "Conditions de lancement : {{perK}} pour 1 000 vues qualifiées plus {{share}} % des revenus d’abonnement, partagés selon le temps de visionnage. Les conditions définitives sont confirmées dans le contrat de créateur.",
+      "rights": "Je détiens les droits sur les images que j’envoie et j’obtiendrai le consentement des personnes reconnaissables.",
+      "submit": "Envoyer la candidature",
+      "sending": "Envoi…"
+    },
+    "viewsText": "pour 1 000 vues qualifiées de vos expériences ({{seconds}} secondes ou plus)."
+  },
+  "legal": {
+    "version": "Version {{version}} · en vigueur au {{date}}",
+    "englishNote": "Ce document juridique est publié en anglais, version qui fait foi."
+  },
+  "faq": {
+    "eyebrow": "Aide",
+    "title": "Questions fréquentes",
+    "lede": "Tout ce que vous pourriez vouloir savoir avant d’explorer, de planifier, de réserver ou de devenir partenaire.",
+    "search": "Rechercher une question",
+    "topics": "Thèmes",
+    "none": "Aucune question ne correspond à votre recherche.",
+    "moreTitle": "Une autre question ?",
+    "moreText": "Notre équipe est là pour vous. Consultez le Centre d’aide, écrivez à {{email}} ou contactez-nous sur WhatsApp.",
+    "groups": {
+      "general": {
+        "title": "À propos de TravelMateVR",
+        "items": [
+          {
+            "q": "Qu’est-ce que TravelMateVR ?",
+            "a": "TravelMateVR vous permet de vivre une destination avant de partir. Explorez lieux, hébergements et circuits en 360°, planifiez votre voyage et réservez auprès de partenaires locaux de confiance, pour décider en toute sérénité."
+          },
+          {
+            "q": "Qui est derrière TravelMateVR ?",
+            "a": "TravelMateVR est développé par Mates Technologies Limited, une entreprise technologique basée à Mbeya, en Tanzanie."
+          },
+          {
+            "q": "Le service est-il gratuit ?",
+            "a": "Explorer, regarder les expériences immersives et planifier sont gratuits. Lors d’une réservation, le prix affiché inclut les taxes et de modestes frais de service."
+          },
+          {
+            "q": "Quelles langues sont disponibles ?",
+            "a": "Anglais, français, allemand, chinois et italien. Changez de langue via l’icône du globe en haut de la page."
+          }
+        ]
+      },
+      "availability": {
+        "title": "Où réserver",
+        "items": [
+          {
+            "q": "Où puis-je réserver et payer ?",
+            "a": "Les réservations et paiements sont actuellement ouverts pour les services situés en Tanzanie, Zanzibar compris."
+          },
+          {
+            "q": "Pourquoi ne puis-je pas réserver hors de Tanzanie ?",
+            "a": "Les autres destinations sont en aperçu jusqu’à notre lancement sur place. Vous pouvez déjà les explorer en 360° et préparer votre voyage ; la réservation ouvrira dès que partenaires locaux et paiements seront en place."
+          },
+          {
+            "q": "Quels moyens de paiement puis-je utiliser ?",
+            "a": "M-Pesa, Airtel Money, Mixx by Yas et HaloPesa, ou une carte Visa ou Mastercard de n’importe quelle banque, dont CRDB, NMB, NBC, Stanbic et TCB. Les paiements bancaires directs arrivent bientôt."
+          }
+        ]
+      },
+      "business": {
+        "title": "Pour les professionnels du tourisme",
+        "items": [
+          {
+            "q": "Qui peut devenir partenaire ?",
+            "a": "Les voyagistes, hôtels, lodges, camps, guides, transporteurs, restaurants et organisateurs d’événements titulaires des licences requises."
+          },
+          {
+            "q": "Combien cela coûte-t-il ?",
+            "a": "Vous pouvez démarrer avec une formule à la commission seule, sans abonnement, puis passer à une offre payante avec plus d’outils quand vous le souhaitez. Les conditions exactes figurent dans votre contrat partenaire."
+          },
+          {
+            "q": "Comment obtenir des contenus 360° de mon établissement ?",
+            "a": "Téléversez vos propres vidéos ou photos 360° depuis votre tableau de bord, ou demandez une prise de vue par notre équipe ou un créateur de votre région."
+          },
+          {
+            "q": "Comment suis-je payé ?",
+            "a": "Reliez un numéro mobile money ou un compte bancaire tanzanien. Les versements suivent le calendrier de vos paramètres une fois votre compte vérifié."
+          },
+          {
+            "q": "Mon entreprise est hors de Tanzanie. Puis-je m’inscrire ?",
+            "a": "Oui. Postulez dès maintenant et préparez votre vitrine et vos contenus. Vous recevrez réservations et paiements dès notre lancement dans votre pays."
+          }
+        ]
+      },
+      "boards": {
+        "title": "Offices du tourisme et conservation",
+        "items": [
+          {
+            "q": "Comment un office du tourisme peut-il travailler avec TravelMateVR ?",
+            "a": "Depuis votre propre tableau de bord, gérez la présentation de votre destination, publiez actualités et avis aux voyageurs, lancez des campagnes et découvrez ce qui intéresse les voyageurs."
+          },
+          {
+            "q": "Les organisations de conservation peuvent-elles participer ?",
+            "a": "Oui. Montrez les lieux que vous protégez, mettez en avant les contributions communautaires et de conservation, et aidez les visiteurs à arriver informés et respectueux."
+          }
+        ]
+      },
+      "creators": {
+        "title": "Pour les créateurs de contenu",
+        "items": [
+          {
+            "q": "Comment les créateurs sont-ils rémunérés ?",
+            "a": "Les créateurs gagnent à chaque vue qualifiée de leurs expériences et reçoivent une part des revenus d’abonnement, répartie selon le temps de visionnage. Les tarifs figurent sur la page Créateurs."
+          },
+          {
+            "q": "À qui appartiennent les contenus ?",
+            "a": "Vous conservez vos droits d’auteur. Vous accordez à TravelMateVR une licence pour diffuser vos contenus sur la plateforme, selon le contrat créateur."
+          },
+          {
+            "q": "De quel matériel ai-je besoin ?",
+            "a": "Une caméra 360° filmant au moins en 4K équirectangulaire ou photographiant en 6000 × 3000 px. Nos consignes de tournage expliquent le reste."
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,580 @@
+{
+  "shell": {
+    "title": "TravelMateVR 指挥中心",
+    "nav": "指挥中心栏目"
+  },
+  "gate": {
+    "title": "TravelMateVR 指挥中心",
+    "text": "管理用户、合作伙伴、内容、预订、AI、客服、收入和平台安全。",
+    "demo": "打开演示指挥中心",
+    "demoNote": "用于评审的演示访问。正式环境中，管理员使用自己的账号并开启两步验证登录，所有权限均由服务器强制执行。",
+    "role": "以下列权限登录"
+  },
+  "roles": {
+    "traveller": "旅行者",
+    "partner": "合作伙伴",
+    "partner_staff": "合作伙伴员工",
+    "tourism_board": "旅游局",
+    "government_dmo": "政府 / 目的地管理组织",
+    "conservation_org": "保护组织",
+    "content_manager": "内容经理",
+    "support_agent": "客服专员",
+    "finance": "财务",
+    "admin": "管理员",
+    "super_admin": "超级管理员"
+  },
+  "roleText": {
+    "super_admin": "全部权限，包括系统设置和安全变更。",
+    "admin": "负责平台日常运营；安全仅可查看，系统设置不可见。",
+    "content_manager": "目的地、VR 内容、评价、营销和促销。",
+    "support_agent": "客服工单、预订、评价；用户仅可查看。",
+    "finance": "预订、数据分析和报表；合作伙伴仅可查看。"
+  },
+  "nav": {
+    "dashboard": "仪表板",
+    "users": "用户",
+    "partners": "合作伙伴",
+    "destinations": "目的地",
+    "bookings": "预订",
+    "vr": "VR 内容",
+    "ai": "AI",
+    "reviews": "评价",
+    "marketing": "营销",
+    "promotions": "促销",
+    "analytics": "数据分析",
+    "sustainability": "可持续发展",
+    "support": "客服",
+    "reports": "报表",
+    "security": "安全",
+    "settings": "系统设置"
+  },
+  "noAccess": {
+    "title": "您无权访问此栏目",
+    "text": "您的角色不包含此区域。如需访问，请联系超级管理员。"
+  },
+  "readOnly": "您可以查看此栏目，但您的角色无法进行修改。",
+  "kpi": {
+    "totalUsers": "用户总数",
+    "activeUsers": "活跃用户（本月）",
+    "partners": "合作伙伴",
+    "destinations": "目的地",
+    "bookings": "预订",
+    "gmv": "交易总额",
+    "commission": "佣金",
+    "subscriptions": "订阅收入",
+    "advertising": "广告收入",
+    "enterprise": "企业收入",
+    "vr": "VR 体验",
+    "ai": "AI 交互",
+    "conversion": "转化率",
+    "tickets": "客服工单",
+    "sampleHint": "示例数据",
+    "plusFees": "另有 {{fees}} 旅客服务费",
+    "annualised": "年化（部分为示例）",
+    "campaignBudgets": "已预订的推广预算",
+    "thisDevice": "在此设备上记录",
+    "open": "未结"
+  },
+  "dashboard": {
+    "title": "欢迎回来，{{name}}",
+    "text": "平台全景：用户、合作伙伴、预订、收入和服务。",
+    "dataNote": "预订、交易总额、佣金、客源市场和合作伙伴表现来自预订数据。用户数、转化率和非佣金收入在接入分析和计费系统前为示例值。",
+    "growth": "用户增长",
+    "newUsers": "新用户",
+    "geo": "旅行者来源",
+    "geoNote": "预订中主要旅客的居住国家。",
+    "bookingTrends": "每月预订",
+    "revenueTrends": "各来源收入",
+    "revenueNote": "佣金来自预订；订阅、广告和企业收入为示例值。",
+    "partnerPerformance": "合作伙伴表现",
+    "destinationPopularity": "目的地热度"
+  },
+  "users": {
+    "text": "TravelMateVR 上的所有账户：旅行者、合作伙伴、旅游局和员工。",
+    "search": "按姓名或邮箱搜索",
+    "allRoles": "全部角色",
+    "count_other": "{{count}} 位用户",
+    "user": "用户",
+    "role": "角色",
+    "roleFor": "{{name}} 的角色",
+    "joined": "注册时间",
+    "lastActive": "最近活跃",
+    "status": {
+      "active": "正常",
+      "suspended": "已停用"
+    },
+    "suspend": "停用",
+    "reactivate": "重新启用",
+    "suspended": "账户已停用。",
+    "reactivated": "账户已重新启用。",
+    "roleChanged": "角色已更新。",
+    "resetMfa": "重置两步验证",
+    "mfaReset": "两步验证已重置，用户下次登录时需重新设置。",
+    "inviteStaff": "邀请员工",
+    "inviteNote": "员工首次登录时必须开启两步验证。只有超级管理员可以授予管理员角色。"
+  },
+  "partners": {
+    "text": "合作伙伴名录、认证、佣金和停用，以及待审核的申请和新商品。",
+    "tab": {
+      "directory": "名录",
+      "applications": "入驻申请",
+      "listings": "新商品"
+    },
+    "partner": "合作伙伴",
+    "commissionFor": "{{name}} 的佣金",
+    "commissionSaved": "佣金已更新。",
+    "verify": "认证",
+    "unverify": "取消认证",
+    "suspend": "停用",
+    "reinstate": "恢复",
+    "suspended": "已停用",
+    "suspendedToast": "已停用 {{name}}，其商品已隐藏。",
+    "reinstated": "已恢复 {{name}}。",
+    "suspendNote": "停用合作伙伴会立即对旅行者隐藏其所有商品。已有预订会保留，请在“预订”中处理。",
+    "submitted": "提交时间",
+    "appStatus": {
+      "submitted": "新申请",
+      "in_review": "审核中",
+      "approved": "已通过",
+      "rejected": "已拒绝"
+    },
+    "noApplications": "暂无申请。申请来自公开的“商家入驻”表单。",
+    "approve": "通过",
+    "reject": "拒绝",
+    "startReview": "标记为审核中",
+    "note": "给申请人的备注（可选）",
+    "notePh": "原因或后续步骤",
+    "decided": {
+      "approved": "{{name}} 已通过。",
+      "rejected": "{{name}} 已拒绝。",
+      "in_review": "{{name}} 正在审核。"
+    },
+    "checks": "通过前：向发证机关核实旅游许可证，核对企业注册信息，并电话确认联系人。",
+    "noListings": "暂无待审核的新商品。",
+    "review": "审核",
+    "publishListing": "发布商品",
+    "listingPublished": "商品已发布到市场。",
+    "listingRejected": "商品已退回合作伙伴。",
+    "listingChecks": "检查描述是否准确具体、价格是否合理，以及商品是否与已有商品重复。"
+  },
+  "destinations": {
+    "text": "所有目的地的关注度、预订以及旅游局发布的内容。",
+    "revert": "撤销旅游局修改",
+    "interestNote": "关注度为基于页面浏览、360° 浏览和搜索的示例指数。",
+    "posts": "已发布的目的地动态",
+    "noPosts": "暂无已发布动态。",
+    "unpublished": "动态已取消发布。"
+  },
+  "bookings": {
+    "text": "所有合作伙伴的预订。在此处理纠纷、退款和重发确认。",
+    "allStatuses": "全部状态",
+    "allPartners": "全部合作伙伴",
+    "count_other": "{{count}} 笔预订",
+    "resend": "重发确认函",
+    "resent": "确认函已重新发送至 {{email}}。",
+    "cancelRefund": "取消并全额退款",
+    "confirmText": "此操作将取消预订，并将已支付的全部款项（{{amount}}）退回原付款方式。系统会通知旅行者和合作伙伴。",
+    "reason": "原因",
+    "reasons": {
+      "partner": "合作伙伴无法履约",
+      "payment": "付款纠纷",
+      "duplicate": "重复预订",
+      "safety": "安全或通行问题",
+      "other": "其他"
+    },
+    "confirm": "取消并退款",
+    "cancelled": "预订 {{id}} 已取消并退款。"
+  },
+  "vr": {
+    "text": "所有沉浸式体验及其发布状态。只有已发布的体验对旅行者可见。",
+    "create": "创建体验",
+    "edit": "编辑体验",
+    "experience": "体验",
+    "createdHere": "在指挥中心创建",
+    "catalogue": "目录",
+    "hotspotCount_other": "{{count}} 个热点",
+    "status": {
+      "draft": "草稿",
+      "review": "审核中",
+      "approved": "已批准",
+      "published": "已发布",
+      "archived": "已归档"
+    },
+    "action": {
+      "draft": "退回草稿",
+      "review": "提交审核",
+      "approved": "批准",
+      "published": "发布",
+      "archived": "归档"
+    },
+    "moved": "“{{name}}”当前状态：{{status}}。",
+    "tagline": "简短描述",
+    "category": "类别",
+    "duration": "时长（分钟）",
+    "pano": "360° 图像",
+    "noPano": "无（照片全景预览）",
+    "photo": "封面照片",
+    "upload": "上传 360° 图片或视频",
+    "uploadHint": "等距柱状投影图片（2:1）或 360° 视频。文件将进入处理流程（拼接检查、压缩、人脸模糊）；处理完成后在上方选择对应媒体。",
+    "fileErr": "请使用小于 2 GB 的 JPG、PNG、WebP、TIFF、MP4、MOV 或 Insta360 文件。",
+    "queued": "等待处理：{{name}}",
+    "startYaw": "初始方向（°）",
+    "narration": "语音讲解（在查看器中朗读）",
+    "narrationPh": "由浏览器语音按旅行者的语言朗读的文字。",
+    "hotspots": "热点",
+    "hsTitle": "热点标题",
+    "hsText": "热点文字",
+    "hsKindLabel": "类型",
+    "hsKind": {
+      "info": "信息",
+      "wildlife": "野生动物",
+      "culture": "文化",
+      "nearby": "附近"
+    },
+    "addHotspot": "添加热点",
+    "bookable": "可从此体验预订",
+    "saved": "体验已保存。",
+    "workflowNote": "新体验从草稿开始：提交审核、批准，然后发布。已发布的体验会出现在 VR 体验库和目的地页面。",
+    "partnerRequests": "合作伙伴上传与拍摄申请",
+    "video": "360° 视频",
+    "noVideo": "无 360° 视频",
+    "videoHint": "主要格式。如设置了下方的 360° 照片，视频无法播放时将显示该照片。"
+  },
+  "ai": {
+    "text": "旅行者如何使用 AI 旅伴：问题、方案、反馈、失败、安全和成本。",
+    "dataNote": "此设备上记录了 {{count}} 次交互，其余为示例数据。提问内容经过脱敏后存储。",
+    "interactions": "交互次数",
+    "itineraries": "生成的行程",
+    "successRate": "成功率",
+    "satisfaction": "有帮助评价",
+    "ratings_other": "{{count}} 条评价",
+    "latency": "平均响应时间",
+    "flags": "安全标记",
+    "sampleNote": "适用于非此设备上的交互。",
+    "popular": "热门问题",
+    "answerTypes": "回答类型",
+    "type": {
+      "plan": "行程方案",
+      "season": "最佳时间",
+      "compare": "比较",
+      "entry": "入境要求",
+      "weather": "天气",
+      "error": "失败"
+    },
+    "recommendations": "最常推荐的目的地",
+    "recNote": "生成方案中包含的目的地。",
+    "failed": "失败的回答",
+    "noFailures": "暂无失败记录。",
+    "safety": "安全标记",
+    "noFlags": "暂无被标记的提问。",
+    "prompt": "提问（已脱敏）",
+    "flag": "标记",
+    "when": "时间",
+    "flagKind": {
+      "personal_data": "个人数据",
+      "unsafe_request": "不安全请求",
+      "medical": "医疗建议",
+      "off_topic": "无关话题"
+    },
+    "redaction": "存储前会移除邮箱和电话号码。被标记的提问会收到安全、通用的回答。",
+    "models": "模型使用与成本",
+    "activeModel": "当前模型",
+    "rulesModel": "基于 TravelMateVR 目录的规则规划器",
+    "dataSource": "运行位置",
+    "gateway": "通过 AI 网关（服务器）",
+    "onDevice": "在浏览器中（演示）",
+    "cost": "本月成本",
+    "costNote": "演示规划器没有按次成本；托管模型会通过网关上报令牌数和成本",
+    "replaceable": "应用通过单一服务接口（规划与回答）调用 AI。托管模型可以在服务器端替换演示规划器，无需修改任何界面。"
+  },
+  "reviews": {
+    "text": "审核新评价，并隐藏违反准则的已发布评价。",
+    "tab": {
+      "queue": "待审核",
+      "published": "已发布",
+      "hidden": "已隐藏"
+    },
+    "approve": "通过",
+    "reject": "拒绝",
+    "approved": "评价已通过并发布。",
+    "rejected": "评价已拒绝。",
+    "emptyQueue": "暂无待审核内容。",
+    "hide": "隐藏",
+    "hidden": "评价已隐藏。",
+    "restore": "恢复",
+    "noneHidden": "暂无隐藏的评价。",
+    "hasReply": "合作伙伴已回复",
+    "reason": "原因",
+    "reasons": {
+      "spam": "垃圾信息",
+      "offensive": "冒犯性语言",
+      "personal_data": "包含个人数据",
+      "not_genuine": "非真实入住",
+      "off_topic": "无关话题"
+    },
+    "policy": "评价只有在违反准则时才会被移除，绝不会因为是差评而移除。每项决定都会记录在审计日志中。"
+  },
+  "marketing": {
+    "text": "审核合作伙伴的推广活动、精选展示和套餐，并监控所有进行中的活动。",
+    "queue": "待审核",
+    "emptyQueue": "暂无待审核内容。",
+    "campaign": "推广活动",
+    "featured": "精选展示",
+    "package": "套餐",
+    "approved": "已通过。",
+    "return": "退回合作伙伴",
+    "returned": "已退回合作伙伴。",
+    "running": "进行中和已排期的推广",
+    "owner": "所属方",
+    "labelling": "推广内容始终标注“推广”或“精选”。AI 旅伴不会在未说明的情况下把付费内容排在更匹配的结果之前。"
+  },
+  "promotions": {
+    "text": "所有合作伙伴优惠。合作伙伴最高折扣为 {{max}}%，可在系统设置中修改。",
+    "overCap": "超过当前上限",
+    "note": "暂停误导旅行者的优惠（例如虚高的“原价”）。暂停后结账时立即不再适用。"
+  },
+  "analytics": {
+    "text": "全平台的交易总额、抽佣率、收入来源、需求和目的地。",
+    "avgBooking": "平均预订金额",
+    "takeRate": "抽佣率",
+    "contributions": "保护与社区捐助",
+    "gmvTrend": "每月交易总额与佣金",
+    "streams": "各来源收入",
+    "streamsNote": "佣金和服务费来自预订；其他来源部分为示例。",
+    "fees": "服务费",
+    "byType": "按类型的预订"
+  },
+  "sustainability": {
+    "text": "所有目的地的捐助、认证和社区主导供给。",
+    "contributing": "设有捐助的商品",
+    "byCountry": "各国生态认证或社区主导的商品"
+  },
+  "support": {
+    "text": "旅行者和合作伙伴的问题。回复会送达旅行者的工单和通知。",
+    "tab": {
+      "active": "处理中",
+      "all": "全部"
+    },
+    "queue": "工单队列",
+    "high": "高优先级",
+    "afterReply": "回复后的状态",
+    "send": "发送回复",
+    "sent": "回复已发送。",
+    "statusSaved": "状态已更新。",
+    "emptyTitle": "暂无工单",
+    "emptyText": "来自帮助中心的支持请求会显示在这里。",
+    "macro": {
+      "received": "{{name}} 您好，感谢您的来信。我们正在处理，稍后会向您更新进展。",
+      "receivedLabel": "确认收到",
+      "refund": "{{name}} 您好，我们已将款项退回您的原付款方式，通常 5–10 个工作日内到账。",
+      "refundLabel": "已退款",
+      "dates": "{{name}} 您好，我们已向合作伙伴申请更改您的日期，收到答复后会立即确认。",
+      "datesLabel": "更改日期"
+    }
+  },
+  "reports": {
+    "text": "为财务、合作伙伴和合规下载 CSV 报表。每次下载都会记录在审计日志中。",
+    "from": "入住开始",
+    "to": "入住结束",
+    "rangeNote_other": "此时段内共 {{count}} 笔预订（适用于预订报表）。",
+    "rows_other": "{{count}} 行",
+    "downloaded": "报表已下载。",
+    "privacy": "报表可能包含个人数据。请妥善保存，不再需要时及时删除。生成于 {{date}}。",
+    "r": {
+      "bookings": {
+        "title": "预订",
+        "text": "所有预订及价格明细和付款状态"
+      },
+      "commission": {
+        "title": "收入：佣金",
+        "text": "每月交易总额与佣金"
+      },
+      "subscriptions": {
+        "title": "收入：合作伙伴订阅",
+        "text": "每月订阅收入（示例）"
+      },
+      "advertising": {
+        "title": "收入：广告",
+        "text": "每月推广和精选展示收入（示例）"
+      },
+      "enterprise": {
+        "title": "收入：企业服务",
+        "text": "旅游局和企业合同（示例）"
+      },
+      "partners": {
+        "title": "合作伙伴",
+        "text": "合作伙伴表现与状态"
+      },
+      "destinations": {
+        "title": "目的地",
+        "text": "各目的地的预订、交易总额和关注度"
+      },
+      "users": {
+        "title": "用户",
+        "text": "按角色和状态统计的账户（不含姓名或邮箱）"
+      },
+      "ai": {
+        "title": "AI 交互",
+        "text": "脱敏提问、回答类型、延迟和反馈"
+      },
+      "audit": {
+        "title": "审计日志",
+        "text": "所有管理员操作"
+      }
+    }
+  },
+  "security": {
+    "text": "谁做了什么、异常活动、数据保护请求和角色权限。",
+    "audit": "管理员操作日志",
+    "search": "搜索日志",
+    "actor": "管理员",
+    "action": "操作",
+    "target": "对象",
+    "auditNote": "审计日志只能追加。正式环境中由服务器写入，至少保留 2 年。",
+    "events": "安全事件",
+    "kind": {
+      "failed_login": "登录失败",
+      "rate_limit": "触发速率限制",
+      "new_device": "新设备登录",
+      "mfa_disabled": "关闭两步验证",
+      "permission_denied": "权限被拒绝"
+    },
+    "sev": {
+      "low": "低",
+      "medium": "中",
+      "high": "高"
+    },
+    "dsr": "数据保护请求",
+    "dsrKind": {
+      "export": "数据导出",
+      "erase": "删除",
+      "correct": "更正"
+    },
+    "dsrStatus": {
+      "new": "新请求",
+      "in_progress": "处理中",
+      "done": "已完成"
+    },
+    "due": "截止 {{date}}",
+    "dsrNote": "请求须在 30 天内完成。删除时仅保留法律要求的数据（例如会计记录）。",
+    "rbac": "角色权限",
+    "section": "栏目",
+    "level": {
+      "read": "查看",
+      "write": "管理"
+    },
+    "enforced": "这些权限由服务器对每个请求强制执行；界面只是隐藏某角色无法使用的内容。"
+  },
+  "settings": {
+    "text": "全平台配置。修改立即生效，并记录在审计日志中。",
+    "commerce": "费用与支付",
+    "fee": "旅客服务费（%）",
+    "feeHint": "按基础价格和附加项目收取，在每笔预订中显示。",
+    "deposit": "定金（%）",
+    "cap": "合作伙伴最高折扣（%）",
+    "features": "功能开关",
+    "flag": {
+      "aiPlanner": "AI 旅伴",
+      "headsetMode": "VR 头显模式",
+      "partnerApplications": "合作伙伴申请",
+      "reviews": "新评价",
+      "creatorApplications": "创作者申请"
+    },
+    "flagText": {
+      "aiPlanner": "/ai 上的规划与问答。关闭后旅行者会看到简短提示。",
+      "headsetMode": "360° 查看器中的 WebXR 头显按钮。",
+      "partnerApplications": "公开的“商家入驻”表单。关闭后页面会说明申请已暂停。",
+      "reviews": "旅行者完成预订后可提交新评价。",
+      "creatorApplications": "在 /creators/apply 接受新的申请。"
+    },
+    "maintenance": "维护横幅",
+    "maintenanceOn": "在整个旅行者网站显示横幅",
+    "maintenanceMsg": "横幅内容",
+    "maintenancePh": "例如：东非时间 02:00–03:00 支付功能短暂不可用。",
+    "security": "安全",
+    "require2fa": "要求员工开启两步验证",
+    "timeout": "管理员会话超时",
+    "minutes_other": "{{count}} 分钟",
+    "attempts": "锁定前允许的登录失败次数",
+    "securityNote": "安全设置由身份验证服务强制执行；此演示仅记录这些设置。",
+    "defaults": "恢复默认值",
+    "save": "保存修改",
+    "saved": "设置已保存并生效。",
+    "integrations": "集成",
+    "connected": "已连接",
+    "demoMode": "演示模式",
+    "int": {
+      "api": {
+        "name": "TravelMateVR API",
+        "text": "目录、预订和账户。设置 VITE_DATA_SOURCE=http 和 VITE_API_BASE_URL。"
+      },
+      "payments": {
+        "name": "支付",
+        "text": "通过符合 PCI 标准的服务商处理银行卡和移动支付，在服务器端配置。"
+      },
+      "maps": {
+        "name": "地图",
+        "text": "地图瓦片。使用限定域名的密钥设置 VITE_MAP_TILES_LIGHT/DARK。"
+      },
+      "ai": {
+        "name": "AI 网关",
+        "text": "位于规划/回答接口之后的托管模型，在服务器端配置。"
+      },
+      "messaging": {
+        "name": "邮件、短信和 WhatsApp",
+        "text": "通知服务商，在服务器端配置。"
+      },
+      "storage": {
+        "name": "媒体存储",
+        "text": "360° 上传与处理流程（拼接、压缩、模糊处理）。"
+      }
+    },
+    "secrets": "服务商密钥只保存在服务器上，绝不会在此输入或随应用发布。",
+    "creators": "创作者计划",
+    "creatorShare": "创作者订阅收入分成（%）",
+    "creatorShareHint": "每月计入创作者奖金池，按各创作者体验的观看时长分配。在 /creators 页面作为暂定条款显示。",
+    "lockout": "达到上限后的锁定时长",
+    "lockoutHint": "连续失败达到上述次数后，登录将暂停此时长。服务器按账户和 IP 地址强制执行。",
+    "lockoutValue_minutes_other": "{{count}} 分钟",
+    "lockoutValue_hours_other": "{{count}} 小时",
+    "viewRate": "每 1,000 次有效观看的收益（美元）",
+    "viewRateHint": "支付给体验的创作者，另计订阅分成。",
+    "qualifiedView": "有效观看所需秒数",
+    "qualifiedViewHint": "观看达到此时长即计为一次观看。同一人同一天的重复观看只计一次。",
+    "payments": "付款与开放国家",
+    "tzsRate": "坦桑尼亚先令兑美元参考汇率",
+    "tzsRateHint": "用于在结账时显示先令金额。最终金额以支付服务商确认为准。",
+    "bookingCountries": "开放预订和付款的国家",
+    "bookingCountriesHint": "其他地方仅可预览：旅客可以探索和规划，但不能预订或付款，当地合作伙伴也无法收到结算。",
+    "errCountries": "请至少保留一个开放的国家。"
+  },
+  "creators": {
+    "title": "创作者申请",
+    "public": "创作者计划页面",
+    "creator": "创作者",
+    "places": "地点",
+    "review": "审核",
+    "none": "暂无创作者申请。",
+    "reject": "拒绝",
+    "inReview": "标记为审核中",
+    "approve": "批准",
+    "id": "编号",
+    "rights": "已确认版权与同意",
+    "yes": "是",
+    "note": "给创作者的备注（可选）",
+    "notePh": "例如：请发送一段瓦地伦的 360° 样片",
+    "nextNote": "批准后将发送创作者协议并开通用于上传的创作者账户。在此演示中，决定会记录在此处和审计日志中。",
+    "status": {
+      "submitted": "新申请",
+      "in_review": "审核中",
+      "approved": "已批准",
+      "rejected": "已拒绝"
+    },
+    "decided": {
+      "submitted": "{{name}} 已改回新申请",
+      "in_review": "{{name}} 已标记为审核中",
+      "approved": "已批准 {{name}}",
+      "rejected": "已拒绝 {{name}}"
+    }
+  }
+}

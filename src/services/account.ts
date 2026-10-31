@@ -1,0 +1,222 @@
+import type { AppNotification, LocalizedText, MessageThread, Review, Role, SupportTicket, TravelDocument, TravellerProfile, User } from '@/domain/types';
+import { createStore, nowIso, uid, useStore } from '@/lib/store';
+import { AppError, DATA_SOURCE, demoLatency, http } from './http';
+import { cleanText, hashPassword, isAcceptablePassword, isEmail, isUsername, normalizeEmail, normalizeUsername, verifyPassword } from '@/lib/security';
+import { platformStore } from './platform';
+import type { Channel } from './messaging';
+
+// ---------------- Session and sign-in ----------------
+// Production: the backend validates and normalises every field, hashes passwords with Argon2id,
+// limits sign-in attempts per account and per IP, answers wrong credentials with one generic error,
+// and issues an httpOnly, Secure, SameSite session cookie (docs/security/authentication.md).
+// Demo mode simulates the same rules on this device: accounts are stored with a PBKDF2 password
+// hash (never the password itself), and the attempt limit is kept in local storage.
+export const sessionStore = createStore<{ user: User | null }>('tm.session', () => ({ user: null }));
+
+/** Sign-in and registration failures. Messages never say which field was wrong. */
+export class AuthError extends Error {
+  constructor(public code: 'invalid_credentials' | 'locked' | 'register_failed' | 'invalid_input', public lockedUntil?: string, public attemptsLeft?: number) {
+    super(code);
+    this.name = 'AuthError';
+  }
+}
+
+interface DemoAccount { id: string; name: string; email: string; username?: string; passwordHash: string; createdAt: string }
+const accountStore = createStore<DemoAccount[]>('tm.auth.accounts', () => []);
+/** Failed attempts on this device; a successful sign-in resets them. */
+const guardStore = createStore<{ failures: number; lockedUntil?: string }>('tm.auth.guard', () => ({ failures: 0 }));
+
+export const loginGuard = {
+  maxAttempts: () => platformStore.get().security.maxLoginAttempts,
+  lockoutMinutes: () => platformStore.get().security.lockoutMinutes,
+  /** ISO time until which sign-in is blocked, or undefined. Expired locks are cleared. */
+  lockedUntil(): string | undefined {
+    const g = guardStore.get();
+    if (!g.lockedUntil) return undefined;
+    if (Date.parse(g.lockedUntil) > Date.now()) return g.lockedUntil;
+    guardStore.set({ failures: 0 });
+    return undefined;
+  },
+  fail(): AuthError {
+    const failures = guardStore.get().failures + 1;
+    if (failures >= loginGuard.maxAttempts()) {
+      const lockedUntil = new Date(Date.now() + loginGuard.lockoutMinutes() * 60_000).toISOString();
+      guardStore.set({ failures, lockedUntil });
+      return new AuthError('locked', lockedUntil);
+    }
+    guardStore.set({ failures });
+    return new AuthError('invalid_credentials', undefined, loginGuard.maxAttempts() - failures);
+  },
+  reset() { guardStore.set({ failures: 0 }); }
+};
+export const useLoginGuard = () => useStore(guardStore);
+
+const startSession = (user: User) => { loginGuard.reset(); sessionStore.set({ user }); return user; };
+
+export const auth = {
+  /** Sign in with an email address or a username. Wrong credentials always produce the same error. */
+  async signIn(identifier: string, password: string): Promise<User> {
+    const locked = loginGuard.lockedUntil();
+    if (locked) throw new AuthError('locked', locked);
+    const id = identifier.includes('@') ? normalizeEmail(identifier) : normalizeUsername(identifier);
+    const wellFormed = (isEmail(id) || isUsername(id)) && password.length > 0 && password.length <= 128;
+    if (DATA_SOURCE === 'http') {
+      try {
+        return startSession(await http<User>('/auth/login', { method: 'POST', json: { identifier: id, password } }));
+      } catch (e) {
+        if (e instanceof AppError && e.code === 'rate_limited') {
+          const until = (e.details as { lockedUntil?: string } | undefined)?.lockedUntil;
+          throw new AuthError('locked', until);
+        }
+        if (e instanceof AppError && (e.code === 'unauthorized' || e.code === 'validation')) throw loginGuard.fail();
+        throw e;
+      }
+    }
+    await demoLatency(400, 800);
+    const account = wellFormed ? accountStore.get().find(a => a.email === id || a.username === id) : undefined;
+    // verifyPassword always does the full hashing work, so an unknown account takes as long as a wrong password.
+    const ok = await verifyPassword(password, account?.passwordHash);
+    if (!account || !ok) throw loginGuard.fail();
+    return startSession({ id: account.id, name: account.name, email: account.email, username: account.username, provider: 'email', roles: ['traveller'], createdAt: account.createdAt });
+  },
+  async register(name: string, email: string, password: string, username?: string): Promise<User> {
+    const clean = { name: cleanText(name, 80), email: normalizeEmail(email), username: username ? normalizeUsername(username) : undefined };
+    if (clean.name.length < 2 || !isEmail(clean.email) || (clean.username && !isUsername(clean.username)) || !isAcceptablePassword(password)) throw new AuthError('invalid_input');
+    if (DATA_SOURCE === 'http') {
+      try {
+        const user = await http<User>('/auth/register', { method: 'POST', json: { ...clean, password } });
+        pushNotification({ kind: 'support', i18n: { title: 'notif.welcome.title', body: 'notif.welcome.body' }, href: '/account/preferences' });
+        return startSession(user);
+      } catch (e) {
+        if (e instanceof AppError && (e.code === 'validation' || e.status === 409)) throw new AuthError('register_failed');
+        throw e;
+      }
+    }
+    await demoLatency(500, 900);
+    const passwordHash = await hashPassword(password);
+    // Generic failure when the email or username is taken, so registration cannot be used to discover accounts.
+    if (accountStore.get().some(a => a.email === clean.email || (clean.username && a.username === clean.username))) throw new AuthError('register_failed');
+    const account: DemoAccount = { id: uid('u_'), name: clean.name, email: clean.email, username: clean.username, passwordHash, createdAt: nowIso() };
+    accountStore.set(list => [...list, account]);
+    pushNotification({ kind: 'support', i18n: { title: 'notif.welcome.title', body: 'notif.welcome.body' }, href: '/account/preferences' });
+    return startSession({ id: account.id, name: account.name, email: account.email, username: account.username, provider: 'email', roles: ['traveller'], createdAt: account.createdAt });
+  },
+  async signInWithGoogle(): Promise<User> {
+    await demoLatency(600, 1000);
+    const user: User = { id: uid('u_'), name: 'Google Traveller', email: 'traveller@gmail.example', provider: 'google', roles: ['traveller'], createdAt: nowIso() };
+    sessionStore.set({ user });
+    return user;
+  },
+  /**
+   * Demo business accounts. Production: the user signs in normally and the backend returns the roles and
+   * organisations they belong to; portal routes are also enforced server-side, never only in the UI.
+   */
+  async signInPortal(kind: 'partner' | 'board' | 'admin', adminRole: Role = 'super_admin'): Promise<User> {
+    await demoLatency(400, 800);
+    const user: User = kind === 'admin'
+      ? { id: `u_demo_${adminRole}`, name: 'Demo Administrator', email: 'admin@travelmatevr.example', provider: 'email', roles: [adminRole], createdAt: nowIso() }
+      : kind === 'partner'
+      ? { id: 'u_demo_partner', name: 'Asha Mollel', email: 'asha@kijani.example', provider: 'email', roles: ['partner'], orgId: 'kijani-camps', createdAt: nowIso() }
+      : { id: 'u_demo_board', name: 'Demo Board Editor', email: 'editor@demo-board.example', provider: 'email', roles: ['tourism_board'], orgId: 'demo-board-tz', createdAt: nowIso() };
+    sessionStore.set({ user });
+    return user;
+  },
+  signOut() { sessionStore.set({ user: null }); },
+  update(patch: Partial<Pick<User, 'name' | 'email'>>) {
+    const clean: Partial<Pick<User, 'name' | 'email'>> = {};
+    if (patch.name !== undefined) { const n = cleanText(patch.name, 80); if (n.length >= 2) clean.name = n; }
+    if (patch.email !== undefined && isEmail(patch.email)) clean.email = normalizeEmail(patch.email);
+    sessionStore.set(s => (s.user ? { user: { ...s.user, ...clean } } : s));
+  }
+};
+export const useSession = () => useStore(sessionStore, s => s.user);
+
+// ---------------- Traveller profile (personalisation) ----------------
+export const DEFAULT_PROFILE: TravellerProfile = {
+  interests: [], adventure: 3, luxury: 3, adults: 2, children: 0, accessibility: [], pace: 'balanced',
+  sustainabilityFirst: false, preferredDestinations: [], consentPersonalisation: true
+};
+export const profileStore = createStore<TravellerProfile & { setAt?: string }>('tm.profile', () => ({ ...DEFAULT_PROFILE }));
+export const useProfile = () => useStore(profileStore);
+export const hasProfile = (p: TravellerProfile & { setAt?: string }) => !!p.setAt;
+
+// ---------------- Notifications ----------------
+const seedNotifications = (): AppNotification[] => [
+  { id: 'n-welcome', kind: 'ai', createdAt: '2026-10-01T08:00:00Z', read: false, href: '/ai', title: { en: 'Plan a trip in one sentence', fr: 'Planifiez un voyage en une phrase', de: 'Eine Reise in einem Satz planen', zh: '一句话规划旅程', it: 'Pianifica un viaggio in una frase' }, body: { en: 'Tell AI TravelMate your dates, budget and interests to get a draft itinerary.', fr: 'Indiquez vos dates, budget et envies à l’IA TravelMate pour obtenir un itinéraire.', de: 'Nennen Sie KI TravelMate Daten, Budget und Interessen und erhalten Sie einen Reiseplan.', zh: '告诉 AI 旅伴您的日期、预算和兴趣，获取行程草案。', it: 'Indica all’IA TravelMate date, budget e interessi per ricevere un itinerario.' } },
+  { id: 'n-season', kind: 'alert', createdAt: '2026-09-28T09:00:00Z', read: false, href: '/destinations/serengeti-national-park', title: { en: 'Short rains begin in November', fr: 'Les petites pluies commencent en novembre', de: 'Die kleine Regenzeit beginnt im November', zh: '短雨季将于十一月开始', it: 'Le piccole piogge iniziano a novembre' }, body: { en: 'Northern Tanzania gets afternoon showers from November. Game viewing stays good and prices drop.', fr: 'Le nord de la Tanzanie connaît des averses l’après-midi dès novembre. L’observation reste bonne et les prix baissent.', de: 'Ab November gibt es im Norden Tansanias Nachmittagsschauer. Die Tierbeobachtung bleibt gut, die Preise sinken.', zh: '坦桑尼亚北部从十一月起午后多阵雨，观赏动物依然很好，价格也会下降。', it: 'Da novembre nel nord della Tanzania piove nel pomeriggio. L’osservazione resta buona e i prezzi scendono.' } }
+];
+export const notificationStore = createStore<AppNotification[]>('tm.notifications', seedNotifications);
+export const useNotifications = () => useStore(notificationStore);
+
+export const notificationPrefsStore = createStore<Record<AppNotification['kind'], Channel[]>>('tm.notificationPrefs', () => ({
+  booking: ['inapp', 'email', 'whatsapp'], reminder: ['inapp', 'push'], itinerary: ['inapp'], partner: ['inapp', 'email'],
+  promotion: [], price: ['inapp'], alert: ['inapp', 'push'], ai: ['inapp'], support: ['inapp', 'email']
+}));
+
+export function pushNotification(n: { kind: AppNotification['kind']; title?: LocalizedText; body?: LocalizedText; i18n?: AppNotification['i18n']; href?: string }) {
+  notificationStore.set(list => [{ id: uid('n_'), createdAt: nowIso(), read: false, ...n }, ...list].slice(0, 100));
+}
+
+// ---------------- Reviews written by the traveller ----------------
+export const myReviewsStore = createStore<Review[]>('tm.reviews', () => []);
+export const useMyReviews = () => useStore(myReviewsStore);
+
+// ---------------- Support tickets ----------------
+export const ticketStore = createStore<SupportTicket[]>('tm.tickets', () => []);
+export const useTickets = () => useStore(ticketStore);
+export const support = {
+  async open(t: Pick<SupportTicket, 'subject' | 'topic' | 'bookingId'> & { message: string }): Promise<SupportTicket> {
+    await demoLatency(400, 700);
+    const ticket: SupportTicket = {
+      id: `TCK-${Math.floor(100000 + Math.random() * 900000)}`, subject: t.subject, topic: t.topic, bookingId: t.bookingId, status: 'open', createdAt: nowIso(),
+      messages: [{ from: 'me', text: t.message, at: nowIso() }, { from: 'support', text: 'ticket.autoAck', at: nowIso() }]
+    };
+    ticketStore.set(list => [ticket, ...list]);
+    pushNotification({ kind: 'support', i18n: { title: 'notif.ticket.title', body: 'notif.ticket.body', params: { id: ticket.id, subject: ticket.subject } }, href: `/help/tickets/${ticket.id}` });
+    return ticket;
+  },
+  reply(id: string, text: string) {
+    ticketStore.set(list => list.map(t => (t.id === id ? { ...t, status: 'waiting', messages: [...t.messages, { from: 'me', text, at: nowIso() }] } : t)));
+  },
+  close(id: string) { ticketStore.set(list => list.map(t => (t.id === id ? { ...t, status: 'closed' } : t))); }
+};
+
+// ---------------- Travel documents ----------------
+// Metadata only (type, label, expiry, last characters of a number). Files picked in demo mode stay in memory
+// for this session and are never written to browser storage. Production: encrypted object storage, signed URLs,
+// access control and audit logging on the documents service.
+export const documentStore = createStore<TravelDocument[]>('tm.documents', () => []);
+export const useDocuments = () => useStore(documentStore);
+const sessionFiles = new Map<string, File>();
+export const documents = {
+  add(doc: Omit<TravelDocument, 'id' | 'addedAt'>, file?: File) {
+    const id = uid('doc_');
+    if (file) sessionFiles.set(id, file);
+    documentStore.set(list => [{ ...doc, id, addedAt: nowIso(), fileName: file?.name }, ...list]);
+  },
+  remove(id: string) { sessionFiles.delete(id); documentStore.set(list => list.filter(d => d.id !== id)); },
+  fileFor(id: string) { return sessionFiles.get(id); }
+};
+
+// ---------------- Messages with partners ----------------
+export const threadStore = createStore<MessageThread[]>('tm.threads', () => []);
+export const useThreads = () => useStore(threadStore);
+export const messages = {
+  ensure(partnerId: string, bookingId?: string): string {
+    const existing = threadStore.get().find(t => t.partnerId === partnerId && (!bookingId || t.bookingId === bookingId));
+    if (existing) return existing.id;
+    const id = uid('th_');
+    threadStore.set(list => [{ id, partnerId, bookingId, updatedAt: nowIso(), messages: [{ from: 'system', text: 'thread.started', at: nowIso() }] }, ...list]);
+    return id;
+  },
+  send(threadId: string, text: string) {
+    threadStore.set(list => list.map(t => (t.id === threadId ? { ...t, updatedAt: nowIso(), messages: [...t.messages, { from: 'me', text, at: nowIso() }] } : t)));
+    // Demo: an automatic acknowledgement stands in for the partner's reply.
+    setTimeout(() => threadStore.set(list => list.map(t => (t.id === threadId ? { ...t, updatedAt: nowIso(), messages: [...t.messages, { from: 'system', text: 'thread.autoAck', at: nowIso() }] } : t))), 1500);
+  }
+};
+
+// ---------------- Roles ----------------
+export const PARTNER_ROLES: Role[] = ['partner', 'partner_staff'];
+export const BOARD_ROLES: Role[] = ['tourism_board', 'government_dmo', 'conservation_org'];
+export const hasRole = (user: User | null | undefined, roles: Role[]) => !!user && user.roles.some(r => roles.includes(r));

@@ -1,18 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" data-theme="dark">
   <head>
-    <meta charset="utf-8" />
-    <title>TravelmateVr - safari's destination and Vr Tours</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta charset="utf-8" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>TravelMateVR — Experience the world before you go</title>
+    <meta name="description" content="Discover destinations through immersive 360° experiences, plan intelligently with AI, and connect with trusted tourism businesses — all in one ecosystem. By Mates Technologies Limited." />
+    <meta name="theme-color" content="#0f2c3f" />
+    <meta name="color-scheme" content="dark light" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <style>
-      @import url("https://fonts.googleapis.com/css?family=Mohave:500,600,300|Inter:500,400,600|Manjari:700");
-    </style>
+    <link rel="icon" type="image/png" sizes="64x64" href="/icons/favicon-64.png" />
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta property="og:title" content="TravelMateVR" />
+    <meta property="og:description" content="Experience the world before you go." />
+    <meta property="og:type" content="website" />
+    <script>
+      // Apply the saved theme before first paint to avoid a flash.
+      (function () {
+        try {
+          // ?theme=light|dark|system lets reviewers open a link in a given theme.
+          var q = new URLSearchParams(location.search).get('theme');
+          if (q === 'light' || q === 'dark' || q === 'system') localStorage.setItem('tm.theme', q);
+          var t = localStorage.getItem('tm.theme') || 'dark';
+          if (t === 'system') t = matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+          document.documentElement.setAttribute('data-theme', t);
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="./src/main.jsx"></script>
+    <noscript>TravelMateVR needs JavaScript to run. Please enable it in your browser.</noscript>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

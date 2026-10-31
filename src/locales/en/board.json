@@ -1,0 +1,247 @@
+{
+  "shell": {
+    "title": "Tourism board portal",
+    "nav": "Tourism board portal sections",
+    "viewSite": "View destinations"
+  },
+  "gate": {
+    "title": "A digital gateway for your destination",
+    "text": "Publish destination content, run campaigns, understand visitor interest and support your tourism businesses, all in one place.",
+    "demo": "Open the demo board account",
+    "demoNote": "The demo account belongs to a fictional organisation, “Demo Tourism Board · Tanzania”. It does not represent any real authority, and its figures are sample data.",
+    "noAccount": "Represent a tourism board, DMO, park or conservation organisation?",
+    "apply": "Request access"
+  },
+  "nav": {
+    "overview": "Overview",
+    "destinations": "Destinations",
+    "content": "Content",
+    "campaigns": "Campaigns",
+    "visitors": "Visitor interest",
+    "attractions": "Attractions",
+    "trends": "Tourism trends",
+    "partners": "Partner ecosystem",
+    "sustainability": "Sustainability"
+  },
+  "kpi": {
+    "interest": "Visitor interest",
+    "vrViews": "360° views",
+    "destinations": "Destinations",
+    "partners": "Tourism businesses",
+    "verified_one": "{{count}} verified",
+    "verified_other": "{{count}} verified",
+    "drafts": "Drafts to publish"
+  },
+  "overview": {
+    "title": "Welcome, {{name}}",
+    "text": "{{org}}: destination interest, campaigns and content at a glance.",
+    "demoNote": "Demo organisation. Figures marked as sample data are generated for illustration and are not official statistics.",
+    "sampleNote": "applies to visitor interest and 360° views.",
+    "top": "Most-viewed destinations",
+    "liveCampaigns": "Live campaigns"
+  },
+  "destinations": {
+    "text": "The destinations in your area. Edit their content and publish updates to TravelMateVR.",
+    "bestTime": "Best months",
+    "content": "Content",
+    "posts_one": "{{count}} live update",
+    "posts_other": "{{count}} live updates",
+    "state": {
+      "catalogue": "TravelMateVR text",
+      "published": "Your version, live",
+      "draft": "Draft"
+    },
+    "interestNote": "Visitor interest is an index of destination page views, 360° views and searches over 12 months (sample data).",
+    "editText": "Update the description, safety and responsible-travel guidance and the best months to visit. Published changes appear on the public page straight away.",
+    "viewPublic": "View public page",
+    "summary": "Summary",
+    "overview": "Overview",
+    "accuracy": "You're responsible for the accuracy of published information. Link safety and entry guidance to official sources where possible.",
+    "draftSaved": "Draft saved.",
+    "published": "Published. The public destination page is updated.",
+    "publish": "Publish",
+    "revert": "Revert to TravelMateVR text",
+    "reverted": "Reverted to the TravelMateVR text.",
+    "draftNote": "Unpublished draft saved {{date}}. Travellers still see the previous version.",
+    "publishedNote": "Your version is live (updated {{date}}).",
+    "managePosts": "Updates and events for this destination"
+  },
+  "content": {
+    "text": "News, events, travel alerts and stories shown on destination pages under “Updates from the destination”.",
+    "new": "New update",
+    "edit": "Edit update",
+    "kind": "Type",
+    "kinds": {
+      "news": "News",
+      "event": "Event",
+      "alert": "Travel alert",
+      "story": "Story"
+    },
+    "titleLabel": "Title",
+    "body": "Text",
+    "eventDate": "Event date",
+    "visibleFrom": "Date (optional)",
+    "expires": "Hide after",
+    "dates": "Dates",
+    "until": "until {{date}}",
+    "expired": "Expired",
+    "status": {
+      "draft": "Draft",
+      "published": "Published"
+    },
+    "publish": "Publish",
+    "unpublish": "Unpublish",
+    "publishedToast": "Published on the destination page.",
+    "draftToast": "Draft saved.",
+    "errTitle": "Add a title of at least 4 characters.",
+    "errBody": "Add at least 20 characters of text.",
+    "errDate": "Events need a date.",
+    "alertNote": "Travel alerts appear first on the destination page. Use them for safety, access or closures, and link to the official source in the text.",
+    "publishNote": "Published updates appear on the public destination page in the language you write them in, with a label naming your organisation.",
+    "emptyTitle": "No updates yet",
+    "emptyText": "Publish news, events or travel alerts for your destinations."
+  },
+  "campaigns": {
+    "text": "Promote destinations to the markets and interests you choose, across TravelMateVR.",
+    "new": "New campaign",
+    "edit": "Edit campaign",
+    "markets": "Source markets",
+    "interests": "Traveller interests",
+    "channel": {
+      "homepage": "Home page",
+      "explore": "Explore and destination pages",
+      "ai": "AI TravelMate suggestions",
+      "newsletter": "Newsletter",
+      "partners": "Partner co-marketing"
+    },
+    "note": "Campaign content is labelled as promoted by your organisation. TravelMateVR reviews campaigns before they start.",
+    "schedule": "Schedule",
+    "scheduled": "Campaign scheduled.",
+    "draftSaved": "Campaign saved as draft.",
+    "status": {
+      "draft": "Draft",
+      "scheduled": "Scheduled",
+      "live": "Live",
+      "ended": "Ended"
+    },
+    "progress": "Campaign progress",
+    "saves": "saves",
+    "none": "No campaigns yet."
+  },
+  "visitors": {
+    "text": "Where interest in your destinations comes from, and what travellers look for.",
+    "interest": "Visitor interest by month",
+    "byDestination": "Interest by destination",
+    "interestDef": "Interest combines destination page views, 360° views and searches.",
+    "markets": "Source markets (share)",
+    "interests": "What travellers are interested in",
+    "searches": "Top searches",
+    "searchesNote": "Searches mentioning your destinations, in the language travellers typed them."
+  },
+  "attractions": {
+    "text": "How each destination and immersive experience performs.",
+    "pageViews": "Page views",
+    "avgVr": "Avg. 360° time",
+    "seconds_one": "{{count}} s",
+    "seconds_other": "{{count}} s",
+    "saves": "Saves",
+    "experiences": "Immersive experiences",
+    "experience": "Experience",
+    "format": "Format",
+    "completion": "Viewed to the end",
+    "captureTip_one": "{{count}} experience still uses a panoramic preview. Real 360° captures keep travellers exploring longer.",
+    "captureTip_other": "{{count}} experiences still use a panoramic preview. Real 360° captures keep travellers exploring longer."
+  },
+  "trends": {
+    "text": "Seasonality, length of stay and booking behaviour across your area.",
+    "avgStay": "Average trip length",
+    "leadTime": "Average booking lead time",
+    "partySize": "Average party size",
+    "repeat": "Returning visitors",
+    "seasonality": "Destinations in their best season",
+    "seasonalityNote": "Share of your destinations in their best months, by month.",
+    "lengthOfStay": "Length of stay",
+    "daysRange": "{{range}} days",
+    "monthly": "Total visitor interest by month"
+  },
+  "partners": {
+    "text": "Tourism businesses on TravelMateVR in your area.",
+    "invite": "Invite businesses",
+    "verified": "Verified",
+    "founding": "Founding partners",
+    "community": "Community-led or locally owned",
+    "ofListings": "of listings",
+    "byType": "By type",
+    "unverified": "Not verified",
+    "note": "Businesses marked “Sample listing” are fictional and demonstrate the marketplace. Invite real businesses in your area to apply."
+  },
+  "sustainability": {
+    "text": "Contributions, certifications and community benefit across your area.",
+    "contributions": "Conservation & community contributions",
+    "contributionsHint_one": "From {{count}} booking",
+    "contributionsHint_other": "From {{count}} bookings",
+    "ecoListings": "Eco-certified listings",
+    "ofListings_one": "of {{count}} listing",
+    "ofListings_other": "of {{count}} listings",
+    "community": "Community-led or locally owned",
+    "ecoDestinations": "Eco-certified destinations",
+    "dataNote": "Contributions are summed from bookings in the demo (including sample guests). Certification shares come from listing data.",
+    "transport": "How visitors travel between destinations",
+    "road": "Road",
+    "flight": "Flights",
+    "ferry": "Ferry",
+    "notes": "Responsible-travel guidance",
+    "claims": "Sustainability claims are shown only when partners provide evidence. Boards can publish guidance on destination pages."
+  },
+  "landing": {
+    "eyebrow": "For tourism boards",
+    "title": "A digital gateway to your destination",
+    "lede": "For tourism boards, DMOs, government tourism authorities, national parks and conservation organisations: publish, promote and understand your destination on TravelMateVR.",
+    "requestDemo": "Request a demo",
+    "openDemo": "Open the demo portal",
+    "forTitle": "What you can do",
+    "forText": "One dashboard to manage how your destination is presented and to see what travellers are looking for.",
+    "caps": {
+      "content": {
+        "t": "Content publishing",
+        "d": "Keep destination descriptions, safety guidance and best seasons up to date, and publish news, events and alerts."
+      },
+      "campaigns": {
+        "t": "Campaigns",
+        "d": "Promote destinations to the source markets and traveller interests you choose."
+      },
+      "interest": {
+        "t": "Visitor interest",
+        "d": "See demand by month, market and interest, and what travellers search for."
+      },
+      "attractions": {
+        "t": "Attraction performance",
+        "d": "Compare destinations and 360° experiences by views, engagement and bookings."
+      },
+      "partners": {
+        "t": "Partner ecosystem",
+        "d": "Understand the tourism businesses in your area and invite new ones."
+      },
+      "sustainability": {
+        "t": "Sustainability metrics",
+        "d": "Track contributions, certifications and community-led tourism."
+      }
+    },
+    "contactTitle": "Request a demo",
+    "org": "Organisation",
+    "type": "Type of organisation",
+    "types": {
+      "board": "Tourism board",
+      "dmo": "Destination management organisation",
+      "government": "Government tourism authority",
+      "park": "National park",
+      "conservation": "Conservation organisation"
+    },
+    "message": "What would you like to achieve?",
+    "messagePh": "Destinations you manage, markets you focus on, timing…",
+    "send": "Send request",
+    "subject": "Tourism board enquiry",
+    "sent": "Thank you. Your request {{id}} has reached our partnerships team; we reply within two working days.",
+    "track": "Track your request"
+  }
+}

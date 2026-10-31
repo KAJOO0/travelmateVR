@@ -1,0 +1,589 @@
+{
+  "shell": {
+    "title": "TravelMateVR Command Center",
+    "nav": "Command Center sections"
+  },
+  "gate": {
+    "title": "TravelMateVR Command Center",
+    "text": "Manage users, partners, content, bookings, AI, support, revenue and platform security.",
+    "demo": "Open the demo Command Center",
+    "demoNote": "Demo access for review. In production, administrators sign in with their own account and two-step verification, and every permission is enforced by the server.",
+    "role": "Sign in with the permissions of"
+  },
+  "roles": {
+    "traveller": "Traveller",
+    "partner": "Partner",
+    "partner_staff": "Partner staff",
+    "tourism_board": "Tourism board",
+    "government_dmo": "Government / DMO",
+    "conservation_org": "Conservation organisation",
+    "content_manager": "Content manager",
+    "support_agent": "Support agent",
+    "finance": "Finance",
+    "admin": "Administrator",
+    "super_admin": "Super administrator"
+  },
+  "roleText": {
+    "super_admin": "Everything, including system settings and security changes.",
+    "admin": "Run the platform day to day; security is read-only and system settings are hidden.",
+    "content_manager": "Destinations, VR content, reviews, marketing and promotions.",
+    "support_agent": "Support tickets, bookings, reviews; users are read-only.",
+    "finance": "Bookings, analytics and reports; partners are read-only."
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "users": "Users",
+    "partners": "Partners",
+    "destinations": "Destinations",
+    "bookings": "Bookings",
+    "vr": "VR content",
+    "ai": "AI",
+    "reviews": "Reviews",
+    "marketing": "Marketing",
+    "promotions": "Promotions",
+    "analytics": "Analytics",
+    "sustainability": "Sustainability",
+    "support": "Support",
+    "reports": "Reports",
+    "security": "Security",
+    "settings": "System settings"
+  },
+  "noAccess": {
+    "title": "You don't have access to this section",
+    "text": "Your role doesn't include this area. Ask a super administrator if you need access."
+  },
+  "readOnly": "You can view this section but your role can't change anything here.",
+  "kpi": {
+    "totalUsers": "Total users",
+    "activeUsers": "Active users (month)",
+    "partners": "Partners",
+    "destinations": "Destinations",
+    "bookings": "Bookings",
+    "gmv": "GMV",
+    "commission": "Commission",
+    "subscriptions": "Subscription revenue",
+    "advertising": "Advertising revenue",
+    "enterprise": "Enterprise revenue",
+    "vr": "VR experiences",
+    "ai": "AI interactions",
+    "conversion": "Conversion rate",
+    "tickets": "Support tickets",
+    "sampleHint": "Sample data",
+    "plusFees": "+ {{fees}} traveller service fees",
+    "annualised": "Annualised (partly sample)",
+    "campaignBudgets": "Booked campaign budgets",
+    "thisDevice": "Recorded on this device",
+    "open": "Open"
+  },
+  "dashboard": {
+    "title": "Good to see you, {{name}}",
+    "text": "The whole platform at a glance: people, partners, bookings, revenue and service.",
+    "dataNote": "Bookings, GMV, commission, guest markets and partner performance come from booking data. Users, conversion and non-commission revenue are sample values until analytics and billing are connected.",
+    "growth": "User growth",
+    "newUsers": "New users",
+    "geo": "Where travellers come from",
+    "geoNote": "Lead traveller's country of residence on bookings.",
+    "bookingTrends": "Bookings by month",
+    "revenueTrends": "Revenue by stream",
+    "revenueNote": "Commission from bookings; subscriptions, advertising and enterprise revenue are sample values.",
+    "partnerPerformance": "Partner performance",
+    "destinationPopularity": "Destination popularity"
+  },
+  "users": {
+    "text": "Every account on TravelMateVR: travellers, partners, tourism boards and staff.",
+    "search": "Search by name or email",
+    "allRoles": "All roles",
+    "count_one": "{{count}} user",
+    "count_other": "{{count}} users",
+    "user": "User",
+    "role": "Role",
+    "roleFor": "Role for {{name}}",
+    "joined": "Joined",
+    "lastActive": "Last active",
+    "status": {
+      "active": "Active",
+      "suspended": "Suspended"
+    },
+    "suspend": "Suspend",
+    "reactivate": "Reactivate",
+    "suspended": "Account suspended.",
+    "reactivated": "Account reactivated.",
+    "roleChanged": "Role updated.",
+    "resetMfa": "Reset 2FA",
+    "mfaReset": "Two-step verification reset. The user will set it up again at next sign-in.",
+    "inviteStaff": "Invite a staff member",
+    "inviteNote": "Staff must turn on two-step verification at first sign-in. Only super administrators can grant administrator roles."
+  },
+  "partners": {
+    "text": "Partner directory, verification, commission and suspensions, plus applications and new listings waiting for review.",
+    "tab": {
+      "directory": "Directory",
+      "applications": "Applications",
+      "listings": "New listings"
+    },
+    "partner": "Partner",
+    "commissionFor": "Commission for {{name}}",
+    "commissionSaved": "Commission updated.",
+    "verify": "Verify",
+    "unverify": "Remove verification",
+    "suspend": "Suspend",
+    "reinstate": "Reinstate",
+    "suspended": "Suspended",
+    "suspendedToast": "{{name}} suspended. Their listings are hidden.",
+    "reinstated": "{{name}} reinstated.",
+    "suspendNote": "Suspending a partner hides all their listings from travellers at once. Existing bookings are kept; review them in Bookings.",
+    "submitted": "Submitted",
+    "appStatus": {
+      "submitted": "New",
+      "in_review": "In review",
+      "approved": "Approved",
+      "rejected": "Rejected"
+    },
+    "noApplications": "No applications yet. They arrive from the public “List your business” form.",
+    "approve": "Approve",
+    "reject": "Reject",
+    "startReview": "Mark as in review",
+    "note": "Note to the applicant (optional)",
+    "notePh": "Reason or next steps",
+    "decided": {
+      "approved": "{{name}} approved.",
+      "rejected": "{{name}} rejected.",
+      "in_review": "{{name}} is now in review."
+    },
+    "checks": "Before approving: verify the tourism licence with the issuing authority, check the business registration, and confirm the contact by phone.",
+    "noListings": "No new listings waiting for review.",
+    "review": "Review",
+    "publishListing": "Publish listing",
+    "listingPublished": "Listing published to the marketplace.",
+    "listingRejected": "Listing returned to the partner.",
+    "listingChecks": "Check that the description is accurate and specific, the price is realistic, and the listing doesn't duplicate an existing one."
+  },
+  "destinations": {
+    "text": "Every destination with interest, bookings and the content tourism boards have published.",
+    "revert": "Revert board edits",
+    "interestNote": "Interest is a sample index of page views, 360° views and searches.",
+    "posts": "Published destination updates",
+    "noPosts": "No published updates.",
+    "unpublished": "Update unpublished."
+  },
+  "bookings": {
+    "text": "All bookings across partners. Handle disputes, refunds and resends here.",
+    "allStatuses": "All statuses",
+    "allPartners": "All partners",
+    "count_one": "{{count}} booking",
+    "count_other": "{{count}} bookings",
+    "resend": "Resend confirmation",
+    "resent": "Confirmation resent to {{email}}.",
+    "cancelRefund": "Cancel with full refund",
+    "confirmText": "This cancels the booking and refunds everything paid ({{amount}}) to the original payment method. The traveller and partner are notified.",
+    "reason": "Reason",
+    "reasons": {
+      "partner": "Partner can't deliver",
+      "payment": "Payment dispute",
+      "duplicate": "Duplicate booking",
+      "safety": "Safety or access issue",
+      "other": "Other"
+    },
+    "confirm": "Cancel and refund",
+    "cancelled": "Booking {{id}} cancelled and refunded."
+  },
+  "vr": {
+    "text": "Every immersive experience and its publishing status. Only published experiences are visible to travellers.",
+    "create": "Create experience",
+    "edit": "Edit experience",
+    "experience": "Experience",
+    "createdHere": "Created in the Command Center",
+    "catalogue": "Catalogue",
+    "hotspotCount_one": "{{count}} hotspot",
+    "hotspotCount_other": "{{count}} hotspots",
+    "status": {
+      "draft": "Draft",
+      "review": "Review",
+      "approved": "Approved",
+      "published": "Published",
+      "archived": "Archived"
+    },
+    "action": {
+      "draft": "Back to draft",
+      "review": "Send to review",
+      "approved": "Approve",
+      "published": "Publish",
+      "archived": "Archive"
+    },
+    "moved": "“{{name}}” is now {{status}}.",
+    "tagline": "Short description",
+    "category": "Category",
+    "duration": "Duration (minutes)",
+    "pano": "360° image",
+    "noPano": "None (panoramic preview of the photo)",
+    "photo": "Cover photo",
+    "upload": "Upload 360° image or video",
+    "uploadHint": "Equirectangular image (2:1) or 360° video. Files go to the processing pipeline (stitching check, compression, face blurring); choose processed media above once ready.",
+    "fileErr": "Use a JPG, PNG, WebP, TIFF, MP4, MOV or Insta360 file under 2 GB.",
+    "queued": "Queued for processing: {{name}}",
+    "startYaw": "Starting direction (°)",
+    "narration": "Narration (spoken in the viewer)",
+    "narrationPh": "Text read aloud with the browser's speech voice in the traveller's language.",
+    "hotspots": "Hotspots",
+    "hsTitle": "Hotspot title",
+    "hsText": "Hotspot text",
+    "hsKindLabel": "Type",
+    "hsKind": {
+      "info": "Information",
+      "wildlife": "Wildlife",
+      "culture": "Culture",
+      "nearby": "Nearby"
+    },
+    "addHotspot": "Add hotspot",
+    "bookable": "Bookable from this experience",
+    "saved": "Experience saved.",
+    "workflowNote": "New experiences start as drafts: send to review, approve, then publish. Published experiences appear in the VR library and on destination pages.",
+    "partnerRequests": "Partner uploads and capture requests",
+    "video": "360° video",
+    "noVideo": "No 360° video",
+    "videoHint": "Primary format. The 360° photo below, if set, is shown when the video can’t play."
+  },
+  "ai": {
+    "text": "How travellers use AI TravelMate: questions, plans, feedback, failures, safety and cost.",
+    "dataNote": "{{count}} interactions were recorded on this device; the rest are sample data. Prompts are stored redacted.",
+    "interactions": "Interactions",
+    "itineraries": "Itineraries generated",
+    "successRate": "Success rate",
+    "satisfaction": "Helpful ratings",
+    "ratings_one": "{{count}} rating",
+    "ratings_other": "{{count}} ratings",
+    "latency": "Average response time",
+    "flags": "Safety flags",
+    "sampleNote": "applies to interactions not made on this device.",
+    "popular": "Popular questions",
+    "answerTypes": "Answer types",
+    "type": {
+      "plan": "Trip plans",
+      "season": "Best time",
+      "compare": "Comparisons",
+      "entry": "Entry requirements",
+      "weather": "Weather",
+      "error": "Failed"
+    },
+    "recommendations": "Most recommended destinations",
+    "recNote": "Destinations included in generated plans.",
+    "failed": "Failed responses",
+    "noFailures": "No failures recorded.",
+    "safety": "Safety flags",
+    "noFlags": "No flagged prompts.",
+    "prompt": "Prompt (redacted)",
+    "flag": "Flag",
+    "when": "When",
+    "flagKind": {
+      "personal_data": "Personal data",
+      "unsafe_request": "Unsafe request",
+      "medical": "Medical advice",
+      "off_topic": "Off topic"
+    },
+    "redaction": "Emails and phone numbers are removed before prompts are stored. Flagged prompts get a safe, general answer.",
+    "models": "Model usage and cost",
+    "activeModel": "Active model",
+    "rulesModel": "rule-based planner over the TravelMateVR catalogue",
+    "dataSource": "Runs",
+    "gateway": "Through the AI gateway (server)",
+    "onDevice": "In the browser (demo)",
+    "cost": "Cost this month",
+    "costNote": "the demo planner has no per-request cost; hosted models report tokens and cost through the gateway",
+    "replaceable": "The app talks to AI through one service interface (plan and respond). A hosted model can replace the demo planner on the server without changing any screens."
+  },
+  "reviews": {
+    "text": "Approve new reviews, and hide published reviews that break the guidelines.",
+    "tab": {
+      "queue": "Waiting for moderation",
+      "published": "Published",
+      "hidden": "Hidden"
+    },
+    "approve": "Approve",
+    "reject": "Reject",
+    "approved": "Review approved and published.",
+    "rejected": "Review rejected.",
+    "emptyQueue": "Nothing waiting for moderation.",
+    "hide": "Hide",
+    "hidden": "Review hidden.",
+    "restore": "Restore",
+    "noneHidden": "No hidden reviews.",
+    "hasReply": "partner replied",
+    "reason": "Reason",
+    "reasons": {
+      "spam": "Spam",
+      "offensive": "Offensive language",
+      "personal_data": "Contains personal data",
+      "not_genuine": "Not a genuine stay",
+      "off_topic": "Off topic"
+    },
+    "policy": "Reviews are only removed when they break the review guidelines, never because they're negative. Every decision is audited."
+  },
+  "marketing": {
+    "text": "Approve partner campaigns, featured placement and packages, and monitor everything running.",
+    "queue": "Waiting for review",
+    "emptyQueue": "Nothing waiting for review.",
+    "campaign": "Campaign",
+    "featured": "Featured placement",
+    "package": "Package",
+    "approved": "Approved.",
+    "return": "Return to partner",
+    "returned": "Returned to the partner.",
+    "running": "Running and scheduled campaigns",
+    "owner": "Owner",
+    "labelling": "Promoted content is always labelled “Promoted” or “Featured”. AI TravelMate never ranks paid content above better matches without saying so."
+  },
+  "promotions": {
+    "text": "All partner offers. The maximum partner discount is {{max}}%; change it in System settings.",
+    "overCap": "Above the current cap",
+    "note": "Pause offers that mislead travellers (for example inflated “before” prices). Paused offers stop applying at checkout immediately."
+  },
+  "analytics": {
+    "text": "GMV, take rate, revenue streams, demand and destinations across the platform.",
+    "avgBooking": "Average booking value",
+    "takeRate": "Take rate",
+    "contributions": "Conservation & community contributions",
+    "gmvTrend": "GMV and commission by month",
+    "streams": "Revenue by stream",
+    "streamsNote": "Commission and service fees from bookings; the other streams are partly sample.",
+    "fees": "Service fees",
+    "byType": "Bookings by type"
+  },
+  "sustainability": {
+    "text": "Contributions, certification and community-led supply across all destinations.",
+    "contributing": "Listings with a contribution",
+    "byCountry": "Eco-certified or community-led listings by country"
+  },
+  "support": {
+    "text": "Questions from travellers and partners. Replies reach the traveller's ticket and notifications.",
+    "tab": {
+      "active": "Active",
+      "all": "All"
+    },
+    "queue": "Ticket queue",
+    "high": "High priority",
+    "afterReply": "Status after reply",
+    "send": "Send reply",
+    "sent": "Reply sent.",
+    "statusSaved": "Status updated.",
+    "emptyTitle": "No tickets",
+    "emptyText": "Support requests from the Help Center appear here.",
+    "macro": {
+      "received": "Hi {{name}}, thanks for getting in touch. We're looking into this now and will update you shortly.",
+      "receivedLabel": "Acknowledge",
+      "refund": "Hi {{name}}, we've issued the refund to your original payment method. It usually arrives within 5–10 business days.",
+      "refundLabel": "Refund issued",
+      "dates": "Hi {{name}}, we've asked the partner about changing your dates and will confirm as soon as they reply.",
+      "datesLabel": "Date change"
+    }
+  },
+  "reports": {
+    "text": "Download reports as CSV for finance, partners and compliance. Each download is recorded in the audit log.",
+    "from": "Stays from",
+    "to": "Stays to",
+    "rangeNote_one": "{{count}} booking in this range (applies to the bookings report).",
+    "rangeNote_other": "{{count}} bookings in this range (applies to the bookings report).",
+    "rows_one": "{{count}} row",
+    "rows_other": "{{count}} rows",
+    "downloaded": "Report downloaded.",
+    "privacy": "Reports may contain personal data. Store them securely and delete them when no longer needed. Generated {{date}}.",
+    "r": {
+      "bookings": {
+        "title": "Bookings",
+        "text": "Every booking with price breakdown and payment status"
+      },
+      "commission": {
+        "title": "Revenue: commission",
+        "text": "Monthly GMV and commission"
+      },
+      "subscriptions": {
+        "title": "Revenue: partner subscriptions",
+        "text": "Monthly subscription revenue (sample)"
+      },
+      "advertising": {
+        "title": "Revenue: advertising",
+        "text": "Monthly campaign and featured-placement revenue (sample)"
+      },
+      "enterprise": {
+        "title": "Revenue: enterprise services",
+        "text": "Tourism board and enterprise contracts (sample)"
+      },
+      "partners": {
+        "title": "Partners",
+        "text": "Partner performance and status"
+      },
+      "destinations": {
+        "title": "Destinations",
+        "text": "Bookings, GMV and interest per destination"
+      },
+      "users": {
+        "title": "Users",
+        "text": "Accounts by role and status (no names or emails)"
+      },
+      "ai": {
+        "title": "AI interactions",
+        "text": "Redacted prompts, answer types, latency and feedback"
+      },
+      "audit": {
+        "title": "Audit log",
+        "text": "Every admin action"
+      }
+    }
+  },
+  "security": {
+    "text": "Who did what, unusual activity, data-protection requests and role permissions.",
+    "audit": "Admin activity log",
+    "search": "Search the log",
+    "actor": "Admin",
+    "action": "Action",
+    "target": "Target",
+    "auditNote": "The audit log is append-only. In production it's written by the server and kept for at least 2 years.",
+    "events": "Security events",
+    "kind": {
+      "failed_login": "Failed sign-in",
+      "rate_limit": "Rate limit reached",
+      "new_device": "Sign-in from a new device",
+      "mfa_disabled": "2FA turned off",
+      "permission_denied": "Permission denied"
+    },
+    "sev": {
+      "low": "Low",
+      "medium": "Medium",
+      "high": "High"
+    },
+    "dsr": "Data-protection requests",
+    "dsrKind": {
+      "export": "Data export",
+      "erase": "Erasure",
+      "correct": "Correction"
+    },
+    "dsrStatus": {
+      "new": "New",
+      "in_progress": "In progress",
+      "done": "Done"
+    },
+    "due": "Due {{date}}",
+    "dsrNote": "Requests must be completed within 30 days. Erasure keeps only what the law requires (for example accounting records).",
+    "rbac": "Role permissions",
+    "section": "Section",
+    "level": {
+      "read": "View",
+      "write": "Manage"
+    },
+    "enforced": "These permissions are enforced by the server on every request; the interface only hides what a role can't use."
+  },
+  "settings": {
+    "text": "Platform-wide configuration. Changes apply immediately and are recorded in the audit log.",
+    "commerce": "Fees and payments",
+    "fee": "Traveller service fee (%)",
+    "feeHint": "Charged on base price and extras; shown on every booking.",
+    "deposit": "Deposit (%)",
+    "cap": "Maximum partner discount (%)",
+    "features": "Features",
+    "flag": {
+      "aiPlanner": "AI TravelMate",
+      "headsetMode": "VR headset mode",
+      "partnerApplications": "Partner applications",
+      "reviews": "New reviews",
+      "creatorApplications": "Creator applications"
+    },
+    "flagText": {
+      "aiPlanner": "Planner and questions on /ai. When off, travellers see a short notice.",
+      "headsetMode": "WebXR headset button in the 360° viewer.",
+      "partnerApplications": "The public “List your business” form. When off, the page explains applications are paused.",
+      "reviews": "Travellers can submit new reviews after a completed booking.",
+      "creatorApplications": "Accept new applications at /creators/apply."
+    },
+    "maintenance": "Maintenance banner",
+    "maintenanceOn": "Show a banner across the traveller site",
+    "maintenanceMsg": "Banner message",
+    "maintenancePh": "e.g. Payments are briefly unavailable from 02:00 to 03:00 EAT.",
+    "security": "Security",
+    "require2fa": "Require two-step verification for staff",
+    "timeout": "Admin session timeout",
+    "minutes_one": "{{count}} minute",
+    "minutes_other": "{{count}} minutes",
+    "attempts": "Failed sign-ins before lock-out",
+    "securityNote": "Security settings are enforced by the authentication service; this demo records them only.",
+    "defaults": "Restore defaults",
+    "save": "Save changes",
+    "saved": "Settings saved and applied.",
+    "integrations": "Integrations",
+    "connected": "Connected",
+    "demoMode": "Demo mode",
+    "int": {
+      "api": {
+        "name": "TravelMateVR API",
+        "text": "Catalogue, bookings and accounts. Set VITE_DATA_SOURCE=http and VITE_API_BASE_URL."
+      },
+      "payments": {
+        "name": "Payments",
+        "text": "Cards and mobile money through a PCI-compliant provider, configured on the server."
+      },
+      "maps": {
+        "name": "Maps",
+        "text": "Map tiles. Set VITE_MAP_TILES_LIGHT/DARK with a domain-restricted key."
+      },
+      "ai": {
+        "name": "AI gateway",
+        "text": "Hosted model behind the plan/respond interface, configured on the server."
+      },
+      "messaging": {
+        "name": "Email, SMS and WhatsApp",
+        "text": "Notification providers, configured on the server."
+      },
+      "storage": {
+        "name": "Media storage",
+        "text": "360° uploads and processing pipeline (stitching checks, compression, blurring)."
+      }
+    },
+    "secrets": "Provider keys and secrets live only on the server. They are never entered here or shipped in the app.",
+    "creators": "Creator programme",
+    "creatorShare": "Creator share of subscription revenue (%)",
+    "creatorShareHint": "Paid into the creator pool each month and split by the watch time of each creator's experiences. Shown on /creators as draft terms.",
+    "lockout": "Sign-in lock after the limit",
+    "lockoutHint": "Sign-in is paused for this long after the attempts above fail in a row. The server enforces it per account and per IP address.",
+    "lockoutValue_minutes_other": "{{count}} minutes",
+    "lockoutValue_hours_other": "{{count}} hours",
+    "lockoutValue_minutes_one": "{{count}} minutes",
+    "lockoutValue_hours_one": "{{count}} hour",
+    "viewRate": "Pay per 1,000 qualified views (USD)",
+    "viewRateHint": "Paid to the creator of the experience, on top of the subscription share.",
+    "qualifiedView": "Seconds for a qualified view",
+    "qualifiedViewHint": "A view counts once someone has watched this long. Repeat views by the same person in a day count once.",
+    "payments": "Payments and launch countries",
+    "tzsRate": "Indicative TZS per USD",
+    "tzsRateHint": "Used to show shilling amounts at checkout. The payment provider confirms the final amount.",
+    "bookingCountries": "Countries open for booking and payment",
+    "bookingCountriesHint": "Everywhere else is preview-only: travellers can explore and plan, but not book or pay, and partners there cannot receive payouts.",
+    "errCountries": "Keep at least one country open."
+  },
+  "creators": {
+    "title": "Creator applications",
+    "public": "Creator programme page",
+    "creator": "Creator",
+    "places": "Places",
+    "review": "Review",
+    "none": "No creator applications yet.",
+    "reject": "Decline",
+    "inReview": "Mark in review",
+    "approve": "Approve",
+    "id": "Reference",
+    "rights": "Rights and consent confirmed",
+    "yes": "Yes",
+    "note": "Note to the creator (optional)",
+    "notePh": "e.g. Please send a 360° sample from Wadi Rum",
+    "nextNote": "Approving sends the creator agreement and opens a creator account for uploads. In this demo the decision is recorded here and in the audit log.",
+    "status": {
+      "submitted": "New",
+      "in_review": "In review",
+      "approved": "Approved",
+      "rejected": "Declined"
+    },
+    "decided": {
+      "submitted": "{{name}} moved back to new",
+      "in_review": "{{name}} marked in review",
+      "approved": "{{name}} approved",
+      "rejected": "{{name}} declined"
+    }
+  }
+}

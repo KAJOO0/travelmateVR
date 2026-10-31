@@ -1,0 +1,1039 @@
+{
+  "impala": {
+    "w": 1839,
+    "h": 1134,
+    "widths": [
+      480,
+      960,
+      1600
+    ],
+    "alt": "Two impala on green grass",
+    "own": true,
+    "lqip": "data:image/webp;base64,UklGRlgAAABXRUJQVlA4IEwAAAAQAgCdASoQAAoAA4BaJaACdAEO9aTnRfQAAP2dTN4JKLXpv2PrMs8lkQgJjNBx5ii9oEFk0EHaOgMfow5m2NYpQuEMJkZsIsMmyAAA"
+  },
+  "dar-city": {
+    "w": 1336,
+    "h": 1476,
+    "widths": [
+      480,
+      960,
+      1336
+    ],
+    "alt": "Dar es Salaam city centre",
+    "own": true,
+    "lqip": "data:image/webp;base64,UklGRnQAAABXRUJQVlA4IGgAAADwAwCdASoQABIAPu1iqU2ppaOiMAgBMB2JZQDDNBcMWHBJv6k65ZFwAP4Euisos6VPPMT9gIIRg2nVVM3Xe/7Ccw60DAzYQgnra8JhQokJjFpGfUYd2gsS/nu0RdQfXRrbIoErgAAAAA=="
+  },
+  "hotel-room": {
+    "w": 1839,
+    "h": 1134,
+    "widths": [
+      480,
+      960,
+      1600
+    ],
+    "alt": "Ocean-view hotel room",
+    "own": true,
+    "lqip": "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAADQAQCdASoQAAoAA4BaJQBdgBamJgt93ADOPrbV1fCl04hPxwREI6Lar3zuqqN6oH+S+rehFcx65d54jPj3fqku+iQeaZu+OQFVM2IAAAA="
+  },
+  "cultural-dance": {
+    "w": 1540,
+    "h": 1304,
+    "widths": [
+      480,
+      960,
+      1540
+    ],
+    "alt": "Traditional dance performance in front of a thatched house",
+    "own": true,
+    "lqip": "data:image/webp;base64,UklGRn4AAABXRUJQVlA4IHIAAABQAgCdASoQAA4AA4BaJagCdAYtfgcGiAuVoQAA9nfZMk2q++nV7HxnMb1cVa9rfR2R3BsB4Z+Mx4p5oS92A62wWpdX++n7p7JLfkbTPdGmh9rszu9aiH1trJqU8IVl2fbvX6rYZzjnzacyS3S2vOeyQAA="
+  },
+  "maasai": {
+    "w": 1839,
+    "h": 1134,
+    "widths": [
+      480,
+      960,
+      1600
+    ],
+    "alt": "Maasai men performing the jumping dance",
+    "own": true,
+    "lqip": "data:image/webp;base64,UklGRnYAAABXRUJQVlA4IGoAAADwAQCdASoQAAoAA4BaJagCdAC9rmBRzIAA/t8pjE/fK3TTS9hiwb51zUuVlNZ0eDx/DW5t7sydhXGHtgqdbHClMRK8lVncGejSYnB58F+vD4uXvR3hMHGn2TDI8FNdsgoDWmEUipsVAAAA"
+  },
+  "ngozi": {
+    "w": 1336,
+    "h": 1476,
+    "widths": [
+      480,
+      960,
+      1336
+    ],
+    "alt": "Ngozi Crater Lake, Mbeya",
+    "own": true,
+    "lqip": "data:image/webp;base64,UklGRoAAAABXRUJQVlA4IHQAAAAQBACdASoQABIAPu1kqU2ppaOiMAgBMB2JaACdOUAAySaR+Wv7mvpLgAD87PJ5smaOx0r/TzhvK45YDgt7/FAFWj/MWrCnzaYl5Ii92SrfDtGoyXqoaQ2GguNeniSQa13Jy/vzUp/4K2qW0um/4K2pyfAAAA=="
+  },
+  "nungwi": {
+    "w": 1336,
+    "h": 1476,
+    "widths": [
+      480,
+      960,
+      1336
+    ],
+    "alt": "Coastline and village seen from above",
+    "own": true,
+    "lqip": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAABwAwCdASoQABIAPu1iqU2ppaOiMAgBMB2JQBadAWYrA4NVwvgAzWWkOH8A3UTdvdIOpgx901BsJqRtIC+bLDlRQwLOLEifdDAo5y9M33pIQWw7XOUxSxqAAAA="
+  },
+  "safari-crew": {
+    "w": 1336,
+    "h": 1476,
+    "widths": [
+      480,
+      960,
+      1336
+    ],
+    "alt": "Safari guides beside their 4x4",
+    "own": true,
+    "lqip": "data:image/webp;base64,UklGRqgAAABXRUJQVlA4IJwAAADwAwCdASoQABIAPu1iqU2ppaOiMAgBMB2JQBOja/gLxZQWqTpTfA2AAP5mwleOIA3P30aQLIRqDk0sMaGnL/YVqowil3F3z0NGxUF2PhuentI2Jn/y7ITFXslyFSXnDsusOUi2i8MwsHtzQu8QGu4ywhEfSGBxe0v192nXf3TfQbFlEC10ZcrLmeueWmHr+zafggycAQfagVEaAAA="
+  },
+  "zanzibar-beach": {
+    "w": 1336,
+    "h": 1476,
+    "widths": [
+      480,
+      960,
+      1336
+    ],
+    "alt": "Turquoise water and beach huts, Zanzibar",
+    "own": true,
+    "lqip": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAACwAwCdASoQABIAPu1iqU2ppaOiMAgBMB2JQBdgAlGKBWLwj8BdxAD+l/uoTXuv5416M7C8NTkvSMGIo4Xpln/n0yIzCqlxV81DQ8OMcQPw/G4PyfTBWEMBAAA="
+  },
+  "serengeti-herds": {
+    "w": 1920,
+    "h": 1168,
+    "widths": [
+      480,
+      960,
+      1600
+    ],
+    "alt": "Serengeti National Park, Tanzania",
+    "own": false,
+    "lqip": "data:image/webp;base64,UklGRkAAAABXRUJQVlA4IDQAAADQAQCdASoQAAoAA4BaJaACdAEO0rcxAAD+W/6gNNzcY4J69e7dP5+RGp1xugBdeNvYPwAA",
+    "credit": {
+      "author": "Daniel Rosengren",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Wildebeest_Migration_in_Serengeti_National_Park,_Tanzania.jpg",
+      "title": "Wildebeest Migration in Serengeti National Park, Tanzania.jpg"
+    }
+  },
+  "serengeti-crossing": {
+    "w": 1920,
+    "h": 1368,
+    "widths": [
+      480,
+      960,
+      1600
+    ],
+    "alt": "Mara River crossing, Serengeti ecosystem",
+    "own": false,
+    "lqip": "data:image/webp;base64,UklGRlwAAABXRUJQVlA4IFAAAADwAQCdASoQAAsAA4BaJZQCdAC8QfpqGgAA/qMjwUYh4bneK3hZBwPCYsyToYXt253PuvQlwCBJ0qiZNisyg91MQt/SbKCVZqlH9DQh+j0AAA==",
+    "credit": {
+      "author": "Wolves201",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Serengeti_wildebeest_migration_JF.jpg",
+      "title": "Serengeti wildebeest migration JF.jpg"
+    }
+  },
+  "ngorongoro": {
+    "w": 1920,
+    "h": 1440,
+    "widths": [
+      480,
+      960,
+      1600
+    ],
+    "alt": "Ngorongoro Crater, Tanzania",
+    "own": false,
+    "lqip": "data:image/webp;base64,UklGRkIAAABXRUJQVlA4IDYAAADwAQCdASoQAAwAA4BaJQBOgCHYKpv48AAA/shyImTCZpsHTxpa0SCcys/w/GK40b44dMd30AA=",
+    "credit": {
+      "author": "Jerry Michalski",
+      "license": "CC BY-SA 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Ngorongoro_landscape_(crater_rim).jpg",
+      "title": "Ngorongoro landscape (crater rim).jpg"
+    }
+  },
+  "ngorongoro-elephant": {
+    "w": 1920,
+    "h": 1280,
+    "widths": [
+      480,
+      960,
+      1600
+    ],
+    "alt": "Game drive in Ngorongoro Crater, Tanzania",
+    "own": false,
+    "lqip": "data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAADQAQCdASoQAAsAA4BaJZgCdAEOpCezgAD+xfkZFcwI3dZqO+O9imAhy/Z/hkfQFyplsU1saBt2LqdtbfyQH1xxSspjum0zBwAAAA==",
+    "credit": {
+      "author": "Zenith4237",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Nature_of_Ngorongoro_Conservation_Area_(129).jpg",
+      "title": "Nature of Ngorongoro Conservation Area (129).jpg"
+    }
+  },
+  "kilimanjaro": {
+    "w": 1920,
+    "h": 1285,
+    "widths": [
+      480,
+      960,
+      1600
+    ],
+    "alt": "Mount Kilimanjaro seen across the plains",
+    "own": false,
+    "lqip": "data:image/webp;base64,UklGRk4AAABXRUJQVlA4IEIAAADQAQCdASoQAAsAA4BaJaACdACqueJ9AAD+xexvr6y/OzCR0/dCTilnJHyWbGObd7C87+vFu/D0YacXLRdzEWm3AAA=",
+    "credit": {
+      "author": "Sergey Pesterev",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Kilimanjaro_from_Amboseli.jpg",
+      "title": "Kilimanjaro from Amboseli.jpg"
+    }
+  },
+  "kilimanjaro-trek": {
+    "w": 1920,
+    "h": 1280,
+    "widths": [
+      480,
+      960,
+      1600
+    ],
+    "alt": "Giant groundsels on Mount Kilimanjaro",
+    "own": false,
+    "lqip": "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAAAQAgCdASoQAAsAA4BaJZAC7AEOeYbaU2gAAP7ts120MkyGYOqb/MJ42f3yqfQadTG2oEnF4LueuJCRC7Amlf5oG0sJ7E57Ckp1tgAAAAA=",
+    "credit": {
+      "author": "Stig Nygaard from Copenhagen, Denmark",
+      "license": "CC BY 2.5",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.5",
+      "source": "https://commons.wikimedia.org/wiki/File:Senecio_kilimanjari_Tanzania.jpg",
+      "title": "Senecio kilimanjari Tanzania.jpg"
+    }
+  },
+  "tarangire": {
+    "w": 1920,
+    "h": 1280,
+    "widths": [
+      480,
+      960,
+      1600
+    ],
+    "alt": "Elephant in Tarangire National Park, Tanzania",
+    "own": false,
+    "lqip": "data:image/webp;base64,UklGRmwAAABXRUJQVlA4IGAAAAAQAgCdASoQAAsAA4BaJQBWAMXr1ZTToT+QAP7OBQIOR1tQz6WQxeMLhZc3nVV2PnPi2eB9cDD8ijWYIr9QS0ZqJk6bygshOFhljVVJpb2s5RsU2XIhssAeCMS5+yrzgAA=",
+    "credit": {
+      "author": "Richard Mortel from Riyadh, Saudi Arabia",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Elephants,_Tarangire_National_Park_(12)_(28417034820).jpg",
+      "title": "Elephants, Tarangire National Park (12) (28417034820).jpg"
+    }
+  },
+  "ruaha": {
+    "w": 1920,
+    "h": 1280,
+    "widths": [
+      480,
+      960,
+      1600
+    ],
+    "alt": "Great Ruaha River, Ruaha National Park, Tanzania",
+    "own": false,
+    "lqip": "data:image/webp;base64,UklGRkwAAABXRUJQVlA4IEAAAADwAQCdASoQAAsAA4BaJaACdAEOq5pljgAA/lp3yISXxslG0taNVlQNRaEv4bdBNdQ7baraxATm3UsVVkZQAAAA",
+    "credit": {
+      "author": "Richard Mortel from Riyadh, Saudi Arabia",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Ruaha_River,_Ruaha_National_Park_(9)_(29028717505).jpg",
+      "title": "Ruaha River, Ruaha National Park (9) (29028717505).jpg"
+    }
+  },
+  "katavi": {
+    "w": 1920,
+    "h": 1278,
+    "widths": [
+      480,
+      960,
+      1600
+    ],
+    "alt": "Katavi National Park, Tanzania",
+    "own": false,
+    "lqip": "data:image/webp;base64,UklGRlgAAABXRUJQVlA4IEwAAADwAQCdASoQAAsAA4BaJQBOiP/wPP/HpAAA/tSb8GjF9p7yox7dDxcbtneOG6hq3qM/8grhh2osJerhTxnYP7KDCRt5zI40TmomAAAA",
+    "credit": {
+      "author": "Calle v H",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Katavi_sunset.jpg",
+      "title": "Katavi sunset.jpg"
+    }
+  },
+  "tanganyika": {
+    "w": 1920,
+    "h": 1440,
+    "widths": [
+      480,
+      960,
+      1600
+    ],
+    "alt": "Shores of Lake Tanganyika",
+    "own": false,
+    "lqip": "data:image/webp;base64,UklGRlAAAABXRUJQVlA4IEQAAACQAQCdASoQAAwAA4BaJbACdABpQmAA+T+X2iAuFeEfYXpjsX6PUgUqU7UFY5oR53r+w4epp+8giOIDoAgJGYDse5GAAA==",
+    "credit": {
+      "author": "Halidtz",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Lake_shore_in_Kagongo_Ward.jpg",
+      "title": "Lake shore in Kagongo Ward.jpg"
+    }
+  },
+  "stonetown-door": {
+    "w": 1920,
+    "h": 1280,
+    "widths": [
+      480,
+      960,
+      1600
+    ],
+    "alt": "Carved door, Stone Town, Zanzibar",
+    "own": false,
+    "lqip": "data:image/webp;base64,UklGRmoAAABXRUJQVlA4IF4AAAAwAgCdASoQAAsAA4BaJYwC7AEetCwl4qV0AAD9/gi2dOkLZMbL3oEx+yq9XJeUy9FRmFRNaMMt2Pgv/Ky33Etcku6rhpd0qL3CJ+qIDFn3UPsoEBRuerzl3nOeQAAA",
+    "credit": {
+      "author": "Eric Kilby",
+      "license": "CC BY-SA 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Door_in_the_Corner_-_Old_building_in_Zanzibar_Stone_Town.jpg",
+      "title": "Door in the Corner - Old building in Zanzibar Stone Town.jpg"
+    }
+  },
+  "stonetown-street": {
+    "w": 1920,
+    "h": 1254,
+    "widths": [
+      480,
+      960,
+      1600
+    ],
+    "alt": "Street in Stone Town, Zanzibar",
+    "own": false,
+    "lqip": "data:image/webp;base64,UklGRnAAAABXRUJQVlA4IGQAAAAwAgCdASoQAAoAA4BaJYwCdAYvrVm4yckbgAD+4mvdevu2nRz+/KHzcr9PjLNfaDfJK24NVXS1SIympNaIVrV6a7sTXW1qhlg1M2hMHg/6lyZSECEvHNQgvoAHA/tmEDhToAAA",
+    "credit": {
+      "author": "Richard Mortel from Riyadh, Saudi Arabia",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Stone_Town,_Zanzibar_(13)_(28822228250).jpg",
+      "title": "Stone Town, Zanzibar (13) (28822228250).jpg"
+    }
+  },
+  "kenya-mara": {
+    "w": 1920,
+    "h": 977,
+    "widths": [
+      480,
+      960,
+      1600
+    ],
+    "alt": "Maasai Mara National Reserve, Kenya",
+    "own": false,
+    "lqip": "data:image/webp;base64,UklGRkoAAABXRUJQVlA4ID4AAAAQAgCdASoQAAgAA4BaJbACdGuAAsy2cTrwAP7g2zvSBVH55BtDD7ZohVg1GlfsG/GEL+cq+FdTaL2GpAAAAA==",
+    "credit": {
+      "author": "Daniel Case",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Buffalo_herd_in_misty_morning_on_savanna_seen_from_balloon,_Maasai_Mara,_Kenya.jpg",
+      "title": "Buffalo herd in misty morning on savanna seen from balloon, Maasai Mara, Kenya.jpg"
+    }
+  },
+  "kenya-lion": {
+    "w": 1920,
+    "h": 1240,
+    "widths": [
+      480,
+      960,
+      1600
+    ],
+    "alt": "Lion in the Maasai Mara, Kenya",
+    "own": false,
+    "lqip": "data:image/webp;base64,UklGRkQAAABXRUJQVlA4IDgAAAAQAgCdASoQAAoAA4BaJZQAAxbHfOPp7pAAAP6ChlldRujvn50NHfSf3v4qo6mUBQp0nZhIQIEAAA==",
+    "credit": {
+      "author": "Smtunli",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Male_lion_resting_Maasai_Mara_Kenya.jpg",
+      "title": "Male lion resting Maasai Mara Kenya.jpg"
+    }
+  },
+  "uganda-gorilla": {
+    "w": 1920,
+    "h": 1280,
+    "widths": [
+      480,
+      960,
+      1600
+    ],
+    "alt": "Mountain gorilla, Bwindi, Uganda",
+    "own": false,
+    "lqip": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAADwAQCdASoQAAsAA4BaJZACw7CE00gqWgAA/tzhy41bucPuOL61wWYu3heldjE6D5t6Ot7L/V9ho5RsXuqUAoyiHB55DOyi6aGpbqqy3TU5jAAA",
+    "credit": {
+      "author": "Diego Delso",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Gorila_de_monta%C3%B1a_(Gorilla_beringei_beringei),_parque_nacional_de_la_Selva_Impenetrable_de_Bwindi,_Uganda,_2024-02-02,_DD_80.jpg",
+      "title": "Gorila de montaña (Gorilla beringei beringei), parque nacional de la Selva Impenetrable de Bwindi, Uganda, 2024-02-02, DD 80.jpg"
+    }
+  },
+  "rwanda-volcanoes": {
+    "w": 1920,
+    "h": 1280,
+    "widths": [
+      480,
+      960,
+      1600
+    ],
+    "alt": "Virunga volcanoes, Rwanda",
+    "own": false,
+    "lqip": "data:image/webp;base64,UklGRlwAAABXRUJQVlA4IFAAAAAwAgCdASoQAAsAA4BaJagCdAEPh0gd/BXAAAD2vcZzFVf7cccfU0SfS0Jf609QXKaeuSJE1umMvK5CZMvWCzH+H28PC8/AaR+hMRkQyIAAAA==",
+    "credit": {
+      "author": "Nina R",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Volcanoes_National_Park_Rwanda.jpg",
+      "title": "Volcanoes National Park Rwanda.jpg"
+    }
+  },
+  "southafrica-capetown": {
+    "w": 1920,
+    "h": 1080,
+    "widths": [
+      480,
+      960,
+      1600
+    ],
+    "alt": "Table Mountain, Cape Town, South Africa",
+    "own": false,
+    "lqip": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAABwAgCdASoQAAkAA4BaJYgCdGuAAt9Isli85rYAAM3TbDETpE2QG02M43xltO8Lxc/Rj9PBDwMDINU7RSbNsGHVUbg2MGGT1GWq/mWT2zSRLtAA",
+    "credit": {
+      "author": "Dietmar Rabich",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Cape_Town_(ZA),_Table_Mountain_--_2024_--_3437.jpg",
+      "title": "Cape Town (ZA), Table Mountain -- 2024 -- 3437.jpg"
+    }
+  },
+  "botswana-okavango": {
+    "w": 1920,
+    "h": 1149,
+    "widths": [
+      480,
+      960,
+      1600
+    ],
+    "alt": "Mokoro canoes in the Okavango Delta, Botswana",
+    "own": false,
+    "lqip": "data:image/webp;base64,UklGRkoAAABXRUJQVlA4ID4AAADQAQCdASoQAAoAA4BaJQBOgCFriQIZQAD9cIup0jnTvoENHWEdCFSNNXja6xwMAChdxpJIuah6MNW76MAAAA==",
+    "credit": {
+      "author": "Diego Delso",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Vista_a%C3%A9rea_del_delta_del_Okavango,_Botsuana,_2018-08-01,_DD_42.jpg",
+      "title": "Vista aérea del delta del Okavango, Botsuana, 2018-08-01, DD 42.jpg"
+    }
+  },
+  "namibia-sossusvlei": {
+    "w": 1920,
+    "h": 1280,
+    "widths": [
+      480,
+      960,
+      1600
+    ],
+    "alt": "Dunes of Sossusvlei, Namibia",
+    "own": false,
+    "lqip": "data:image/webp;base64,UklGRlgAAABXRUJQVlA4IEwAAADQAQCdASoQAAsAA4BaJbACdAD2AbkgAAD+5y96px685MgTMYB2/mOpzJk+tEU2WQgjHjTJWv2ku7nKVktBcSUwtV7LpcxdzNvaaYAA",
+    "credit": {
+      "author": "Giles Laurent",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:006_Dune_45_in_Sossusvlei_at_sunrise_Photo_by_Giles_Laurent.jpg",
+      "title": "006 Dune 45 in Sossusvlei at sunrise Photo by Giles Laurent.jpg"
+    }
+  },
+  "zambia-vicfalls": {
+    "w": 1920,
+    "h": 621,
+    "widths": [
+      480,
+      960,
+      1600
+    ],
+    "alt": "Victoria Falls on the Zambezi",
+    "own": false,
+    "lqip": "data:image/webp;base64,UklGRlIAAABXRUJQVlA4IEYAAAAQAgCdASoQAAUAA4BaJZQCdAEXf7QP7jUAAP3Gj8LCoZQoFfbRkvuBZLWLs1wwV6RVSjIHzcbATQph5PEIBQEF43SGoAAA",
+    "credit": {
+      "author": "Diego Delso",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Cataratas_Victoria,_Zambia-Zimbabue,_2018-07-27,_DD_30-34_PAN.jpg",
+      "title": "Cataratas Victoria, Zambia-Zimbabue, 2018-07-27, DD 30-34 PAN.jpg"
+    }
+  },
+  "zimbabwe-manapools": {
+    "w": 1920,
+    "h": 1440,
+    "widths": [
+      480,
+      960,
+      1600
+    ],
+    "alt": "Zambezi River at Mana Pools, Zimbabwe",
+    "own": false,
+    "lqip": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAABwAgCdASoQAAwAA4BaJQBOgCfc2IoipxXmAEgAAP7roDR0slSpA3vyHzl9ISFJez8OYiKRqa/aXgi0pZY+CXONy/S5JXwPMUgywDnZk2ntpHe8grtp8AAA",
+    "credit": {
+      "author": "Babakathy",
+      "license": "CC0",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "source": "https://commons.wikimedia.org/wiki/File:Island_in_the_Zambezi_River_at_Mana_Pools_National_Park.jpg",
+      "title": "Island in the Zambezi River at Mana Pools National Park.jpg"
+    }
+  },
+  "zimbabwe-greatzim": {
+    "w": 1920,
+    "h": 1080,
+    "widths": [
+      480,
+      960,
+      1600
+    ],
+    "alt": "Great Zimbabwe National Monument",
+    "own": false,
+    "lqip": "data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAADwAQCdASoQAAkAA4BaJQBdgCHwvViHemAA/uzEaH6kpp659zaEHcLkuTaZdz6G4xB8IAMd4okbEsabETXE5CYEbk/S+DUXoAA=",
+    "credit": {
+      "author": "Simonchihanga",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Great-Zimbabwe-still-standing_strong.jpg",
+      "title": "Great-Zimbabwe-still-standing strong.jpg"
+    }
+  },
+  "bali-rice": {
+    "w": 3840,
+    "h": 2560,
+    "widths": [
+      480,
+      960,
+      1600,
+      2400
+    ],
+    "alt": "Rice terraces in Tabanan Regency, Bali, Indonesia",
+    "own": false,
+    "lqip": "data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAADwAQCdASoQAAsAA4BaJbACdAEUoH7YroAA/vOuO5nvOcQaY6rzm5xZYvTXb9ZxXIBAj6oubwQi2FmoQrhtitgLS4TwEMhOhdAAAA==",
+    "credit": {
+      "author": "CEphoto, Uwe Aranas",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Tabanan-Regency_Indonesia_Rice-paddies-05.jpg",
+      "title": "Tabanan-Regency Indonesia Rice-paddies-05.jpg"
+    }
+  },
+  "bali-temple": {
+    "w": 3840,
+    "h": 2560,
+    "widths": [
+      480,
+      960,
+      1600,
+      2400
+    ],
+    "alt": "Pura Ulun Danu Bratan on Lake Bratan, Bali",
+    "own": false,
+    "lqip": "data:image/webp;base64,UklGRlwAAABXRUJQVlA4IFAAAAAwAgCdASoQAAsAA4BaJZQC7AD0SXCnIABjAAD+8hKedDPZnw7maZPCrlPngFZg1IKUItI8SVfQU90aSsa7gej3PMzzxSUHYrebXGJV18AAAA==",
+    "credit": {
+      "author": "CEphoto, Uwe Aranas",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Brantan_Bali_Pura-Ulun-Danu-Bratan-01.jpg",
+      "title": "Brantan Bali Pura-Ulun-Danu-Bratan-01.jpg"
+    }
+  },
+  "halong-bay": {
+    "w": 3840,
+    "h": 2563,
+    "widths": [
+      480,
+      960,
+      1600,
+      2400
+    ],
+    "alt": "Limestone islands of Ha Long Bay from Titov Island, Vietnam",
+    "own": false,
+    "lqip": "data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAADwAQCdASoQAAsAA4BaJYwAAp1at1Ccf0gA/uevEW3ZJh5SojjHrWA74wpsE4sWT0sznx6a+iPJxxqyriF88h2tzqzS0B7/07sAAA==",
+    "credit": {
+      "author": "Jakub Hałun",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:View_of_sea_from_Titov_Island,_Ha_Long_Bay,_Vietnam,_20240128_1337_3732.jpg",
+      "title": "View of sea from Titov Island, Ha Long Bay, Vietnam, 20240128 1337 3732.jpg"
+    }
+  },
+  "halong-boat": {
+    "w": 3840,
+    "h": 2563,
+    "widths": [
+      480,
+      960,
+      1600,
+      2400
+    ],
+    "alt": "Fishing boat near Cat Ba Island, Vietnam",
+    "own": false,
+    "lqip": "data:image/webp;base64,UklGRkAAAABXRUJQVlA4IDQAAADQAQCdASoQAAsAA4BaJbAC7AEOcP2QAAD+E9+5PSn1XU/w0O8rwl87ASZMXqP12l9VceAA",
+    "credit": {
+      "author": "Jakub Hałun",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Fisherman_boat_near_Cat_Ba_Island,_Vietnam,_20240131_1434_4709.jpg",
+      "title": "Fisherman boat near Cat Ba Island, Vietnam, 20240131 1434 4709.jpg"
+    }
+  },
+  "angkor-wat": {
+    "w": 3840,
+    "h": 2564,
+    "widths": [
+      480,
+      960,
+      1600,
+      2400
+    ],
+    "alt": "Angkor Wat reflected in the lotus pond, Cambodia",
+    "own": false,
+    "lqip": "data:image/webp;base64,UklGRk4AAABXRUJQVlA4IEIAAADQAQCdASoQAAsAA4BaJYgCdAEOuNLigAD8fJhn6VHbEBgBRCi7z4wnv86rm8D72sum3Z6ENialC5XGyYpBc4gAAAA=",
+    "credit": {
+      "author": "Satdeep Gill",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Angkor_Wat_with_its_reflection.jpg",
+      "title": "Angkor Wat with its reflection.jpg"
+    }
+  },
+  "angkor-gallery": {
+    "w": 3840,
+    "h": 2586,
+    "widths": [
+      480,
+      960,
+      1600,
+      2400
+    ],
+    "alt": "Angkor Wat, Siem Reap, Cambodia",
+    "own": false,
+    "lqip": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAAAQAgCdASoQAAsAA4BaJYgCdAEXxXEKQ1ngAP6xkhUuHsPRg0tEVAszXlRwm1BtQ9n1+tH2IxHHpZfYB8CR07DaK+UwsDR/3tNHj1N1eaheZ0gA",
+    "credit": {
+      "author": "Marcin Konsek",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:2016_Angkor,_Angkor_Wat,_Brama_Angkor_Wat_(21).jpg",
+      "title": "2016 Angkor, Angkor Wat, Brama Angkor Wat (21).jpg"
+    }
+  },
+  "petra-monastery": {
+    "w": 3840,
+    "h": 2560,
+    "widths": [
+      480,
+      960,
+      1600,
+      2400
+    ],
+    "alt": "Ad Deir (the Monastery), Petra, Jordan",
+    "own": false,
+    "lqip": "data:image/webp;base64,UklGRnIAAABXRUJQVlA4IGYAAADwAQCdASoQAAsAA4BaJZACdADO3YG6G4AA4hVlhWIeMy9TUag/M5CgWpgXovxmb4MbW1TBBeKhjOyVNKYAMhcmpN5RV/yHEFusNWQd5rrtkulpP2Twn6J2Ey2P2JxWZ5DGlCwAAAA=",
+    "credit": {
+      "author": "Diego Delso",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "source": "https://commons.wikimedia.org/wiki/File:The_Monastery,_Petra,_Jordan4.jpg",
+      "title": "The Monastery, Petra, Jordan4.jpg"
+    }
+  },
+  "wadi-rum": {
+    "w": 3840,
+    "h": 2880,
+    "widths": [
+      480,
+      960,
+      1600,
+      2400
+    ],
+    "alt": "Sandstone mountains of Wadi Rum, Jordan",
+    "own": false,
+    "lqip": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAABQAgCdASoQAAwAA4BaJbACdGuAAsTqCSqpTAAA/lXjviiaTfzgZwhH8DK5VQuRshvJjRt81RccotA2kODrXYy18thbW3e6GBT9kWH2/CHjLsqpinexTgAA",
+    "credit": {
+      "author": "Peter Chisholm",
+      "license": "CC0",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "source": "https://commons.wikimedia.org/wiki/File:Wadi_rum_desert.jpg",
+      "title": "Wadi rum desert.jpg"
+    }
+  },
+  "dubai-skyline": {
+    "w": 3840,
+    "h": 2560,
+    "widths": [
+      480,
+      960,
+      1600,
+      2400
+    ],
+    "alt": "Dubai skyline with the Burj Khalifa, UAE",
+    "own": false,
+    "lqip": "data:image/webp;base64,UklGRkoAAABXRUJQVlA4ID4AAADQAQCdASoQAAsAA4BaJZACdAEOY77AAAD+9qv8BHfGtXacnnVOsYpfltqa3JlCcpsPuWBhe4gZeYnSWCQAAA==",
+    "credit": {
+      "author": "Robert Bock",
+      "license": "CC0",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "source": "https://commons.wikimedia.org/wiki/File:Dubai_skyline_unsplash.jpg",
+      "title": "Dubai skyline unsplash.jpg"
+    }
+  },
+  "dubai-dunes": {
+    "w": 3840,
+    "h": 2659,
+    "widths": [
+      480,
+      960,
+      1600,
+      2400
+    ],
+    "alt": "Desert dunes at Al Qudra near Dubai, UAE",
+    "own": false,
+    "lqip": "data:image/webp;base64,UklGRkQAAABXRUJQVlA4IDgAAACwAQCdASoQAAsAA4BaJQBOgCHwMywAAP7zkwV/YfoqnrCgbjcnZhB+rPmmSszz3qEytqdvSgAAAA==",
+    "credit": {
+      "author": "JSPhotography2016",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Al_Qudra_Desert_Dunes.jpg",
+      "title": "Al Qudra Desert Dunes.jpg"
+    }
+  },
+  "muscat-bay": {
+    "w": 3840,
+    "h": 2560,
+    "widths": [
+      480,
+      960,
+      1600,
+      2400
+    ],
+    "alt": "Al Mirani bay and forts, Old Muscat, Oman",
+    "own": false,
+    "lqip": "data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAACwAQCdASoQAAsAA4BaJYwC7AEOYSTQAP737ppJq8uvavH4vH1r7wJv57Pged0WQUbcPQY2l5+b+xH4XJDxkpJ2QHvTBO6XAAA=",
+    "credit": {
+      "author": "Diego Delso",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Bah%C3%ADa_de_Al_Mirani,_Mascate,_Om%C3%A1n,_2024-08-14,_DD_44.jpg",
+      "title": "Bahía de Al Mirani, Mascate, Omán, 2024-08-14, DD 44.jpg"
+    }
+  },
+  "wahiba-sands": {
+    "w": 3840,
+    "h": 2560,
+    "widths": [
+      480,
+      960,
+      1600,
+      2400
+    ],
+    "alt": "Wahiba Sands desert, Oman",
+    "own": false,
+    "lqip": "data:image/webp;base64,UklGRkIAAABXRUJQVlA4IDYAAADwAQCdASoQAAsAA4BaJagCdGuAAsz1HUAA/up7NTbrQz7kV4EUZcXakA/iCVzpObX2DpgAAAA=",
+    "credit": {
+      "author": "Diego Delso",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Desierto_de_Wahiba,_Om%C3%A1n,_2024-08-17,_DD_18.jpg",
+      "title": "Desierto de Wahiba, Omán, 2024-08-17, DD 18.jpg"
+    }
+  },
+  "santorini-oia": {
+    "w": 3840,
+    "h": 2560,
+    "widths": [
+      480,
+      960,
+      1600,
+      2400
+    ],
+    "alt": "Blue domes of Oia, Santorini, Greece",
+    "own": false,
+    "lqip": "data:image/webp;base64,UklGRnIAAABXRUJQVlA4IGYAAAAQAgCdASoQAAsAA4BaJagCdAEK+/AsEoCgAPqfJxpmCgj+uqwFu/hKDJsjVsUYQAwGLS4TgCdMobuud9q4g/6Th99zDlzNHXCbmGu9jrjxD6mGfZE03lCGYMb55BpQ77ldjNAYAAA=",
+    "credit": {
+      "author": "Giles Laurent",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:1000_Three_domes_of_Oia_in_Santorini_Photo_by_Giles_Laurent.jpg",
+      "title": "1000 Three domes of Oia in Santorini Photo by Giles Laurent.jpg"
+    }
+  },
+  "bled-lake": {
+    "w": 3840,
+    "h": 2564,
+    "widths": [
+      480,
+      960,
+      1600,
+      2400
+    ],
+    "alt": "Bled Island and Bled Castle, Slovenia",
+    "own": false,
+    "lqip": "data:image/webp;base64,UklGRk4AAABXRUJQVlA4IEIAAACwAQCdASoQAAsAA4BaJQBOgCHWlnwAAP7ts2Jd5nfeU8ESXlMo1EaRp0qTcHKa4aBrlqI0MFZpMvtgrzYgQmgYgAA=",
+    "credit": {
+      "author": "Jakub Hałun",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Bled_Island_and_Bled_Castle,_Slovenia,_20240504_0906_8331.jpg",
+      "title": "Bled Island and Bled Castle, Slovenia, 20240504 0906 8331.jpg"
+    }
+  },
+  "madeira-cliffs": {
+    "w": 3840,
+    "h": 2160,
+    "widths": [
+      480,
+      960,
+      1600,
+      2400
+    ],
+    "alt": "Cabo Girão sea cliff, Madeira, Portugal",
+    "own": false,
+    "lqip": "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAACwAQCdASoQAAkAA4BaJaACdAD2E/CaAMsbfCBAxttFxPEbLR6Ykg7pfPjaC3285x/rqwYkOz3BDF6bnDnYVy1j16DvwYNGFnFDTO0QkAA=",
+    "credit": {
+      "author": "Otto Domes",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Steilklippe_Cabo_Girao_-_Madeira.jpg",
+      "title": "Steilklippe Cabo Girao - Madeira.jpg"
+    }
+  },
+  "madeira-saolourenco": {
+    "w": 3840,
+    "h": 2785,
+    "widths": [
+      480,
+      960,
+      1600,
+      2400
+    ],
+    "alt": "Ponta de São Lourenço cliffs, Madeira",
+    "own": false,
+    "lqip": "data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAADQAQCdASoQAAwAA4BaJQBOgCE8R/VSAAD5YLv5MiesXS0CJRaGFeU7zeiKUwni5XHN1O91cVmQMlotnxxGerkOFL813wpJ4AA=",
+    "credit": {
+      "author": "Ввласенко",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Cliffs_of_S%C3%A3o_Louren%C3%A7o._View_from_Porto_da_Cruz._Madeira,_Portugal.jpg",
+      "title": "Cliffs of São Lourenço. View from Porto da Cruz. Madeira, Portugal.jpg"
+    }
+  },
+  "logo-katavi-fahari": {
+    "w": 376,
+    "h": 352,
+    "widths": [
+      160,
+      320
+    ],
+    "alt": "",
+    "own": true,
+    "lqip": ""
+  },
+  "logo-mpanda-safaris": {
+    "w": 352,
+    "h": 352,
+    "widths": [
+      160,
+      320
+    ],
+    "alt": "",
+    "own": true,
+    "lqip": ""
+  },
+  "pano-table_mountain_1": {
+    "w": 3277,
+    "h": 1638,
+    "widths": [
+      480,
+      960,
+      1600
+    ],
+    "alt": "Table Mountain 1",
+    "own": false,
+    "lqip": "data:image/webp;base64,UklGRkIAAABXRUJQVlA4IDYAAACwAQCdASoQAAgAA4BaJZwAAvd8a25wAP6xlV9vF29T91336gQmSBCoEh4BOW90y6oA3h8ZAAA=",
+    "credit": {
+      "author": "Greg Zaal, Rico Cilliers",
+      "license": "CC0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "source": "https://polyhaven.com/a/table_mountain_1",
+      "title": "Table Mountain 1"
+    }
+  },
+  "pano-mpumalanga_veld": {
+    "w": 3277,
+    "h": 1638,
+    "widths": [
+      480,
+      960,
+      1600
+    ],
+    "alt": "Mpumalanga Veld",
+    "own": false,
+    "lqip": "data:image/webp;base64,UklGRkwAAABXRUJQVlA4IEAAAADwAQCdASoQAAgAA4BaJYgCdAEKv+85OIAA/vUFUNWm54hgBE8P1ydrjWhnbinM7FS4IQ15czWLwevujhpGsAAA",
+    "credit": {
+      "author": "Greg Zaal",
+      "license": "CC0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "source": "https://polyhaven.com/a/mpumalanga_veld",
+      "title": "Mpumalanga Veld"
+    }
+  },
+  "pano-drakensberg_solitary_mountain": {
+    "w": 3277,
+    "h": 1638,
+    "widths": [
+      480,
+      960,
+      1600
+    ],
+    "alt": "Drakensberg Solitary Mountain",
+    "own": false,
+    "lqip": "data:image/webp;base64,UklGRkgAAABXRUJQVlA4IDwAAADwAQCdASoQAAgAA4BaJYgCdAEf3FI5alwA/I8GBfXf40sGFbRKEEh3VX0jdZnvDbhukcsBF2iN+L8AAAA=",
+    "credit": {
+      "author": "Dimitrios Savva, Jarod Guest",
+      "license": "CC0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "source": "https://polyhaven.com/a/drakensberg_solitary_mountain",
+      "title": "Drakensberg Solitary Mountain"
+    }
+  },
+  "pano-sabie_tent": {
+    "w": 3277,
+    "h": 1638,
+    "widths": [
+      480,
+      960,
+      1600
+    ],
+    "alt": "Sabie Tent",
+    "own": false,
+    "lqip": "data:image/webp;base64,UklGRkoAAABXRUJQVlA4ID4AAADQAQCdASoQAAgAA4BaJZwAAl1ttTjFpAD+t5k9Tn6ezLgxDaXp3ZsVnwSVT3+lwT558D7TP5gGF5FwItAAAA==",
+    "credit": {
+      "author": "Greg Zaal",
+      "license": "CC0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "source": "https://polyhaven.com/a/sabie_tent",
+      "title": "Sabie Tent"
+    }
+  },
+  "pano-amphitheatre_zanzibar_fort": {
+    "w": 3277,
+    "h": 1638,
+    "widths": [
+      480,
+      960,
+      1600
+    ],
+    "alt": "Amphitheatre Zanzibar Fort",
+    "own": false,
+    "lqip": "data:image/webp;base64,UklGRkYAAABXRUJQVlA4IDoAAACwAQCdASoQAAgAA4BaJZwAAxbEvR7AAP5BM1Pmq7Vz1Dqr5U1NorVQDjVT2iijFlBTDASF13TAgAAA",
+    "credit": {
+      "author": "Dimitrios Savva, Jarod Guest",
+      "license": "CC0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "source": "https://polyhaven.com/a/amphitheatre_zanzibar_fort",
+      "title": "Amphitheatre Zanzibar Fort"
+    }
+  },
+  "pano-wadi_rum_night": {
+    "w": 3200,
+    "h": 1600,
+    "widths": [
+      480,
+      960,
+      1600
+    ],
+    "alt": "Night Panorama in Wadi Rum",
+    "own": false,
+    "lqip": "data:image/webp;base64,UklGRkAAAABXRUJQVlA4IDQAAACwAQCdASoQAAgAA4BaJZQAAudenftAAP73nn+NyBVg5B9rgZKUqh6M22NrZQwTXPlOHkAA",
+    "credit": {
+      "author": "Faraheed",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Night_Panorama_in_Wadi_Rum.jpg",
+      "title": "Night Panorama in Wadi Rum"
+    }
+  },
+  "pano-santorini_imerovigli": {
+    "w": 1536,
+    "h": 768,
+    "widths": [
+      480,
+      960,
+      1600
+    ],
+    "alt": "Imerovigli Panoramic 360 View - Santorini",
+    "own": false,
+    "lqip": "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAAAQAgCdASoQAAgAA4BaJbACdAD5NJ1T3IAAAOJhaFMZpE+x5FPb8tPtQzd0Xvvjs/49ZmmXdYKtpT3w6OU995L1JQaLD6fC5v+CFrDBnnOOs8ZEAAA=",
+    "credit": {
+      "author": "Anna Tsolidou",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Imerovigli_Panoramic_360_View_-_Santorini.jpg",
+      "title": "Imerovigli Panoramic 360 View - Santorini"
+    }
+  },
+  "video-bled-timelapse": {
+    "w": 819,
+    "h": 410,
+    "widths": [
+      480,
+      800
+    ],
+    "alt": "Video 360°. Timelapse. Bled Lake in Slovenia.",
+    "own": false,
+    "lqip": "data:image/webp;base64,UklGRlAAAABXRUJQVlA4IEQAAAAQAgCdASoQAAgAA4BaJYwCdAEU3QEkXB3AAP7Zqjxf2fku+QQF8hdRX8uGHaJdFZHotjswEWlpymf8MbfXEvyyMUMAAA==",
+    "credit": {
+      "author": "Fabio Casati",
+      "license": "CC BY 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Video_360%C2%B0._Timelapse._Bled_Lake_in_Slovenia..webm",
+      "title": "Video 360°. Timelapse. Bled Lake in Slovenia."
+    }
+  },
+  "video-madeira-cabo-girao": {
+    "w": 768,
+    "h": 384,
+    "widths": [
+      480,
+      768
+    ],
+    "alt": "Não veja este video 360 se tiver vertigens! Madeira - Cabo Girão",
+    "own": false,
+    "lqip": "data:image/webp;base64,UklGRkoAAABXRUJQVlA4ID4AAADQAQCdASoQAAgAA4BaJQBOgCHUoo6TAAD+shOK77SuG9oorXT4Rd99ltMYqYkT7jzWE58UZfbjyozz3gsAAA==",
+    "credit": {
+      "author": "Vasco Marques",
+      "license": "CC BY 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+      "source": "https://commons.wikimedia.org/wiki/File:N%C3%A3o_veja_este_video_360_se_tiver_vertigens!_Madeira_-_Cabo_Gir%C3%A3o.webm",
+      "title": "Não veja este video 360 se tiver vertigens! Madeira - Cabo Girão"
+    }
+  }
+}

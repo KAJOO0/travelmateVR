@@ -1,0 +1,79 @@
+{
+  "table_mountain_1": {
+    "name": "Table Mountain 1",
+    "author": "Greg Zaal, Rico Cilliers",
+    "source": "https://polyhaven.com/a/table_mountain_1",
+    "license": "CC0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "widths": [
+      2048,
+      4096
+    ]
+  },
+  "mpumalanga_veld": {
+    "name": "Mpumalanga Veld",
+    "author": "Greg Zaal",
+    "source": "https://polyhaven.com/a/mpumalanga_veld",
+    "license": "CC0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "widths": [
+      2048,
+      4096
+    ]
+  },
+  "drakensberg_solitary_mountain": {
+    "name": "Drakensberg Solitary Mountain",
+    "author": "Dimitrios Savva, Jarod Guest",
+    "source": "https://polyhaven.com/a/drakensberg_solitary_mountain",
+    "license": "CC0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "widths": [
+      2048,
+      4096
+    ]
+  },
+  "sabie_tent": {
+    "name": "Sabie Tent",
+    "author": "Greg Zaal",
+    "source": "https://polyhaven.com/a/sabie_tent",
+    "license": "CC0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "widths": [
+      2048,
+      4096
+    ]
+  },
+  "amphitheatre_zanzibar_fort": {
+    "name": "Amphitheatre Zanzibar Fort",
+    "author": "Dimitrios Savva, Jarod Guest",
+    "source": "https://polyhaven.com/a/amphitheatre_zanzibar_fort",
+    "license": "CC0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "widths": [
+      2048,
+      4096
+    ]
+  },
+  "wadi_rum_night": {
+    "name": "Night Panorama in Wadi Rum",
+    "author": "Faraheed",
+    "source": "https://commons.wikimedia.org/wiki/File:Night_Panorama_in_Wadi_Rum.jpg",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "widths": [
+      2048,
+      4096
+    ]
+  },
+  "santorini_imerovigli": {
+    "name": "Imerovigli Panoramic 360 View - Santorini",
+    "author": "Anna Tsolidou",
+    "source": "https://commons.wikimedia.org/wiki/File:Imerovigli_Panoramic_360_View_-_Santorini.jpg",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "widths": [
+      2048,
+      4096
+    ]
+  }
+}

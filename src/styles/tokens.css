@@ -1,0 +1,115 @@
+/* TravelMateVR design tokens.
+   Dark is the canonical theme (from "TravelMate Page Design"); light is derived from the same blues. */
+
+:root,
+:root[data-theme='dark'] {
+  --bg: #0f2c3f;
+  --panel: #0c2638;
+  --panel-2: #174a69;
+  --panel-line: #2b7fb5;
+  --frame: #3791c7;
+  --heading: #d1e9ff;
+  --ink: #ffffff;
+  --muted: #b6d0e4;
+  --accent: #0079c1;
+  --accent-bright: #00a6f4;
+  --accent-ink: #ffffff;
+  --accent-soft: rgba(0, 121, 193, 0.24);
+  --ring: #00a6f4;
+  --pill: #ffffff;
+  --pill-ink: #111111;
+  --glass: rgba(255, 255, 255, 0.07);
+  --glass-hover: rgba(255, 255, 255, 0.16);
+  --glass-line: rgba(255, 255, 255, 0.3);
+  --stroke: rgba(255, 255, 255, 0.5);
+  --stroke-hover: rgba(255, 255, 255, 0.85);
+  --dot: rgba(255, 255, 255, 0.3);
+  --link: #00a6f4;
+  --success: #3ccf91;
+  --warning: #ffc46b;
+  --danger: #ff8a7a;
+  --eco: #7fdc9b;
+  --blob-1: rgba(45, 102, 135, 0.95);
+  --blob-2: rgba(41, 93, 125, 0.9);
+  --blob-3: rgba(29, 71, 97, 0.9);
+  --shadow: none;
+  --shadow-pop: 0 18px 50px rgba(0, 0, 0, 0.45);
+  --band: linear-gradient(100deg, #005b94 0%, #0079c1 100%);
+  --band-ink: #ffffff;
+  --band-muted: #e3f0fd;
+  --band-btn: #040506;
+  --skeleton: rgba(255, 255, 255, 0.08);
+  --logo-ink: #ffffff;
+  color-scheme: dark;
+}
+
+:root[data-theme='light'] {
+  --bg: #f2f7fb;
+  --panel: #ffffff;
+  --panel-2: #e2f0fa;
+  --panel-line: #c3d9ea;
+  --frame: #3791c7;
+  --heading: #0b2d47;
+  --ink: #0c1e2c;
+  --muted: #4a6274;
+  --accent: #0079c1;
+  --accent-bright: #0079c1;
+  --accent-ink: #ffffff;
+  --accent-soft: rgba(0, 121, 193, 0.12);
+  --ring: #0079c1;
+  --pill: #ffffff;
+  --pill-ink: #111111;
+  --glass: rgba(15, 44, 63, 0.04);
+  --glass-hover: rgba(15, 44, 63, 0.09);
+  --glass-line: rgba(15, 44, 63, 0.2);
+  --stroke: rgba(15, 44, 63, 0.42);
+  --stroke-hover: rgba(15, 44, 63, 0.82);
+  --dot: rgba(15, 44, 63, 0.22);
+  --link: #006aa9;
+  --success: #12825a;
+  --warning: #9a5b00;
+  --danger: #b4321f;
+  --eco: #1d7a43;
+  --blob-1: rgba(0, 121, 193, 0.1);
+  --blob-2: rgba(55, 145, 199, 0.1);
+  --blob-3: rgba(0, 121, 193, 0.07);
+  --shadow: 0 1px 2px rgba(12, 30, 44, 0.06), 0 8px 24px rgba(12, 30, 44, 0.06);
+  --shadow-pop: 0 18px 50px rgba(12, 30, 44, 0.18);
+  --band: linear-gradient(100deg, #005b94 0%, #0079c1 100%);
+  --band-ink: #ffffff;
+  --band-muted: #e3f0fd;
+  --band-btn: #040506;
+  --skeleton: rgba(15, 44, 63, 0.08);
+  --logo-ink: #111111;
+  color-scheme: light;
+}
+
+:root {
+  /* Text on photography is always light, in both themes. */
+  --on-media: #ffffff;
+  --on-media-muted: #d3e4f5;
+  --media-scrim: linear-gradient(0deg, rgba(3, 12, 28, 0.92) 0%, rgba(3, 12, 28, 0.72) 38%, rgba(3, 12, 28, 0.2) 70%, rgba(3, 12, 28, 0) 88%);
+
+  --word-gap: clamp(1.1rem, 4vw, 3.6rem);
+  --font: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+
+  /* Type scale (from the approved design) */
+  --fs-display: clamp(28px, 3.4vw, 48px);
+  --fs-h1: clamp(26px, 2.9vw, 40px);
+  --fs-h2: clamp(20px, 2vw, 28px);
+  --fs-h3: clamp(17px, 1.7vw, 24px);
+  --fs-h4: clamp(17px, 1.45vw, 20px);
+  --fs-body: 16px;
+  --fs-small: clamp(12px, 0.9vw, 13px);
+  --fs-btn: clamp(13px, 1vw, 15px);
+
+  --r-sm: 12px;
+  --r-md: 22px;
+  --r-lg: clamp(20px, 2.4vw, 30px);
+  --r-xl: clamp(22px, 3vw, 34px);
+  --gutter: clamp(16px, 2.6vw, 32px);
+  --maxw: 1240px;
+  --header-h: 64px;
+  --bottom-nav-h: 0px;
+  --ease: cubic-bezier(0.22, 0.8, 0.2, 1);
+}

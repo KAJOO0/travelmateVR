@@ -1,0 +1,425 @@
+{
+  "title": "我的旅伴",
+  "hello": "您好，{{name}}",
+  "helloGuest": "欢迎来到我的旅伴",
+  "guestNote": "您正以访客身份使用 TravelMateVR。所有内容都保存在此设备上；登录后可保存到您的账户。",
+  "nav": {
+    "overview": "概览",
+    "trips": "我的行程",
+    "bookings": "预订",
+    "wishlist": "心愿单",
+    "itineraries": "日程",
+    "reviews": "评价",
+    "messages": "消息",
+    "notifications": "通知",
+    "documents": "文件",
+    "preferences": "旅行偏好",
+    "security": "隐私与安全"
+  },
+  "overview": {
+    "upcoming": "即将出行",
+    "openControl": "打开行程控制中心",
+    "recent": "最新通知",
+    "allNotifications": "全部通知"
+  },
+  "bookings": {
+    "title": "预订",
+    "text": "所有预订集中一处，确认函、收据和二维码均可离线查看。",
+    "filter": "筛选预订",
+    "f": {
+      "all": "全部",
+      "upcoming": "即将出行",
+      "pending": "等待确认",
+      "completed": "已完成",
+      "cancelled": "已取消"
+    },
+    "manage": "管理",
+    "emptyTitle": "这里还没有预订",
+    "emptyText": "预订住宿、游猎或体验后，会显示在这里。",
+    "browse": "浏览市场"
+  },
+  "wishlist": {
+    "title": "心愿单",
+    "text": "您收藏的目的地、体验和地点，按收藏夹整理。",
+    "allSaved_other": "全部收藏（{{count}}）",
+    "collections": "收藏夹",
+    "newCollection": "新建收藏夹",
+    "collectionName": "收藏夹名称",
+    "collectionPh": "例如：蜜月灵感",
+    "create": "创建",
+    "deleteCollection": "删除收藏夹",
+    "inCollection": "添加到收藏夹或从中移除",
+    "type": "类型",
+    "k": {
+      "all": "全部",
+      "destination": "目的地",
+      "experience": "体验",
+      "stay": "住宿",
+      "safari": "游猎",
+      "activity": "活动",
+      "restaurant": "餐厅",
+      "event": "活动赛事"
+    },
+    "emptyTitle": "还没有收藏",
+    "emptyText": "点击任意目的地、体验或商品上的爱心，即可收藏到这里。"
+  },
+  "notifications": {
+    "title": "通知",
+    "tab": {
+      "all": "全部",
+      "unread": "未读",
+      "settings": "设置"
+    },
+    "markAll": "全部标为已读",
+    "markRead": "标为已读",
+    "markUnread": "标为未读",
+    "delete": "删除通知",
+    "emptyTitle": "已全部查看",
+    "emptyText": "预订更新、行程提醒和提示将显示在这里。",
+    "settingsText": "选择每类更新的通知方式。",
+    "type": "类型",
+    "channelsNote": "账户连接后将开通电子邮件、短信、WhatsApp 和推送通知。在此预览版中，通知仅在应用内显示。",
+    "kind": {
+      "booking": "预订更新",
+      "reminder": "行程提醒",
+      "itinerary": "日程变更",
+      "partner": "合作伙伴消息",
+      "promotion": "优惠",
+      "price": "价格提醒",
+      "alert": "旅行提示",
+      "ai": "AI 建议",
+      "support": "客服"
+    }
+  },
+  "channel": {
+    "inapp": "应用内",
+    "email": "电子邮件",
+    "sms": "短信",
+    "whatsapp": "WhatsApp",
+    "push": "推送"
+  },
+  "prefs": {
+    "intro": "这些偏好将影响 AI 旅伴的方案和您的推荐内容，并保存在此设备上。",
+    "interests": "兴趣",
+    "budget": "预算水平",
+    "style": "旅行方式",
+    "pace": "节奏",
+    "destinations": "梦想目的地",
+    "noPreference": "无偏好",
+    "adventure": "冒险程度",
+    "luxury": "舒适程度",
+    "sustainability": "优先选择可持续和社区主导的选项",
+    "accessibility": "无障碍需求",
+    "consent": "个性化我的推荐",
+    "consentHint": "您可以随时关闭。我们绝不出售您的数据。",
+    "reset": "重置偏好",
+    "saved": "偏好已保存。",
+    "styles": {
+      "independent": "自由行",
+      "guided": "跟团",
+      "mixed": "两者结合"
+    },
+    "paces": {
+      "relaxed": "悠闲",
+      "balanced": "适中",
+      "packed": "紧凑"
+    },
+    "access": {
+      "stepFree": "无台阶通道",
+      "lowMobility": "行走不便",
+      "visual": "视力障碍",
+      "hearing": "听力障碍",
+      "dietary": "饮食需求"
+    }
+  },
+  "docs": {
+    "yours": "您的旅行文件",
+    "add": "添加文件",
+    "typeLabel": "文件类型",
+    "label": "名称",
+    "labelPh": "例如：护照（Amina）",
+    "last4": "号码后 4 位",
+    "last4Hint": "可选。我们从不存储完整的证件号码。",
+    "expiry": "有效期至",
+    "trip": "关联行程",
+    "noTrip": "无行程",
+    "file": "文件（可选）",
+    "fileHint": "文件仅保留在此浏览器标签页中，不会上传。",
+    "expires": "{{date}}到期",
+    "expiringSoon": "即将到期",
+    "remove": "移除{{name}}",
+    "open": "打开",
+    "confirmations": "预订确认",
+    "security": "请妥善保存重要文件的副本，出行时携带原件。",
+    "emptyTitle": "还没有文件",
+    "emptyText": "添加护照、签证、保险或疫苗接种信息，与您的行程放在一起。",
+    "type": {
+      "passport": "护照",
+      "visa": "签证",
+      "ticket": "票据",
+      "insurance": "旅行保险",
+      "vaccination": "疫苗接种证明",
+      "other": "其他"
+    }
+  },
+  "reviews": {
+    "title": "评价",
+    "count_other": "{{count}} 条评价",
+    "sort": "评价排序",
+    "recent": "最新",
+    "high": "评分最高",
+    "low": "评分最低",
+    "emptyTitle": "暂无评价",
+    "emptyText": "评价来自通过 TravelMateVR 预订的旅客。",
+    "write": "写评价",
+    "writeFor": "评价{{name}}",
+    "yourRating": "您的评分",
+    "stars_other": "{{count}} 星",
+    "name": "评价显示的名字",
+    "text": "您的评价",
+    "submit": "提交评价",
+    "thanks": "谢谢！您的评价将在审核后显示。",
+    "errRating": "请选择评分。",
+    "errText": "请至少写 20 个字符。",
+    "moderation": "只有完成预订的旅客才能评价。每条评价在发布前都会经过审核。",
+    "yours": "您的评价",
+    "awaiting": "等待您评价",
+    "pendingModeration": "审核中",
+    "noneTitle": "暂无待写评价",
+    "noneText": "预订完成后，您可以在这里评价。",
+    "responseFrom": "{{partner}} 的回复",
+    "paused": "新评价功能暂时暂停，请稍后再试。",
+    "published": "已发布",
+    "rejected": "未发布（不符合评价准则）"
+  },
+  "messages": {
+    "emptyTitle": "还没有消息",
+    "emptyText": "与合作伙伴的对话从商品或预订页面开始。",
+    "write": "写消息",
+    "send": "发送",
+    "whatsapp": "您好，我想咨询我在 TravelMateVR 上与 {{partner}} 的对话。",
+    "note": "在此预览版中，消息保存在此设备上。您也可以通过以下渠道联系我们：",
+    "conversations": "对话",
+    "you": "你",
+    "back": "全部对话",
+    "booking": "预订 {{id}}",
+    "pick": "选择一个对话进行查看。"
+  },
+  "thread": {
+    "started": "对话已开始。合作伙伴通常会在其标注的响应时间内回复。",
+    "autoAck": "自动回复：合作伙伴已收到您的消息，将尽快答复。"
+  },
+  "security": {
+    "signedInAs": "已通过{{provider}}以 {{email}} 登录。",
+    "emailPassword": "电子邮箱和密码",
+    "notSignedIn": "您尚未登录。",
+    "signin": "登录",
+    "signOut": "退出登录",
+    "signedOut": "您已退出登录。",
+    "p1": "密码从不以明文保存，仅保存加盐哈希。",
+    "p2": "付款由符合 PCI 标准的支付合作伙伴处理。",
+    "p3": "您的数据在传输过程中经过加密。",
+    "devices": "设备",
+    "current": "当前设备",
+    "thisBrowser": "此浏览器",
+    "thisPhone": "此手机",
+    "privacy": "您的数据",
+    "privacyText": "下载 TravelMateVR 在此设备上存储的数据副本，或将其删除。",
+    "export": "下载我的数据",
+    "erase": "删除我的数据",
+    "eraseText": "这将从此设备上删除行程、预订、偏好、文件和消息，且无法撤销。",
+    "eraseConfirm": "全部删除"
+  },
+  "signin": {
+    "welcome": "欢迎回来",
+    "create": "创建账户",
+    "why": "在所有设备上集中管理您的行程、预订和心愿单。",
+    "google": "使用 Google 继续",
+    "or": "或",
+    "name": "姓名",
+    "password": "密码",
+    "passwordHint": "使用 8–128 个字符。",
+    "errPassword": "请使用 8–128 个字符。",
+    "working": "请稍候…",
+    "register": "创建账户",
+    "noAccount": "第一次使用 TravelMateVR？",
+    "haveAccount": "已有账户？",
+    "already": "您已以 {{email}} 登录。",
+    "demo": "预览版登录：正式服务上线前，账户仅在此设备上模拟。密码仅以安全哈希形式保存。请勿使用真实密码。",
+    "terms": "继续即表示您同意我们的",
+    "partner": "您是旅游企业吗？成为合作伙伴",
+    "photoAlt": "一队游猎导游站在他们的车旁",
+    "identifier": "邮箱或用户名",
+    "username": "用户名（可选）",
+    "usernameHint": "3–30 个字符：字母、数字、点、下划线或连字符。",
+    "errIdentifier": "请输入邮箱地址或用户名。",
+    "errUsername": "请使用 3–30 个字母、数字、点、下划线或连字符。",
+    "errCredentials": "邮箱、用户名或密码不正确。",
+    "attemptsLeft_other": "再尝试 {{count}} 次失败后，登录将被暂停。",
+    "locked": "登录失败次数过多。为保障您的安全，登录已暂停至 {{time}}。",
+    "errRegister": "无法使用这些信息创建账户。如果您已有账户，请直接登录。",
+    "errGeneric": "出现问题，请重试。"
+  },
+  "help": {
+    "title": "帮助中心",
+    "text": "解答预订、付款、VR 和行程相关问题，需要时有真人为您服务。",
+    "search": "搜索帮助文章",
+    "faq": "常见问题",
+    "noResults": "未找到答案",
+    "noResultsText": "请换个说法，或联系我们的团队。",
+    "ai": "询问 AI 旅伴",
+    "aiText": "即时解答目的地、季节和规划问题。",
+    "human": "联系人工客服",
+    "humanText": "发送邮件至 {{email}} 或致电 {{phone}}。",
+    "whatsapp": "WhatsApp 联系我们",
+    "waMessage": "您好 TravelMateVR，我需要帮助。",
+    "contact": "联系我们",
+    "open": "提交支持请求",
+    "yourTickets": "您的支持请求"
+  },
+  "faq": {
+    "booking": {
+      "title": "预订",
+      "q1": "如何预订住宿或体验？",
+      "a1": "打开商品，选择日期和人数，添加附加项目并按步骤操作。付款前会显示含税费的完整价格。",
+      "q2": "即时预订和申请预订有什么区别？",
+      "a2": "即时预订会立即确认。申请预订需合作伙伴先确认是否有空位，确认前不会扣款。",
+      "q3": "在哪里找到预订确认？",
+      "a3": "在“预订”和行程控制中心中。每笔预订都有编号、收据和二维码，可离线打开。"
+    },
+    "payment": {
+      "title": "付款",
+      "q1": "可以使用哪些付款方式？",
+      "a1": "在坦桑尼亚，你可以使用 M-Pesa、Airtel Money、Mixx by Yas、HaloPesa，或任何银行的 Visa、Mastercard 卡付款。价格以美元显示，移动支付会附带先令参考金额。",
+      "q2": "可以支付定金吗？",
+      "a2": "符合条件的预订可以先付定金，余款稍后在预订页面支付。",
+      "q3": "有隐藏费用吗？",
+      "a3": "没有。显示的总价已包含税费、TravelMateVR 服务费及任何保护捐助。"
+    },
+    "cancel": {
+      "title": "取消与退款",
+      "q1": "如何取消预订？",
+      "a1": "打开预订并选择“取消预订”。确认前会显示具体退款金额。",
+      "q2": "可以退回多少？",
+      "a2": "取决于商品的取消政策：灵活、适中或严格。",
+      "q3": "退款需要多长时间？",
+      "a3": "退款将退回原付款方式，通常需 5–10 个工作日，视服务商而定。"
+    },
+    "vr": {
+      "title": "360° 与 VR",
+      "q1": "需要 VR 头显吗？",
+      "a1": "不需要。所有体验都可在手机或电脑上使用。在 Meta Quest 浏览器等 WebXR 浏览器中使用头显可获得完全沉浸感。",
+      "q2": "360° 和全景预览有什么区别？",
+      "a2": "360° 体验是完整的球形实景。全景预览会平移展示一张宽幅照片，直到我们完成该地点的 360° 拍摄。",
+      "q3": "查看器很慢怎么办？",
+      "a3": "360° 图片较大。请尝试更稳定的网络；加载后，最近浏览的体验会保留以供离线使用。"
+    },
+    "ai": {
+      "title": "AI 旅伴",
+      "q1": "AI 旅伴如何规划行程？",
+      "a1": "它根据您的需求和保存的偏好，从我们的目录中匹配目的地、住宿和活动，并解释选择理由。",
+      "q2": "AI 给出的价格是最终价格吗？",
+      "a2": "不是，只是估算。预订每个项目时会显示准确价格。",
+      "q3": "可以修改 AI 方案吗？",
+      "a3": "可以。在对话中提出修改，或保存方案后在行程编辑器中逐日调整。"
+    },
+    "account": {
+      "title": "账户与隐私",
+      "q1": "需要注册账户吗？",
+      "a1": "您可以以访客身份探索、规划和预订。注册账户后，行程和预订可在多设备间同步。",
+      "q2": "我的数据如何使用？",
+      "a2": "仅用于提供预订服务，以及在您同意时个性化推荐。我们绝不出售个人数据。",
+      "q3": "如何删除我的数据？",
+      "a3": "前往“我的旅伴 › 隐私与安全”下载或删除您的数据。"
+    },
+    "partners": {
+      "title": "合作伙伴",
+      "q1": "TravelMateVR 的合作伙伴有哪些？",
+      "a1": "本地运营商、旅舍、导游和社区企业。创始合作伙伴和认证合作伙伴会在其商品上标注。",
+      "q2": "“示例商品”是什么意思？",
+      "a2": "示例商品是虚构的商家，用于在合作伙伴入驻期间展示市场的运作方式。",
+      "q3": "我的企业如何加入？",
+      "a3": "访问“合作伙伴”页面提交申请。我们的团队会在商品上线前审核每份申请。"
+    },
+    "safety": {
+      "title": "安全",
+      "q1": "在哪里查看紧急信息？",
+      "a1": "每个目的地页面和行程控制中心都显示当地紧急电话和实用安全建议。",
+      "q2": "旅途中能联系 TravelMateVR 吗？",
+      "a2": "可以，通过 WhatsApp、电话或电子邮件。提交支持请求时请注明您的预订编号。",
+      "q3": "入境要求是最新的吗？",
+      "a3": "我们会定期核查，但规定可能变化。出行前请务必向官方政府渠道确认。"
+    }
+  },
+  "contact": {
+    "title": "联系我们",
+    "text": "我们位于坦桑尼亚姆贝亚的团队，随时为您提供预订、行程和合作方面的帮助。",
+    "email": "电子邮件",
+    "phone": "电话",
+    "office": "办公地址",
+    "write": "给我们留言"
+  },
+  "ticket": {
+    "topicLabel": "主题",
+    "topic": {
+      "booking": "预订",
+      "payment": "付款",
+      "trip": "旅途中",
+      "account": "账户",
+      "partner": "合作伙伴",
+      "other": "其他"
+    },
+    "booking": "相关预订",
+    "noBooking": "与预订无关",
+    "subject": "标题",
+    "message": "我们能为您做些什么？",
+    "errMessage": "请至少用 10 个字符描述您的问题。",
+    "response": "我们通常在一个工作日内回复。",
+    "send": "发送请求",
+    "sending": "发送中…",
+    "notFound": "未找到该支持请求",
+    "team": "TravelMateVR 客服",
+    "reply": "回复",
+    "closed": "此请求已关闭。如需更多帮助，请提交新请求。",
+    "close": "关闭请求",
+    "whatsapp": "您好 TravelMateVR，我想跟进支持请求 {{id}}。",
+    "autoAck": "谢谢，我们已收到您的请求。TravelMateVR 团队通常会在几小时内回复。旅途中如需紧急帮助，请通过 WhatsApp 联系我们。"
+  },
+  "notif": {
+    "welcome": {
+      "title": "欢迎使用 TravelMateVR",
+      "body": "设置您的旅行偏好，获取更个性化的推荐。"
+    },
+    "ticket": {
+      "title": "已收到支持请求 {{id}}",
+      "body": "“{{subject}}”：我们将在一个工作日内回复。"
+    },
+    "requested": {
+      "title": "预订请求已发送"
+    },
+    "booked": {
+      "title": "预订已确认",
+      "body": "{{title}} · 预订 {{id}}"
+    },
+    "paid": {
+      "title": "已收到付款",
+      "body": "已收到您为预订 {{id}} 支付的款项。"
+    },
+    "cancelled": {
+      "title": "预订 {{id}} 已取消",
+      "body": "退款：{{amount}}。"
+    },
+    "partnerConfirmed": {
+      "title": "合作伙伴已确认预订 {{id}}",
+      "body": "您的请求已被接受。打开预订完成付款并获取确认函。"
+    },
+    "partnerDeclined": {
+      "title": "预订请求 {{id}} 被拒绝",
+      "body": "合作伙伴无法在这些日期接待您。已支付的款项将全额退还。"
+    },
+    "ticketReply": {
+      "title": "请求 {{id}} 有新回复",
+      "body": "TravelMateVR 团队已回复您的支持请求。"
+    }
+  }
+}

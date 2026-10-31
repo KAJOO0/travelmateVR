@@ -2,49 +2,33 @@
 logs
 *.log
 npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
 
 node_modules
 dist
 dist-ssr
+dev-dist
+.vite
 *.local
-
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
-.DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
-
 .env
-# Logs
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
+.env.*
+!.env.example
 
-node_modules
-dist
-dist-ssr
-*.local
-
-# Editor directories and files
+# Editor
 .vscode/*
 !.vscode/extensions.json
 .idea
 .DS_Store
 *.suo
-*.ntvs*
-*.njsproj
-*.sln
 *.sw?
+
+# 360-degree originals (large - see assets-src/pano/credits.json for sources)
+assets-src/pano/*.jpg
+
+# 360-degree video originals (download URLs in assets-src/video360/credits.json)
+assets-src/video360/*.webm
+
+# Local preview tunnel (cloudflared binary and log)
+.tunnel/
+
+# Netlify site link (local)
+.netlify/

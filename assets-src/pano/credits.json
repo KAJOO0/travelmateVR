@@ -1,0 +1,74 @@
+{
+  "table_mountain_1": {
+    "license": "CC0",
+    "source": "https://polyhaven.com/a/table_mountain_1",
+    "name": "Table Mountain 1",
+    "authors": "Greg Zaal, Rico Cilliers",
+    "coords": [
+      -33.958547,
+      18.405612
+    ]
+  },
+  "mpumalanga_veld": {
+    "license": "CC0",
+    "source": "https://polyhaven.com/a/mpumalanga_veld",
+    "name": "Mpumalanga Veld",
+    "authors": "Greg Zaal",
+    "coords": [
+      -24.889112,
+      30.876935
+    ]
+  },
+  "drakensberg_solitary_mountain": {
+    "license": "CC0",
+    "source": "https://polyhaven.com/a/drakensberg_solitary_mountain",
+    "name": "Drakensberg Solitary Mountain",
+    "authors": "Dimitrios Savva, Jarod Guest",
+    "coords": [
+      -28.94226,
+      29.32537
+    ]
+  },
+  "sabie_tent": {
+    "license": "CC0",
+    "source": "https://polyhaven.com/a/sabie_tent",
+    "name": "Sabie Tent",
+    "authors": "Greg Zaal",
+    "coords": [
+      -25.117582,
+      31.914647
+    ]
+  },
+  "amphitheatre_zanzibar_fort": {
+    "license": "CC0",
+    "source": "https://polyhaven.com/a/amphitheatre_zanzibar_fort",
+    "name": "Amphitheatre Zanzibar Fort",
+    "authors": "Dimitrios Savva, Jarod Guest",
+    "coords": [
+      -6.161257996537621,
+      39.18935791993835
+    ]
+  },
+  "wadi_rum_night": {
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Night_Panorama_in_Wadi_Rum.jpg",
+    "name": "Night Panorama in Wadi Rum",
+    "authors": "Faraheed",
+    "coords": [
+      null,
+      null
+    ]
+  },
+  "santorini_imerovigli": {
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Imerovigli_Panoramic_360_View_-_Santorini.jpg",
+    "name": "Imerovigli Panoramic 360 View - Santorini",
+    "authors": "Anna Tsolidou",
+    "coords": [
+      36.431053,
+      25.42463
+    ]
+  }
+}
