@@ -3,13 +3,16 @@ backend:
   phases:
     build:
       commands:
-        - npm ci
+        # npm ci rejects this tree (several @aws-amplify/* packages bundle conflicting
+        # nested zod versions; `npm install` resolves it the same way it does locally,
+        # with a benign ERESOLVE warning) — npm install is the practical choice here.
+        - npm install
         - npx ampx pipeline-deploy --branch $AWS_BRANCH --app-id $AWS_APP_ID
 frontend:
   phases:
     preBuild:
       commands:
-        - npm ci
+        - npm install
     build:
       commands:
         - npm run build
