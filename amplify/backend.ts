@@ -41,11 +41,19 @@ cfnUserPoolClient.explicitAuthFlows = ['ALLOW_CUSTOM_AUTH', 'ALLOW_REFRESH_TOKEN
 // timing difference an attacker could use to enumerate accounts.
 cfnUserPoolClient.preventUserExistenceErrors = 'ENABLED';
 
+// These live in the top-level backend stack (backend.stack), not nested inside auth's own
+// stack — packing them into the same nested stack as the Cognito trigger wiring created a
+// CloudformationStackCircularDependencyError (auth's resources + this Lambda + these
+// resources all cross-referencing each other inside one template). A plain top-level ->
+// nested-stack reference (this stack depends on auth's outputs, never the reverse) is the
+// well-supported, acyclic CloudFormation pattern.
+const loginGuardStack = backend.createStack('LoginGuardResources');
+
 // Plain CDK-managed table, not an Amplify Data model — see amplify/data/resource.ts for why
 // (allow.resource() is field-level-only, not a whole-model CRUD rule). This table has zero
 // GraphQL/API surface: the only way to touch it is the direct IAM grant below, scoped to this
 // one Lambda.
-const loginAttemptsTable = new dynamodb.Table(backend.auth.resources.userPool.stack, 'LoginAttempts', {
+const loginAttemptsTable = new dynamodb.Table(loginGuardStack, 'LoginAttempts', {
   partitionKey: { name: 'id', type: dynamodb.AttributeType.STRING }, // id = normalized email
   billingMode: dynamodb.BillingMode.PAY_PER_REQUEST
 });
@@ -54,9 +62,14 @@ loginAttemptsTable.grantReadWriteData(backend.loginGuardFn.resources.lambda);
 backend.loginGuardFn.addEnvironment('LOGIN_ATTEMPTS_TABLE', loginAttemptsTable.tableName);
 backend.loginGuardFn.addEnvironment('USER_POOL_ID', backend.auth.resources.userPool.userPoolId);
 backend.loginGuardFn.addEnvironment('USER_POOL_CLIENT_ID', backend.auth.resources.userPoolClient.userPoolClientId);
+// A wildcard-within-account-region ARN, not the exact pool's token-referenced ARN — referencing
+// the pool resource's own .userPoolArn here (even from the Lambda's own stack scope) re-creates
+// the same circular-dependency class of issue, since the Lambda is itself a trigger ON that
+// pool. This stays scoped to this account/region/service either way; there's only one user
+// pool in this app, so the practical difference is nil, and it breaks the cycle.
 backend.loginGuardFn.resources.lambda.addToRolePolicy(new iam.PolicyStatement({
   actions: ['cognito-idp:AdminInitiateAuth'],
-  resources: [backend.auth.resources.userPool.userPoolArn]
+  resources: [`arn:aws:cognito-idp:${backend.stack.region}:${backend.stack.account}:userpool/*`]
 }));
 
 // IP-based rate limiting: enforced at the edge by WAF, in front of Cognito's own
@@ -66,7 +79,7 @@ backend.loginGuardFn.resources.lambda.addToRolePolicy(new iam.PolicyStatement({
 // an AWS-documented supported resource type for exactly this brute-force-protection purpose.
 // Cost note: this is a real, ongoing AWS cost (~$5/month base + ~$1/rule + per-request), unlike
 // everything else built so far which sits in the free tier at this traffic level.
-const webAcl = new wafv2.CfnWebACL(backend.auth.resources.userPool.stack, 'LoginGuardWaf', {
+const webAcl = new wafv2.CfnWebACL(loginGuardStack, 'LoginGuardWaf', {
   scope: 'REGIONAL',
   defaultAction: { allow: {} },
   visibilityConfig: { sampledRequestsEnabled: true, cloudWatchMetricsEnabled: true, metricName: 'LoginGuardWaf' },
@@ -80,7 +93,10 @@ const webAcl = new wafv2.CfnWebACL(backend.auth.resources.userPool.stack, 'Login
     }
   ]
 });
-new wafv2.CfnWebACLAssociation(backend.auth.resources.userPool.stack, 'LoginGuardWafAssoc', {
+// This DOES need the exact pool ARN (WAF associations can't target a wildcard) — placed in the
+// separate top-level stack, this is now a one-directional cross-stack reference (loginGuardStack
+// -> auth's output), not part of auth's own internal template, so it doesn't re-introduce the cycle.
+new wafv2.CfnWebACLAssociation(loginGuardStack, 'LoginGuardWafAssoc', {
   resourceArn: backend.auth.resources.userPool.userPoolArn,
   webAclArn: webAcl.attrArn
 });

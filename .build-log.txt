@@ -1,0 +1,117 @@
+2026-11-03T18:29:07.375Z [INFO]: # Build environment configured with Standard build compute type: 8GiB Memory, 4vCPUs, 128GB Disk Space
+2026-11-03T18:29:08.220Z [INFO]: # Cloning repository: git@github.com:KAJOO0/travelmateVR.git
+2026-11-03T18:29:14.692Z [INFO]: 
+2026-11-03T18:29:14.784Z [INFO]: Cloning into 'travelmateVR'...
+2026-11-03T18:29:14.784Z [INFO]: # Switching to commit: d5ef00eeca47d5aecde1baf2af9f61b8efb214d3
+2026-11-03T18:29:15.155Z [INFO]: Note: switching to 'd5ef00eeca47d5aecde1baf2af9f61b8efb214d3'.
+                                 You are in 'detached HEAD' state. You can look around, make experimental
+                                 changes and commit them, and you can discard any commits you make in this
+                                 state without impacting any branches by switching back to a branch.
+                                 If you want to create a new branch to retain commits you create, you may
+                                 do so (now or later) by using -c with the switch command. Example:
+                                 git switch -c <new-branch-name>
+                                 Or undo this operation with:
+                                 git switch -
+                                 Turn off this advice by setting config variable advice.detachedHead to false
+                                 HEAD is now at d5ef00e Fix circular stack dependency: pin login-guard function to the auth stack
+2026-11-03T18:29:15.226Z [INFO]: Successfully cleaned up Git credentials
+2026-11-03T18:29:15.226Z [INFO]: # Checking for Git submodules at: /codebuild/output/src853232540/src/travelmateVR/.gitmodules
+2026-11-03T18:29:15.233Z [INFO]: # Retrieving environment cache...
+2026-11-03T18:29:15.292Z [INFO]: # Retrieved environment cache
+2026-11-03T18:29:15.293Z [INFO]: ---- Setting Up SSM Secrets ----
+2026-11-03T18:29:15.293Z [INFO]: SSM params {"Path":"/amplify/d1tgxuxxng291h/main/","WithDecryption":true}
+2026-11-03T18:29:16.074Z [INFO]: # No package override configuration found.
+2026-11-03T18:29:16.080Z [INFO]: # Retrieving cache...
+2026-11-03T18:29:16.080Z [INFO]: # Retrieved cache
+2026-11-03T18:29:20.135Z [INFO]: ## Starting Backend Build
+                                 # Starting phase: build
+                                 # Executing command: npm install
+2026-11-03T18:29:35.424Z [WARNING]: npm warn ERESOLVE overriding peer dependency
+2026-11-03T18:29:35.430Z [WARNING]: npm warn While resolving: @aws-amplify/backend-output-schemas@1.8.0
+                                    npm warn Found: zod@3.25.17
+                                    npm warn node_modules/@aws-amplify/data-construct/node_modules/@aws-amplify/backend-output-schemas/node_modules/zod
+                                    npm warn
+                                    npm warn Could not resolve dependency:
+                                    npm warn peer zod@"3.25.17" from @aws-amplify/backend-output-schemas@1.8.0
+                                    npm warn node_modules/@aws-amplify/data-construct/node_modules/@aws-amplify/backend-output-schemas
+                                    npm warn   bundled @aws-amplify/backend-output-schemas@"^1.0.0" from @aws-amplify/data-construct@1.17.8
+                                    npm warn   node_modules/@aws-amplify/data-construct
+                                    npm warn   2 more (@aws-amplify/ai-constructs, @aws-amplify/backend-output-storage)
+2026-11-03T18:29:35.717Z [WARNING]: npm warn ERESOLVE overriding peer dependency
+                                    npm warn While resolving: @aws-amplify/backend-output-schemas@1.8.0
+                                    npm warn Found: zod@3.25.17
+                                    npm warn node_modules/@aws-amplify/graphql-api-construct/node_modules/@aws-amplify/backend-output-schemas/node_modules/zod
+                                    npm warn
+                                    npm warn Could not resolve dependency:
+                                    npm warn peer zod@"3.25.17" from @aws-amplify/backend-output-schemas@1.8.0
+                                    npm warn node_modules/@aws-amplify/graphql-api-construct/node_modules/@aws-amplify/backend-output-schemas
+                                    npm warn   bundled @aws-amplify/backend-output-schemas@"^1.0.0" from @aws-amplify/graphql-api-construct@1.22.3
+                                    npm warn   node_modules/@aws-amplify/graphql-api-construct
+                                    npm warn   2 more (@aws-amplify/ai-constructs, @aws-amplify/backend-output-storage)
+2026-11-03T18:30:44.614Z [INFO]: added 1120 packages, and audited 1560 packages in 1m
+2026-11-03T18:30:44.619Z [INFO]: 217 packages are looking for funding
+                                 run `npm fund` for details
+2026-11-03T18:30:45.071Z [INFO]: 83 vulnerabilities (3 low, 37 moderate, 39 high, 4 critical)
+                                 To address issues that do not require attention, run:
+                                 npm audit fix
+                                 To address all issues possible (including breaking changes), run:
+                                 npm audit fix --force
+                                 Some issues need review, and may require choosing
+                                 a different dependency.
+                                 Run `npm audit` for details.
+2026-11-03T18:30:45.106Z [INFO]: # Executing command: npx ampx pipeline-deploy --branch $AWS_BRANCH --app-id $AWS_APP_ID
+2026-11-03T18:30:48.139Z [INFO]: 6:30:47 PM Synthesizing backend...
+2026-11-03T18:30:48.143Z [INFO]: 
+2026-11-03T18:30:49.212Z [WARNING]: Bundling asset amplify-d1tgxuxxng291h-main-branch-bb8bcf4da8/AmplifyBranchLinker/CustomResourceLambda/Code/Stage...
+2026-11-03T18:30:49.460Z [WARNING]: ...82cd4f965f4a0b2c218bb670c0f3c36382bf0c827c72f1-building/index.js  1.1mb ⚠️
+                                    ⚡ Done in 57ms
+2026-11-03T18:30:49.552Z [WARNING]: Bundling asset amplify-d1tgxuxxng291h-main-branch-bb8bcf4da8/auth/AmplifySecretFetcherResourceProviderLambda/Code/Stage...
+2026-11-03T18:30:49.797Z [WARNING]: ...20dda6e45086544df9dcd2588b7f49ae751da215f82cba-building/index.js  797.8kb
+                                    ⚡ Done in 36ms
+2026-11-03T18:30:49.845Z [WARNING]: Bundling asset amplify-d1tgxuxxng291h-main-branch-bb8bcf4da8/auth/login-guard-lambda/Code/Stage...
+2026-11-03T18:30:52.939Z [INFO]: 6:30:52 PM ✔ Backend synthesized in 5.2 seconds
+2026-11-03T18:30:52.944Z [INFO]: 6:30:52 PM Running type checks...
+2026-11-03T18:31:01.487Z [INFO]: 6:31:01 PM ✔ Type checks completed in 8.54 seconds
+2026-11-03T18:31:01.500Z [INFO]: 6:31:01 PM Building and publishing assets...
+2026-11-03T18:31:04.850Z [INFO]: 6:31:04 PM ✔ Built and published assets
+2026-11-03T18:31:07.674Z [INFO]: amplify-d1tgxuxxng291h-main-branch-bb8bcf4da8 |   0 | 6:31:05 PM | UPDATE_IN_PROGRESS | AWS::CloudFormation::Stack | amplify-d1tgxuxxng291h-main-branch-bb8bcf4da8 User Initiated
+2026-11-03T18:31:11.838Z [INFO]: amplify-d1tgxuxxng291h-main-branch-bb8bcf4da8 |   0 | 6:31:10 PM | UPDATE_IN_PROGRESS | AWS::CloudFormation::Stack | auth.NestedStack/auth.NestedStackResource (auth179371D7)
+2026-11-03T18:31:11.842Z [INFO]: amplify-d1tgxuxxng291h-main-branch-bb8bcf4da8 |   0 | 6:31:10 PM | UPDATE_FAILED | AWS::CloudFormation::Stack | auth.NestedStack/auth.NestedStackResource (auth179371D7) Circular dependency between resources: [amplifyAuthUserPoolPreAuthenticationCognito4931C5BA, amplifyAuthadminGroupRole7DCAC20D, loginguardlambda3A6B13DD, amplifyAuthIdentityPoolRoleAttachment045F17C8, amplifyAuthadminGroupBF1343DA, amplifyAuthUserPoolAppClient2626C6F8, loginguardlambdaServiceRoleDefaultPolicy803A1E17, amplifyAuthauthenticatedUserRoleD8DA3689, amplifyAuthGoogleIdPA9736819, amplifyAuthUserPoolUserPoolDomain1F688B5B, amplifyAuthUserPoolCreateAuthChallengeCognitoF079104F, amplifyAuthUserPoolDefineAuthChallengeCognitoFB5C5ACA, amplifyAuthunauthenticatedUserRole2B524D9E, amplifyAuthUserPool4BA7F805, amplifyAuthUserPoolVerifyAuthChallengeResponseCognito8B3FF4AD, amplifyAuthIdentityPool3FDE84CC, LoginGuardWafAssoc]
+2026-11-03T18:31:11.842Z [INFO]: amplify-d1tgxuxxng291h-main-branch-bb8bcf4da8 |   0 | 6:31:11 PM | UPDATE_ROLLBACK_IN_PROGRESS | AWS::CloudFormation::Stack | amplify-d1tgxuxxng291h-main-branch-bb8bcf4da8 The following resource(s) failed to update: [auth179371D7].
+2026-11-03T18:31:13.928Z [INFO]: amplify-d1tgxuxxng291h-main-branch-bb8bcf4da8 |   1 | 6:31:12 PM | UPDATE_COMPLETE | AWS::CloudFormation::Stack | auth.NestedStack/auth.NestedStackResource (auth179371D7)
+2026-11-03T18:31:13.930Z [INFO]: amplify-d1tgxuxxng291h-main-branch-bb8bcf4da8 |   2 | 6:31:13 PM | UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS | AWS::CloudFormation::Stack | amplify-d1tgxuxxng291h-main-branch-bb8bcf4da8
+2026-11-03T18:31:15.887Z [INFO]: amplify-d1tgxuxxng291h-main-branch-bb8bcf4da8 |   1 | 6:31:14 PM | UPDATE_COMPLETE | AWS::CloudFormation::Stack | auth.NestedStack/auth.NestedStackResource (auth179371D7)
+2026-11-03T18:31:15.891Z [INFO]: amplify-d1tgxuxxng291h-main-branch-bb8bcf4da8 |   1 | 6:31:14 PM | UPDATE_ROLLBACK_COMPLETE | AWS::CloudFormation::Stack | amplify-d1tgxuxxng291h-main-branch-bb8bcf4da8
+2026-11-03T18:31:16.013Z [INFO]: 
+2026-11-03T18:31:16.014Z [WARNING]: ampx pipeline-deploy
+                                    Command to deploy backends in a custom CI/CD pipeline. This command is not inten
+                                    ded to be used locally.
+                                    Options:
+                                    --debug            Print debug logs to the console
+                                    [boolean] [default: false]
+                                    --branch           Name of the git branch being deployed
+                                    [string] [required]
+                                    --app-id           The app id of the target Amplify app[string] [required]
+                                    --outputs-out-dir  A path to directory where amplify_outputs is written. I
+                                    f not provided defaults to current process working dire
+                                    ctory.                                         [string]
+                                    --outputs-version  Version of the configuration. Version 0 represents clas
+                                    sic amplify-cli config file amplify-configuration and 1
+                                    represents newer config file amplify_outputs
+                                    [string] [choices: "0", "1", "1.1", "1.2", "1.3", "1.4", "1.5"] [default: "1.5
+                                    "]
+                                    --outputs-format   amplify_outputs file format
+                                    [string] [choices: "mjs", "json", "json-mobile", "ts", "dart"]
+                                    -h, --help             Show help                                     [boolean]
+2026-11-03T18:31:16.015Z [INFO]: [CloudFormationDeploymentError] The CloudFormation deployment has failed.
+                                 ∟ Caused by: [DeploymentError] The stack named amplify-d1tgxuxxng291h-main-branch-bb8bcf4da8 failed to deploy: UPDATE_ROLLBACK_COMPLETE
+                                 ∟ Caused by: [DeploymentError] The stack named amplify-d1tgxuxxng291h-main-branch-bb8bcf4da8 failed to deploy: UPDATE_ROLLBACK_COMPLETE
+                                 Resolution: Find more information in the CloudFormation AWS Console for this stack.
+2026-11-03T18:31:16.085Z [ERROR]: !!! Build failed
+2026-11-03T18:31:16.085Z [ERROR]: !!! Error: Command failed with exit code 1
+2026-11-03T18:31:16.085Z [INFO]: # Starting environment caching...
+2026-11-03T18:31:16.085Z [INFO]: # Uploading environment cache artifact...
+2026-11-03T18:31:16.184Z [INFO]: # Uploaded environment cache artifact
+2026-11-03T18:31:16.184Z [INFO]: # Environment caching completed
+
+
