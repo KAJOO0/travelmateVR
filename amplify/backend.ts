@@ -41,19 +41,16 @@ cfnUserPoolClient.explicitAuthFlows = ['ALLOW_CUSTOM_AUTH', 'ALLOW_REFRESH_TOKEN
 // timing difference an attacker could use to enumerate accounts.
 cfnUserPoolClient.preventUserExistenceErrors = 'ENABLED';
 
-// These live in the top-level backend stack (backend.stack), not nested inside auth's own
-// stack — packing them into the same nested stack as the Cognito trigger wiring created a
-// CloudformationStackCircularDependencyError (auth's resources + this Lambda + these
-// resources all cross-referencing each other inside one template). A plain top-level ->
-// nested-stack reference (this stack depends on auth's outputs, never the reverse) is the
-// well-supported, acyclic CloudFormation pattern.
-const loginGuardStack = backend.createStack('LoginGuardResources');
-
-// Plain CDK-managed table, not an Amplify Data model — see amplify/data/resource.ts for why
-// (allow.resource() is field-level-only, not a whole-model CRUD rule). This table has zero
-// GraphQL/API surface: the only way to touch it is the direct IAM grant below, scoped to this
-// one Lambda.
-const loginAttemptsTable = new dynamodb.Table(loginGuardStack, 'LoginAttempts', {
+// These live directly in the root backend stack (backend.stack) — not nested inside auth's own
+// stack, and not in a second new nested stack either. Both of those were tried and both hit
+// CloudformationStackCircularDependencyError: nesting inside auth entangled these resources
+// with the Cognito trigger wiring; a separate new nested stack (via backend.createStack(...))
+// still got flagged in a circular set alongside auth AND data, even though neither references
+// these resources at all — CloudFormation's "circular dependency between nested stacks" check
+// appears to reason about nested-stack ordering more broadly than just direct references. The
+// root stack isn't a nested stack, so resources placed here don't participate in that check;
+// this is a plain nested-stack -> root-stack output reference, the ordinary direction.
+const loginAttemptsTable = new dynamodb.Table(backend.stack, 'LoginAttempts', {
   partitionKey: { name: 'id', type: dynamodb.AttributeType.STRING }, // id = normalized email
   billingMode: dynamodb.BillingMode.PAY_PER_REQUEST
 });
@@ -79,7 +76,7 @@ backend.loginGuardFn.resources.lambda.addToRolePolicy(new iam.PolicyStatement({
 // an AWS-documented supported resource type for exactly this brute-force-protection purpose.
 // Cost note: this is a real, ongoing AWS cost (~$5/month base + ~$1/rule + per-request), unlike
 // everything else built so far which sits in the free tier at this traffic level.
-const webAcl = new wafv2.CfnWebACL(loginGuardStack, 'LoginGuardWaf', {
+const webAcl = new wafv2.CfnWebACL(backend.stack, 'LoginGuardWaf', {
   scope: 'REGIONAL',
   defaultAction: { allow: {} },
   visibilityConfig: { sampledRequestsEnabled: true, cloudWatchMetricsEnabled: true, metricName: 'LoginGuardWaf' },
@@ -94,9 +91,9 @@ const webAcl = new wafv2.CfnWebACL(loginGuardStack, 'LoginGuardWaf', {
   ]
 });
 // This DOES need the exact pool ARN (WAF associations can't target a wildcard) — placed in the
-// separate top-level stack, this is now a one-directional cross-stack reference (loginGuardStack
-// -> auth's output), not part of auth's own internal template, so it doesn't re-introduce the cycle.
-new wafv2.CfnWebACLAssociation(loginGuardStack, 'LoginGuardWafAssoc', {
+// root stack, this is a one-directional reference to auth's nested-stack output, not part of
+// auth's own internal template, so it doesn't re-introduce the cycle.
+new wafv2.CfnWebACLAssociation(backend.stack, 'LoginGuardWafAssoc', {
   resourceArn: backend.auth.resources.userPool.userPoolArn,
   webAclArn: webAcl.attrArn
 });
