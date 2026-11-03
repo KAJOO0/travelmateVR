@@ -34,18 +34,24 @@ const repoRoot = path.dirname(fileURLToPath(import.meta.url)) + '/..';
 
 // ---------------- Setup ----------------
 
-const outputsPath = path.resolve(repoRoot, 'amplify_outputs.json');
+// AMPLIFY_MIGRATION_OUTPUTS_PATH lets this target a specific deployed backend (e.g. a
+// production outputs file fetched via `npx ampx generate outputs --branch main --app-id ...`)
+// instead of the default sandbox output at the repo root.
+const outputsPath = path.resolve(repoRoot, process.env.AMPLIFY_MIGRATION_OUTPUTS_PATH ?? 'amplify_outputs.json');
 if (!fs.existsSync(outputsPath)) {
   console.error(`Missing ${outputsPath}. Run "npx ampx sandbox" (or deploy the backend) first — this file is generated from that, not committed to git.`);
   process.exit(1);
 }
-const apiKey = process.env.AMPLIFY_MIGRATION_API_KEY;
+const outputs = JSON.parse(fs.readFileSync(outputsPath, 'utf8'));
+// The API key lives in the outputs file itself (data.api_key) — read it directly rather than
+// requiring it to be copy-pasted into an env var and risk it getting echoed/logged anywhere.
+const apiKey = process.env.AMPLIFY_MIGRATION_API_KEY ?? outputs.data?.api_key;
 if (!apiKey) {
-  console.error('Missing AMPLIFY_MIGRATION_API_KEY. Set it to the short-lived Amplify Data API key before running this script.');
+  console.error('No API key found: neither AMPLIFY_MIGRATION_API_KEY nor data.api_key in the outputs file.');
   process.exit(1);
 }
 
-Amplify.configure(JSON.parse(fs.readFileSync(outputsPath, 'utf8')));
+Amplify.configure(outputs);
 const client = generateClient<Schema>({ authMode: 'apiKey', apiKey });
 
 // ---------------- 360° content guard (decision 12 — see src/lib/media360.ts) ----------------

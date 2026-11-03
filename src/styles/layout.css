@@ -43,6 +43,7 @@
   box-shadow: var(--shadow-pop); animation: popIn 0.18s var(--ease);
 }
 .popover.left { right: auto; left: 0; }
+@media (max-width: 480px) { .popover { min-width: 200px; max-width: calc(100vw - 32px); } }
 @keyframes popIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
 .menu-list { display: grid; gap: 2px; list-style: none; }
 .menu-list a, .menu-list button {
@@ -50,11 +51,22 @@
   background: none; text-align: left; text-decoration: none; color: inherit; cursor: pointer; font-weight: 500;
 }
 .menu-list a:hover, .menu-list button:hover, .menu-list [aria-checked='true'] { background: var(--accent-soft); }
+/* Rows with no .mi-ico wrapper (e.g. the portal "Back to Site" / "Sign Out" menu) would
+   otherwise render their <svg> at the browser's unconstrained default size — explicitly
+   size every menu-list icon so a plain icon+label row never blows up. */
+.menu-list > li > a svg, .menu-list > li > button svg { width: 18px; height: 18px; flex: none; }
 .menu-list .mi-ico { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 12px; background: var(--accent-soft); color: var(--ring); flex: none; }
 .menu-list .mi-ico svg { width: 18px; height: 18px; }
 .menu-list b { display: block; font-size: var(--fs-btn); font-weight: 600; }
 .menu-list small { display: block; color: var(--muted); font-size: var(--fs-small); line-height: 1.35; }
 .menu-list .tick { margin-left: auto; width: 18px; height: 18px; color: var(--accent-bright); }
+@media (max-width: 480px) {
+  /* Tighten the icon-only (no .mi-ico) menu rows specifically on phones — this is the
+     "Back to Site"/"Sign Out" shape (PortalLayout's UserMenu), not the richer .mi-ico rows
+     used elsewhere, which already read at a reasonable size. */
+  .menu-list > li > a:not(:has(.mi-ico)), .menu-list > li > button:not(:has(.mi-ico)) { padding: 8px 10px; gap: 8px; font-size: var(--fs-small); }
+  .menu-list > li > a svg, .menu-list > li > button svg { width: 16px; height: 16px; }
+}
 .more-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2px; width: min(520px, calc(100vw - 32px)); }
 .prefs { width: min(320px, calc(100vw - 32px)); display: grid; gap: 14px; padding: 14px; }
 .prefs h3 { font-size: var(--fs-small); font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
