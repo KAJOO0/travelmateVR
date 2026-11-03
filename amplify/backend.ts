@@ -57,8 +57,15 @@ const loginAttemptsTable = new dynamodb.Table(backend.stack, 'LoginAttempts', {
 loginAttemptsTable.grantReadWriteData(backend.loginGuardFn.resources.lambda);
 
 backend.loginGuardFn.addEnvironment('LOGIN_ATTEMPTS_TABLE', loginAttemptsTable.tableName);
-backend.loginGuardFn.addEnvironment('USER_POOL_ID', backend.auth.resources.userPool.userPoolId);
-backend.loginGuardFn.addEnvironment('USER_POOL_CLIENT_ID', backend.auth.resources.userPoolClient.userPoolClientId);
+// Deliberately NOT adding USER_POOL_ID/USER_POOL_CLIENT_ID as environment variables here: the
+// Lambda's own Environment property referencing the user pool/client, combined with the user
+// pool's LambdaConfig referencing this Lambda's ARN (since it's wired as a trigger below), is a
+// direct 2-resource CloudFormation cycle — confirmed as the actual root cause of the circular
+// dependency across every earlier attempt at fixing this via resource placement (Google
+// federation was never the cause; removing it changed nothing). The handler reads both values
+// off the trigger event instead (every Cognito trigger event carries userPoolId and
+// callerContext.clientId) — see amplify/functions/login-guard/handler.ts.
+//
 // A wildcard-within-account-region ARN, not the exact pool's token-referenced ARN — referencing
 // the pool resource's own .userPoolArn here (even from the Lambda's own stack scope) re-creates
 // the same circular-dependency class of issue, since the Lambda is itself a trigger ON that

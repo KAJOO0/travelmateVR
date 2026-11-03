@@ -98,11 +98,15 @@ export const handler = async (event: AnyTriggerEvent): Promise<AnyTriggerEvent> 
       // Cognito already has — do not short-circuit on event.request.userNotFound before this
       // call (that WOULD reopen exactly the kind of timing leak src/services/account.ts's demo
       // mode verifyPassword() already goes out of its way to avoid).
+      // Read straight off the trigger event rather than an env var pointing back at the user
+      // pool/client resources: a Lambda property (Environment) referencing those and the user
+      // pool's own LambdaConfig referencing this Lambda's ARN is a direct 2-resource
+      // CloudFormation cycle. Every Cognito trigger event already carries both identifiers.
       let ok = false;
       try {
         const r = await cognito.send(new AdminInitiateAuthCommand({
-          UserPoolId: process.env.USER_POOL_ID,
-          ClientId: process.env.USER_POOL_CLIENT_ID,
+          UserPoolId: event.userPoolId,
+          ClientId: event.callerContext.clientId,
           AuthFlow: 'ADMIN_USER_PASSWORD_AUTH',
           AuthParameters: { USERNAME: email, PASSWORD: password }
         }));

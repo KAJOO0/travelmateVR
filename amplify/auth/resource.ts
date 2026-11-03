@@ -26,17 +26,36 @@ import { loginGuardFn } from '../functions/login-guard/resource';
  *
  * @see https://docs.amplify.aws/gen2/build-a-backend/auth
  */
-// TEMPORARILY DISABLED: externalProviders.google, to isolate a CloudFormation circular
-// dependency that appeared only once both this AND the triggers below were configured
-// together (confirmed: our own added resources — the lockout Lambda's IAM policy, the WAF
-// association — were successfully extracted from the cycle already; what's left is a cycle
-// purely among auth-construct's own auto-generated resources: UserPool, its 4 trigger
-// permissions, UserPoolDomain, GoogleIdP, IdentityPool, IAM roles). Re-enabling this is
-// tracked as a follow-up once isolated from the trigger wiring — see
-// docs/security/pending-implementation.md.
+/**
+ * Google sign-in: Cognito's built-in federation (not hand-rolled OIDC token verification —
+ * Cognito does the issuer/audience/expiry checks and issues the app's own session the same
+ * way email sign-in does). The client secret is a sandbox/deployed-environment secret (set
+ * via `npx ampx sandbox secret set GOOGLE_CLIENT_SECRET`, or the Console's Secrets page for
+ * production), never committed in plaintext. The client ID isn't sensitive (it's embedded in
+ * every redirect URL anyway) but Amplify's config type still requires it as a BackendSecret.
+ *
+ * Isolation test confirmed this was never the cause of the earlier circular-dependency
+ * failures (job #16 failed identically with Google fully removed) — the real cause was
+ * loginGuardFn's environment variables referencing the user pool/client (fixed in
+ * amplify/backend.ts + handler.ts instead).
+ */
 export const auth = defineAuth({
   loginWith: {
-    email: true
+    email: true,
+    externalProviders: {
+      google: {
+        clientId: secret('GOOGLE_CLIENT_ID'),
+        clientSecret: secret('GOOGLE_CLIENT_SECRET')
+      },
+      // domainPrefix isn't configurable at this level (confirmed: omitted from the factory's
+      // own type) — Amplify auto-generates the Cognito Hosted UI domain. Check
+      // amplify_outputs.json's auth.oauth.domain after deploy for the real value, and update
+      // the Google OAuth client's redirect URI to match if it differs from what was guessed
+      // before this was known.
+      callbackUrls: ['https://main.d1tgxuxxng291h.amplifyapp.com/', 'http://localhost:5173/'],
+      logoutUrls: ['https://main.d1tgxuxxng291h.amplifyapp.com/', 'http://localhost:5173/'],
+      scopes: ['EMAIL', 'OPENID', 'PROFILE']
+    }
   },
   groups: ['admin'],
   triggers: {
