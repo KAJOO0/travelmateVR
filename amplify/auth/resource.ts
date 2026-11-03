@@ -26,26 +26,17 @@ import { loginGuardFn } from '../functions/login-guard/resource';
  *
  * @see https://docs.amplify.aws/gen2/build-a-backend/auth
  */
+// TEMPORARILY DISABLED: externalProviders.google, to isolate a CloudFormation circular
+// dependency that appeared only once both this AND the triggers below were configured
+// together (confirmed: our own added resources — the lockout Lambda's IAM policy, the WAF
+// association — were successfully extracted from the cycle already; what's left is a cycle
+// purely among auth-construct's own auto-generated resources: UserPool, its 4 trigger
+// permissions, UserPoolDomain, GoogleIdP, IdentityPool, IAM roles). Re-enabling this is
+// tracked as a follow-up once isolated from the trigger wiring — see
+// docs/security/pending-implementation.md.
 export const auth = defineAuth({
   loginWith: {
-    email: true,
-    externalProviders: {
-      google: {
-        // Amplify's config type requires clientId as a BackendSecret too (not a plain string),
-        // even though the client ID itself isn't actually sensitive — it's embedded in every
-        // redirect URL anyway. Set via `npx ampx sandbox secret set GOOGLE_CLIENT_ID`.
-        clientId: secret('GOOGLE_CLIENT_ID'),
-        clientSecret: secret('GOOGLE_CLIENT_SECRET')
-      },
-      // domainPrefix isn't configurable at this level (confirmed: omitted from the factory's
-      // own type) — Amplify auto-generates the Cognito Hosted UI domain. Check
-      // amplify_outputs.json's auth.oauth.domain after deploy for the real value, and update
-      // the Google OAuth client's redirect URI to match if it differs from what was guessed
-      // before this was known.
-      callbackUrls: ['https://main.d1tgxuxxng291h.amplifyapp.com/', 'http://localhost:5173/'],
-      logoutUrls: ['https://main.d1tgxuxxng291h.amplifyapp.com/', 'http://localhost:5173/'],
-      scopes: ['EMAIL', 'OPENID', 'PROFILE']
-    }
+    email: true
   },
   groups: ['admin'],
   triggers: {
