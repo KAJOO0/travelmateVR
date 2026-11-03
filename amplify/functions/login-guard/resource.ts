@@ -6,5 +6,11 @@ import { defineFunction } from '@aws-amplify/backend';
 export const loginGuardFn = defineFunction({
   name: 'login-guard',
   entry: './handler.ts',
-  timeoutSeconds: 10 // AdminInitiateAuth round-trip + one Data read/write; verify against real latency in the sandbox
+  timeoutSeconds: 10, // AdminInitiateAuth round-trip + one DynamoDB read/write; verify against real latency once deployed
+  // Must live in the same CloudFormation stack as auth, not its own nested stack: auth's
+  // triggers reference this function (auth -> function) while this function's IAM policy
+  // references the user pool ARN (function -> auth) — a cross-stack circular dependency
+  // CloudFormation rejects. Within one stack, that's just normal same-template resource
+  // ordering, which CloudFormation resolves fine.
+  resourceGroupName: 'auth'
 });
