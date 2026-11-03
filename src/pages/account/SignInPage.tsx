@@ -13,7 +13,11 @@ export default function SignInPage() {
   const { t } = useTranslation(['account', 'common', 'trip']);
   const navigate = useNavigate();
   const [params] = useSearchParams();
-  const next = params.get('next')?.startsWith('/') ? params.get('next')! : '/account';
+  // '/' alone isn't enough — '//evil.com' also starts with '/' and browsers treat it as
+  // protocol-relative (external). react-router's client-side navigate() can't actually leave
+  // the origin regardless, but reject it explicitly rather than rely on that incidentally.
+  const nextParam = params.get('next');
+  const next = nextParam && nextParam.startsWith('/') && !nextParam.startsWith('//') ? nextParam : '/account';
   const user = useSession();
   const [mode, setMode] = useState<'signin' | 'register' | 'confirm'>(params.get('mode') === 'register' ? 'register' : 'signin');
   const [name, setName] = useState('');
