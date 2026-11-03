@@ -201,6 +201,14 @@ const schema = a.schema({
       // 'mine' from src/domain/types.ts is a client-only UI flag — never persisted here.
     })
     .authorization(allow => [allow.guest().to(['read']), allow.group('admin'), allow.publicApiKey().to(['create', 'update', 'delete'])])
+  // Progressive login lockout state lives in a plain CDK-managed DynamoDB table
+  // (amplify/backend.ts), not an Amplify Data model — allow.resource() turned out to only be
+  // valid for field-level authorization, not a whole model's CRUD rules (confirmed from the
+  // installed package's types: ModelType.authorization() takes BaseAllowModifier, which
+  // explicitly omits 'resource'). A raw table with a direct IAM grant to the login-guard
+  // Lambda is arguably cleaner anyway: zero GraphQL/API surface for this data at all, not
+  // even theoretically reachable via a stolen API key or token. See
+  // amplify/functions/login-guard/handler.ts.
 });
 
 export type Schema = ClientSchema<typeof schema>;

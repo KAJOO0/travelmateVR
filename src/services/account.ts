@@ -5,10 +5,12 @@ import { cleanText, hashPassword, isAcceptablePassword, isEmail, isUsername, nor
 import { platformStore } from './platform';
 import type { Channel } from './messaging';
 import {
+  confirmSignIn as cognitoConfirmSignIn,
   confirmSignUp as cognitoConfirmSignUp,
   fetchUserAttributes,
   getCurrentUser,
   signIn as cognitoSignIn,
+  signInWithRedirect,
   signOut as cognitoSignOut,
   signUp as cognitoSignUp
 } from 'aws-amplify/auth';
@@ -35,8 +37,11 @@ const accountStore = createStore<DemoAccount[]>('tm.auth.accounts', () => []);
 const guardStore = createStore<{ failures: number; lockedUntil?: string }>('tm.auth.guard', () => ({ failures: 0 }));
 
 export const loginGuard = {
-  maxAttempts: () => platformStore.get().security.maxLoginAttempts,
-  lockoutMinutes: () => platformStore.get().security.lockoutMinutes,
+  // Real mode's actual lockout thresholds (15/30/1440min escalation) are enforced server-side
+  // by amplify/functions/login-guard/ — this '3' is only the number SignInPage.tsx's
+  // "N attempts left" display counts down from, cosmetic, not enforcement.
+  maxAttempts: () => (REAL_BACKEND ? 3 : platformStore.get().security.maxLoginAttempts),
+  lockoutMinutes: () => platformStore.get().security.lockoutMinutes, // demo-mode only
   /** ISO time until which sign-in is blocked, or undefined. Expired locks are cleared. */
   lockedUntil(): string | undefined {
     const g = guardStore.get();
@@ -55,7 +60,14 @@ export const loginGuard = {
     guardStore.set({ failures });
     return new AuthError('invalid_credentials', undefined, loginGuard.maxAttempts() - failures);
   },
-  reset() { guardStore.set({ failures: 0 }); }
+  reset() { guardStore.set({ failures: 0 }); },
+  /** Real mode only: mirrors the login-guard Lambda's verdict into this local store so
+   *  SignInPage.tsx's existing banner/countdown/disabled-inputs UI (which reads guardStore
+   *  directly, not the thrown error) keeps working unchanged. This is a UX cache, not the
+   *  enforcement — the server re-checks on every real attempt regardless of what this says. */
+  syncLock(lockedUntil: string | undefined) {
+    guardStore.set({ failures: lockedUntil ? loginGuard.maxAttempts() : 0, lockedUntil });
+  }
 };
 export const useLoginGuard = () => useStore(guardStore);
 
@@ -64,9 +76,64 @@ const startSession = (user: User) => { loginGuard.reset(); sessionStore.set({ us
 /** After a Cognito signIn()/confirmSignUp()+signIn() call has already succeeded: read the
  *  authenticated user's attributes and land them in the app's session, same shape as every
  *  other sign-in path. */
-async function finishRealSignIn(fallbackEmail: string): Promise<User> {
+async function finishRealSignIn(fallbackEmail: string, provider: 'email' | 'google' = 'email'): Promise<User> {
   const [{ userId }, attrs] = await Promise.all([getCurrentUser(), fetchUserAttributes()]);
-  return startSession({ id: userId, name: attrs.name ?? fallbackEmail, email: attrs.email ?? fallbackEmail, provider: 'email', roles: ['traveller'], createdAt: nowIso() });
+  return startSession({ id: userId, name: attrs.name ?? fallbackEmail, email: attrs.email ?? fallbackEmail, provider, roles: ['traveller'], createdAt: nowIso() });
+}
+
+/** Call once on app load (see src/main.tsx's Hub 'auth' listener). A Google sign-in is a full
+ *  browser redirect to accounts.google.com and back — the click handler that started it never
+ *  gets to finish running, so this is how the app notices a redirect sign-in actually landed
+ *  and populates sessionStore accordingly. Silently does nothing if there's no session to pick
+ *  up (e.g. called on every page load, not just after a real redirect). */
+export async function syncSessionFromRedirect(): Promise<void> {
+  if (!REAL_BACKEND) return;
+  try {
+    await finishRealSignIn('', 'google');
+  } catch {
+    // Not actually signed in (most page loads) — nothing to do.
+  }
+}
+
+/** Translates the login-guard Lambda's smuggled error text (thrown from a Cognito trigger,
+ *  surfaced here as a rejected confirmSignIn()) back into the existing AuthError contract
+ *  SignInPage.tsx already understands. Falls back to a generic invalid_credentials on
+ *  anything unparseable — never reveals more than today's code already does. */
+function mapCognitoLockoutError(e: unknown): AuthError {
+  const message = e instanceof Error ? e.message : '';
+  const lockedMatch = message.match(/LOCKED:(\S+)/);
+  if (lockedMatch) {
+    loginGuard.syncLock(lockedMatch[1]);
+    return new AuthError('locked', lockedMatch[1]);
+  }
+  const leftMatch = message.match(/ATTEMPTS_LEFT:(\d+)/);
+  if (leftMatch) return new AuthError('invalid_credentials', undefined, Number(leftMatch[1]));
+  return new AuthError('invalid_credentials');
+}
+
+/** The only way a real sign-in attempt happens now — the user pool client's auth flows are
+ *  locked to CUSTOM_AUTH only (see amplify/backend.ts), so every real-mode sign-in (and the
+ *  post-signup sign-in inside register()/confirmRegistration()) must go through this, not a
+ *  direct cognitoSignIn(username, password) call. See amplify/functions/login-guard/handler.ts
+ *  for the server side — that Lambda is the sole judge of password correctness, via
+ *  VerifyAuthChallengeResponse, which is what makes progressive lockout enforceable
+ *  server-side rather than just cosmetic. */
+async function attemptCustomAuthSignIn(email: string, password: string): Promise<void> {
+  const { isSignedIn, nextStep } = await cognitoSignIn({ username: email, options: { authFlowType: 'CUSTOM_WITHOUT_SRP' } });
+  if (isSignedIn) return;
+  // An unconfirmed account surfaces here, on the initial call, same as it did under SRP —
+  // Amplify's CUSTOM_WITHOUT_SRP path reuses the same UserNotConfirmedException -> nextStep
+  // mapping. Must be checked before the lockout-relevant CONFIRM_SIGN_IN_WITH_CUSTOM_CHALLENGE
+  // branch below, since an unconfirmed account never reaches the password-challenge step at all.
+  if (nextStep?.signInStep === 'CONFIRM_SIGN_UP') throw new AuthError('confirmation_required');
+  if (nextStep?.signInStep !== 'CONFIRM_SIGN_IN_WITH_CUSTOM_CHALLENGE') throw loginGuard.fail(); // unexpected state — fail generically
+  try {
+    const { isSignedIn: done } = await cognitoConfirmSignIn({ challengeResponse: password });
+    if (!done) throw loginGuard.fail();
+  } catch (e) {
+    if (e instanceof AuthError) throw e;
+    throw mapCognitoLockoutError(e);
+  }
 }
 
 export const auth = {
@@ -92,16 +159,8 @@ export const auth = {
       // Real mode is email-only this phase — a username identifier fails the same generic
       // way as a wrong password, never revealing that usernames aren't supported yet.
       if (!isEmail(id)) throw loginGuard.fail();
-      try {
-        const { isSignedIn, nextStep } = await cognitoSignIn({ username: id, password });
-        if (!isSignedIn) {
-          if (nextStep?.signInStep === 'CONFIRM_SIGN_UP') throw new AuthError('confirmation_required');
-          throw loginGuard.fail();
-        }
-      } catch (e) {
-        if (e instanceof AuthError) throw e;
-        throw loginGuard.fail();
-      }
+      await attemptCustomAuthSignIn(id, password);
+      loginGuard.syncLock(undefined); // success — clear any stale local lock mirror
       return finishRealSignIn(id);
     }
     await demoLatency(400, 800);
@@ -129,7 +188,9 @@ export const auth = {
         const { nextStep } = await cognitoSignUp({ username: clean.email, password, options: { userAttributes: { email: clean.email, name: clean.name } } });
         if (nextStep.signUpStep === 'CONFIRM_SIGN_UP') throw new AuthError('confirmation_required');
         // A pool configured to skip confirmation lands here directly — sign in immediately.
-        await cognitoSignIn({ username: clean.email, password });
+        // Mechanical fix, not a feature change: SRP is pool-wide disabled (amplify/backend.ts),
+        // so this must go through the same custom-auth path real sign-in uses.
+        await attemptCustomAuthSignIn(clean.email, password);
         const user = await finishRealSignIn(clean.email);
         pushNotification({ kind: 'support', i18n: { title: 'notif.welcome.title', body: 'notif.welcome.body' }, href: '/account/preferences' });
         return user;
@@ -148,6 +209,13 @@ export const auth = {
     return startSession({ id: account.id, name: account.name, email: account.email, username: account.username, provider: 'email', roles: ['traveller'], createdAt: account.createdAt });
   },
   async signInWithGoogle(): Promise<User> {
+    if (REAL_BACKEND) {
+      // Full browser redirect to accounts.google.com — this call doesn't resolve in the
+      // normal sense (the tab navigates away before it could). The session gets populated
+      // after the user lands back, via syncSessionFromRedirect() (src/main.tsx's Hub listener).
+      await signInWithRedirect({ provider: 'Google' });
+      return new Promise<User>(() => {}); // intentionally never resolves — see above
+    }
     await demoLatency(600, 1000);
     const user: User = { id: uid('u_'), name: 'Google Traveller', email: 'traveller@gmail.example', provider: 'google', roles: ['traveller'], createdAt: nowIso() };
     sessionStore.set({ user });
@@ -170,7 +238,9 @@ export const auth = {
   /** Completes registration after the "enter the code we emailed you" step (real mode only). */
   async confirmRegistration(email: string, password: string, code: string): Promise<User> {
     await cognitoConfirmSignUp({ username: email, confirmationCode: code });
-    await cognitoSignIn({ username: email, password });
+    // Mechanical fix, not a feature change: SRP is pool-wide disabled (amplify/backend.ts),
+    // so this must go through the same custom-auth path real sign-in uses.
+    await attemptCustomAuthSignIn(email, password);
     const user = await finishRealSignIn(email);
     pushNotification({ kind: 'support', i18n: { title: 'notif.welcome.title', body: 'notif.welcome.body' }, href: '/account/preferences' });
     return user;
