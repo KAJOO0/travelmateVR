@@ -6,13 +6,15 @@ import { Icon } from '@/components/ui/Icon';
 import { PARTNER_NAV, PRIMARY_NAV } from '@/app/nav';
 import { useDismiss } from '@/lib/hooks';
 import { useWishlist } from '@/app/providers/WishlistProvider';
+import { useSession } from '@/services/account';
 import { PreferencesMenu } from './PreferencesMenu';
 import { NavDrawer } from './NavDrawer';
 
 export function Header({ onSearch }: { onSearch: () => void }) {
-  const { t } = useTranslation();
+  const { t } = useTranslation(['common', 'account']);
   const { pathname } = useLocation();
   const { items } = useWishlist();
+  const user = useSession();
   const [moreOpen, setMoreOpen] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const moreRef = useRef<HTMLDivElement>(null);
@@ -77,10 +79,17 @@ export function Header({ onSearch }: { onSearch: () => void }) {
         <button type="button" className="icon-btn menu-toggle" aria-label={t('a11y.openMenu')} aria-expanded={drawerOpen} onClick={() => setDrawerOpen(true)}>
           <Icon name="menu" />
         </button>
-        <Link className="signin" to="/signin">
-          <span className="lbl">{t('nav.signIn')}</span>
-          <span className="avatar" aria-hidden="true"><Icon name="user" /></span>
-        </Link>
+        {user ? (
+          <Link className="signin" to="/account" aria-label={t('account:title')}>
+            <span className="lbl">{user.name.split(' ')[0]}</span>
+            <span className="avatar" aria-hidden="true">{user.name.split(' ').map(s => s[0]).slice(0, 2).join('')}</span>
+          </Link>
+        ) : (
+          <Link className="signin" to="/signin">
+            <span className="lbl">{t('nav.signIn')}</span>
+            <span className="avatar" aria-hidden="true"><Icon name="user" /></span>
+          </Link>
+        )}
       </div>
 
       <Link className="btn ghost cta cta-explore" to="/destinations">{t('cta.startExploring')}</Link>
