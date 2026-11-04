@@ -13,9 +13,11 @@
     "videos": "node scripts/build-videos.mjs",
     "i18n:check": "node scripts/check-locales.mjs",
     "migrate:seed": "tsx scripts/migrate-seed-to-amplify.ts",
+    "delete:account": "tsx scripts/delete-user-account.ts",
     "deploy": "npm run build && npx -y netlify-cli deploy --prod --dir dist --no-build --site travelmatevr.netlify.app"
   },
   "dependencies": {
+    "@aws-sdk/client-cloudformation": "^3.1161.0",
     "@aws-sdk/client-cognito-identity-provider": "^3.1161.0",
     "@aws-sdk/client-dynamodb": "^3.1161.0",
     "@aws-sdk/lib-dynamodb": "^3.1161.0",
