@@ -153,7 +153,7 @@ new wafv2.CfnWebACLAssociation(backend.stack, 'DataApiWafAssoc', {
 // Validation CNAME (add this first, independent of the above — safe, doesn't affect anything
 // live): _7f80b09ad32b8d9d3812296386f985d0.auth.travelmatevr.com ->
 // _d950fb3babd052845d3e0f6b76e86f8b.wzccmgtwzk.acm-validations.aws
-const ENABLE_CUSTOM_AUTH_DOMAIN = false;
+const ENABLE_CUSTOM_AUTH_DOMAIN = true; // cert ISSUED 2026-11-04 — confirmed via ACM
 const AUTH_DOMAIN_CERT_ARN = 'arn:aws:acm:us-east-1:946769780520:certificate/d064de2e-45e2-40bd-9afb-9a4c16f3fe69';
 
 if (ENABLE_CUSTOM_AUTH_DOMAIN) {
