@@ -22,7 +22,22 @@ import { syncSessionFromRedirect } from '@/services/account';
 // the only things that need it.
 const outputsModules = import.meta.glob<{ default: Record<string, unknown> }>('../amplify_outputs.json', { eager: true });
 const outputs = Object.values(outputsModules)[0]?.default;
-if (outputs) Amplify.configure(outputs);
+if (outputs) {
+  // Upstream bug workaround: once amplify/backend.ts overrides the Hosted UI onto a custom
+  // domain (auth.travelmatevr.com) via the CfnUserPoolDomain escape hatch, the auth
+  // construct's own output-generation code still computes oauth.domain as
+  // `${domainName}.auth.${region}.amazoncognito.com` — written for the Cognito-prefix case,
+  // unaware we replaced domainName with a full custom FQDN. Confirmed live: the deployed
+  // bundle actually shipped "auth.travelmatevr.com.auth.eu-west-3.amazoncognito.com", a
+  // domain that doesn't exist — which is why Google sign-in hung (signInWithRedirect was
+  // navigating the browser to that nonexistent host). The underlying Cognito resource itself
+  // is correct; only this one generated config value is wrong, so patch it here rather than
+  // reaching back into third-party construct internals. If the custom domain ever changes,
+  // update this string to match.
+  const oauth = (outputs as { auth?: { oauth?: { domain?: string } } }).auth?.oauth;
+  if (oauth?.domain?.endsWith('.amazoncognito.com')) oauth.domain = 'auth.travelmatevr.com';
+  Amplify.configure(outputs);
+}
 
 // Google sign-in is a full browser redirect — the click that started it never gets to finish
 // running. This is how the app notices a redirect sign-in actually completed (Hub fires
