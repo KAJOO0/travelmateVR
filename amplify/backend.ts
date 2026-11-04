@@ -106,6 +106,38 @@ new wafv2.CfnWebACLAssociation(backend.stack, 'LoginGuardWafAssoc', {
   webAclArn: webAcl.attrArn
 });
 
+// ---------------- AppSync rate limiting (pre-launch audit, Area 5) ----------------
+
+// The catalogue's GraphQL API had zero rate limiting of any kind — AWS's blanket
+// account-level service quotas exist for scaling headroom, not abuse prevention, so any
+// client could hit it at whatever rate it could sustain. A dedicated WebACL, not the
+// LoginGuardWaf above: that one's 100-req/5min limit is tuned tight for login attempts
+// specifically, and WAF rate-based rules count per-IP across every resource one WebACL is
+// associated with — sharing it would mean heavy (legitimate) catalogue browsing from one
+// IP could exhaust the same budget meant to stop password-guessing from that IP, or the
+// reverse. Separate WebACL, independently tunable, same reasoning otherwise.
+const dataApiWebAcl = new wafv2.CfnWebACL(backend.stack, 'DataApiWaf', {
+  scope: 'REGIONAL',
+  defaultAction: { allow: {} },
+  visibilityConfig: { sampledRequestsEnabled: true, cloudWatchMetricsEnabled: true, metricName: 'DataApiWaf' },
+  rules: [
+    {
+      name: 'RateLimitPerIp',
+      priority: 0,
+      // Higher than the login limit on purpose — normal catalogue browsing fans out into
+      // many GraphQL requests per page (nested model reads). Placeholder, tune after
+      // observing real traffic, same as LoginGuardWaf's rule.
+      statement: { rateBasedStatement: { limit: 500, aggregateKeyType: 'IP' } },
+      action: { block: {} },
+      visibilityConfig: { sampledRequestsEnabled: true, cloudWatchMetricsEnabled: true, metricName: 'DataApiRateLimitPerIp' }
+    }
+  ]
+});
+new wafv2.CfnWebACLAssociation(backend.stack, 'DataApiWafAssoc', {
+  resourceArn: backend.data.resources.graphqlApi.arn,
+  webAclArn: dataApiWebAcl.attrArn
+});
+
 // ---------------- Custom Hosted UI domain (auth.travelmatevr.com) ----------------
 
 // Flip to true only once BOTH of these are true — deploying while either is false fails the

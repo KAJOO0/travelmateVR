@@ -12,5 +12,10 @@ export const loginGuardFn = defineFunction({
   // references the user pool ARN (function -> auth) — a cross-stack circular dependency
   // CloudFormation rejects. Within one stack, that's just normal same-template resource
   // ordering, which CloudFormation resolves fine.
-  resourceGroupName: 'auth'
+  resourceGroupName: 'auth',
+  // Default CloudWatch log retention is "never expire" — this function's invocation events
+  // carry real email addresses (event.userName) once real password sign-ins happen, so
+  // indefinite retention is an unnecessary, unbounded copy of that data (pre-launch audit,
+  // Area 1). 3 months balances that against still having useful history to debug with.
+  logging: { retention: '3 months' }
 });
