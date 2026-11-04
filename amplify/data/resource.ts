@@ -7,9 +7,17 @@ import { type ClientSchema, a, defineData } from '@aws-amplify/backend';
 //
 // Reads are public (the catalogue is public content). Writes are locked to the 'admin'
 // Cognito group (amplify/auth/resource.ts) — nothing writes through the app yet, but the
-// rule is correct from day one rather than temporarily open. A short-lived API key grant
-// is added to each model solely for the one-time seed migration script
-// (scripts/migrate-seed-to-amplify.ts) — it is never used by the running app.
+// rule is correct from day one rather than temporarily open.
+//
+// A standing allow.publicApiKey() write grant used to be on every model below, for the
+// one-time seed migration script (scripts/migrate-seed-to-amplify.ts). Removed: that API
+// key is embedded in amplify_outputs.json, which src/main.tsx bundles into the public JS —
+// so it was a public, unauthenticated write credential on the live catalogue, not a
+// private one, and `expiresInDays` never actually closed the window because every routine
+// redeploy silently re-issued it. If the migration needs to run again, do it with
+// IAM/admin credentials (e.g. `ampx sandbox` locally, or a one-off script using the
+// deployer's AWS credentials directly against DynamoDB/AppSync), never a schema-level
+// public key grant.
 
 const LocalizedText = a.customType({
   en: a.string(),
@@ -62,7 +70,7 @@ const schema = a.schema({
       currency: a.string(), // folded in from src/data/seed/reference.ts's COUNTRY_INFO
       destinations: a.hasMany('Destination', 'countryId')
     })
-    .authorization(allow => [allow.guest().to(['read']), allow.group('admin'), allow.publicApiKey().to(['create', 'update', 'delete'])]),
+    .authorization(allow => [allow.guest().to(['read']), allow.group('admin')]),
 
   Destination: a
     .model({
@@ -94,7 +102,7 @@ const schema = a.schema({
       listings: a.hasMany('Listing', 'destinationId'),
       experiences: a.hasMany('Experience', 'destinationId')
     })
-    .authorization(allow => [allow.guest().to(['read']), allow.group('admin'), allow.publicApiKey().to(['create', 'update', 'delete'])]),
+    .authorization(allow => [allow.guest().to(['read']), allow.group('admin')]),
 
   Partner: a
     .model({
@@ -115,7 +123,7 @@ const schema = a.schema({
       tagline: LocalizedText,
       listings: a.hasMany('Listing', 'partnerId')
     })
-    .authorization(allow => [allow.guest().to(['read']), allow.group('admin'), allow.publicApiKey().to(['create', 'update', 'delete'])]),
+    .authorization(allow => [allow.guest().to(['read']), allow.group('admin')]),
 
   Listing: a
     .model({
@@ -159,7 +167,7 @@ const schema = a.schema({
       extras: a.ref('Extra').array(),
       paused: a.boolean().default(false) // forward-compat for the (out-of-scope) partner inventory overlay — nothing writes it yet
     })
-    .authorization(allow => [allow.guest().to(['read']), allow.group('admin'), allow.publicApiKey().to(['create', 'update', 'delete'])]),
+    .authorization(allow => [allow.guest().to(['read']), allow.group('admin')]),
 
   Experience: a
     .model({
@@ -183,7 +191,7 @@ const schema = a.schema({
       featured: a.boolean(),
       listingIds: a.string().array() // flat id references (many-to-many), not a relation
     })
-    .authorization(allow => [allow.guest().to(['read']), allow.group('admin'), allow.publicApiKey().to(['create', 'update', 'delete'])]),
+    .authorization(allow => [allow.guest().to(['read']), allow.group('admin')]),
 
   Review: a
     .model({
@@ -200,7 +208,7 @@ const schema = a.schema({
       status: a.enum(['pending', 'approved', 'rejected']) // forward-compat for (out-of-scope) moderation; migration sets 'approved' explicitly
       // 'mine' from src/domain/types.ts is a client-only UI flag — never persisted here.
     })
-    .authorization(allow => [allow.guest().to(['read']), allow.group('admin'), allow.publicApiKey().to(['create', 'update', 'delete'])])
+    .authorization(allow => [allow.guest().to(['read']), allow.group('admin')])
   // Progressive login lockout state lives in a plain CDK-managed DynamoDB table
   // (amplify/backend.ts), not an Amplify Data model — allow.resource() turned out to only be
   // valid for field-level authorization, not a whole model's CRUD rules (confirmed from the
@@ -216,7 +224,6 @@ export type Schema = ClientSchema<typeof schema>;
 export const data = defineData({
   schema,
   authorizationModes: {
-    defaultAuthorizationMode: 'identityPool', // guest reads via the unauthenticated Cognito Identity Pool role; allow.group('admin') writes use the Cognito User Pool from amplify/auth/resource.ts automatically
-    apiKeyAuthorizationMode: { expiresInDays: 7 } // migration-script-only — let it expire or delete it after use
+    defaultAuthorizationMode: 'identityPool' // guest reads via the unauthenticated Cognito Identity Pool role; allow.group('admin') writes use the Cognito User Pool from amplify/auth/resource.ts automatically
   }
 });
