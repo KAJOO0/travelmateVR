@@ -68,7 +68,7 @@ export const PRIVACY: LegalDoc = {
         'To create and administer your account, authenticate you and keep your account secure: performance of a contract (GDPR Art. 6(1)(b)) and our legitimate interests in securing the Platform (Art. 6(1)(f)).',
         'To display immersive previews, destination information and personalised recommendations: performance of a contract and, for personalisation based on your stated interests, your consent (Art. 6(1)(a)), which you may withdraw in your account preferences.',
         'To process bookings, transmit them to Partners, collect payments through licensed providers, issue confirmations and handle changes, cancellations and refunds: performance of a contract.',
-        'To provide the AI travel planner, including generating itineraries and cost estimates from your requests: performance of a contract; prompts are stored in redacted form for quality and safety monitoring on the basis of our legitimate interests.',
+        'To provide the AI travel planner, including generating itineraries and cost estimates from your requests: performance of a contract. Once the AI planner is backed by a live service (it is not yet — requests are handled on-device today), prompts will be stored in redacted form for quality and safety monitoring on the basis of our legitimate interests.',
         'To verify Partners and Creators, including licence and identity checks, and to prevent fraud, money laundering and the financing of terrorism: compliance with legal obligations (Art. 6(1)(c)) and legitimate interests.',
         'To provide customer support and to communicate with you about your bookings and account: performance of a contract.',
         'To send marketing communications: your prior consent where required by law; you may opt out at any time using the unsubscribe link or your notification settings.',
@@ -128,7 +128,7 @@ export const PRIVACY: LegalDoc = {
     {
       h: '12. Security',
       p: [
-        'We implement appropriate technical and organisational measures to protect Personal Data against accidental or unlawful destruction, loss, alteration, unauthorised disclosure or access, including encryption in transit (TLS), salted one-way hashing of passwords, role-based access controls, limitation of failed sign-in attempts, audit logging of administrative actions and the segregation of payment data to licensed providers. No method of transmission or storage is completely secure; you are responsible for keeping your credentials confidential.',
+        'We implement appropriate technical and organisational measures to protect Personal Data against accidental or unlawful destruction, loss, alteration, unauthorised disclosure or access, including encryption in transit (TLS), salted one-way hashing of passwords, role-based access controls, limitation of failed sign-in attempts and the segregation of payment data to licensed providers. Audit logging of administrative actions will be added once an administrative back end exists. No method of transmission or storage is completely secure; you are responsible for keeping your credentials confidential.',
         'In the event of a personal data breach likely to result in a risk to your rights and freedoms, we will notify the competent supervisory authority and, where required, you, within the time limits prescribed by Applicable Data Protection Law.'
       ]
     },
@@ -216,7 +216,7 @@ export const TERMS: LegalDoc = {
         'You must be at least 18 years of age, or the age of majority in your jurisdiction, and have legal capacity to enter into a binding contract in order to create an Account or make a Booking.',
         'You must provide accurate, current and complete information and keep it up to date. You may not impersonate any person or use a false identity.',
         'You are responsible for maintaining the confidentiality of your credentials and for all activity under your Account. You must notify us immediately of any unauthorised use.',
-        'For your protection, sign-in is temporarily suspended after repeated unsuccessful attempts. We may require additional verification, including two-factor authentication for administrative and Partner accounts.',
+        'For your protection, sign-in is temporarily suspended after repeated unsuccessful attempts. We may in the future require additional verification, including two-factor authentication for administrative and Partner accounts, once those account types exist.',
         'Where you act on behalf of a business or body, you represent and warrant that you are authorised to bind it to these Terms.'
       ]
     },
