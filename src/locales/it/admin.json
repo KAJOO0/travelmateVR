@@ -8,6 +8,7 @@
     "text": "Gestisci utenti, partner, contenuti, prenotazioni, IA, assistenza, ricavi e sicurezza della piattaforma.",
     "demo": "Apri il Command Center demo",
     "demoNote": "Accesso demo per la revisione. In produzione gli amministratori accedono con il proprio account e la verifica in due passaggi, e ogni permesso è applicato dal server.",
+    "realBackendNote": "Questa è la piattaforma reale: la sessione demo è disabilitata qui. Accedi invece con un account che dispone dell'accesso amministratore; ogni permesso resta comunque applicato dal server.",
     "role": "Accedi con i permessi di"
   },
   "roles": {

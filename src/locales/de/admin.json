@@ -8,6 +8,7 @@
     "text": "Verwalte Nutzer, Partner, Inhalte, Buchungen, KI, Support, Umsatz und die Sicherheit der Plattform.",
     "demo": "Demo-Command-Center öffnen",
     "demoNote": "Demozugang zur Prüfung. Im Livebetrieb melden sich Administratoren mit eigenem Konto und Zwei-Faktor-Bestätigung an; jede Berechtigung wird vom Server durchgesetzt.",
+    "realBackendNote": "Dies ist die echte Plattform — der Demo-Zugang ist hier deaktiviert. Melden Sie sich stattdessen mit einem Konto mit Administratorzugriff an; jede Berechtigung wird weiterhin vom Server durchgesetzt.",
     "role": "Anmelden mit den Berechtigungen von"
   },
   "roles": {

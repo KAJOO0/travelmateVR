@@ -6,6 +6,7 @@ import { Media } from '@/components/ui/Media';
 import { Notice } from '@/components/ui/bits';
 import { auth } from '@/services/account';
 import { ADMIN_ROLES } from '@/services/admin';
+import { REAL_BACKEND } from '@/services/http';
 import { usePageTitle } from '@/app/usePageTitle';
 import type { Role, User } from '@/domain/types';
 
@@ -27,28 +28,43 @@ export function PortalGate({ kind, signedInAs }: { kind: 'partner' | 'board' | '
           <h1>{t(`${ns}:gate.title`)}</h1>
           <p style={{ color: 'var(--muted)' }}>{t(`${ns}:gate.text`)}</p>
           {signedInAs && <Notice icon="info">{t('business:gate.noAccess', { email: signedInAs.email })}</Notice>}
-          {kind === 'admin' && (
-            <fieldset className="field" style={{ border: 0 }}>
-              <legend className="label" style={{ marginBottom: 8 }}>{t('admin:gate.role')}</legend>
-              <div style={{ display: 'grid', gap: 6 }}>
-                {ADMIN_ROLES.map(r => (
-                  <label key={r} className="check" style={{ alignItems: 'flex-start' }}>
-                    <input type="radio" name="admin-role" checked={role === r} onChange={() => setRole(r)} style={{ marginTop: 3 }} />
-                    <span><b>{t(`admin:roles.${r}`)}</b><br /><small className="muted">{t(`admin:roleText.${r}`)}</small></span>
-                  </label>
-                ))}
-              </div>
-            </fieldset>
-          )}
-          <button type="button" className="btn solid" disabled={busy} onClick={() => void enter()}>
-            <Icon name={kind === 'admin' ? 'shield' : 'briefcase'} />{busy ? t('business:gate.opening') : t(`${ns}:gate.demo`)}
-          </button>
-          <Notice icon="shield">{t(`${ns}:gate.demoNote`)}</Notice>
-          {kind !== 'admin' && (
-            <p style={{ fontSize: 'var(--fs-small)', color: 'var(--muted)' }}>
-              {t(`${ns}:gate.noAccount`)}{' '}
-              <Link to={kind === 'partner' ? '/partners/join' : '/tourism-boards#contact'}>{t(`${ns}:gate.apply`)}</Link>
-            </p>
+          {REAL_BACKEND ? (
+            // The one-click demo session below sets only a local, client-side role label —
+            // never a real Cognito credential — so it's disabled here on the real backend.
+            // Real portal access requires actually being signed in with an account that holds
+            // the matching Cognito group membership (checked server-side on every write
+            // regardless of this gate); it stays fully available in demo mode for
+            // presentations. See src/services/account.ts's finishRealSignIn().
+            <>
+              <Notice icon="shield">{t('admin:gate.realBackendNote')}</Notice>
+              <Link className="btn solid" to="/signin"><Icon name="shield" />{t('common:nav.signIn')}</Link>
+            </>
+          ) : (
+            <>
+              {kind === 'admin' && (
+                <fieldset className="field" style={{ border: 0 }}>
+                  <legend className="label" style={{ marginBottom: 8 }}>{t('admin:gate.role')}</legend>
+                  <div style={{ display: 'grid', gap: 6 }}>
+                    {ADMIN_ROLES.map(r => (
+                      <label key={r} className="check" style={{ alignItems: 'flex-start' }}>
+                        <input type="radio" name="admin-role" checked={role === r} onChange={() => setRole(r)} style={{ marginTop: 3 }} />
+                        <span><b>{t(`admin:roles.${r}`)}</b><br /><small className="muted">{t(`admin:roleText.${r}`)}</small></span>
+                      </label>
+                    ))}
+                  </div>
+                </fieldset>
+              )}
+              <button type="button" className="btn solid" disabled={busy} onClick={() => void enter()}>
+                <Icon name={kind === 'admin' ? 'shield' : 'briefcase'} />{busy ? t('business:gate.opening') : t(`${ns}:gate.demo`)}
+              </button>
+              <Notice icon="shield">{t(`${ns}:gate.demoNote`)}</Notice>
+              {kind !== 'admin' && (
+                <p style={{ fontSize: 'var(--fs-small)', color: 'var(--muted)' }}>
+                  {t(`${ns}:gate.noAccount`)}{' '}
+                  <Link to={kind === 'partner' ? '/partners/join' : '/tourism-boards#contact'}>{t(`${ns}:gate.apply`)}</Link>
+                </p>
+              )}
+            </>
           )}
         </div>
       </div>

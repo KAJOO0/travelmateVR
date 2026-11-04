@@ -8,6 +8,7 @@
     "text": "Gérez utilisateurs, partenaires, contenus, réservations, IA, assistance, revenus et sécurité de la plateforme.",
     "demo": "Ouvrir le Command Center de démonstration",
     "demoNote": "Accès de démonstration pour évaluation. En production, les administrateurs se connectent avec leur propre compte et une validation en deux étapes, et chaque autorisation est appliquée par le serveur.",
+    "realBackendNote": "Ceci est la plateforme réelle — la session de démonstration est désactivée ici. Connectez-vous plutôt avec un compte disposant d'un accès administrateur ; chaque autorisation reste appliquée par le serveur.",
     "role": "Se connecter avec les autorisations de"
   },
   "roles": {

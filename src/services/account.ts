@@ -7,6 +7,7 @@ import type { Channel } from './messaging';
 import {
   confirmSignIn as cognitoConfirmSignIn,
   confirmSignUp as cognitoConfirmSignUp,
+  fetchAuthSession,
   fetchUserAttributes,
   getCurrentUser,
   signIn as cognitoSignIn,
@@ -75,10 +76,22 @@ const startSession = (user: User) => { loginGuard.reset(); sessionStore.set({ us
 
 /** After a Cognito signIn()/confirmSignUp()+signIn() call has already succeeded: read the
  *  authenticated user's attributes and land them in the app's session, same shape as every
- *  other sign-in path. */
+ *  other sign-in path.
+ *
+ *  Admin access: real Cognito group membership (amplify/auth/resource.ts's 'admin' group,
+ *  read from the ID token's standard `cognito:groups` claim — not the app's own session
+ *  object, which can't be trusted for this) maps to the 'super_admin' role. This is the only
+ *  real group that exists today, so there's no finer-grained mapping yet. This is what makes
+ *  a real signed-in admin distinct from the PortalGate demo button (src/services/account.ts's
+ *  signInPortal()), which only ever sets a local session and is disabled entirely in real-mode
+ *  (see PortalGate.tsx) — real admin access requires actually being in this Cognito group,
+ *  checked server-side by every Amplify Data write already (allow.group('admin')), not just
+ *  this client-side role label, which exists only to drive which UI the app shows. */
 async function finishRealSignIn(fallbackEmail: string, provider: 'email' | 'google' = 'email'): Promise<User> {
-  const [{ userId }, attrs] = await Promise.all([getCurrentUser(), fetchUserAttributes()]);
-  return startSession({ id: userId, name: attrs.name ?? fallbackEmail, email: attrs.email ?? fallbackEmail, provider, roles: ['traveller'], createdAt: nowIso() });
+  const [{ userId }, attrs, session] = await Promise.all([getCurrentUser(), fetchUserAttributes(), fetchAuthSession()]);
+  const groups = (session.tokens?.idToken?.payload['cognito:groups'] as string[] | undefined) ?? [];
+  const roles: Role[] = groups.includes('admin') ? ['super_admin'] : ['traveller'];
+  return startSession({ id: userId, name: attrs.name ?? fallbackEmail, email: attrs.email ?? fallbackEmail, provider, roles, createdAt: nowIso() });
 }
 
 /** Call once on app load (see src/main.tsx's Hub 'auth' listener). A Google sign-in is a full

@@ -8,6 +8,7 @@
     "text": "Manage users, partners, content, bookings, AI, support, revenue and platform security.",
     "demo": "Open the demo Command Center",
     "demoNote": "Demo access for review. In production, administrators sign in with their own account and two-step verification, and every permission is enforced by the server.",
+    "realBackendNote": "This is the real platform — the demo session is disabled here. Sign in with an account that has admin access instead; every permission is still enforced by the server regardless.",
     "role": "Sign in with the permissions of"
   },
   "roles": {
