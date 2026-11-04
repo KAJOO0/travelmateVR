@@ -1,4 +1,5 @@
 import { defineBackend } from '@aws-amplify/backend';
+import * as cognito from 'aws-cdk-lib/aws-cognito';
 import * as dynamodb from 'aws-cdk-lib/aws-dynamodb';
 import * as iam from 'aws-cdk-lib/aws-iam';
 import * as wafv2 from 'aws-cdk-lib/aws-wafv2';
@@ -104,3 +105,44 @@ new wafv2.CfnWebACLAssociation(backend.stack, 'LoginGuardWafAssoc', {
   resourceArn: backend.auth.resources.userPool.userPoolArn,
   webAclArn: webAcl.attrArn
 });
+
+// ---------------- Custom Hosted UI domain (auth.travelmatevr.com) ----------------
+
+// Flip to true only once BOTH of these are true — deploying while either is false fails the
+// build (ACM rejects an unissued cert on a Cognito domain) and would take down the
+// currently-working Google sign-in in the process:
+//   1. AUTH_DOMAIN_CERT_ARN's certificate status is ISSUED (currently PENDING_VALIDATION —
+//      requires the DNS CNAME below to be added at whichever provider ends up hosting
+//      travelmatevr.com's DNS).
+//   2. That same DNS provider has auth.travelmatevr.com CNAME'd to this user pool's Hosted UI
+//      CloudFront target (get the exact target from the deploy's own output after enabling,
+//      same two-step process as the travelmatevr.com Amplify domain association).
+//
+// Validation CNAME (add this first, independent of the above — safe, doesn't affect anything
+// live): _7f80b09ad32b8d9d3812296386f985d0.auth.travelmatevr.com ->
+// _d950fb3babd052845d3e0f6b76e86f8b.wzccmgtwzk.acm-validations.aws
+const ENABLE_CUSTOM_AUTH_DOMAIN = false;
+const AUTH_DOMAIN_CERT_ARN = 'arn:aws:acm:us-east-1:946769780520:certificate/d064de2e-45e2-40bd-9afb-9a4c16f3fe69';
+
+if (ENABLE_CUSTOM_AUTH_DOMAIN) {
+  // defineAuth exposes no way to configure the Hosted UI domain at all (confirmed earlier:
+  // `domainPrefix` is explicitly omitted from its type — the wrapper always generates one
+  // itself once externalProviders is set). Replacing it with a custom domain therefore means
+  // reaching the UserPoolDomain CfnResource the construct creates internally, which isn't
+  // exposed via backend.auth.resources.cfnResources either. The lookup below isn't a blind
+  // guess: it mirrors the exact lookup auth-construct's OWN code uses internally to produce
+  // the oauthCognitoDomain output (@aws-amplify/auth-construct/lib/construct.js, around line
+  // 974: `this.resources.userPool.node.tryFindChild(`${this.name}UserPoolDomain`)`), where
+  // `this.name` is '' because we never set defineAuth's `name` option — so the construct ID
+  // is exactly 'UserPoolDomain', a direct child of the userPool L2 construct.
+  const userPoolDomain = backend.auth.resources.userPool.node.tryFindChild('UserPoolDomain');
+  if (!(userPoolDomain instanceof cognito.UserPoolDomain)) {
+    throw new Error('Expected to find the auth construct\'s UserPoolDomain child — its internal naming must have changed.');
+  }
+  // CDK's standard escape hatch: the L2's own `resource` field is private, but its single L1
+  // child is reachable as the construct's default child (CfnUserPoolDomain, created with the
+  // fixed id 'Resource' — aws-cdk-lib/aws-cognito/lib/user-pool-domain.js).
+  const cfnUserPoolDomain = userPoolDomain.node.defaultChild as cognito.CfnUserPoolDomain;
+  cfnUserPoolDomain.domain = 'auth.travelmatevr.com';
+  cfnUserPoolDomain.customDomainConfig = { certificateArn: AUTH_DOMAIN_CERT_ARN };
+}
