@@ -389,7 +389,7 @@ function Security() {
         <Modal title={t('account:security.erase')} onClose={() => setConfirm(false)}>
           <p>{t('account:security.eraseText')}</p>
           <div className="row-between"><button type="button" className="btn ghost sm" onClick={() => setConfirm(false)}>{t('common:actions.cancel')}</button>
-            <button type="button" className="btn solid sm" onClick={() => { Object.keys(localStorage).filter(k => k.startsWith('tm.') && k !== 'tm.lang' && k !== 'tm.theme').forEach(k => localStorage.removeItem(k)); sessionStorage.clear(); window.location.href = '/'; }}>{t('account:security.eraseConfirm')}</button>
+            <button type="button" className="btn solid sm" onClick={async () => { await auth.signOut(); Object.keys(localStorage).filter(k => k.startsWith('tm.') && k !== 'tm.lang' && k !== 'tm.theme').forEach(k => localStorage.removeItem(k)); sessionStorage.clear(); window.location.href = '/'; }}>{t('account:security.eraseConfirm')}</button>
           </div>
         </Modal>
       )}
