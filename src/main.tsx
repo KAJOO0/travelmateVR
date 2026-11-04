@@ -30,6 +30,10 @@ if (outputs) Amplify.configure(outputs);
 // so it can't double-fire or race with the normal sign-in path).
 Hub.listen('auth', ({ payload }) => {
   if (payload.event === 'signInWithRedirect') void syncSessionFromRedirect();
+  // Without this, a failed federated sign-in (wrong IdP scopes, Cognito rejecting the
+  // federated user, etc.) fails completely silently — the page that started the redirect is
+  // long gone by the time Cognito reports back, and nothing else listens for this event.
+  else if (payload.event === 'signInWithRedirect_failure') console.error('Google sign-in failed:', payload.data?.error);
 });
 
 initPwa();

@@ -22,22 +22,24 @@ import { loginGuardFn } from '../functions/login-guard/resource';
  * way email sign-in does). The client secret is a sandbox/deployed-environment secret (set
  * via `npx ampx sandbox secret set GOOGLE_CLIENT_SECRET`, or the Console's Secrets page for
  * production), never committed in plaintext. The client ID isn't sensitive (it's embedded in
- * every redirect URL anyway) so it's a plain string here.
- *
- * @see https://docs.amplify.aws/gen2/build-a-backend/auth
- */
-/**
- * Google sign-in: Cognito's built-in federation (not hand-rolled OIDC token verification —
- * Cognito does the issuer/audience/expiry checks and issues the app's own session the same
- * way email sign-in does). The client secret is a sandbox/deployed-environment secret (set
- * via `npx ampx sandbox secret set GOOGLE_CLIENT_SECRET`, or the Console's Secrets page for
- * production), never committed in plaintext. The client ID isn't sensitive (it's embedded in
  * every redirect URL anyway) but Amplify's config type still requires it as a BackendSecret.
  *
- * Isolation test confirmed this was never the cause of the earlier circular-dependency
- * failures (job #16 failed identically with Google fully removed) — the real cause was
- * loginGuardFn's environment variables referencing the user pool/client (fixed in
+ * Isolation test confirmed the earlier circular-dependency failures were never caused by
+ * Google federation (job #16 failed identically with Google fully removed) — the real cause
+ * was loginGuardFn's environment variables referencing the user pool/client (fixed in
  * amplify/backend.ts + handler.ts instead).
+ *
+ * `scopes` below (on `externalProviders` itself) sets the user pool APP CLIENT's
+ * AllowedOAuthScopes — confirmed via deploy this was already correct. It does NOT control
+ * what Cognito asks Google for. That's `google.scopes`, a separate property this type
+ * inherits from CDK's `UserPoolIdentityProviderGoogleProps`, defaulting to `['profile']`
+ * alone if omitted — which is exactly what happened here: Google never granted an email,
+ * so Cognito's attributeMapping (email -> email) had nothing to map, federation silently
+ * failed to produce a usable account, and the app's Hub listener (only handling
+ * 'signInWithRedirect', not 'signInWithRedirect_failure') never surfaced an error. Must be
+ * explicit.
+ *
+ * @see https://docs.amplify.aws/gen2/build-a-backend/auth
  */
 export const auth = defineAuth({
   loginWith: {
@@ -45,7 +47,8 @@ export const auth = defineAuth({
     externalProviders: {
       google: {
         clientId: secret('GOOGLE_CLIENT_ID'),
-        clientSecret: secret('GOOGLE_CLIENT_SECRET')
+        clientSecret: secret('GOOGLE_CLIENT_SECRET'),
+        scopes: ['profile', 'email', 'openid']
       },
       // domainPrefix isn't configurable at this level (confirmed: omitted from the factory's
       // own type) — Amplify auto-generates the Cognito Hosted UI domain. Check
