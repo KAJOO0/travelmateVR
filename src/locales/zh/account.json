@@ -1,5 +1,9 @@
 {
   "title": "我的旅伴",
+  "header": {
+    "admin": "管理后台",
+    "signOut": "退出登录"
+  },
   "hello": "您好，{{name}}",
   "helloGuest": "欢迎来到我的旅伴",
   "guestNote": "您正以访客身份使用 TravelMateVR。所有内容都保存在此设备上；登录后可保存到您的账户。",
@@ -228,7 +232,13 @@
     "export": "下载我的数据",
     "erase": "删除我的数据",
     "eraseText": "这将从此设备上删除行程、预订、偏好、文件和消息，且无法撤销。",
-    "eraseConfirm": "全部删除"
+    "eraseConfirm": "全部删除",
+    "dangerZone": "危险操作区",
+    "deleteText": "永久删除您的账户，而不仅仅是此设备上的数据。此操作无法撤销。",
+    "delete": "删除我的账户",
+    "deleteConfirmText": "此操作将永久删除您的账户以及此设备上的所有内容，且无法撤销。",
+    "deleteConfirm": "永久删除账户",
+    "deleting": "正在删除…"
   },
   "signin": {
     "welcome": "欢迎回来",

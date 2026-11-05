@@ -7,6 +7,7 @@ import type { Channel } from './messaging';
 import {
   confirmSignIn as cognitoConfirmSignIn,
   confirmSignUp as cognitoConfirmSignUp,
+  deleteUser as cognitoDeleteUser,
   fetchAuthSession,
   fetchUserAttributes,
   getCurrentUser,
@@ -284,6 +285,23 @@ export const auth = {
   },
   async signOut() {
     if (REAL_BACKEND) { try { await cognitoSignOut(); } catch { /* best-effort: clear the local session regardless */ } }
+    sessionStore.set({ user: null });
+  },
+  /** Self-service account deletion — Cognito's own deleteUser() API, which only ever
+   *  deletes the CURRENTLY AUTHENTICATED user's own account (no admin privilege needed or
+   *  usable here), separate from scripts/delete-user-account.ts's admin-run runbook for
+   *  cases where the user can't sign in themselves to do this. A demo session (its id
+   *  always starts with 'u_demo_') was never a real Cognito user, so there's nothing on
+   *  the backend to delete — just the local session and device data. Also clears every
+   *  tm.*-prefixed localStorage key, same as the account page's existing "erase my data"
+   *  action, since deleting the account should leave nothing behind either way. */
+  async deleteAccount() {
+    const isDemo = sessionStore.get().user?.id.startsWith('u_demo_');
+    if (REAL_BACKEND && !isDemo) {
+      try { await cognitoDeleteUser(); } catch { /* best-effort: clear the local session regardless */ }
+    }
+    Object.keys(localStorage).filter(k => k.startsWith('tm.') && k !== 'tm.lang' && k !== 'tm.theme').forEach(k => localStorage.removeItem(k));
+    sessionStorage.clear();
     sessionStore.set({ user: null });
   },
   update(patch: Partial<Pick<User, 'name' | 'email'>>) {

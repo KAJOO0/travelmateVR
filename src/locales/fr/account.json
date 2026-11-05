@@ -1,5 +1,9 @@
 {
   "title": "Mon TravelMate",
+  "header": {
+    "admin": "Tableau de bord admin",
+    "signOut": "Se déconnecter"
+  },
   "hello": "Bonjour, {{name}}",
   "helloGuest": "Bienvenue dans Mon TravelMate",
   "guestNote": "Vous naviguez en tant qu’invité : tout reste sur cet appareil. Connectez-vous pour le garder dans votre compte.",
@@ -234,7 +238,13 @@
     "export": "Télécharger mes données",
     "erase": "Effacer mes données",
     "eraseText": "Cela supprime voyages, réservations, préférences, documents et messages de cet appareil. Action irréversible.",
-    "eraseConfirm": "Tout effacer"
+    "eraseConfirm": "Tout effacer",
+    "dangerZone": "Zone de danger",
+    "deleteText": "Supprime définitivement votre compte, pas seulement les données de cet appareil. Aucun retour en arrière possible.",
+    "delete": "Supprimer mon compte",
+    "deleteConfirmText": "Cela supprime définitivement votre compte et tout ce qui se trouve sur cet appareil. Action irréversible.",
+    "deleteConfirm": "Supprimer définitivement mon compte",
+    "deleting": "Suppression…"
   },
   "signin": {
     "welcome": "Ravi de vous revoir",

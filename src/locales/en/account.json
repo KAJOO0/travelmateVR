@@ -1,5 +1,9 @@
 {
   "title": "My TravelMate",
+  "header": {
+    "admin": "Admin dashboard",
+    "signOut": "Sign out"
+  },
   "hello": "Hello, {{name}}",
   "helloGuest": "Welcome to My TravelMate",
   "guestNote": "You're using TravelMateVR as a guest. Everything is saved on this device; sign in to keep it with your account.",
@@ -231,7 +235,13 @@
     "export": "Download my data",
     "erase": "Erase my data",
     "eraseText": "This removes trips, bookings, preferences, documents and messages from this device. It can't be undone.",
-    "eraseConfirm": "Erase everything"
+    "eraseConfirm": "Erase everything",
+    "dangerZone": "Danger zone",
+    "deleteText": "Permanently delete your account, not just this device's data. There's no undo once this is done.",
+    "delete": "Delete my account",
+    "deleteConfirmText": "This permanently deletes your account and everything on this device. It can't be undone.",
+    "deleteConfirm": "Delete my account permanently",
+    "deleting": "Deleting…"
   },
   "signin": {
     "welcome": "Welcome back",

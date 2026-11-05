@@ -351,6 +351,8 @@ function Security() {
   const toast = useToast();
   const profile = useProfile();
   const [confirm, setConfirm] = useState(false);
+  const [deleteConfirm, setDeleteConfirm] = useState(false);
+  const [deleting, setDeleting] = useState(false);
   const exportData = () => {
     const data: Record<string, unknown> = {};
     for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i)!; if (k.startsWith('tm.')) { try { data[k] = JSON.parse(localStorage.getItem(k)!); } catch { data[k] = localStorage.getItem(k); } } }
@@ -385,11 +387,27 @@ function Security() {
           <Link className="btn ghost sm" to="/privacy">{t('common:footer.links.privacy')}</Link>
         </div>
       </section>
+      <section className="panel" style={{ display: 'grid', gap: 10 }}>
+        <h2 className="group-title">{t('account:security.dangerZone')}</h2>
+        <p style={{ color: 'var(--muted)', fontSize: 'var(--fs-small)' }}>{t('account:security.deleteText')}</p>
+        <div className="chip-row">
+          <button type="button" className="btn ghost sm danger" onClick={() => setDeleteConfirm(true)}><Icon name="trash" />{t('account:security.delete')}</button>
+        </div>
+      </section>
       {confirm && (
         <Modal title={t('account:security.erase')} onClose={() => setConfirm(false)}>
           <p>{t('account:security.eraseText')}</p>
           <div className="row-between"><button type="button" className="btn ghost sm" onClick={() => setConfirm(false)}>{t('common:actions.cancel')}</button>
             <button type="button" className="btn solid sm" onClick={async () => { await auth.signOut(); Object.keys(localStorage).filter(k => k.startsWith('tm.') && k !== 'tm.lang' && k !== 'tm.theme').forEach(k => localStorage.removeItem(k)); sessionStorage.clear(); window.location.href = '/'; }}>{t('account:security.eraseConfirm')}</button>
+          </div>
+        </Modal>
+      )}
+      {deleteConfirm && (
+        <Modal title={t('account:security.delete')} onClose={() => (!deleting ? setDeleteConfirm(false) : undefined)}>
+          <p>{t('account:security.deleteConfirmText')}</p>
+          <div className="row-between">
+            <button type="button" className="btn ghost sm" disabled={deleting} onClick={() => setDeleteConfirm(false)}>{t('common:actions.cancel')}</button>
+            <button type="button" className="btn solid sm danger" disabled={deleting} onClick={async () => { setDeleting(true); await auth.deleteAccount(); window.location.href = '/'; }}>{deleting ? t('account:security.deleting') : t('account:security.deleteConfirm')}</button>
           </div>
         </Modal>
       )}

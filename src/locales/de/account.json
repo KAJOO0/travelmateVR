@@ -1,5 +1,9 @@
 {
   "title": "Mein TravelMate",
+  "header": {
+    "admin": "Admin-Dashboard",
+    "signOut": "Abmelden"
+  },
   "hello": "Hallo, {{name}}",
   "helloGuest": "Willkommen bei Mein TravelMate",
   "guestNote": "Du bist als Gast unterwegs. Alles bleibt auf diesem Gerät. Melde dich an, damit es in deinem Konto gespeichert wird.",
@@ -231,7 +235,13 @@
     "export": "Meine Daten herunterladen",
     "erase": "Meine Daten löschen",
     "eraseText": "Damit werden Reisen, Buchungen, Vorlieben, Dokumente und Nachrichten von diesem Gerät entfernt. Dies kann nicht rückgängig gemacht werden.",
-    "eraseConfirm": "Alles löschen"
+    "eraseConfirm": "Alles löschen",
+    "dangerZone": "Gefahrenzone",
+    "deleteText": "Löscht dein Konto dauerhaft, nicht nur die Daten auf diesem Gerät. Es gibt danach kein Zurück mehr.",
+    "delete": "Mein Konto löschen",
+    "deleteConfirmText": "Dies löscht dein Konto und alles auf diesem Gerät dauerhaft. Es kann nicht rückgängig gemacht werden.",
+    "deleteConfirm": "Konto endgültig löschen",
+    "deleting": "Wird gelöscht …"
   },
   "signin": {
     "welcome": "Willkommen zurück",
