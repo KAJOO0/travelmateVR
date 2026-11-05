@@ -76,8 +76,12 @@ export const handler = async (event: AnyTriggerEvent): Promise<AnyTriggerEvent> 
     }
 
     case 'CreateAuthChallenge_Authentication': {
-      // Nothing to generate — the password itself is the challenge answer.
-      event.response.publicChallengeParameters = {};
+      // Nothing to generate — the password itself is the challenge answer. Cognito silently
+      // rejects the whole InitiateAuth call (masked as a generic "Incorrect username or
+      // password", with no error anywhere in this Lambda's logs) if publicChallengeParameters
+      // is an empty object — confirmed by direct testing, not documented by AWS. It must have
+      // at least one key; the value itself is never checked against the answer.
+      event.response.publicChallengeParameters = { prompt: 'password' };
       event.response.privateChallengeParameters = {};
       event.response.challengeMetadata = 'PASSWORD_CHALLENGE';
       return event;

@@ -122,7 +122,11 @@ export async function syncSessionFromRedirect(): Promise<boolean> {
  *  anything unparseable — never reveals more than today's code already does. */
 function mapCognitoLockoutError(e: unknown): AuthError {
   const message = e instanceof Error ? e.message : '';
-  const lockedMatch = message.match(/LOCKED:(\S+)/);
+  // Cognito wraps the Lambda's thrown message in UserLambdaValidationException and appends a
+  // trailing period — confirmed live. \S+ would capture that period as part of the ISO
+  // timestamp and make every downstream Date.parse() return Invalid Date, so match the ISO
+  // shape precisely instead of "everything non-whitespace".
+  const lockedMatch = message.match(/LOCKED:(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?Z)/);
   if (lockedMatch) {
     loginGuard.syncLock(lockedMatch[1]);
     return new AuthError('locked', lockedMatch[1]);
