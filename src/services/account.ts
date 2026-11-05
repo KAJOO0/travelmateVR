@@ -139,15 +139,22 @@ function mapCognitoLockoutError(e: unknown): AuthError {
  *  VerifyAuthChallengeResponse, which is what makes progressive lockout enforceable
  *  server-side rather than just cosmetic. */
 async function attemptCustomAuthSignIn(email: string, password: string): Promise<void> {
-  const { isSignedIn, nextStep } = await cognitoSignIn({ username: email, options: { authFlowType: 'CUSTOM_WITHOUT_SRP' } });
-  if (isSignedIn) return;
-  // An unconfirmed account surfaces here, on the initial call, same as it did under SRP —
-  // Amplify's CUSTOM_WITHOUT_SRP path reuses the same UserNotConfirmedException -> nextStep
-  // mapping. Must be checked before the lockout-relevant CONFIRM_SIGN_IN_WITH_CUSTOM_CHALLENGE
-  // branch below, since an unconfirmed account never reaches the password-challenge step at all.
-  if (nextStep?.signInStep === 'CONFIRM_SIGN_UP') throw new AuthError('confirmation_required');
-  if (nextStep?.signInStep !== 'CONFIRM_SIGN_IN_WITH_CUSTOM_CHALLENGE') throw loginGuard.fail(); // unexpected state — fail generically
   try {
+    // Confirmed live: for an email with no account at all, Cognito's own
+    // preventUserExistenceErrors protection throws NotAuthorizedException straight out of
+    // this very first call — it never even reaches a nextStep — contrary to this flow's
+    // original design assumption that existing and non-existing users took an identical
+    // path all the way to the password-challenge step. Without this try/catch, that
+    // exception (not an AuthError) fell all the way through signIn() as an unhandled
+    // "something went wrong" instead of the normal "wrong email or password" message.
+    const { isSignedIn, nextStep } = await cognitoSignIn({ username: email, options: { authFlowType: 'CUSTOM_WITHOUT_SRP' } });
+    if (isSignedIn) return;
+    // An unconfirmed account surfaces here, on the initial call, same as it did under SRP —
+    // Amplify's CUSTOM_WITHOUT_SRP path reuses the same UserNotConfirmedException -> nextStep
+    // mapping. Must be checked before the lockout-relevant CONFIRM_SIGN_IN_WITH_CUSTOM_CHALLENGE
+    // branch below, since an unconfirmed account never reaches the password-challenge step at all.
+    if (nextStep?.signInStep === 'CONFIRM_SIGN_UP') throw new AuthError('confirmation_required');
+    if (nextStep?.signInStep !== 'CONFIRM_SIGN_IN_WITH_CUSTOM_CHALLENGE') throw loginGuard.fail(); // unexpected state — fail generically
     const { isSignedIn: done } = await cognitoConfirmSignIn({ challengeResponse: password });
     if (!done) throw loginGuard.fail();
   } catch (e) {
