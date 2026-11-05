@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Icon, type IconName } from '@/components/ui/Icon';
 import { Media } from '@/components/ui/Media';
 import { Notice } from '@/components/ui/bits';
 import { usePageTitle } from '@/app/usePageTitle';
-import { support } from '@/services/account';
+import { auth, support } from '@/services/account';
 import '@/styles/home.css';
 import '@/styles/pages.css';
 import '@/styles/portal.css';
@@ -20,11 +20,16 @@ const ORG_TYPES = ['board', 'dmo', 'government', 'park', 'conservation'];
 export default function BoardsLandingPage() {
   const { t } = useTranslation(['board', 'business', 'common', 'trip']);
   usePageTitle(t('board:landing.title'));
+  const navigate = useNavigate();
   const [f, setF] = useState({ org: '', type: 'board', name: '', email: '', message: '' });
   const [touched, setTouched] = useState(false);
   const [busy, setBusy] = useState(false);
+  const [demoBusy, setDemoBusy] = useState(false);
   const [sent, setSent] = useState<string | null>(null);
   const errs = { org: f.org.trim().length < 2, name: f.name.trim().length < 2, email: !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email) };
+  // One click, straight into the real portal with a demo session — the whole point is not
+  // making a prospective board ask for a demo or click through the sign-in gate first.
+  const previewDemo = async () => { setDemoBusy(true); await auth.signInPortal('board'); navigate('/board'); };
 
   const submit = async () => {
     setTouched(true);
@@ -45,8 +50,8 @@ export default function BoardsLandingPage() {
             <h1>{t('board:landing.title')}</h1>
             <p>{t('board:landing.lede')}</p>
             <div className="chip-row" style={{ marginTop: 8 }}>
-              <a className="btn light" href="#contact"><Icon name="mail" />{t('board:landing.requestDemo')}</a>
-              <Link className="btn on-media" to="/board"><Icon name="briefcase" />{t('board:landing.openDemo')}</Link>
+              <button type="button" className="btn light" disabled={demoBusy} onClick={() => void previewDemo()}><Icon name="eye" />{demoBusy ? t('business:gate.opening') : t('board:landing.openDemo')}</button>
+              <a className="btn on-media" href="#contact"><Icon name="mail" />{t('board:landing.requestDemo')}</a>
             </div>
           </div>
         </div>

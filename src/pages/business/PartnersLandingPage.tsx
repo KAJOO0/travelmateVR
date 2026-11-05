@@ -1,10 +1,12 @@
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Icon, type IconName } from '@/components/ui/Icon';
 import { Media } from '@/components/ui/Media';
 import { usePageTitle } from '@/app/usePageTitle';
 import { whatsappLink } from '@/config/site';
 import { seedIndex } from '@/services/catalog';
+import { auth } from '@/services/account';
 import { useLocale } from '@/i18n/useLocale';
 import { countryName } from '@/lib/content';
 import { GLOBAL_REGIONS, type Partner } from '@/domain/types';
@@ -29,7 +31,12 @@ export default function PartnersLandingPage() {
   const { t } = useTranslation(['business', 'common', 'home', 'explore']);
   usePageTitle(t('business:landing.title'));
   const lang = useLocale();
+  const navigate = useNavigate();
+  const [demoBusy, setDemoBusy] = useState(false);
   const global = seedIndex.countries.filter(c => GLOBAL_REGIONS.includes(c.region));
+  // One click, straight into the real portal with a demo session — the whole point is not
+  // making a prospective partner ask for a demo or click through the sign-in gate first.
+  const previewDemo = async () => { setDemoBusy(true); await auth.signInPortal('partner'); navigate('/business'); };
   return (
     <div className="page">
       <section className="block">
@@ -40,6 +47,7 @@ export default function PartnersLandingPage() {
             <h1>{t('business:landing.title')}</h1>
             <p>{t('business:landing.lede')}</p>
             <div className="chip-row" style={{ marginTop: 8 }}>
+              <button type="button" className="btn solid" disabled={demoBusy} onClick={() => void previewDemo()}><Icon name="eye" />{demoBusy ? t('business:gate.opening') : t('business:landing.previewDemo')}</button>
               <Link className="btn light" to="/partners/join"><Icon name="plus" />{t('business:landing.apply')}</Link>
               <Link className="btn on-media" to="/business"><Icon name="briefcase" />{t('business:landing.signIn')}</Link>
             </div>
