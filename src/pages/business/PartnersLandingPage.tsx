@@ -7,7 +7,7 @@ import { whatsappLink } from '@/config/site';
 import { seedIndex } from '@/services/catalog';
 import { useLocale } from '@/i18n/useLocale';
 import { countryName } from '@/lib/content';
-import { GLOBAL_REGIONS } from '@/domain/types';
+import { GLOBAL_REGIONS, type Partner } from '@/domain/types';
 import '@/styles/home.css';
 import '@/styles/pages.css';
 import '@/styles/portal.css';
@@ -16,10 +16,17 @@ const BENEFITS: { k: string; icon: IconName }[] = [
   { k: 'storefront', icon: 'landmark' }, { k: 'vr', icon: 'view360' }, { k: 'ai', icon: 'sparkles' },
   { k: 'bookings', icon: 'calendar' }, { k: 'payments', icon: 'shield' }, { k: 'insights', icon: 'barChart' }
 ];
+// All 7 real partner categories (Partner['kind']), not just the 3 the homepage teases — each
+// needs its own specific benefit copy so "Learn more" actually reveals something beyond the
+// one-line homepage card, instead of scrolling down to read the exact same sentence again.
+const CATEGORIES: { kind: Partner['kind']; icon: IconName }[] = [
+  { kind: 'operator', icon: 'binoculars' }, { kind: 'lodge', icon: 'bed' }, { kind: 'restaurant', icon: 'utensils' },
+  { kind: 'transport', icon: 'car' }, { kind: 'community', icon: 'users' }, { kind: 'events', icon: 'ticketStar' }, { kind: 'guide', icon: 'compass' }
+];
 
 /** Public "For partners" page: value proposition, how joining works, plans, and entry to the portal. */
 export default function PartnersLandingPage() {
-  const { t } = useTranslation(['business', 'common', 'home']);
+  const { t } = useTranslation(['business', 'common', 'home', 'explore']);
   usePageTitle(t('business:landing.title'));
   const lang = useLocale();
   const global = seedIndex.countries.filter(c => GLOBAL_REGIONS.includes(c.region));
@@ -52,10 +59,10 @@ export default function PartnersLandingPage() {
       <section className="block" aria-labelledby="pl-for">
         <h2 className="sec-title" id="pl-for">{t('home:types.title')}</h2>
         <div className="grid3">
-          {([['operators', 'binoculars', 'operator'], ['hotels', 'bed', 'lodge'], ['guides', 'compass', 'guide']] as const).map(([k, icon, kind]) => (
-            <div className="card about" key={k} id={`for-${k}`} style={{ scrollMarginTop: 96 }}>
-              <span className="ico"><Icon name={icon} /></span><h3>{t(`home:types.${k}.title`)}</h3><p>{t(`home:types.${k}.text`)}</p>
-              <Link className="tlink" to={`/partners/join?kind=${kind}`}><span>{t('business:landing.apply')}</span><Icon name="arrowRight" /></Link>
+          {CATEGORIES.map(c => (
+            <div className="card about" key={c.kind} id={`for-${c.kind}`} style={{ scrollMarginTop: 96 }}>
+              <span className="ico"><Icon name={c.icon} /></span><h3>{t(`explore:partnerKind.${c.kind}`)}</h3><p>{t(`business:landing.categoryBenefit.${c.kind}`)}</p>
+              <Link className="tlink" to={`/partners/join?kind=${c.kind}`}><span>{t('business:landing.apply')}</span><Icon name="arrowRight" /></Link>
             </div>
           ))}
         </div>

@@ -59,9 +59,9 @@ const BENEFITS: { key: string; icon: IconName }[] = [
 const STEPS: IconName[] = ['compass', 'view360', 'sparkles', 'ticket'];
 const PARTNER_BENEFITS = ['reach', 'leads', 'confidence', 'conversion', 'showcase', 'manage'];
 const PARTNER_TYPES: { key: string; icon: IconName; to: string }[] = [
-  { key: 'operators', icon: 'binoculars', to: '/partners#for-operators' },
-  { key: 'hotels', icon: 'bed', to: '/partners#for-hotels' },
-  { key: 'guides', icon: 'compass', to: '/partners#for-guides' },
+  { key: 'operators', icon: 'binoculars', to: '/partners#for-operator' },
+  { key: 'hotels', icon: 'bed', to: '/partners#for-lodge' },
+  { key: 'guides', icon: 'compass', to: '/partners#for-guide' },
   { key: 'boards', icon: 'landmark', to: '/tourism-boards' },
   { key: 'conservation', icon: 'leaf', to: '/tourism-boards' },
   { key: 'creators', icon: 'video360', to: '/creators' }

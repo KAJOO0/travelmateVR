@@ -625,6 +625,15 @@
     "lede": "Présentez votre lodge, votre camp, votre safari, votre circuit ou votre restaurant sur TravelMateVR. Montrez-le en 360°, recevez des réservations et soyez payé, avec des outils pensés pour les acteurs du tourisme africain.",
     "apply": "Postuler",
     "signIn": "Connexion partenaire",
+    "categoryBenefit": {
+      "operator": "Laissez les voyageurs découvrir vos itinéraires, véhicules et camps réels en 360° avant de réserver — moins d'annulations de dernière minute, plus de voyageurs qui savent déjà exactement à quoi s'attendre.",
+      "lodge": "Montrez chaque chambre, chaque vue et chaque espace commun tel qu'il est. Les voyageurs qui ont déjà exploré votre établissement en 360° réservent en confiance et arrivent avec les bonnes attentes.",
+      "restaurant": "Offrez aux convives une place à votre table avant même leur arrivée. Montrez votre salle, votre vue, votre ambiance — démarquez-vous parmi les options voisines.",
+      "transport": "Présentez vos véhicules, itinéraires et niveau de confort en 360° afin que les voyageurs réservent le bon transport dès la première fois, avec moins de litiges liés à des attentes non satisfaites.",
+      "community": "Mettez votre expérience communautaire devant des voyageurs du monde entier, avec une part de chaque réservation reversée directement aux personnes qui l'ont créée.",
+      "events": "Référencez vos événements là où les voyageurs planifient déjà leurs dates dans votre destination — remplissez vos places pour festivals, visites et expériences avec de vraies réservations anticipées.",
+      "guide": "Partagez vos connaissances locales avant même le début du voyage, et soyez l'expert en qui les voyageurs ont déjà confiance avant d'arriver."
+    },
     "whyTitle": "Ce que vous y gagnez",
     "benefits": {
       "storefront": {

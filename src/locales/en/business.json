@@ -613,6 +613,15 @@
     "lede": "List your lodge, camp, safari, tour or restaurant on TravelMateVR. Show it in 360°, take bookings, and get paid, with tools built for African tourism businesses.",
     "apply": "Apply to join",
     "signIn": "Partner sign-in",
+    "categoryBenefit": {
+      "operator": "Let travellers preview your actual routes, vehicles and camps in 360° before they book — fewer last-minute cancellations, more guests who already know exactly what they're getting.",
+      "lodge": "Show every room, view and common area exactly as it is. Guests who've already explored your property in 360° book with confidence and arrive with the right expectations.",
+      "restaurant": "Give diners a seat at your table before they arrive. Show your dining room, your view, your atmosphere — stand out to travellers comparing options nearby.",
+      "transport": "Showcase your vehicles, routes and comfort level in 360° so travellers book the right transport the first time, with fewer disputes over unmet expectations.",
+      "community": "Put your community-led experience in front of travellers worldwide, with a share of every booking going directly back to the people who built it.",
+      "events": "List your events where travellers are already planning their dates in your destination — fill seats for festivals, tours and experiences with real advance bookings.",
+      "guide": "Share your local knowledge before the trip even begins, and be the expert travellers already trust before they land."
+    },
     "whyTitle": "What you get",
     "benefits": {
       "storefront": {
