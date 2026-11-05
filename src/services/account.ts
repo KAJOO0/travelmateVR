@@ -94,17 +94,24 @@ async function finishRealSignIn(fallbackEmail: string, provider: 'email' | 'goog
   return startSession({ id: userId, name: attrs.name ?? fallbackEmail, email: attrs.email ?? fallbackEmail, provider, roles, createdAt: nowIso() });
 }
 
-/** Call once on app load (see src/main.tsx's Hub 'auth' listener). A Google sign-in is a full
- *  browser redirect to accounts.google.com and back — the click handler that started it never
- *  gets to finish running, so this is how the app notices a redirect sign-in actually landed
- *  and populates sessionStore accordingly. Silently does nothing if there's no session to pick
- *  up (e.g. called on every page load, not just after a real redirect). */
-export async function syncSessionFromRedirect(): Promise<void> {
-  if (!REAL_BACKEND) return;
+/** Call once on app load (see src/main.tsx's Hub 'auth' listener), only ever in response to
+ *  the Hub 'signInWithRedirect' event — Amplify itself has already confirmed a redirect
+ *  sign-in completed by the time that event fires, so (unlike a blind call on every page
+ *  load) a failure here is a real problem worth logging, not an expected no-session case.
+ *  A Google sign-in is a full browser redirect to accounts.google.com and back — the click
+ *  handler that started it never gets to finish running, so this is how the app notices a
+ *  redirect sign-in actually landed and populates sessionStore accordingly. Returns whether
+ *  it actually signed someone in, so the caller can navigate them to their account — the
+ *  OAuth round-trip always lands back on the bare registered callback URL (the homepage),
+ *  never wherever the user actually meant to end up. */
+export async function syncSessionFromRedirect(): Promise<boolean> {
+  if (!REAL_BACKEND) return false;
   try {
     await finishRealSignIn('', 'google');
-  } catch {
-    // Not actually signed in (most page loads) — nothing to do.
+    return true;
+  } catch (e) {
+    console.error('Google sign-in completed the redirect but finishing the session failed:', e);
+    return false;
   }
 }
 

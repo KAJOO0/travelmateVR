@@ -39,12 +39,21 @@ if (outputs) {
   Amplify.configure(outputs);
 }
 
+const router = createBrowserRouter(routes);
+
 // Google sign-in is a full browser redirect — the click that started it never gets to finish
 // running. This is how the app notices a redirect sign-in actually completed (Hub fires
 // 'signInWithRedirect' specifically for this flow, not for regular email/password sign-in,
 // so it can't double-fire or race with the normal sign-in path).
 Hub.listen('auth', ({ payload }) => {
-  if (payload.event === 'signInWithRedirect') void syncSessionFromRedirect();
+  if (payload.event === 'signInWithRedirect') {
+    // The OAuth round-trip always lands back on the bare registered callback URL (the
+    // homepage), never wherever the user actually meant to go — unlike the normal
+    // email/password sign-in form, which already navigates to /account itself. Without this,
+    // a successful Google sign-in looked like nothing happened: the session was set, but
+    // nothing ever took the user anywhere to see it.
+    void syncSessionFromRedirect().then(signedIn => { if (signedIn) void router.navigate('/account'); });
+  }
   // Without this, a failed federated sign-in (wrong IdP scopes, Cognito rejecting the
   // federated user, etc.) fails completely silently — the page that started the redirect is
   // long gone by the time Cognito reports back, and nothing else listens for this event.
@@ -52,7 +61,6 @@ Hub.listen('auth', ({ payload }) => {
 });
 
 initPwa();
-const router = createBrowserRouter(routes);
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
