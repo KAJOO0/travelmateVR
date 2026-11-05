@@ -51,12 +51,24 @@ export const auth = defineAuth({
         scopes: ['profile', 'email', 'openid']
       },
       // domainPrefix isn't configurable at this level (confirmed: omitted from the factory's
-      // own type) — Amplify auto-generates the Cognito Hosted UI domain. Check
-      // amplify_outputs.json's auth.oauth.domain after deploy for the real value, and update
-      // the Google OAuth client's redirect URI to match if it differs from what was guessed
-      // before this was known.
-      callbackUrls: ['https://main.d1tgxuxxng291h.amplifyapp.com/', 'http://localhost:5173/'],
-      logoutUrls: ['https://main.d1tgxuxxng291h.amplifyapp.com/', 'http://localhost:5173/'],
+      // own type) — Amplify auto-generates the Cognito Hosted UI domain, now overridden onto
+      // auth.travelmatevr.com (see amplify/backend.ts). www.travelmatevr.com and the apex are
+      // the real cut-over site's URLs — confirmed missing live via a direct /oauth2/authorize
+      // test, which Cognito rejected with redirect_mismatch because only the old
+      // amplifyapp.com URL was registered here. The old URLs stay too: amplifyapp.com remains
+      // reachable directly, and localhost is for local dev.
+      callbackUrls: [
+        'https://www.travelmatevr.com/',
+        'https://travelmatevr.com/',
+        'https://main.d1tgxuxxng291h.amplifyapp.com/',
+        'http://localhost:5173/'
+      ],
+      logoutUrls: [
+        'https://www.travelmatevr.com/',
+        'https://travelmatevr.com/',
+        'https://main.d1tgxuxxng291h.amplifyapp.com/',
+        'http://localhost:5173/'
+      ],
       scopes: ['EMAIL', 'OPENID', 'PROFILE']
     }
   },
