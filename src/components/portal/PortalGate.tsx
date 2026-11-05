@@ -28,13 +28,19 @@ export function PortalGate({ kind, signedInAs }: { kind: 'partner' | 'board' | '
           <h1>{t(`${ns}:gate.title`)}</h1>
           <p style={{ color: 'var(--muted)' }}>{t(`${ns}:gate.text`)}</p>
           {signedInAs && <Notice icon="info">{t('business:gate.noAccess', { email: signedInAs.email })}</Notice>}
-          {REAL_BACKEND ? (
-            // The one-click demo session below sets only a local, client-side role label —
-            // never a real Cognito credential — so it's disabled here on the real backend.
-            // Real portal access requires actually being signed in with an account that holds
-            // the matching Cognito group membership (checked server-side on every write
-            // regardless of this gate); it stays fully available in demo mode for
-            // presentations. See src/services/account.ts's finishRealSignIn().
+          {REAL_BACKEND && kind === 'admin' ? (
+            // Admin only: the one-click demo session below sets only a local, client-side
+            // role label — never a real Cognito credential — so it's disabled here on the
+            // real backend for admin specifically, since that's a real operational control
+            // plane, not a sales tool. Real admin access requires actually being signed in
+            // with an account that holds the matching Cognito group membership (checked
+            // server-side on every write regardless of this gate).
+            //
+            // Partner and tourism-board demo access stays available even on the real
+            // backend, intentionally, alongside real accounts (which already work app-wide
+            // via /signin) — it's a sales tool letting a prospective partner or board preview
+            // the full portal experience without requesting a live demo, not a security
+            // boundary the way admin is. See src/services/account.ts's finishRealSignIn().
             <>
               <Notice icon="shield">{t('admin:gate.realBackendNote')}</Notice>
               <Link className="btn solid" to="/signin"><Icon name="shield" />{t('common:nav.signIn')}</Link>

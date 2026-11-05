@@ -249,6 +249,8 @@
     "haveAccount": "Already have an account?",
     "already": "You're signed in as {{email}}.",
     "demo": "Preview sign-in: accounts are simulated on this device until the live service launches. Passwords are stored only as a secure hash. Don’t use a real password.",
+    "demoCta": "Just want to look around first?",
+    "demoCtaLink": "Preview the demo experience",
     "terms": "By continuing you agree to our",
     "partner": "Are you a tourism business? Join as a partner",
     "photoAlt": "A safari guide team standing beside their vehicle",

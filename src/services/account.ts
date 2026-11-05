@@ -241,6 +241,16 @@ export const auth = {
     sessionStore.set({ user });
     return user;
   },
+  /** One-click preview of the full traveller experience, no sign-up required — a sales tool
+   *  (let a prospective traveller, partner or board see the platform themselves rather than
+   *  have to request a demo), so unlike signInPortal('admin', ...) this stays available
+   *  regardless of REAL_BACKEND, alongside the real sign-up/sign-in form right next to it. */
+  async signInDemoClient(): Promise<User> {
+    await demoLatency(400, 800);
+    const user: User = { id: 'u_demo_client', name: 'Demo Traveller', email: 'traveller@travelmatevr.example', provider: 'email', roles: ['traveller'], createdAt: nowIso() };
+    sessionStore.set({ user });
+    return user;
+  },
   /**
    * Demo business accounts. Production: the user signs in normally and the backend returns the roles and
    * organisations they belong to; portal routes are also enforced server-side, never only in the UI.

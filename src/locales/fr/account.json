@@ -252,6 +252,8 @@
     "haveAccount": "Vous avez déjà un compte ?",
     "already": "Vous êtes connecté en tant que {{email}}.",
     "demo": "Connexion de prévisualisation : les comptes sont simulés sur cet appareil jusqu’au lancement du service. Les mots de passe ne sont conservés que sous forme d’empreinte sécurisée. N’utilisez pas un vrai mot de passe.",
+    "demoCta": "Vous voulez juste jeter un œil d’abord ?",
+    "demoCtaLink": "Découvrir la démo",
     "terms": "En continuant, vous acceptez nos",
     "partner": "Vous êtes une entreprise touristique ? Devenez partenaire",
     "photoAlt": "Une équipe de guides de safari près de leur véhicule",

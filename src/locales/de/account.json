@@ -249,6 +249,8 @@
     "haveAccount": "Du hast schon ein Konto?",
     "already": "Du bist als {{email}} angemeldet.",
     "demo": "Vorschau-Anmeldung: Bis der echte Dienst startet, werden Konten auf diesem Gerät simuliert. Passwörter speichern wir nur als sicheren Hash. Nimm bitte kein echtes Passwort.",
+    "demoCta": "Erst einmal nur umsehen?",
+    "demoCtaLink": "Demo-Erlebnis ansehen",
     "terms": "Wenn du weitermachst, akzeptierst du unsere",
     "partner": "Du hast ein Tourismus-Unternehmen? Werde Partner",
     "photoAlt": "Ein Safari-Guide-Team neben seinem Fahrzeug",

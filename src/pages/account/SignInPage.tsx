@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Media } from '@/components/ui/Media';
 import { Notice } from '@/components/ui/bits';
 import { auth, AuthError, loginGuard, useLoginGuard, useSession } from '@/services/account';
+import { REAL_BACKEND } from '@/services/http';
 import { isAcceptablePassword, isEmail, isUsername, PASSWORD_MAX } from '@/lib/security';
 import { useLocale } from '@/i18n/useLocale';
 import { usePageTitle } from '@/app/usePageTitle';
@@ -150,7 +151,18 @@ export default function SignInPage() {
             {mode === 'signin' ? t('account:signin.noAccount') : t('account:signin.haveAccount')}{' '}
             <button type="button" className="tlink" onClick={() => { setMode(m => (m === 'signin' ? 'register' : 'signin')); setTouched(false); setFormError(null); }}><span>{mode === 'signin' ? t('account:signin.register') : t('common:nav.signIn')}</span></button>
           </p>
-          <Notice icon="info">{t('account:signin.demo')}</Notice>
+          {REAL_BACKEND ? (
+            // A sales tool, not a security boundary: let a prospective traveller (or a
+            // partner/board rep sizing up the platform) see the real experience immediately,
+            // without requesting a demo or creating a real account first — alongside the real
+            // sign-up/sign-in form right above, not instead of it.
+            <p style={{ fontSize: 'var(--fs-small)', color: 'var(--muted)' }}>
+              {t('account:signin.demoCta')}{' '}
+              <button type="button" className="tlink" disabled={busy} onClick={async () => { setBusy(true); await auth.signInDemoClient(); navigate(next, { replace: true }); }}><span>{t('account:signin.demoCtaLink')}</span></button>
+            </p>
+          ) : (
+            <Notice icon="info">{t('account:signin.demo')}</Notice>
+          )}
           <p style={{ fontSize: 12, color: 'var(--muted)' }}>{t('account:signin.terms')} <Link to="/terms">{t('common:footer.links.terms')}</Link> · <Link to="/privacy">{t('common:footer.links.privacy')}</Link> · <Link to="/partners">{t('account:signin.partner')}</Link></p>
         </form>
       </section>

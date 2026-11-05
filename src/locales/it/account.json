@@ -252,6 +252,8 @@
     "haveAccount": "Hai già un account?",
     "already": "Hai effettuato l’accesso come {{email}}.",
     "demo": "Accesso di anteprima: gli account sono simulati su questo dispositivo fino al lancio del servizio. Le password vengono conservate solo come hash sicuro. Non usare una password reale.",
+    "demoCta": "Vuoi solo dare un'occhiata prima?",
+    "demoCtaLink": "Prova la demo",
     "terms": "Continuando accetti i nostri",
     "partner": "Sei un’impresa turistica? Diventa partner",
     "photoAlt": "Una squadra di guide safari accanto al proprio veicolo",
