@@ -244,6 +244,8 @@
     "or": "oppure",
     "name": "Nome e cognome",
     "password": "Password",
+    "showPassword": "Mostra",
+    "hidePassword": "Nascondi",
     "passwordHint": "Da 8 a 128 caratteri.",
     "errPassword": "Usa da 8 a 128 caratteri.",
     "working": "Un momento…",

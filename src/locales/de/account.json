@@ -241,6 +241,8 @@
     "or": "oder",
     "name": "Vollständiger Name",
     "password": "Passwort",
+    "showPassword": "Anzeigen",
+    "hidePassword": "Verbergen",
     "passwordHint": "8–128 Zeichen.",
     "errPassword": "8–128 Zeichen verwenden.",
     "working": "Einen Moment…",

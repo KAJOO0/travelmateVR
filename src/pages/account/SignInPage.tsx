@@ -26,6 +26,7 @@ export default function SignInPage() {
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [code, setCode] = useState('');
   const [busy, setBusy] = useState(false);
   const [touched, setTouched] = useState(false);
@@ -145,7 +146,15 @@ export default function SignInPage() {
               <label className="field"><span>{t('account:signin.username')}</span><input value={username} maxLength={30} autoComplete="username" autoCapitalize="none" spellCheck={false} onChange={e => setUsername(e.target.value)} aria-invalid={touched && errs.username} /><span className="hint">{t('account:signin.usernameHint')}</span>{touched && errs.username && <span className="err">{t('account:signin.errUsername')}</span>}</label>
             </>
           )}
-          <label className="field"><span>{t('account:signin.password')}</span><input type="password" value={password} maxLength={PASSWORD_MAX} autoComplete={mode === 'signin' ? 'current-password' : 'new-password'} onChange={e => setPassword(e.target.value)} aria-invalid={touched && errs.password} disabled={!!lockedUntil} />{mode === 'register' && <span className="hint">{t('account:signin.passwordHint')}</span>}{touched && errs.password && <span className="err">{t(mode === 'signin' ? 'trip:book.errRequired' : 'account:signin.errPassword')}</span>}</label>
+          <label className="field"><span>{t('account:signin.password')}</span>
+            <span style={{ position: 'relative', display: 'block' }}>
+              <input type={showPassword ? 'text' : 'password'} value={password} maxLength={PASSWORD_MAX} style={{ paddingRight: 56, width: '100%' }} autoComplete={mode === 'signin' ? 'current-password' : 'new-password'} onChange={e => setPassword(e.target.value)} aria-invalid={touched && errs.password} disabled={!!lockedUntil} />
+              <button type="button" className="tlink" style={{ position: 'absolute', right: 10, top: '50%', transform: 'translateY(-50%)', fontSize: 'var(--fs-small)' }} onClick={() => setShowPassword(s => !s)} aria-label={t(showPassword ? 'account:signin.hidePassword' : 'account:signin.showPassword')}>
+                <span>{t(showPassword ? 'account:signin.hidePassword' : 'account:signin.showPassword')}</span>
+              </button>
+            </span>
+            {mode === 'register' && <span className="hint">{t('account:signin.passwordHint')}</span>}{touched && errs.password && <span className="err">{t(mode === 'signin' ? 'trip:book.errRequired' : 'account:signin.errPassword')}</span>}
+          </label>
           <button type="submit" className="btn solid" disabled={busy || !!lockedUntil}>{busy ? t('account:signin.working') : mode === 'signin' ? t('common:nav.signIn') : t('account:signin.register')}</button>
           <p style={{ fontSize: 'var(--fs-small)' }}>
             {mode === 'signin' ? t('account:signin.noAccount') : t('account:signin.haveAccount')}{' '}

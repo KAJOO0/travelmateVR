@@ -238,6 +238,8 @@
     "or": "或",
     "name": "姓名",
     "password": "密码",
+    "showPassword": "显示",
+    "hidePassword": "隐藏",
     "passwordHint": "使用 8–128 个字符。",
     "errPassword": "请使用 8–128 个字符。",
     "working": "请稍候…",
