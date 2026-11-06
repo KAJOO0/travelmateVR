@@ -10,7 +10,12 @@ export default defineConfig({
   plugins: [
     react(),
     VitePWA({
-      registerType: 'prompt',
+      // Was 'prompt': a new service worker (and any server-side fix it carries, e.g. a CSP
+      // header change) sat inactive behind a dismissible banner until a visitor happened to
+      // click it — confirmed live as the cause of the OAuth callback still hitting a stale,
+      // precached CSP after the header was already fixed server-side. 'autoUpdate' activates a
+      // new worker (and reloads) as soon as one is found, no visitor action required.
+      registerType: 'autoUpdate',
       injectRegister: false,
       includeAssets: ['favicon.svg', 'icons/*.png', 'brand/*.svg', 'offline.html'],
       manifest: {
@@ -38,11 +43,21 @@ export default defineConfig({
         ]
       },
       workbox: {
+        // New worker takes over immediately (together with registerType: 'autoUpdate' above)
+        // instead of waiting for every open tab to close — otherwise the old worker keeps
+        // serving its stale precached app shell (headers included) to any tab already open.
+        skipWaiting: true,
+        clientsClaim: true,
         // App shell + locale bundles are precached; media is cached on first view.
         globPatterns: ['**/*.{js,css,html,svg,woff2}', 'icons/*.png'],
         globIgnores: ['media/**', 'pano/**', 'video/**'],
         navigateFallback: '/index.html',
-        navigateFallbackDenylist: [/^\/api\//],
+        // The Google/Cognito OAuth callback always lands here as `/?code=...&state=...` — a
+        // real navigation, so without this the app-shell fallback above serves it from
+        // whatever was precached at build/install time, headers and all, instead of a live
+        // network response. Confirmed live: this is why a server-side CSP fix didn't take
+        // effect for a visitor whose service worker predated it. Never cache this one.
+        navigateFallbackDenylist: [/^\/api\//, /[?&]code=/],
         runtimeCaching: [
           {
             urlPattern: ({ url }) => url.pathname.startsWith('/media/') && url.pathname.endsWith('.webp'),
