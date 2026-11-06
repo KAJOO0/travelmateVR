@@ -29,7 +29,7 @@ customHeaders:
           style-src 'self' 'unsafe-inline';
           img-src 'self' data: blob: https://tile.openstreetmap.org;
           font-src 'self' data:;
-          connect-src 'self' https://*.appsync-api.eu-west-3.amazonaws.com wss://*.appsync-realtime-api.eu-west-3.amazonaws.com https://cognito-idp.eu-west-3.amazonaws.com https://cognito-identity.eu-west-3.amazonaws.com;
+          connect-src 'self' https://*.appsync-api.eu-west-3.amazonaws.com wss://*.appsync-realtime-api.eu-west-3.amazonaws.com https://cognito-idp.eu-west-3.amazonaws.com https://cognito-identity.eu-west-3.amazonaws.com https://auth.travelmatevr.com;
           media-src 'self';
           object-src 'none';
           base-uri 'self';
@@ -62,7 +62,12 @@ customHeaders:
   this to a nonce/hash build pipeline is a safe follow-up, deliberately not attempted here to
   avoid a live breakage from a mismatched hash.
 - `connect-src` allow-lists Cognito + AppSync (the real backend, `eu-west-3`) plus the
-  OpenStreetMap tile host (`src/components/map/MapView.tsx`'s default tile provider).
+  OpenStreetMap tile host (`src/components/map/MapView.tsx`'s default tile provider) and the
+  custom Cognito Hosted UI domain (`auth.travelmatevr.com`) — the browser calls this domain's
+  `/oauth2/token` endpoint directly to finish Google sign-in, so without it here that one
+  fetch is silently blocked by this very policy (confirmed live: `TypeError: Failed to fetch`
+  with a CSP violation logged for this exact host, even though Cognito/Google's own config was
+  otherwise correct).
 - `frame-ancestors 'none'` (CSP) and `X-Frame-Options: DENY` (legacy header) are intentionally
   redundant — nothing in this app needs to be iframe-embedded.
 
