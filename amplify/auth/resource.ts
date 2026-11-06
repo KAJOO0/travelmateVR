@@ -69,7 +69,12 @@ export const auth = defineAuth({
         'https://main.d1tgxuxxng291h.amplifyapp.com/',
         'http://localhost:5173/'
       ],
-      scopes: ['EMAIL', 'OPENID', 'PROFILE']
+      // Missing 'COGNITO_ADMIN' (-> aws.cognito.signin.user.admin) is why a federated Google
+      // session's access token worked for the OAuth round-trip itself but then failed with
+      // NotAuthorizedException: Access Token does not have required scopes on the very next
+      // call (fetchUserAttributes() -> Cognito's GetUser) - confirmed live. Email/password
+      // sign-in never hit this because it doesn't go through this OAuth scopes list at all.
+      scopes: ['EMAIL', 'OPENID', 'PROFILE', 'COGNITO_ADMIN']
     }
   },
   groups: ['admin'],
