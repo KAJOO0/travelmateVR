@@ -9,7 +9,6 @@ import {
   confirmSignUp as cognitoConfirmSignUp,
   deleteUser as cognitoDeleteUser,
   fetchAuthSession,
-  fetchUserAttributes,
   getCurrentUser,
   signIn as cognitoSignIn,
   signInWithRedirect,
@@ -89,10 +88,21 @@ const startSession = (user: User) => { loginGuard.reset(); sessionStore.set({ us
  *  checked server-side by every Amplify Data write already (allow.group('admin')), not just
  *  this client-side role label, which exists only to drive which UI the app shows. */
 async function finishRealSignIn(fallbackEmail: string, provider: 'email' | 'google' = 'email'): Promise<User> {
-  const [{ userId }, attrs, session] = await Promise.all([getCurrentUser(), fetchUserAttributes(), fetchAuthSession()]);
-  const groups = (session.tokens?.idToken?.payload['cognito:groups'] as string[] | undefined) ?? [];
+  const [{ userId }, session] = await Promise.all([getCurrentUser(), fetchAuthSession()]);
+  // Read name/email straight off the ID token rather than calling fetchUserAttributes()
+  // (Cognito's GetUser) - confirmed live that a Google-federated access token never carries
+  // the aws.cognito.signin.user.admin scope GetUser requires, no matter what the user pool
+  // client's AllowedOAuthScopes allows or what scope the sign-in request asks for; GetUser
+  // fails with NotAuthorizedException for every federated sign-in regardless. The ID token
+  // already has what's needed for free - 'email' and 'name' are standard claims populated by
+  // the 'email'/'profile' OAuth scopes we do get, the same way 'cognito:groups' below already
+  // works without GetUser.
+  const claims = session.tokens?.idToken?.payload ?? {};
+  const groups = (claims['cognito:groups'] as string[] | undefined) ?? [];
   const roles: Role[] = groups.includes('admin') ? ['super_admin'] : ['traveller'];
-  return startSession({ id: userId, name: attrs.name ?? fallbackEmail, email: attrs.email ?? fallbackEmail, provider, roles, createdAt: nowIso() });
+  const name = (claims.name as string | undefined) ?? fallbackEmail;
+  const email = (claims.email as string | undefined) ?? fallbackEmail;
+  return startSession({ id: userId, name, email, provider, roles, createdAt: nowIso() });
 }
 
 /** Call once on app load (see src/main.tsx's Hub 'auth' listener), only ever in response to

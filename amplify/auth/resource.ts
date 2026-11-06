@@ -48,7 +48,14 @@ export const auth = defineAuth({
       google: {
         clientId: secret('GOOGLE_CLIENT_ID'),
         clientSecret: secret('GOOGLE_CLIENT_SECRET'),
-        scopes: ['profile', 'email', 'openid']
+        scopes: ['profile', 'email', 'openid'],
+        // Without this, Cognito's default Google mapping leaves the 'name' standard attribute
+        // (and so the ID token's `name` claim) unmapped - confirmed live: a real Google
+        // sign-in's ID token had `email` populated but `name` was simply undefined, which is
+        // why the UI fell back to "Welcome Google" with no initials instead of a real name.
+        // 'email' needed no explicit mapping here because Cognito maps it by default; 'name'
+        // (CDK's `fullname`) does not have that default.
+        attributeMapping: { fullname: 'name' }
       },
       // domainPrefix isn't configurable at this level (confirmed: omitted from the factory's
       // own type) — Amplify auto-generates the Cognito Hosted UI domain, now overridden onto
