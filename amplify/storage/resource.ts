@@ -33,7 +33,7 @@ export const storage = defineStorage({
     // not login-gated.
     'profile-media/{entity_id}/*': [
       allow.entity('identity').to(['read', 'write', 'delete']),
-      allow.guest().to(['read']),
+      allow.guest.to(['read']),
       // update-partner-profile verifies a claimed logo/cover key really exists before
       // writing it onto the public Partner row — needs read across every identity's prefix
       // for the same reason submitApplicationFn does on partner-docs/*.
