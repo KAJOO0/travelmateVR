@@ -49,14 +49,26 @@ export const handler: AppSyncResolverHandler<Args, Record<string, unknown>> = as
   // CloudFormation reference here, which is exactly what caused the earlier circular-dependency
   // failure), not a plain baked-in string.
   const bucket = process.env.PARTNER_DOCS_BUCKET_NAME;
+  // Same allow-list/size cap as the client-side picker in src/pages/business/JoinPage.tsx
+  // (MAX_CERT_FILE_BYTES/CERT_FILE_TYPES) - enforced here too, since a direct GraphQL call
+  // bypasses that form entirely and could otherwise upload+reference anything S3 will store.
+  const ALLOWED_TYPES = new Set(['application/pdf', 'image/jpeg', 'image/png']);
+  const MAX_BYTES = 10 * 1024 * 1024;
   // Confirms every claimed document genuinely exists (not just a plausible-looking string the
   // client made up) - the actual enforcement point, not the length check above alone.
   await Promise.all(docs.map(async key => {
+    let head;
     try {
-      await s3.send(new HeadObjectCommand({ Bucket: bucket, Key: key }));
+      head = await s3.send(new HeadObjectCommand({ Bucket: bucket, Key: key }));
     } catch (e) {
       console.error('HeadObject failed', { bucket, key, error: e instanceof Error ? e.message : e, name: e instanceof Error ? e.name : undefined });
       throw new Error(`Certification document not found: ${key}`);
+    }
+    if (!head.ContentType || !ALLOWED_TYPES.has(head.ContentType)) {
+      throw new Error(`Certification document has an unsupported file type: ${key}`);
+    }
+    if ((head.ContentLength ?? 0) > MAX_BYTES) {
+      throw new Error(`Certification document is too large: ${key}`);
     }
   }));
 

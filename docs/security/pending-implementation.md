@@ -4,37 +4,17 @@ Concrete enough to execute directly when you're ready, without re-deriving the a
 Each needs something only you can provide (a new external account, or a go-ahead on new
 infrastructure) — that's why these weren't done automatically.
 
-## A. Progressive server-side login lockout (directive §10)
+## A. Progressive server-side login lockout (directive §10) — DONE
 
-**Why client-side isn't enough:** today's `loginGuard` (`src/services/account.ts`) tracks
-failures in the browser's `localStorage` — trivially bypassed by clearing storage or using a
-different device. Real enforcement needs server-side state.
-
-**The right architecture, using what's already in place:**
-1. Add a `LoginAttempt` model to `amplify/data/resource.ts` (or a dedicated DynamoDB table via
-   a new `amplify/storage`-style resource) keyed by `identifier` (email/username) with fields:
-   `failureCount`, `lockedUntil`, `escalationStage` (0/1/2), `lastAttemptAt`, plus a secondary
-   index on source IP for the IP-based limiting the directive also asks for.
-2. Add a **Cognito PreAuthentication Lambda trigger** (`amplify/auth/resource.ts` supports
-   `triggers: { preAuthentication: defineFunction(...) }`). This Lambda runs server-side,
-   before Cognito evaluates the password, and:
-   - Reads the attempt record for this identifier.
-   - If `lockedUntil` is in the future, throws (Cognito surfaces this as a rejected sign-in,
-     without revealing *why* to the client — map it to the same generic `AuthError` the app
-     already uses).
-3. Add a **PostAuthentication trigger** to reset the counter on success, and a
-   **PostConfirmation**/custom logic path to increment `failureCount` and compute the
-   15/30/1440-minute escalation on failure (Cognito's triggers don't fire on failed
-   auth the same way — the increment logic more practically belongs in `account.ts`'s
-   `auth.signIn` real-mode branch, calling a new AppSync mutation that does the increment
-   **server-side** via a resolver, not by trusting the client to report its own failures).
-4. Reuse the exact escalation math already written in `loginGuard` (`src/services/account.ts`)
-   — the 15/30/1440-minute cumulative logic doesn't need to be redesigned, just moved
-   server-side.
-
-**Cost/complexity:** one new Lambda (free tier covers this easily at current traffic), one new
-DynamoDB table (pennies). Moderate implementation effort — a few hours of focused work, not
-major infrastructure.
+**Status: Already implemented, this doc entry was stale.** Confirmed live during the
+2026-11-08 audit (see `audit-2026-11.md`): `amplify/functions/login-guard/` wires all four
+CUSTOM_AUTH Cognito triggers (`PreAuthentication`, `DefineAuthChallenge`,
+`CreateAuthChallenge`, `VerifyAuthChallengeResponse`) to one Lambda, backed by a dedicated
+DynamoDB table (`amplify/functions/login-guard/escalation.ts`) implementing the 15/30/1440-
+minute escalation. The app client's `ExplicitAuthFlows` excludes `USER_PASSWORD_AUTH`/
+`USER_SRP_AUTH`, so every real sign-in is forced through this custom flow — it can't be
+bypassed by calling a different Cognito auth API from the browser. No further action needed
+here; left in this file only as a record that it's resolved, not pending.
 
 ## B. Google Sign-In (directive §9)
 
@@ -69,13 +49,18 @@ describe Cognito doing out of the box.
    option. Flag this explicitly during setup so it's configured correctly, not just left on a
    default.
 
-## C. MFA for admins (directive §12G)
+## C. MFA for admins (directive §12G) — no longer blocked, now actionable
 
-**Blocked on the admin backend existing for real** — right now `/admin` runs on mock/demo
-auth (`auth.signInPortal`), not real Cognito accounts, so there's no real admin account to
-attach MFA to yet. Once admin accounts are real (a separate, larger phase — wiring the admin
-Command Center to the real backend, not a security task on its own):
+**Correction (2026-11-08 audit): the premise above was stale.** `/admin` is NOT mock-gated —
+confirmed live: `src/services/account.ts`'s `finishRealSignIn()` reads the real ID token's
+`cognito:groups` claim and maps `admin` membership to `roles: ['super_admin']`;
+`PortalLayout.tsx`/`PortalGate.tsx` gate the actual `/admin` route tree on that real role, and
+`PortalGate.tsx` explicitly disables the mock one-click admin demo button whenever
+`REAL_BACKEND` is true. A real admin (`gerald@matestechnologies.com`) already exists in the
+Cognito `admin` group. `GetUserPoolMfaConfig` shows MFA is entirely unconfigured on the pool
+(`MfaConfiguration: OFF`, no SMS/TOTP block at all) — nobody can enroll even voluntarily today.
 
+This is now directly actionable, not deferred work:
 1. Cognito supports TOTP MFA natively — `amplify/auth/resource.ts`'s `defineAuth` accepts
    `multifactor: { mode: 'OPTIONAL' | 'REQUIRED', totp: true }`.
 2. Scope it to admin roles specifically (not all travellers) via a Cognito group-based policy
@@ -83,4 +68,5 @@ Command Center to the real backend, not a security task on its own):
 3. Needs a small UI addition: a QR-code enrollment screen (the project already has
    `src/components/ui/QrCode.tsx` available to reuse for this).
 
-Not started — correctly sequenced behind the admin backend work, not forgotten.
+Awaiting a scope decision (admin-mandatory only vs. optional for all users) before
+implementation — see the 2026-11-08 audit's remediation plan.

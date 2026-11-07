@@ -47,11 +47,24 @@ export const handler: AppSyncResolverHandler<Args, Record<string, unknown>> = as
   // by design (see amplify/storage/resource.ts): worst case is referencing someone else's
   // already-uploaded photo as your own, not a privacy or access-control breach.
   const bucket = process.env.PARTNER_DOCS_BUCKET_NAME;
+  // Matches the accept="image/*" hint on the logo/cover file inputs in ProfilePage.tsx/
+  // AccountPage.tsx - that hint is client-side only, so enforce the same shape here too.
+  // 10MB mirrors submit-partner-application's cap - no existing project precedent set one for
+  // images specifically, this is a reasonable, revisitable choice.
+  const ALLOWED_TYPES = new Set(['image/jpeg', 'image/png', 'image/webp']);
+  const MAX_BYTES = 10 * 1024 * 1024;
   await Promise.all([logo, cover].filter((k): k is string => !!k).map(async key => {
+    let head;
     try {
-      await s3.send(new HeadObjectCommand({ Bucket: bucket, Key: key }));
+      head = await s3.send(new HeadObjectCommand({ Bucket: bucket, Key: key }));
     } catch {
       throw new Error(`Image not found: ${key}`);
+    }
+    if (!head.ContentType || !ALLOWED_TYPES.has(head.ContentType)) {
+      throw new Error(`Image has an unsupported file type: ${key}`);
+    }
+    if ((head.ContentLength ?? 0) > MAX_BYTES) {
+      throw new Error(`Image is too large: ${key}`);
     }
   }));
 
