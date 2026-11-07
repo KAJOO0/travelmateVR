@@ -1,5 +1,6 @@
 import { defineStorage } from '@aws-amplify/backend';
 import { submitApplicationFn } from '../functions/submit-partner-application/resource';
+import { updatePartnerProfileFn } from '../functions/update-partner-profile/resource';
 
 // Partner/tour-operator certification documents. 'partner-docs/{entity_id}/*' scopes each
 // applicant to their own prefix (entity_id resolves to the caller's Cognito Identity Pool
@@ -25,6 +26,18 @@ export const storage = defineStorage({
     'vr-media/{entity_id}/*': [
       allow.entity('identity').to(['read', 'write', 'delete']),
       allow.groups(['admin']).to(['read'])
+    ],
+    // Profile/cover photos — accepted as public-read by design (src/pages/account's "my
+    // data" docs flag this explicitly): the whole point is other people see them, same trust
+    // level Partner.cover already has. The exact key isn't guessable/listed anywhere, just
+    // not login-gated.
+    'profile-media/{entity_id}/*': [
+      allow.entity('identity').to(['read', 'write', 'delete']),
+      allow.guest().to(['read']),
+      // update-partner-profile verifies a claimed logo/cover key really exists before
+      // writing it onto the public Partner row — needs read across every identity's prefix
+      // for the same reason submitApplicationFn does on partner-docs/*.
+      allow.resource(updatePartnerProfileFn).to(['read'])
     ]
   })
 });

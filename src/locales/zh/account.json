@@ -213,6 +213,26 @@
     "started": "对话已开始。合作伙伴通常会在其标注的响应时间内回复。",
     "autoAck": "自动回复：合作伙伴已收到您的消息，将尽快答复。"
   },
+  "profile": {
+    "title": "头像与链接",
+    "photo": "头像",
+    "cover": "封面图",
+    "noCover": "尚未设置封面图",
+    "social": "社交媒体与链接",
+    "socialLabel": {
+      "instagram": "Instagram",
+      "facebook": "Facebook",
+      "twitter": "X（Twitter）",
+      "tiktok": "TikTok",
+      "youtube": "YouTube",
+      "website": "网站",
+      "linktree": "Linktree"
+    },
+    "photoSaved": "头像已更新。",
+    "coverSaved": "封面图已更新。",
+    "uploadFailed": "出错了，请重试。",
+    "saving": "保存中…"
+  },
   "security": {
     "signedInAs": "已通过{{provider}}以 {{email}} 登录。",
     "emailPassword": "电子邮箱和密码",
@@ -236,6 +256,7 @@
     "exportPdfLocal": "本设备上",
     "exportPdfApplications": "合作伙伴申请",
     "exportPdfNotifications": "通知",
+    "exportPdfProfile": "资料与链接",
     "erase": "删除我的数据",
     "eraseText": "这将从此设备上删除行程、预订、偏好、文件和消息，且无法撤销。",
     "eraseConfirm": "全部删除",

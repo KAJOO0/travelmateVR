@@ -346,6 +346,15 @@
     "realNote": "{{name}} ist Gründungspartner von TravelMateVR. Preise und Reiseabläufe werden direkt vom Partner bestätigt.",
     "whatsapp": "Hallo, ich möchte {{name}} über TravelMateVR etwas zu einer Reise fragen.",
     "whatsappNote": "WhatsApp-Nachrichten landen beim TravelMateVR-Team. Wir verbinden dich mit dem Partner.",
+    "social": {
+      "instagram": "Instagram",
+      "facebook": "Facebook",
+      "twitter": "X (Twitter)",
+      "tiktok": "TikTok",
+      "youtube": "YouTube",
+      "website": "Website",
+      "linktree": "Linktree"
+    },
     "services": "Leistungen und Preise",
     "phone": "Telefon",
     "website": "Website",

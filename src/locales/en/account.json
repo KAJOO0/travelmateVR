@@ -216,6 +216,26 @@
     "started": "Conversation started. The partner usually replies within their stated response time.",
     "autoAck": "Automatic reply: the partner has received your message and will answer soon."
   },
+  "profile": {
+    "title": "Profile photo & links",
+    "photo": "Profile photo",
+    "cover": "Cover photo",
+    "noCover": "No cover photo yet",
+    "social": "Social media and links",
+    "socialLabel": {
+      "instagram": "Instagram",
+      "facebook": "Facebook",
+      "twitter": "X (Twitter)",
+      "tiktok": "TikTok",
+      "youtube": "YouTube",
+      "website": "Website",
+      "linktree": "Linktree"
+    },
+    "photoSaved": "Profile photo updated.",
+    "coverSaved": "Cover photo updated.",
+    "uploadFailed": "Something went wrong. Please try again.",
+    "saving": "Saving…"
+  },
   "security": {
     "signedInAs": "Signed in as {{email}} with {{provider}}.",
     "emailPassword": "email and password",
@@ -239,6 +259,7 @@
     "exportPdfLocal": "On this device",
     "exportPdfApplications": "Partner applications",
     "exportPdfNotifications": "Notifications",
+    "exportPdfProfile": "Profile & links",
     "erase": "Erase my data",
     "eraseText": "This removes trips, bookings, preferences, documents and messages from this device. It can't be undone.",
     "eraseConfirm": "Erase everything",

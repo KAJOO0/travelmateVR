@@ -9,6 +9,7 @@ import { storage } from './storage/resource';
 import { loginGuardFn } from './functions/login-guard/resource';
 import { deleteAccountFn } from './functions/delete-account/resource';
 import { submitApplicationFn } from './functions/submit-partner-application/resource';
+import { updatePartnerProfileFn } from './functions/update-partner-profile/resource';
 
 /**
  * @see https://docs.amplify.aws/react/build-a-backend/ to add storage, functions, and more
@@ -19,7 +20,8 @@ export const backend = defineBackend({
   storage,
   loginGuardFn,
   deleteAccountFn,
-  submitApplicationFn
+  submitApplicationFn,
+  updatePartnerProfileFn
 });
 
 // Match src/lib/security.ts's isAcceptablePassword exactly (length 8–128, no composition
@@ -149,6 +151,23 @@ if (!partnerApplicationTableEntry) {
 const [, partnerApplicationTable] = partnerApplicationTableEntry;
 partnerApplicationTable.grantWriteData(backend.submitApplicationFn.resources.lambda);
 backend.submitApplicationFn.addEnvironment('PARTNER_APPLICATIONS_TABLE', partnerApplicationTable.tableName);
+
+// ---------------- Partner profile self-service (amplify/functions/update-partner-profile/) ----------------
+
+// 'Partner' alone would also match 'PartnerApplication' (both logical ids contain the
+// substring) — excluding anything with 'Application' in it disambiguates the two.
+const partnerTableEntry = Object.entries(backend.data.resources.tables)
+  .find(([logicalId]) => logicalId.includes('Partner') && !logicalId.includes('Application'));
+if (!partnerTableEntry) {
+  throw new Error('Could not find the generated Partner table among backend.data.resources.tables.');
+}
+const [, partnerTable] = partnerTableEntry;
+partnerTable.grantReadWriteData(backend.updatePartnerProfileFn.resources.lambda);
+backend.updatePartnerProfileFn.addEnvironment('PARTNER_TABLE', partnerTable.tableName);
+// S3 read access + the PARTNER_DOCS_BUCKET_NAME env var are both already handled by
+// amplify/storage/resource.ts's allow.resource(updatePartnerProfileFn) grant on
+// profile-media/* — same reasoning as submitApplicationFn above; adding either manually
+// here would reproduce the exact circular-dependency bug already fixed once.
 
 // ---------------- AppSync rate limiting (pre-launch audit, Area 5) ----------------
 

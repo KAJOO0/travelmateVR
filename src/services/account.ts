@@ -16,6 +16,7 @@ import {
   signUp as cognitoSignUp
 } from 'aws-amplify/auth';
 import { generateClient } from 'aws-amplify/data';
+import { uploadData } from 'aws-amplify/storage';
 import type { Schema } from '../../amplify/data/resource';
 
 const dataClient = () => generateClient<Schema>({ authMode: 'userPool' });
@@ -404,16 +405,70 @@ export function setBackendNotificationRead(id: string, read: boolean): Promise<u
 export async function fetchMyBackendData(): Promise<{
   applications: { businessName: string; status: string; createdAt: string }[];
   notifications: { kind: string; createdAt: string; read: boolean }[];
+  profile: { hasPhoto: boolean; hasCover: boolean; social: Record<string, string> };
 }> {
-  if (!REAL_BACKEND) return { applications: [], notifications: [] };
-  const [apps, notifs] = await Promise.all([
+  if (!REAL_BACKEND) return { applications: [], notifications: [], profile: { hasPhoto: false, hasCover: false, social: {} } };
+  const [apps, notifs, profiles] = await Promise.all([
     dataClient().models.PartnerApplication.list().catch(() => ({ data: [] })),
-    dataClient().models.Notification.list().catch(() => ({ data: [] }))
+    dataClient().models.Notification.list().catch(() => ({ data: [] })),
+    dataClient().models.UserProfile.list().catch(() => ({ data: [] }))
   ]);
+  const profile = profiles.data[0];
   return {
     applications: apps.data.map(a => ({ businessName: a.businessName, status: a.status ?? 'submitted', createdAt: a.createdAt })),
-    notifications: notifs.data.map(n => ({ kind: n.kind ?? '', createdAt: n.createdAt, read: n.read ?? false }))
+    notifications: notifs.data.map(n => ({ kind: n.kind ?? '', createdAt: n.createdAt, read: n.read ?? false })),
+    profile: {
+      hasPhoto: !!profile?.photoKey,
+      hasCover: !!profile?.coverKey,
+      social: profile?.social ? Object.fromEntries(Object.entries(profile.social).filter(([, v]) => v)) as Record<string, string> : {}
+    }
   };
+}
+
+// ---------------- Profile photo, cover photo, social links (UserProfile) ----------------
+// One row per Cognito user. Travellers edit this directly (AccountPage.tsx); a partner also
+// has one for their own copy, separate from the public Partner row itself (which only
+// updatePartnerProfile, a narrow server-verified mutation, can write — see
+// amplify/functions/update-partner-profile/).
+export type SocialLinks = NonNullable<Schema['UserProfile']['type']>['social'];
+
+function useProfileClient() { return dataClient(); }
+
+export function useMyProfile() {
+  const [profile, setProfile] = useState<Schema['UserProfile']['type'] | null>(null);
+  useEffect(() => {
+    if (!REAL_BACKEND) return;
+    const sub = useProfileClient().models.UserProfile.observeQuery().subscribe({
+      next: ({ items }) => setProfile(items[0] ?? null)
+    });
+    return () => sub.unsubscribe();
+  }, []);
+  return profile;
+}
+
+/** Uploads to profile-media/{identityId}/... (public read by design — see
+ *  amplify/storage/resource.ts) and saves the key onto this user's UserProfile row,
+ *  creating it on first use. */
+async function uploadProfileMedia(file: File, field: 'photoKey' | 'coverKey'): Promise<string> {
+  const identityId = (await fetchAuthSession()).identityId;
+  if (!identityId) throw new Error('Sign in to upload a photo.');
+  const key = `profile-media/${identityId}/${Date.now()}-${file.name}`;
+  await uploadData({ path: key, data: file }).result;
+  const client = dataClient();
+  const existing = await client.models.UserProfile.list();
+  if (existing.data[0]) await client.models.UserProfile.update({ id: existing.data[0].id, [field]: key });
+  else await client.models.UserProfile.create({ [field]: key });
+  return key;
+}
+
+export const uploadProfilePhoto = (file: File) => uploadProfileMedia(file, 'photoKey');
+export const uploadProfileCover = (file: File) => uploadProfileMedia(file, 'coverKey');
+
+export async function updateMySocialLinks(social: NonNullable<SocialLinks>): Promise<void> {
+  const client = dataClient();
+  const existing = await client.models.UserProfile.list();
+  if (existing.data[0]) await client.models.UserProfile.update({ id: existing.data[0].id, social });
+  else await client.models.UserProfile.create({ social });
 }
 
 // ---------------- Reviews written by the traveller ----------------

@@ -1,6 +1,7 @@
 import { type ClientSchema, a, defineData } from '@aws-amplify/backend';
 import { deleteAccountFn } from '../functions/delete-account/resource';
 import { submitApplicationFn } from '../functions/submit-partner-application/resource';
+import { updatePartnerProfileFn } from '../functions/update-partner-profile/resource';
 
 // Real catalogue data: Country, Destination, Partner, Listing, Experience, Review.
 // Mirrors src/domain/types.ts. Everything else (bookings, admin, partner/board portals,
@@ -51,11 +52,24 @@ const Hotspot = a.customType({
   text: a.ref('LocalizedText')
 });
 
+// Shared by UserProfile (travellers + a partner's own editable copy) and Partner (the public
+// row). Every field optional - nobody has to fill in all seven.
+const SocialLinks = a.customType({
+  instagram: a.string(),
+  facebook: a.string(),
+  twitter: a.string(),
+  tiktok: a.string(),
+  youtube: a.string(),
+  website: a.string(),
+  linktree: a.string()
+});
+
 const schema = a.schema({
   LocalizedText,
   Coordinates,
   Extra,
   Hotspot,
+  SocialLinks,
 
   Country: a
     .model({
@@ -131,7 +145,11 @@ const schema = a.schema({
       // sets this by hand once a Partner row exists some other way.
       applicationId: a.id(),
       revokedAt: a.datetime(),
-      revokedReason: a.string()
+      revokedReason: a.string(),
+      // Which Cognito user may call updatePartnerProfile for this row (below) - admin-set by
+      // hand, same accepted gap as applicationId above (no admin UI for either yet).
+      ownerSub: a.string(),
+      social: a.ref('SocialLinks')
     })
     .authorization(allow => [allow.guest().to(['read']), allow.group('admin')]),
 
@@ -270,6 +288,47 @@ const schema = a.schema({
       read: a.boolean().default(false)
     })
     .authorization(allow => [allow.owner().to(['read', 'update']), allow.group('admin').to(['create', 'read'])]),
+
+  // One row per Cognito user - a traveller's own photo/cover/social links, and also a
+  // partner's own editable copy of the same (separate from the public Partner row itself,
+  // which updatePartnerProfile below writes). No guest/authenticated-wide read: nothing in
+  // this app shows one user's profile to another today, so owner-only + admin is the
+  // correct, narrower default rather than opening a list()-enumerable new privacy surface
+  // for zero current benefit.
+  UserProfile: a
+    .model({
+      photoKey: a.string(), // S3 key under profile-media/{identityId}/* (amplify/storage/resource.ts)
+      coverKey: a.string(),
+      social: a.ref('SocialLinks'),
+      // Admin-set by hand, same accepted gap as Partner.applicationId/ownerSub - no admin UI
+      // yet for linking a traveller's profile to the partner account they also operate.
+      partnerId: a.id()
+    })
+    .authorization(allow => [allow.owner().to(['read', 'create', 'update', 'delete']), allow.group('admin').to(['read'])]),
+
+  // A partner's narrow, self-service write path onto their own PUBLIC Partner row - logo,
+  // cover and social links only. Not a Partner authorization() change (that stays
+  // allow.guest().to(['read']) + allow.group('admin') exactly as before): this mutation is
+  // the only thing that can write these three fields on behalf of a non-admin caller, and
+  // its handler enforces that the caller actually owns this Partner row (Partner.ownerSub)
+  // before touching anything. See amplify/functions/update-partner-profile/handler.ts.
+  updatePartnerProfile: a
+    .mutation()
+    .arguments({
+      partnerId: a.id().required(),
+      logo: a.string(),
+      cover: a.string(),
+      instagram: a.string(),
+      facebook: a.string(),
+      twitter: a.string(),
+      tiktok: a.string(),
+      youtube: a.string(),
+      website: a.string(),
+      linktree: a.string()
+    })
+    .returns(a.ref('Partner'))
+    .authorization(allow => [allow.authenticated()])
+    .handler(a.handler.function(updatePartnerProfileFn)),
 
   // No arguments beyond the application's own fields: the applicant identity comes from the
   // caller's verified token (event.identity), server-side, never from client input - the same

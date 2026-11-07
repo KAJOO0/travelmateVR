@@ -36,6 +36,35 @@ export interface StorefrontEdit {
 export const storefrontStore = createStore<Record<string, StorefrontEdit>>('tm.biz.storefront', () => ({}));
 export const useStorefront = () => useStore(storefrontStore);
 
+// ---------------- Real, publicly-visible partner logo/cover/social ----------------
+// Unlike storefrontStore above (a local-only overlay nobody else ever sees), this writes
+// through updatePartnerProfile (amplify/functions/update-partner-profile/) onto the actual
+// Partner row everyone reads - see that mutation's authorization() comment in
+// amplify/data/resource.ts for why this couldn't just be a direct model write.
+export type PartnerSocialLinks = NonNullable<Partner['social']>;
+
+export const partnerProfile = {
+  async uploadLogo(file: File): Promise<string> { return uploadPartnerMedia(file); },
+  async uploadCover(file: File): Promise<string> { return uploadPartnerMedia(file); },
+  /** Only the fields you pass are changed — omit logo/cover to leave them as-is. Throws if
+   *  this Cognito user isn't this Partner row's registered owner (Partner.ownerSub, admin-set
+   *  by hand) - expected for today's demo/seed partner sessions, which have no real backend
+   *  row at all yet (see src/components/portal/PortalLayout.tsx: the portal's "who am I"
+   *  always resolves from static seed data, not a real Partner row). */
+  async save(partnerId: string, patch: { logo?: string; cover?: string; social?: PartnerSocialLinks }): Promise<void> {
+    const res = await dataClient().mutations.updatePartnerProfile({ partnerId, logo: patch.logo, cover: patch.cover, ...patch.social });
+    if (res.errors?.length) throw new Error(res.errors.map(e => e.message).join('; '));
+  }
+};
+
+async function uploadPartnerMedia(file: File): Promise<string> {
+  const identityId = (await fetchAuthSession()).identityId;
+  if (!identityId) throw new Error('Sign in to upload a photo.');
+  const key = `profile-media/${identityId}/${Date.now()}-${file.name}`;
+  await uploadData({ path: key, data: file }).result;
+  return key;
+}
+
 const ORIGINAL_PARTNERS = new Map(PARTNERS.map(p => [p.id, structuredClone(p)]));
 function applyStorefronts() {
   const all = storefrontStore.get();

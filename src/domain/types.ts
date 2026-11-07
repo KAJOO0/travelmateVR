@@ -192,6 +192,7 @@ export interface Partner {
   since?: number;
   /** Storefront headline, written by the partner in the portal. */
   tagline?: Partial<LocalizedText>;
+  social?: { instagram?: string; facebook?: string; twitter?: string; tiktok?: string; youtube?: string; website?: string; linktree?: string };
 }
 
 export interface Review {

@@ -346,6 +346,15 @@
     "realNote": "{{name}} is a founding partner of TravelMateVR. Rates and itineraries are confirmed directly by the partner.",
     "whatsapp": "Hello, I'd like to ask {{name}} about a trip, via TravelMateVR.",
     "whatsappNote": "WhatsApp messages go to the TravelMateVR team, who connect you with the partner.",
+    "social": {
+      "instagram": "Instagram",
+      "facebook": "Facebook",
+      "twitter": "X (Twitter)",
+      "tiktok": "TikTok",
+      "youtube": "YouTube",
+      "website": "Website",
+      "linktree": "Linktree"
+    },
     "services": "Services and prices",
     "phone": "Phone",
     "website": "Website",

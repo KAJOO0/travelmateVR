@@ -338,6 +338,15 @@
     "realNote": "{{name}} 是 TravelMateVR 的创始合作伙伴。价格和行程由合作伙伴直接确认。",
     "whatsapp": "您好，我想通过 TravelMateVR 向 {{name}} 咨询行程。",
     "whatsappNote": "WhatsApp 消息将发送给 TravelMateVR 团队，由团队为您联系合作伙伴。",
+    "social": {
+      "instagram": "Instagram",
+      "facebook": "Facebook",
+      "twitter": "X（Twitter）",
+      "tiktok": "TikTok",
+      "youtube": "YouTube",
+      "website": "网站",
+      "linktree": "Linktree"
+    },
     "services": "服务与价格",
     "phone": "电话",
     "website": "网站",

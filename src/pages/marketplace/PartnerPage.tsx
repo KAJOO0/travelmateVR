@@ -3,6 +3,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Icon } from '@/components/ui/Icon';
 import { Media } from '@/components/ui/Media';
+import { S3Image } from '@/components/ui/S3Image';
 import { Content, Notice, WhatsAppButton } from '@/components/ui/bits';
 import { NotFoundState } from '@/components/ui/States';
 import { ListingCard } from '@/components/cards/ListingCard';
@@ -21,6 +22,12 @@ import { money } from '@/lib/format';
 import { usePageTitle } from '@/app/usePageTitle';
 import '@/styles/home.css';
 import '@/styles/pages.css';
+
+// A real upload (src/services/business.ts's partnerProfile.uploadCover) vs. a seed-data
+// manifest id - see PartnerLogo.tsx for the same reasoning.
+const isS3Key = (v: string | undefined): v is string => !!v?.startsWith('profile-media/');
+
+const SOCIAL_PLATFORMS = ['instagram', 'facebook', 'twitter', 'tiktok', 'youtube', 'website', 'linktree'] as const;
 
 /** Partner digital storefront. */
 export default function PartnerPage() {
@@ -53,7 +60,9 @@ export default function PartnerPage() {
       </nav>
 
       <section className="detail-hero" style={{ minHeight: 'clamp(260px, 30vw, 380px)' }}>
-        <Media id={partner.cover} sizes="1240px" priority decorative />
+        {isS3Key(partner.cover)
+          ? <S3Image s3Key={partner.cover} alt="" fallback={<div style={{ width: '100%', height: '100%', background: 'var(--panel-2)' }} />} />
+          : <Media id={partner.cover} sizes="1240px" priority decorative />}
         <div className="txt">
           <div className="partner-head">
             <PartnerLogo partner={partner} large />
@@ -145,6 +154,13 @@ export default function PartnerPage() {
             <button type="button" className="btn solid" onClick={() => navigate(`/account/messages?thread=${messages.ensure(partner.id)}`)}><Icon name="mail" />{t('explore:listing.message')}</button>
             <WhatsAppButton className="btn ghost" message={t('explore:partner.whatsapp', { name: partner.name })} />
             <p style={{ fontSize: 'var(--fs-small)', color: 'var(--muted)' }}>{t('explore:partner.whatsappNote')}</p>
+            {partner.social && Object.values(partner.social).some(Boolean) && (
+              <div className="chip-row" style={{ marginTop: 8 }}>
+                {SOCIAL_PLATFORMS.filter(k => partner.social?.[k]).map(k => (
+                  <a key={k} className="btn ghost sm" href={partner.social![k]} target="_blank" rel="noopener noreferrer"><Icon name="external" />{t(`explore:partner.social.${k}`)}</a>
+                ))}
+              </div>
+            )}
           </div>
         </aside>
       </div>

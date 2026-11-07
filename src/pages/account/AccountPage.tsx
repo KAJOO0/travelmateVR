@@ -12,7 +12,8 @@ import { PartnerLogo } from '@/features/partners/PartnerLogo';
 import { useWishlist } from '@/app/providers/WishlistProvider';
 import { usePreferences, type ThemeMode } from '@/app/providers/PreferencesProvider';
 import { useToast } from '@/app/providers/ToastProvider';
-import { auth, documents, fetchMyBackendData, messages, profileStore, useDocuments, useMyReviews, useNotifications, useProfile, useSession, useThreads, DEFAULT_PROFILE } from '@/services/account';
+import { auth, documents, fetchMyBackendData, messages, profileStore, updateMySocialLinks, uploadProfileCover, uploadProfilePhoto, useDocuments, useMyProfile, useMyReviews, useNotifications, useProfile, useSession, useThreads, type SocialLinks, DEFAULT_PROFILE } from '@/services/account';
+import { S3Image } from '@/components/ui/S3Image';
 import { effectiveStatus, useBookings } from '@/services/bookings';
 import { tripStatus, useTrips } from '@/services/trips';
 import { seedIndex } from '@/services/catalog';
@@ -116,6 +117,77 @@ function Overview() {
 
 const INTERESTS: InterestTag[] = ['wildlife', 'beach', 'culture', 'mountain', 'adventure', 'luxury', 'family', 'eco', 'lake', 'city', 'landscape'];
 const ACCESS = ['stepFree', 'lowMobility', 'visual', 'hearing', 'dietary'];
+const SOCIAL_PLATFORMS: (keyof NonNullable<SocialLinks>)[] = ['instagram', 'facebook', 'twitter', 'tiktok', 'youtube', 'website', 'linktree'];
+
+/** Real backend (UserProfile) - unlike the rest of Preferences below, which is local-only
+ *  personalization. Photos/social links are meant for other people to see, so they need the
+ *  real backend's owner-authorized model, not a per-browser local store. */
+function ProfilePhoto() {
+  const { t } = useTranslation(['account', 'common']);
+  const toast = useToast();
+  const user = useSession();
+  const profile = useMyProfile();
+  const [uploadingPhoto, setUploadingPhoto] = useState(false);
+  const [uploadingCover, setUploadingCover] = useState(false);
+  const [social, setSocial] = useState<NonNullable<SocialLinks>>({});
+  const [savingSocial, setSavingSocial] = useState(false);
+  useEffect(() => { if (profile?.social) setSocial(profile.social); }, [profile?.social]);
+  const socialErr = (v: string) => !!v && !/^https:\/\/[^\s]+\.[^\s]+$/.test(v);
+
+  const onPickPhoto = async (file: File | null) => {
+    if (!file) return;
+    setUploadingPhoto(true);
+    try { await uploadProfilePhoto(file); toast.show({ icon: 'check', text: t('account:profile.photoSaved') }); }
+    catch { toast.show({ icon: 'close', text: t('account:profile.uploadFailed') }); }
+    setUploadingPhoto(false);
+  };
+  const onPickCover = async (file: File | null) => {
+    if (!file) return;
+    setUploadingCover(true);
+    try { await uploadProfileCover(file); toast.show({ icon: 'check', text: t('account:profile.coverSaved') }); }
+    catch { toast.show({ icon: 'close', text: t('account:profile.uploadFailed') }); }
+    setUploadingCover(false);
+  };
+  const saveSocial = async () => {
+    if (SOCIAL_PLATFORMS.some(k => socialErr(social[k] ?? ''))) return;
+    setSavingSocial(true);
+    try { await updateMySocialLinks(social); toast.show({ icon: 'check', text: t('account:prefs.saved') }); }
+    catch { toast.show({ icon: 'close', text: t('account:profile.uploadFailed') }); }
+    setSavingSocial(false);
+  };
+
+  return (
+    <section className="panel" style={{ display: 'grid', gap: 16 }}>
+      <h2 className="group-title">{t('account:profile.title')}</h2>
+      <div className="row-between" style={{ flexWrap: 'wrap', gap: 16 }}>
+        <label className="field" style={{ maxWidth: 260 }}>
+          <span>{t('account:profile.photo')}</span>
+          <span className="avatar" style={{ width: 64, height: 64, fontSize: 20 }}>
+            <S3Image s3Key={profile?.photoKey ?? undefined} alt="" fallback={(user?.name ?? '').split(' ').map(s => s[0]).slice(0, 2).join('')} />
+          </span>
+          <input type="file" accept="image/*" disabled={uploadingPhoto} onChange={e => void onPickPhoto(e.target.files?.[0] ?? null)} />
+        </label>
+        <label className="field" style={{ maxWidth: 260 }}>
+          <span>{t('account:profile.cover')}</span>
+          {profile?.coverKey && <S3Image s3Key={profile.coverKey} alt="" className="media-img" fallback={<span className="muted small">{t('account:profile.noCover')}</span>} />}
+          <input type="file" accept="image/*" disabled={uploadingCover} onChange={e => void onPickCover(e.target.files?.[0] ?? null)} />
+        </label>
+      </div>
+      <fieldset style={{ border: 0, padding: 0, margin: 0 }}>
+        <legend className="label" style={{ marginBottom: 8 }}>{t('account:profile.social')}</legend>
+        <div className="form-grid">
+          {SOCIAL_PLATFORMS.map(k => (
+            <label key={k} className="field"><span>{t(`account:profile.socialLabel.${k}`)}</span>
+              <input type="url" value={social[k] ?? ''} placeholder="https://" onChange={e => setSocial(s => ({ ...s, [k]: e.target.value }))} aria-invalid={socialErr(social[k] ?? '')} />
+              {socialErr(social[k] ?? '') && <span className="err">{t('business:profile.errWebsite')}</span>}
+            </label>
+          ))}
+        </div>
+        <button type="button" className="btn solid sm" disabled={savingSocial} style={{ marginTop: 10 }} onClick={() => void saveSocial()}>{savingSocial ? t('account:profile.saving') : t('common:actions.save')}</button>
+      </fieldset>
+    </section>
+  );
+}
 
 function Preferences() {
   const { t, i18n } = useTranslation(['account', 'common', 'trip']);
@@ -127,8 +199,10 @@ function Preferences() {
   const up = (patch: Partial<typeof p>) => setP(x => ({ ...x, ...patch }));
   const toggle = <T,>(arr: T[], v: T) => (arr.includes(v) ? arr.filter(x => x !== v) : [...arr, v]);
   return (
-    <form className="panel" style={{ display: 'grid', gap: 20 }} onSubmit={e => { e.preventDefault(); profileStore.set({ ...p, setAt: new Date().toISOString() }); toast.show({ icon: 'check', text: t('account:prefs.saved') }); }}>
-      <p style={{ color: 'var(--muted)' }}>{t('account:prefs.intro')}</p>
+    <>
+      <ProfilePhoto />
+      <form className="panel" style={{ display: 'grid', gap: 20 }} onSubmit={e => { e.preventDefault(); profileStore.set({ ...p, setAt: new Date().toISOString() }); toast.show({ icon: 'check', text: t('account:prefs.saved') }); }}>
+        <p style={{ color: 'var(--muted)' }}>{t('account:prefs.intro')}</p>
       <fieldset style={{ border: 0, padding: 0, margin: 0 }}><legend className="label" style={{ marginBottom: 8 }}>{t('account:prefs.interests')}</legend>
         <div className="chip-row">{INTERESTS.map(i => <button key={i} type="button" className="toggle" aria-pressed={p.interests.includes(i)} onClick={() => up({ interests: toggle(p.interests, i) })}>{t(`common:tags.${i}`)}</button>)}</div>
       </fieldset>
@@ -173,7 +247,8 @@ function Preferences() {
         </label>
       </div>
       <div className="row-between"><button type="button" className="btn ghost sm" onClick={() => setP({ ...DEFAULT_PROFILE })}>{t('account:prefs.reset')}</button><button type="submit" className="btn solid">{t('common:actions.save')}</button></div>
-    </form>
+      </form>
+    </>
   );
 }
 
@@ -373,7 +448,15 @@ function Security() {
       exportPdf('travelmatevr-my-data.pdf', t('account:security.exportPdfTitle'), [
         { heading: t('account:security.exportPdfLocal'), rows: Object.entries(local).map(([k, v]) => [k, typeof v === 'string' ? v : JSON.stringify(v)]) },
         { heading: t('account:security.exportPdfApplications'), rows: backend.applications.map(a => [a.businessName, `${a.status} · ${a.createdAt}`]) },
-        { heading: t('account:security.exportPdfNotifications'), rows: backend.notifications.map(n => [n.kind, `${n.read ? 'read' : 'unread'} · ${n.createdAt}`]) }
+        { heading: t('account:security.exportPdfNotifications'), rows: backend.notifications.map(n => [n.kind, `${n.read ? 'read' : 'unread'} · ${n.createdAt}`]) },
+        {
+          heading: t('account:security.exportPdfProfile'),
+          rows: [
+            [t('account:profile.photo'), backend.profile.hasPhoto ? t('business:common.yes') : t('business:common.no')],
+            [t('account:profile.cover'), backend.profile.hasCover ? t('business:common.yes') : t('business:common.no')],
+            ...Object.entries(backend.profile.social).map(([k, v]) => [k, v] as [string, string])
+          ]
+        }
       ]);
     } finally {
       setExportingPdf(false);

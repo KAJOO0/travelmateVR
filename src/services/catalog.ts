@@ -170,7 +170,8 @@ function toPartner(p: Schema['Partner']['type']): Partner {
     id: p.id, slug: p.slug, name: p.name, kind: p.kind as Partner['kind'], logo: nn(p.logo), cover: p.cover,
     destinationIds: nn(p.destinationIds)?.filter((x): x is string => x != null) ?? [], description: toLocalizedReq(p.description),
     verified: p.verified, founding: nn(p.founding), real: p.real, languages: nn(p.languages)?.filter((l): l is string => l != null) ?? [],
-    responseHours: nn(p.responseHours), whatsapp: nn(p.whatsapp), since: nn(p.since), tagline: toLocalized(p.tagline)
+    responseHours: nn(p.responseHours), whatsapp: nn(p.whatsapp), since: nn(p.since), tagline: toLocalized(p.tagline),
+    social: p.social ? Object.fromEntries(Object.entries(p.social).filter(([, v]) => v)) as Partner['social'] : undefined
   };
 }
 

@@ -6,8 +6,9 @@ import { Icon } from '@/components/ui/Icon';
 import { PARTNER_NAV, PRIMARY_NAV } from '@/app/nav';
 import { useDismiss } from '@/lib/hooks';
 import { useWishlist } from '@/app/providers/WishlistProvider';
-import { auth, hasRole, useSession } from '@/services/account';
+import { auth, hasRole, useMyProfile, useSession } from '@/services/account';
 import { ADMIN_ROLES } from '@/services/admin';
+import { S3Image } from '@/components/ui/S3Image';
 import { PreferencesMenu } from './PreferencesMenu';
 import { NavDrawer } from './NavDrawer';
 
@@ -17,6 +18,7 @@ export function Header({ onSearch }: { onSearch: () => void }) {
   const navigate = useNavigate();
   const { items } = useWishlist();
   const user = useSession();
+  const myProfile = useMyProfile();
   const [moreOpen, setMoreOpen] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [accountOpen, setAccountOpen] = useState(false);
@@ -91,7 +93,9 @@ export function Header({ onSearch }: { onSearch: () => void }) {
           <div className="pop-anchor" ref={accountRef}>
             <button ref={accountBtn} type="button" className="signin" aria-expanded={accountOpen} aria-haspopup="menu" onClick={() => setAccountOpen(o => !o)}>
               <span className="lbl">{user.name.split(' ')[0]}</span>
-              <span className="avatar" aria-hidden="true">{user.name.split(' ').map(s => s[0]).slice(0, 2).join('')}</span>
+              <span className="avatar" aria-hidden="true">
+                <S3Image s3Key={myProfile?.photoKey ?? undefined} alt="" fallback={user.name.split(' ').map(s => s[0]).slice(0, 2).join('')} />
+              </span>
             </button>
             {accountOpen && (
               <div className="popover" role="menu" style={{ minWidth: 200 }}>

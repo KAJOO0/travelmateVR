@@ -219,6 +219,26 @@
     "started": "Conversation commencée. Le partenaire répond généralement dans son délai de réponse indiqué.",
     "autoAck": "Réponse automatique : le partenaire a bien reçu votre message et répondra bientôt."
   },
+  "profile": {
+    "title": "Photo de profil et liens",
+    "photo": "Photo de profil",
+    "cover": "Photo de couverture",
+    "noCover": "Pas encore de photo de couverture",
+    "social": "Réseaux sociaux et liens",
+    "socialLabel": {
+      "instagram": "Instagram",
+      "facebook": "Facebook",
+      "twitter": "X (Twitter)",
+      "tiktok": "TikTok",
+      "youtube": "YouTube",
+      "website": "Site web",
+      "linktree": "Linktree"
+    },
+    "photoSaved": "Photo de profil mise à jour.",
+    "coverSaved": "Photo de couverture mise à jour.",
+    "uploadFailed": "Une erreur est survenue. Veuillez réessayer.",
+    "saving": "Enregistrement…"
+  },
   "security": {
     "signedInAs": "Connecté en tant que {{email}} avec {{provider}}.",
     "emailPassword": "e-mail et mot de passe",
@@ -242,6 +262,7 @@
     "exportPdfLocal": "Sur cet appareil",
     "exportPdfApplications": "Candidatures partenaires",
     "exportPdfNotifications": "Notifications",
+    "exportPdfProfile": "Profil et liens",
     "erase": "Effacer mes données",
     "eraseText": "Cela supprime voyages, réservations, préférences, documents et messages de cet appareil. Action irréversible.",
     "eraseConfirm": "Tout effacer",
