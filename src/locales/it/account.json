@@ -244,7 +244,8 @@
     "delete": "Elimina il mio account",
     "deleteConfirmText": "Questo elimina definitivamente il tuo account e tutto ciò che si trova su questo dispositivo. L'operazione è irreversibile.",
     "deleteConfirm": "Elimina definitivamente l'account",
-    "deleting": "Eliminazione…"
+    "deleting": "Eliminazione…",
+    "deleteFailed": "Si è verificato un problema durante l'eliminazione dell'account. Riprova."
   },
   "signin": {
     "welcome": "Bentornato!",

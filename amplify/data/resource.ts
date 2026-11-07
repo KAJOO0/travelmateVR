@@ -1,4 +1,5 @@
 import { type ClientSchema, a, defineData } from '@aws-amplify/backend';
+import { deleteAccountFn } from '../functions/delete-account/resource';
 
 // Real catalogue data: Country, Destination, Partner, Listing, Experience, Review.
 // Mirrors src/domain/types.ts. Everything else (bookings, admin, partner/board portals,
@@ -208,7 +209,17 @@ const schema = a.schema({
       status: a.enum(['pending', 'approved', 'rejected']) // forward-compat for (out-of-scope) moderation; migration sets 'approved' explicitly
       // 'mine' from src/domain/types.ts is a client-only UI flag — never persisted here.
     })
-    .authorization(allow => [allow.guest().to(['read']), allow.group('admin')])
+    .authorization(allow => [allow.guest().to(['read']), allow.group('admin')]),
+
+  // See amplify/functions/delete-account/handler.ts for why this exists as a real backend
+  // mutation rather than relying on Cognito's client-side deleteUser(). No arguments: the
+  // account to delete is always the caller's own, identified server-side from the verified
+  // token, never from client input.
+  deleteMyAccount: a
+    .mutation()
+    .returns(a.customType({ success: a.boolean() }))
+    .authorization(allow => [allow.authenticated()])
+    .handler(a.handler.function(deleteAccountFn))
   // Progressive login lockout state lives in a plain CDK-managed DynamoDB table
   // (amplify/backend.ts), not an Amplify Data model — allow.resource() turned out to only be
   // valid for field-level authorization, not a whole model's CRUD rules (confirmed from the

@@ -6,6 +6,7 @@ import * as wafv2 from 'aws-cdk-lib/aws-wafv2';
 import { auth } from './auth/resource';
 import { data } from './data/resource';
 import { loginGuardFn } from './functions/login-guard/resource';
+import { deleteAccountFn } from './functions/delete-account/resource';
 
 /**
  * @see https://docs.amplify.aws/react/build-a-backend/ to add storage, functions, and more
@@ -13,7 +14,8 @@ import { loginGuardFn } from './functions/login-guard/resource';
 export const backend = defineBackend({
   auth,
   data,
-  loginGuardFn
+  loginGuardFn,
+  deleteAccountFn
 });
 
 // Match src/lib/security.ts's isAcceptablePassword exactly (length 8–128, no composition
@@ -105,6 +107,18 @@ new wafv2.CfnWebACLAssociation(backend.stack, 'LoginGuardWafAssoc', {
   resourceArn: backend.auth.resources.userPool.userPoolArn,
   webAclArn: webAcl.attrArn
 });
+
+// ---------------- Self-service account deletion (amplify/functions/delete-account/) ----------------
+
+// Unlike loginGuardFn, this function is never wired as a Cognito trigger (it's invoked by
+// AppSync as deleteMyAccount's data source instead) - the user pool has no LambdaConfig
+// reference back to it, so there's no cycle in referencing the pool directly here, and this
+// value is exactly what AdminDeleteUser needs.
+backend.deleteAccountFn.addEnvironment('USER_POOL_ID', backend.auth.resources.userPool.userPoolId);
+backend.deleteAccountFn.resources.lambda.addToRolePolicy(new iam.PolicyStatement({
+  actions: ['cognito-idp:AdminDeleteUser'],
+  resources: [backend.auth.resources.userPool.userPoolArn]
+}));
 
 // ---------------- AppSync rate limiting (pre-launch audit, Area 5) ----------------
 

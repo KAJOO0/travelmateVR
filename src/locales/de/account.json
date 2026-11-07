@@ -241,7 +241,8 @@
     "delete": "Mein Konto löschen",
     "deleteConfirmText": "Dies löscht dein Konto und alles auf diesem Gerät dauerhaft. Es kann nicht rückgängig gemacht werden.",
     "deleteConfirm": "Konto endgültig löschen",
-    "deleting": "Wird gelöscht …"
+    "deleting": "Wird gelöscht …",
+    "deleteFailed": "Beim Löschen deines Kontos ist etwas schiefgelaufen. Bitte versuche es erneut."
   },
   "signin": {
     "welcome": "Willkommen zurück",

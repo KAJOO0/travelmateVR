@@ -7,7 +7,6 @@ import type { Channel } from './messaging';
 import {
   confirmSignIn as cognitoConfirmSignIn,
   confirmSignUp as cognitoConfirmSignUp,
-  deleteUser as cognitoDeleteUser,
   fetchAuthSession,
   getCurrentUser,
   signIn as cognitoSignIn,
@@ -15,6 +14,10 @@ import {
   signOut as cognitoSignOut,
   signUp as cognitoSignUp
 } from 'aws-amplify/auth';
+import { generateClient } from 'aws-amplify/data';
+import type { Schema } from '../../amplify/data/resource';
+
+const dataClient = () => generateClient<Schema>({ authMode: 'userPool' });
 
 // ---------------- Session and sign-in ----------------
 // Production: the backend validates and normalises every field, hashes passwords with Argon2id,
@@ -301,18 +304,27 @@ export const auth = {
     if (REAL_BACKEND) { try { await cognitoSignOut(); } catch { /* best-effort: clear the local session regardless */ } }
     sessionStore.set({ user: null });
   },
-  /** Self-service account deletion — Cognito's own deleteUser() API, which only ever
-   *  deletes the CURRENTLY AUTHENTICATED user's own account (no admin privilege needed or
-   *  usable here), separate from scripts/delete-user-account.ts's admin-run runbook for
-   *  cases where the user can't sign in themselves to do this. A demo session (its id
-   *  always starts with 'u_demo_') was never a real Cognito user, so there's nothing on
-   *  the backend to delete — just the local session and device data. Also clears every
-   *  tm.*-prefixed localStorage key, same as the account page's existing "erase my data"
-   *  action, since deleting the account should leave nothing behind either way. */
+  /** Self-service account deletion, via the deleteMyAccount custom mutation
+   *  (amplify/functions/delete-account/) rather than calling Cognito's own deleteUser() API
+   *  directly — confirmed live that deleteUser() (like GetUser) requires the
+   *  aws.cognito.signin.user.admin OAuth scope, which Cognito never grants to a
+   *  Google-federated access token, so the old client-side call silently failed for every
+   *  Google sign-in while swallowing the error and reporting success. The backend mutation
+   *  identifies the account to delete from the caller's own verified token server-side, so it
+   *  works the same way regardless of sign-in method.
+   *
+   *  Unlike the old version, a real backend failure here now THROWS instead of being
+   *  swallowed — AccountPage.tsx's delete button shows a real error rather than declaring an
+   *  account deleted that still exists. A demo session (its id always starts with 'u_demo_')
+   *  was never a real Cognito user, so there's nothing on the backend to delete — just the
+   *  local session and device data. Also clears every tm.*-prefixed localStorage key, same as
+   *  the account page's existing "erase my data" action, since deleting the account should
+   *  leave nothing behind either way. */
   async deleteAccount() {
     const isDemo = sessionStore.get().user?.id.startsWith('u_demo_');
     if (REAL_BACKEND && !isDemo) {
-      try { await cognitoDeleteUser(); } catch { /* best-effort: clear the local session regardless */ }
+      const res = await dataClient().mutations.deleteMyAccount();
+      if (res.errors?.length) throw new Error(res.errors.map(e => e.message).join('; '));
     }
     Object.keys(localStorage).filter(k => k.startsWith('tm.') && k !== 'tm.lang' && k !== 'tm.theme').forEach(k => localStorage.removeItem(k));
     sessionStorage.clear();

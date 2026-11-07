@@ -407,7 +407,16 @@ function Security() {
           <p>{t('account:security.deleteConfirmText')}</p>
           <div className="row-between">
             <button type="button" className="btn ghost sm" disabled={deleting} onClick={() => setDeleteConfirm(false)}>{t('common:actions.cancel')}</button>
-            <button type="button" className="btn solid sm danger" disabled={deleting} onClick={async () => { setDeleting(true); await auth.deleteAccount(); window.location.href = '/'; }}>{deleting ? t('account:security.deleting') : t('account:security.deleteConfirm')}</button>
+            <button type="button" className="btn solid sm danger" disabled={deleting} onClick={async () => {
+              setDeleting(true);
+              try {
+                await auth.deleteAccount();
+                window.location.href = '/';
+              } catch {
+                setDeleting(false);
+                toast.show({ icon: 'close', text: t('account:security.deleteFailed') });
+              }
+            }}>{deleting ? t('account:security.deleting') : t('account:security.deleteConfirm')}</button>
           </div>
         </Modal>
       )}

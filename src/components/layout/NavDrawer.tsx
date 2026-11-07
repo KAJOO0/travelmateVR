@@ -1,15 +1,26 @@
 import { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Logo } from '@/components/brand/Logo';
 import { Icon } from '@/components/ui/Icon';
 import { MORE_NAV, PARTNER_NAV, PRIMARY_NAV } from '@/app/nav';
+import { auth, hasRole, useSession } from '@/services/account';
+import { ADMIN_ROLES } from '@/services/admin';
 
 /** Full navigation for tablet and mobile. */
 export function NavDrawer({ onClose }: { onClose: () => void }) {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const user = useSession();
   const panel = useRef<HTMLDivElement>(null);
+  // Below 767px, layout.css hides the desktop header's whole account-menu trigger
+  // (`.tools .signin{display:none}`) with no mobile replacement - confirmed live: on a
+  // phone-width screen there was no way at all to reach /account, /admin, or sign out
+  // other than navigating to /account first via the bottom nav's "profile" tab (which
+  // itself has its own sign-out button, but nothing surfaces /admin). This section is
+  // that replacement, always present in the one mobile nav surface that isn't hidden.
+  const signOut = async () => { onClose(); await auth.signOut(); navigate('/'); };
 
   useEffect(() => {
     const prev = document.activeElement as HTMLElement | null;
@@ -50,6 +61,14 @@ export function NavDrawer({ onClose }: { onClose: () => void }) {
           <Link className="btn ghost" to="/partners" onClick={onClose}>{t('cta.becomePartner')}</Link>
         </div>
         <nav aria-label={t('a11y.mainNav')}>
+          <h2>{t('account:title')}</h2>
+          <ul className="menu-list">
+            <li><Link to="/account" onClick={onClose}><span className="mi-ico"><Icon name="user" /></span><span><b>{t('account:title')}</b></span></Link></li>
+            {user && hasRole(user, ADMIN_ROLES) && <li><Link to="/admin" onClick={onClose}><span className="mi-ico"><Icon name="shield" /></span><span><b>{t('account:header.admin')}</b></span></Link></li>}
+            {user
+              ? <li><button type="button" onClick={() => void signOut()}><span className="mi-ico"><Icon name="logout" /></span><span><b>{t('account:header.signOut')}</b></span></button></li>
+              : <li><Link to="/signin" onClick={onClose}><span className="mi-ico"><Icon name="user" /></span><span><b>{t('nav.signIn')}</b></span></Link></li>}
+          </ul>
           <h2>{t('nav.discover')}</h2>
           <ul className="menu-list">{PRIMARY_NAV.filter(n => n.to !== '/').map(n => item(n.key, n.to, n.icon))}{item('about', '/about', 'info')}</ul>
           <h2>{t('nav.marketplace')}</h2>

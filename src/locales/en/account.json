@@ -241,7 +241,8 @@
     "delete": "Delete my account",
     "deleteConfirmText": "This permanently deletes your account and everything on this device. It can't be undone.",
     "deleteConfirm": "Delete my account permanently",
-    "deleting": "Deleting…"
+    "deleting": "Deleting…",
+    "deleteFailed": "Something went wrong deleting your account. Please try again."
   },
   "signin": {
     "welcome": "Welcome back",
