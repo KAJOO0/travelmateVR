@@ -55,6 +55,18 @@ export const handler: AppSyncResolverHandler<Args, Record<string, unknown>> = as
     }
   }));
 
+  // Same shape as the client-side check in src/pages/business/ProfilePage.tsx - enforced here
+  // too, since this mutation is a public GraphQL field any authenticated partner-owner can call
+  // directly (devtools/curl/any client), bypassing that React form entirely. Without this, an
+  // owner could write a `javascript:` URI into a field that's stored on the public Partner row
+  // and (depending on what reads Partner.social in the future) rendered as a raw <a href>.
+  const SOCIAL_URL_RE = /^https:\/\/[^\s]+\.[^\s]+$/;
+  for (const [key, value] of Object.entries(social)) {
+    if (value != null && !SOCIAL_URL_RE.test(value as string)) {
+      throw new Error(`Invalid link for ${key}: must be a https:// URL.`);
+    }
+  }
+
   const now = new Date().toISOString();
   const hasSocial = Object.values(social).some(v => v !== undefined && v !== null);
 

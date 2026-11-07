@@ -29,6 +29,11 @@ const isS3Key = (v: string | undefined): v is string => !!v?.startsWith('profile
 
 const SOCIAL_PLATFORMS = ['instagram', 'facebook', 'twitter', 'tiktok', 'youtube', 'website', 'linktree'] as const;
 
+// Defense-in-depth: update-partner-profile's handler already rejects non-https values before
+// they're written, but this field is rendered as a raw <a href> to every visitor of a public
+// page - never trust a single layer for an href sink that came from user input at any point.
+const isSafeHttpUrl = (v: string | undefined): v is string => !!v && /^https:\/\/[^\s]+\.[^\s]+$/.test(v);
+
 /** Partner digital storefront. */
 export default function PartnerPage() {
   const { slug = '' } = useParams();
@@ -154,9 +159,9 @@ export default function PartnerPage() {
             <button type="button" className="btn solid" onClick={() => navigate(`/account/messages?thread=${messages.ensure(partner.id)}`)}><Icon name="mail" />{t('explore:listing.message')}</button>
             <WhatsAppButton className="btn ghost" message={t('explore:partner.whatsapp', { name: partner.name })} />
             <p style={{ fontSize: 'var(--fs-small)', color: 'var(--muted)' }}>{t('explore:partner.whatsappNote')}</p>
-            {partner.social && Object.values(partner.social).some(Boolean) && (
+            {partner.social && SOCIAL_PLATFORMS.some(k => isSafeHttpUrl(partner.social?.[k])) && (
               <div className="chip-row" style={{ marginTop: 8 }}>
-                {SOCIAL_PLATFORMS.filter(k => partner.social?.[k]).map(k => (
+                {SOCIAL_PLATFORMS.filter(k => isSafeHttpUrl(partner.social?.[k])).map(k => (
                   <a key={k} className="btn ghost sm" href={partner.social![k]} target="_blank" rel="noopener noreferrer"><Icon name="external" />{t(`explore:partner.social.${k}`)}</a>
                 ))}
               </div>
