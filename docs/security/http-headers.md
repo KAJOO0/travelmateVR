@@ -35,6 +35,20 @@ customHeaders:
           base-uri 'self';
           form-action 'self';
           frame-ancestors 'none';
+      # Amplify Hosting's own default lets CloudFront's edge cache index.html for up to a
+      # year (s-maxage), relying entirely on deploy-time invalidation reaching every edge
+      # location before the next visitor hits it - confirmed live as unreliable: a brand-new
+      # incognito browser got served an index.html from an older deploy, referencing JS chunk
+      # files the newer deploy had already removed (404s on dynamic import, breaking the
+      # whole page). no-cache doesn't mean "don't store" - it means every request must
+      # revalidate with origin first, so this can never serve stale HTML again. The override
+      # just below restores long-lived caching for the actual hashed, truly-immutable assets.
+      - key: 'Cache-Control'
+        value: 'no-cache, must-revalidate'
+  - pattern: '/assets/**'
+    headers:
+      - key: 'Cache-Control'
+        value: 'public, max-age=31536000, immutable'
   - pattern: '/account/**'
     headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }]
   - pattern: '/bookings/**'
