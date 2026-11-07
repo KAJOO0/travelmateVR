@@ -314,7 +314,12 @@
     "code": "Codice di verifica",
     "errCode": "Inserisci il codice a 6 cifre che ti abbiamo inviato.",
     "confirmSubmit": "Conferma e continua",
-    "backToSignIn": "Torna all'accesso"
+    "backToSignIn": "Torna all'accesso",
+    "mfaTitle": "Inserisci il codice di autenticazione",
+    "mfaHint": "Apri la tua app di autenticazione e inserisci il codice a 6 cifre per TravelMateVR.",
+    "mfaCode": "Codice di autenticazione",
+    "mfaSubmit": "Verifica e continua",
+    "errMfaCode": "Il codice non è corretto. Controlla la tua app di autenticazione e riprova."
   },
   "help": {
     "title": "Centro assistenza",

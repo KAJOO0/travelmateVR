@@ -306,7 +306,12 @@
     "code": "验证码",
     "errCode": "请输入我们发送给您的 6 位验证码。",
     "confirmSubmit": "确认并继续",
-    "backToSignIn": "返回登录"
+    "backToSignIn": "返回登录",
+    "mfaTitle": "输入您的验证码",
+    "mfaHint": "打开您的身份验证器应用,输入 TravelMateVR 的 6 位验证码。",
+    "mfaCode": "验证码",
+    "mfaSubmit": "验证并继续",
+    "errMfaCode": "验证码不正确。请检查您的身份验证器应用并重试。"
   },
   "help": {
     "title": "帮助中心",

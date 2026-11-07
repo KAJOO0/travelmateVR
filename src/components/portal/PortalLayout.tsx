@@ -1,4 +1,4 @@
-import { createContext, Suspense, useCallback, useContext, useRef, useState, type ReactNode } from 'react';
+import { createContext, Suspense, useCallback, useContext, useEffect, useRef, useState, type ReactNode } from 'react';
 import { Link, NavLink, Outlet, ScrollRestoration, useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Icon, type IconName } from '@/components/ui/Icon';
@@ -7,7 +7,8 @@ import { PreferencesMenu } from '@/components/layout/PreferencesMenu';
 import { ErrorBoundary } from '@/components/layout/ErrorBoundary';
 import { ToastProvider } from '@/app/providers/ToastProvider';
 import { useDismiss } from '@/lib/hooks';
-import { auth, BOARD_ROLES, hasRole, PARTNER_ROLES, useSession } from '@/services/account';
+import { auth, BOARD_ROLES, hasRole, mfa, PARTNER_ROLES, useSession } from '@/services/account';
+import { REAL_BACKEND } from '@/services/http';
 import { seedIndex } from '@/services/catalog';
 import { DEMO_BOARD } from '@/services/board';
 import { ADMIN_ROLES, adminRoleOf, canRead, type AdminSection } from '@/services/admin';
@@ -16,6 +17,7 @@ import { useStore } from '@/lib/store';
 import { Notice } from '@/components/ui/bits';
 import type { Partner, Role, User } from '@/domain/types';
 import { PortalGate } from './PortalGate';
+import { AdminMfaSetup } from './AdminMfaSetup';
 import { usePageTitle } from '@/app/usePageTitle';
 import '@/styles/pages.css';
 import '@/styles/portal.css';
@@ -121,8 +123,23 @@ export function PortalLayout({ kind }: { kind: PortalKind }) {
   const orgName = kind === 'partner' ? partner?.name ?? '' : kind === 'board' ? DEMO_BOARD.name : '';
   const ns = kind === 'partner' ? 'business' : kind === 'board' ? 'board' : 'admin';
 
+  // Mandatory TOTP enrollment for the admin group on the real backend — see
+  // src/services/account.ts's `mfa` export and AdminMfaSetup.tsx. mfa.isEnrolled() always
+  // resolves 'ok' immediately when !REAL_BACKEND, so local dev and the one-click admin demo
+  // (which REAL_BACKEND disables anyway — see PortalGate.tsx) are both unaffected.
+  const [mfaStatus, setMfaStatus] = useState<'checking' | 'required' | 'ok'>(REAL_BACKEND && kind === 'admin' ? 'checking' : 'ok');
+  useEffect(() => {
+    if (kind !== 'admin' || !allowed || !user) return;
+    let alive = true;
+    setMfaStatus('checking');
+    mfa.isEnrolled().then(ok => { if (alive) setMfaStatus(ok ? 'ok' : 'required'); });
+    return () => { alive = false; };
+  }, [kind, allowed, user?.id]);
+
   let body: ReactNode;
   if (!user || !allowed || (kind === 'partner' && !partner)) body = <PortalGate kind={kind} signedInAs={user && !allowed ? user : null} />;
+  else if (kind === 'admin' && mfaStatus === 'checking') body = <div className="skeleton" style={{ height: 320, borderRadius: 24, margin: 24 }} />;
+  else if (kind === 'admin' && mfaStatus === 'required') body = <AdminMfaSetup user={user} onDone={() => setMfaStatus('ok')} />;
   else body = (
     <Ctx.Provider value={{ kind, user, partner, orgName, orgId: user.orgId ?? '', adminRole }}>
       <div className="portal-body">

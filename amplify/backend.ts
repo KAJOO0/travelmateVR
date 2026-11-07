@@ -81,7 +81,10 @@ backend.loginGuardFn.addEnvironment('LOGIN_ATTEMPTS_TABLE', loginAttemptsTable.t
 // pool. This stays scoped to this account/region/service either way; there's only one user
 // pool in this app, so the practical difference is nil, and it breaks the cycle.
 backend.loginGuardFn.resources.lambda.addToRolePolicy(new iam.PolicyStatement({
-  actions: ['cognito-idp:AdminInitiateAuth'],
+  // AdminRespondToAuthChallenge: needed for the TOTP MFA second round (see handler.ts) - it
+  // continues the SOFTWARE_TOKEN_MFA challenge AdminInitiateAuth returns for an MFA-enrolled
+  // user, the same way AdminInitiateAuth itself continues the password check.
+  actions: ['cognito-idp:AdminInitiateAuth', 'cognito-idp:AdminRespondToAuthChallenge'],
   resources: [`arn:aws:cognito-idp:${backend.stack.region}:${backend.stack.account}:userpool/*`]
 }));
 

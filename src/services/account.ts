@@ -9,11 +9,15 @@ import {
   confirmSignIn as cognitoConfirmSignIn,
   confirmSignUp as cognitoConfirmSignUp,
   fetchAuthSession,
+  fetchMFAPreference as cognitoFetchMFAPreference,
   getCurrentUser,
+  setUpTOTP as cognitoSetUpTOTP,
   signIn as cognitoSignIn,
   signInWithRedirect,
   signOut as cognitoSignOut,
-  signUp as cognitoSignUp
+  signUp as cognitoSignUp,
+  updateMFAPreference as cognitoUpdateMFAPreference,
+  verifyTOTPSetup as cognitoVerifyTOTPSetup
 } from 'aws-amplify/auth';
 import { generateClient } from 'aws-amplify/data';
 import { uploadData } from 'aws-amplify/storage';
@@ -31,7 +35,7 @@ export const sessionStore = createStore<{ user: User | null }>('tm.session', () 
 
 /** Sign-in and registration failures. Messages never say which field was wrong. */
 export class AuthError extends Error {
-  constructor(public code: 'invalid_credentials' | 'locked' | 'register_failed' | 'invalid_input' | 'confirmation_required', public lockedUntil?: string, public attemptsLeft?: number) {
+  constructor(public code: 'invalid_credentials' | 'locked' | 'register_failed' | 'invalid_input' | 'confirmation_required' | 'mfa_required', public lockedUntil?: string, public attemptsLeft?: number) {
     super(code);
     this.name = 'AuthError';
   }
@@ -158,7 +162,11 @@ function mapCognitoLockoutError(e: unknown): AuthError {
  *  for the server side — that Lambda is the sole judge of password correctness, via
  *  VerifyAuthChallengeResponse, which is what makes progressive lockout enforceable
  *  server-side rather than just cosmetic. */
-async function attemptCustomAuthSignIn(email: string, password: string): Promise<void> {
+/** Returns 'done' once fully signed in, or 'mfa_required' if the password round succeeded but
+ *  this account has TOTP enrolled and a second round (the 6-digit code) is still needed — see
+ *  amplify/functions/login-guard/handler.ts. Non-enrolled users (everyone, until an admin
+ *  enrolls) always get 'done' here, unchanged from before this existed. */
+async function attemptCustomAuthSignIn(email: string, password: string): Promise<'done' | 'mfa_required'> {
   try {
     // Confirmed live: for an email with no account at all, Cognito's own
     // preventUserExistenceErrors protection throws NotAuthorizedException straight out of
@@ -168,15 +176,30 @@ async function attemptCustomAuthSignIn(email: string, password: string): Promise
     // exception (not an AuthError) fell all the way through signIn() as an unhandled
     // "something went wrong" instead of the normal "wrong email or password" message.
     const { isSignedIn, nextStep } = await cognitoSignIn({ username: email, options: { authFlowType: 'CUSTOM_WITHOUT_SRP' } });
-    if (isSignedIn) return;
+    if (isSignedIn) return 'done';
     // An unconfirmed account surfaces here, on the initial call, same as it did under SRP —
     // Amplify's CUSTOM_WITHOUT_SRP path reuses the same UserNotConfirmedException -> nextStep
     // mapping. Must be checked before the lockout-relevant CONFIRM_SIGN_IN_WITH_CUSTOM_CHALLENGE
     // branch below, since an unconfirmed account never reaches the password-challenge step at all.
     if (nextStep?.signInStep === 'CONFIRM_SIGN_UP') throw new AuthError('confirmation_required');
     if (nextStep?.signInStep !== 'CONFIRM_SIGN_IN_WITH_CUSTOM_CHALLENGE') throw loginGuard.fail(); // unexpected state — fail generically
-    const { isSignedIn: done } = await cognitoConfirmSignIn({ challengeResponse: password });
-    if (!done) throw loginGuard.fail();
+    const { isSignedIn: done, nextStep: step2 } = await cognitoConfirmSignIn({ challengeResponse: password });
+    if (done) return 'done';
+    if (step2?.signInStep === 'CONFIRM_SIGN_IN_WITH_CUSTOM_CHALLENGE' && step2.additionalInfo?.prompt === 'totp') return 'mfa_required';
+    throw loginGuard.fail();
+  } catch (e) {
+    if (e instanceof AuthError) throw e;
+    throw mapCognitoLockoutError(e);
+  }
+}
+
+/** Completes a sign-in that attemptCustomAuthSignIn left at 'mfa_required' — submits the
+ *  6-digit TOTP code as the second challenge round. Same lockout/escalation as a wrong
+ *  password (amplify/functions/login-guard/handler.ts treats a wrong code as a failure). */
+async function completeMfaSignIn(code: string): Promise<void> {
+  try {
+    const { isSignedIn } = await cognitoConfirmSignIn({ challengeResponse: code });
+    if (!isSignedIn) throw loginGuard.fail();
   } catch (e) {
     if (e instanceof AuthError) throw e;
     throw mapCognitoLockoutError(e);
@@ -206,7 +229,8 @@ export const auth = {
       // Real mode is email-only this phase — a username identifier fails the same generic
       // way as a wrong password, never revealing that usernames aren't supported yet.
       if (!isEmail(id)) throw loginGuard.fail();
-      await attemptCustomAuthSignIn(id, password);
+      const result = await attemptCustomAuthSignIn(id, password);
+      if (result === 'mfa_required') throw new AuthError('mfa_required');
       loginGuard.syncLock(undefined); // success — clear any stale local lock mirror
       return finishRealSignIn(id);
     }
@@ -292,6 +316,12 @@ export const auth = {
     sessionStore.set({ user });
     return user;
   },
+  /** Completes a sign-in that threw AuthError('mfa_required') — see attemptCustomAuthSignIn. */
+  async confirmMfaSignIn(email: string, code: string): Promise<User> {
+    await completeMfaSignIn(code);
+    loginGuard.syncLock(undefined);
+    return finishRealSignIn(email);
+  },
   /** Completes registration after the "enter the code we emailed you" step (real mode only). */
   async confirmRegistration(email: string, password: string, code: string): Promise<User> {
     await cognitoConfirmSignUp({ username: email, confirmationCode: code });
@@ -340,6 +370,36 @@ export const auth = {
   }
 };
 export const useSession = () => useStore(sessionStore, s => s.user);
+
+// ---------------- TOTP MFA enrollment (admin group; see PortalLayout.tsx) ----------------
+// Enrollment itself needs no new backend code: setUpTOTP/verifyTOTPSetup/updateMFAPreference
+// are plain Amplify Auth client calls against the already-signed-in user's own session. The
+// server-side half (amplify/functions/login-guard/handler.ts) only reacts to whatever
+// preference this sets — nothing here talks to that Lambda directly.
+export const mfa = {
+  /** Whether the current signed-in user already has TOTP set as their preferred MFA method. */
+  async isEnrolled(): Promise<boolean> {
+    if (!REAL_BACKEND) return true; // demo/mock sessions never need this gate
+    try {
+      const pref = await cognitoFetchMFAPreference();
+      return pref.preferred === 'TOTP' || !!pref.enabled?.includes('TOTP');
+    } catch {
+      return false;
+    }
+  },
+  /** Starts enrollment: returns the shared secret and an otpauth:// URI for a QR code. */
+  async startEnrollment(accountName: string): Promise<{ secret: string; uri: string }> {
+    const details = await cognitoSetUpTOTP();
+    return { secret: details.sharedSecret, uri: details.getSetupUri('TravelMateVR', accountName).toString() };
+  },
+  /** Confirms the 6-digit code from the authenticator app, then makes TOTP the preferred
+   *  method going forward — this is the write that amplify/functions/login-guard/handler.ts's
+   *  internal AdminInitiateAuth call starts reacting to on the next sign-in. */
+  async confirmEnrollment(code: string): Promise<void> {
+    await cognitoVerifyTOTPSetup({ code });
+    await cognitoUpdateMFAPreference({ totp: 'PREFERRED' });
+  }
+};
 
 // ---------------- Traveller profile (personalisation) ----------------
 export const DEFAULT_PROFILE: TravellerProfile = {

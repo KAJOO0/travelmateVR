@@ -310,7 +310,12 @@
     "code": "Bestätigungscode",
     "errCode": "Gib den 6-stelligen Code ein, den wir dir geschickt haben.",
     "confirmSubmit": "Bestätigen und weiter",
-    "backToSignIn": "Zurück zur Anmeldung"
+    "backToSignIn": "Zurück zur Anmeldung",
+    "mfaTitle": "Gib deinen Authentifizierungscode ein",
+    "mfaHint": "Öffne deine Authentifizierungs-App und gib den 6-stelligen Code für TravelMateVR ein.",
+    "mfaCode": "Authentifizierungscode",
+    "mfaSubmit": "Überprüfen und weiter",
+    "errMfaCode": "Dieser Code hat nicht funktioniert. Überprüfe deine Authentifizierungs-App und versuche es erneut."
   },
   "help": {
     "title": "Hilfe-Center",

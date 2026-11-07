@@ -11,6 +11,18 @@
     "realBackendNote": "Questa è la piattaforma reale: la sessione demo è disabilitata qui. Accedi invece con un account che dispone dell'accesso amministratore; ogni permesso resta comunque applicato dal server.",
     "role": "Accedi con i permessi di"
   },
+  "mfa": {
+    "eyebrow": "Sicurezza richiesta",
+    "title": "Configura l'autenticazione a due fattori",
+    "text": "Gli account amministratore devono configurare un'app di autenticazione prima di accedere al Command Center. Scansiona questo codice QR, poi inserisci il codice a 6 cifre mostrato.",
+    "qrAlt": "Codice QR per la configurazione dell'app di autenticazione",
+    "manualHint": "Non riesci a scansionare? Inserisci questo codice manualmente:",
+    "code": "Codice a 6 cifre",
+    "confirm": "Verifica e continua",
+    "verifying": "Verifica in corso…",
+    "err": "Il codice non è corretto. Controlla la tua app di autenticazione e riprova.",
+    "startErr": "Impossibile avviare la configurazione. Aggiorna la pagina per riprovare."
+  },
   "roles": {
     "traveller": "Viaggiatore",
     "partner": "Partner",

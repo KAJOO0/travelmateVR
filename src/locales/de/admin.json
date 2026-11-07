@@ -11,6 +11,18 @@
     "realBackendNote": "Dies ist die echte Plattform — der Demo-Zugang ist hier deaktiviert. Melden Sie sich stattdessen mit einem Konto mit Administratorzugriff an; jede Berechtigung wird weiterhin vom Server durchgesetzt.",
     "role": "Anmelden mit den Berechtigungen von"
   },
+  "mfa": {
+    "eyebrow": "Sicherheit erforderlich",
+    "title": "Zwei-Faktor-Authentifizierung einrichten",
+    "text": "Admin-Konten müssen eine Authentifizierungs-App einrichten, bevor sie auf das Command Center zugreifen können. Scanne diesen QR-Code und gib dann den angezeigten 6-stelligen Code ein.",
+    "qrAlt": "QR-Code zur Einrichtung der Authentifizierungs-App",
+    "manualHint": "Kannst du nicht scannen? Gib diesen Code manuell ein:",
+    "code": "6-stelliger Code",
+    "confirm": "Überprüfen und weiter",
+    "verifying": "Wird überprüft…",
+    "err": "Dieser Code hat nicht funktioniert. Überprüfe deine Authentifizierungs-App und versuche es erneut.",
+    "startErr": "Einrichtung konnte nicht gestartet werden. Lade die Seite neu, um es erneut zu versuchen."
+  },
   "roles": {
     "traveller": "Reisende/r",
     "partner": "Partner",

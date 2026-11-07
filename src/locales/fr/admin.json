@@ -11,6 +11,18 @@
     "realBackendNote": "Ceci est la plateforme réelle — la session de démonstration est désactivée ici. Connectez-vous plutôt avec un compte disposant d'un accès administrateur ; chaque autorisation reste appliquée par le serveur.",
     "role": "Se connecter avec les autorisations de"
   },
+  "mfa": {
+    "eyebrow": "Sécurité requise",
+    "title": "Configurer l'authentification à deux facteurs",
+    "text": "Les comptes administrateurs doivent configurer une application d'authentification avant d'accéder au Centre de contrôle. Scannez ce code QR, puis saisissez le code à 6 chiffres affiché.",
+    "qrAlt": "Code QR pour la configuration de l'application d'authentification",
+    "manualHint": "Impossible de scanner ? Saisissez ce code manuellement :",
+    "code": "Code à 6 chiffres",
+    "confirm": "Vérifier et continuer",
+    "verifying": "Vérification…",
+    "err": "Ce code n'a pas fonctionné. Vérifiez votre application d'authentification et réessayez.",
+    "startErr": "Impossible de démarrer la configuration. Actualisez la page pour réessayer."
+  },
   "roles": {
     "traveller": "Voyageur",
     "partner": "Partenaire",

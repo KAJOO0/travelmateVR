@@ -11,6 +11,18 @@
     "realBackendNote": "This is the real platform — the demo session is disabled here. Sign in with an account that has admin access instead; every permission is still enforced by the server regardless.",
     "role": "Sign in with the permissions of"
   },
+  "mfa": {
+    "eyebrow": "Security required",
+    "title": "Set up two-factor authentication",
+    "text": "Admin accounts must enroll an authenticator app before accessing the Command Center. Scan this QR code, then enter the 6-digit code it shows.",
+    "qrAlt": "QR code for authenticator app setup",
+    "manualHint": "Can't scan it? Enter this code manually:",
+    "code": "6-digit code",
+    "confirm": "Verify and continue",
+    "verifying": "Verifying…",
+    "err": "That code didn't work. Check your authenticator app and try again.",
+    "startErr": "Couldn't start setup. Refresh the page to try again."
+  },
   "roles": {
     "traveller": "Traveller",
     "partner": "Partner",

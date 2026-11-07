@@ -85,6 +85,15 @@ export const auth = defineAuth({
     }
   },
   groups: ['admin'],
+  // OPTIONAL, not ON: travellers are unaffected unless/until they enroll. Enforcement for the
+  // admin group specifically is an app-layer rule (src/components/portal/PortalLayout.tsx
+  // blocks the dashboard until an admin-group member enrolls), not a pool-wide requirement -
+  // Cognito has no native per-group MFA requirement. Once a user's TOTP preference is set to
+  // PREFERRED (via updateMFAPreference, during enrollment), amplify/functions/login-guard/
+  // picks this up automatically: its internal AdminInitiateAuth call starts returning a
+  // SOFTWARE_TOKEN_MFA challenge instead of tokens for that user, which the Lambda now handles
+  // as a second custom-auth round (see handler.ts) - non-enrolled users see no change at all.
+  multifactor: { mode: 'OPTIONAL', totp: true },
   triggers: {
     preAuthentication: loginGuardFn,
     defineAuthChallenge: loginGuardFn,

@@ -20,7 +20,7 @@ export default function SignInPage() {
   const nextParam = params.get('next');
   const next = nextParam && nextParam.startsWith('/') && !nextParam.startsWith('//') ? nextParam : '/account';
   const user = useSession();
-  const [mode, setMode] = useState<'signin' | 'register' | 'confirm'>(params.get('mode') === 'register' ? 'register' : 'signin');
+  const [mode, setMode] = useState<'signin' | 'register' | 'confirm' | 'mfa'>(params.get('mode') === 'register' ? 'register' : 'signin');
   const [name, setName] = useState('');
   const lang = useLocale();
   const [email, setEmail] = useState('');
@@ -39,8 +39,8 @@ export default function SignInPage() {
     ? { name: false, email: !(isEmail(email) || isUsername(email)), username: false, password: password.length === 0, code: false }
     : mode === 'register'
     ? { name: name.trim().length < 2, email: !isEmail(email), username: !!username.trim() && !isUsername(username), password: !isAcceptablePassword(password), code: false }
-    : { name: false, email: false, username: false, password: false, code: code.trim().length !== 6 };
-  const lockedUntil = mode === 'signin' && guard.lockedUntil && Date.parse(guard.lockedUntil) > now ? guard.lockedUntil : undefined;
+    : { name: false, email: false, username: false, password: false, code: code.trim().length !== 6 }; // 'confirm' and 'mfa' share this shape
+  const lockedUntil = (mode === 'signin' || mode === 'mfa') && guard.lockedUntil && Date.parse(guard.lockedUntil) > now ? guard.lockedUntil : undefined;
   useEffect(() => {
     if (!lockedUntil) return;
     const id = setInterval(() => { setNow(Date.now()); loginGuard.lockedUntil(); }, 30_000);
@@ -55,6 +55,7 @@ export default function SignInPage() {
     try {
       if (mode === 'signin') await auth.signIn(email, password);
       else if (mode === 'confirm') await auth.confirmRegistration(email, password, code.trim());
+      else if (mode === 'mfa') await auth.confirmMfaSignIn(email, code.trim());
       else await auth.register(name, email, password, username.trim() || undefined);
       navigate(next, { replace: true });
     } catch (err) {
@@ -65,10 +66,21 @@ export default function SignInPage() {
         setBusy(false);
         return;
       }
+      if (err instanceof AuthError && err.code === 'mfa_required') {
+        // Password round already succeeded (amplify/functions/login-guard/handler.ts) — the
+        // in-progress Cognito challenge session survives across this call, so only the code
+        // input is still needed. Password is cleared below like any other mode switch here.
+        setMode('mfa'); setTouched(false); setFormError(null); setCode('');
+        setPassword('');
+        setBusy(false);
+        return;
+      }
       setPassword('');
       if (err instanceof AuthError) {
         if (err.code === 'locked') { setNow(Date.now()); setFormError(null); }
+        else if (mode === 'mfa' && err.code === 'invalid_credentials') setFormError({ key: 'account:signin.errMfaCode' });
         else if (err.code === 'invalid_credentials') setFormError({ key: 'account:signin.errCredentials', params: err.attemptsLeft !== undefined && err.attemptsLeft <= 2 ? { left: err.attemptsLeft } : undefined });
+        else if (mode === 'mfa') setFormError({ key: 'account:signin.errMfaCode' });
         else if (mode === 'confirm') setFormError({ key: 'account:signin.errCode' });
         else setFormError({ key: 'account:signin.errRegister' });
       } else setFormError({ key: 'account:signin.errGeneric' });
@@ -103,6 +115,31 @@ export default function SignInPage() {
             <button type="submit" className="btn solid" disabled={busy}>{busy ? t('account:signin.working') : t('account:signin.confirmSubmit')}</button>
             <p style={{ fontSize: 'var(--fs-small)' }}>
               <button type="button" className="tlink" onClick={() => { setMode('signin'); setTouched(false); setFormError(null); setCode(''); }}><span>{t('account:signin.backToSignIn')}</span></button>
+            </p>
+          </form>
+        </section>
+      </div>
+    );
+  }
+
+  if (mode === 'mfa') {
+    return (
+      <div className="page">
+        <section className="auth">
+          <div className="pic"><Media id="safari-crew" sizes="520px" priority alt={t('account:signin.photoAlt')} /></div>
+          <form onSubmit={submit} noValidate>
+            <h1>{t('account:signin.mfaTitle')}</h1>
+            <p style={{ color: 'var(--muted)' }}>{t('account:signin.mfaHint')}</p>
+            {lockedUntil && <Notice tone="warn" icon="shield">{t('account:signin.locked', { time: until(lockedUntil), count: loginGuard.maxAttempts() })}</Notice>}
+            {formError && <div role="alert"><Notice tone="warn">{t(formError.key)}</Notice></div>}
+            <label className="field">
+              <span>{t('account:signin.mfaCode')}</span>
+              <input value={code} maxLength={6} inputMode="numeric" autoComplete="one-time-code" onChange={e => setCode(e.target.value)} aria-invalid={touched && errs.code} disabled={!!lockedUntil} />
+              {touched && errs.code && <span className="err">{t('account:signin.errCode')}</span>}
+            </label>
+            <button type="submit" className="btn solid" disabled={busy || !!lockedUntil}>{busy ? t('account:signin.working') : t('account:signin.mfaSubmit')}</button>
+            <p style={{ fontSize: 'var(--fs-small)' }}>
+              <button type="button" className="tlink" onClick={() => { setMode('signin'); setTouched(false); setFormError(null); setCode(''); setPassword(''); }}><span>{t('account:signin.backToSignIn')}</span></button>
             </p>
           </form>
         </section>
