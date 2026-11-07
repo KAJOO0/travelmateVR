@@ -41,7 +41,10 @@ export const handler: AppSyncResolverHandler<Args, Record<string, unknown>> = as
     throw new Error('At least one certification document is required to submit a partner application.');
   }
 
-  const bucket = process.env.PARTNER_DOCS_BUCKET_NAME;
+  // Auto-injected by amplify/storage/resource.ts's allow.resource(submitApplicationFn) grant -
+  // `${storageName}_BUCKET_NAME`, confirmed against the installed @aws-amplify/backend-storage
+  // package - not something this function sets itself (see amplify/backend.ts for why not).
+  const bucket = process.env.partnerDocs_BUCKET_NAME;
   // Confirms every claimed document genuinely exists (not just a plausible-looking string the
   // client made up) - the actual enforcement point, not the length check above alone.
   await Promise.all(docs.map(async key => {

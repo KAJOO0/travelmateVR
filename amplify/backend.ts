@@ -126,10 +126,15 @@ backend.deleteAccountFn.resources.lambda.addToRolePolicy(new iam.PolicyStatement
 
 // ---------------- Mandatory partner certification (amplify/functions/submit-partner-application/) ----------------
 
-// S3 read access for this function is granted in amplify/storage/resource.ts's own `access`
-// callback (allow.resource(submitApplicationFn)) — the idiomatic Gen2 way to grant a function
-// storage access, kept there instead of duplicated here.
-backend.submitApplicationFn.addEnvironment('PARTNER_DOCS_BUCKET_NAME', backend.storage.resources.bucket.bucketName);
+// S3 read access AND the bucket's name as an env var are both already handled by
+// amplify/storage/resource.ts's own `access` callback (allow.resource(submitApplicationFn)) —
+// confirmed from the installed @aws-amplify/backend-storage package: granting a function
+// access this way auto-injects `${storageName}_BUCKET_NAME` (here, partnerDocs_BUCKET_NAME)
+// into it. Manually calling addEnvironment for the same value here, from the root stack,
+// created a second, reverse cross-stack reference (Data's function -> Storage's bucket) on
+// top of storage's own grant (Storage -> Data's function) - confirmed live as a genuine
+// circular dependency (CloudformationStackCircularDependencyError naming storage+data
+// together) once submitApplicationFn was correctly pinned into the data stack below.
 
 // backend.data.resources.tables is keyed by CDK logical ID, not the plain model name (confirmed
 // from @aws-amplify/graphql-api-construct's own type: `Record<string, ITable>`, "keyed by
