@@ -41,10 +41,14 @@ export const handler: AppSyncResolverHandler<Args, Record<string, unknown>> = as
     throw new Error('At least one certification document is required to submit a partner application.');
   }
 
-  // Auto-injected by amplify/storage/resource.ts's allow.resource(submitApplicationFn) grant -
-  // `${storageName}_BUCKET_NAME`, confirmed against the installed @aws-amplify/backend-storage
-  // package - not something this function sets itself (see amplify/backend.ts for why not).
-  const bucket = process.env.partnerDocs_BUCKET_NAME;
+  // Auto-injected by amplify/storage/resource.ts's allow.resource(submitApplicationFn) grant.
+  // Confirmed live via GetFunctionConfiguration: the real name is 'PARTNER_DOCS_BUCKET_NAME'
+  // (my own first guess, before I second-guessed it from a source comment that turned out to
+  // describe a different, generic naming pattern, not this grant's actual one) - and its value
+  // is a resolved-at-runtime SSM reference (Amplify's cross-stack mechanism that avoids a hard
+  // CloudFormation reference here, which is exactly what caused the earlier circular-dependency
+  // failure), not a plain baked-in string.
+  const bucket = process.env.PARTNER_DOCS_BUCKET_NAME;
   // Confirms every claimed document genuinely exists (not just a plausible-looking string the
   // client made up) - the actual enforcement point, not the length check above alone.
   await Promise.all(docs.map(async key => {
