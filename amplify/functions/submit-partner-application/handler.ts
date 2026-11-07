@@ -50,7 +50,8 @@ export const handler: AppSyncResolverHandler<Args, Record<string, unknown>> = as
   await Promise.all(docs.map(async key => {
     try {
       await s3.send(new HeadObjectCommand({ Bucket: bucket, Key: key }));
-    } catch {
+    } catch (e) {
+      console.error('HeadObject failed', { bucket, key, error: e instanceof Error ? e.message : e, name: e instanceof Error ? e.name : undefined });
       throw new Error(`Certification document not found: ${key}`);
     }
   }));
