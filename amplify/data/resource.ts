@@ -1,5 +1,6 @@
 import { type ClientSchema, a, defineData } from '@aws-amplify/backend';
 import { deleteAccountFn } from '../functions/delete-account/resource';
+import { submitApplicationFn } from '../functions/submit-partner-application/resource';
 
 // Real catalogue data: Country, Destination, Partner, Listing, Experience, Review.
 // Mirrors src/domain/types.ts. Everything else (bookings, admin, partner/board portals,
@@ -122,7 +123,15 @@ const schema = a.schema({
       whatsapp: a.string(),
       since: a.integer(),
       tagline: LocalizedText,
-      listings: a.hasMany('Listing', 'partnerId')
+      listings: a.hasMany('Listing', 'partnerId'),
+      // Links a live catalogue entry back to the PartnerApplication it came from, so an admin
+      // can revoke approval for a partner whose application never had a valid certification
+      // document. No automated "approved application -> live Partner" publish pipeline exists
+      // yet (confirmed: approving an application today only flips a status flag) - an admin
+      // sets this by hand once a Partner row exists some other way.
+      applicationId: a.id(),
+      revokedAt: a.datetime(),
+      revokedReason: a.string()
     })
     .authorization(allow => [allow.guest().to(['read']), allow.group('admin')]),
 
@@ -210,6 +219,88 @@ const schema = a.schema({
       // 'mine' from src/domain/types.ts is a client-only UI flag — never persisted here.
     })
     .authorization(allow => [allow.guest().to(['read']), allow.group('admin')]),
+
+  // A partner/tour-operator application. No `create` grant here, for anyone — the only way to
+  // create one is the submitPartnerApplication mutation below, so the certification-document
+  // requirement is enforced by that Lambda, not just by the registration form's own UI. See
+  // amplify/functions/submit-partner-application/handler.ts.
+  PartnerApplication: a
+    .model({
+      businessName: a.string().required(),
+      kind: a.string().required(),
+      countryId: a.string().required(),
+      area: a.string().required(),
+      destinations: a.string().array().required(),
+      services: a.string().array().required(),
+      licence: a.string(),
+      registration: a.string(),
+      website: a.string(),
+      contactName: a.string().required(),
+      contactEmail: a.string().required(),
+      contactPhone: a.string().required(),
+      contactRole: a.string(),
+      languages: a.string().array().required(),
+      communityOwned: a.boolean().required(),
+      ecoCertification: a.string(),
+      about: a.string().required(),
+      // S3 keys under partner-docs/{identityId}/... (amplify/storage/resource.ts). At least
+      // one is required to exist for a submission to be accepted at all — checked by
+      // submitPartnerApplication's handler via S3 HeadObject, not just this array being
+      // non-null (which `.required()` alone would allow to be empty).
+      certificationDocs: a.string().array().required(),
+      status: a.enum(['submitted', 'in_review', 'approved', 'rejected', 'revoked']),
+      decidedAt: a.datetime(),
+      decisionNote: a.string(),
+      revokedAt: a.datetime(),
+      revokedReason: a.string(),
+      linkedPartnerId: a.id()
+    })
+    .authorization(allow => [allow.owner().to(['read']), allow.group('admin')]),
+
+  // Backend-delivered notifications, so e.g. a partner-revocation reaches the affected user's
+  // account on any device, any time they sign in - unlike src/services/account.ts's
+  // pushNotification(), which only ever reaches the same browser/device it was called from.
+  Notification: a
+    .model({
+      kind: a.enum(['booking', 'reminder', 'itinerary', 'partner', 'promotion', 'price', 'alert', 'ai', 'support']),
+      titleKey: a.string().required(),
+      bodyKey: a.string().required(),
+      params: a.json(),
+      href: a.string(),
+      read: a.boolean().default(false)
+    })
+    .authorization(allow => [allow.owner().to(['read', 'update']), allow.group('admin').to(['create', 'read'])]),
+
+  // No arguments beyond the application's own fields: the applicant identity comes from the
+  // caller's verified token (event.identity), server-side, never from client input - the same
+  // reasoning as deleteMyAccount just below. This is the one and only path that can create a
+  // PartnerApplication (see its authorization() above), which is what makes the certification
+  // requirement real instead of cosmetic.
+  submitPartnerApplication: a
+    .mutation()
+    .arguments({
+      businessName: a.string().required(),
+      kind: a.string().required(),
+      countryId: a.string().required(),
+      area: a.string().required(),
+      destinations: a.string().array().required(),
+      services: a.string().array().required(),
+      licence: a.string(),
+      registration: a.string(),
+      website: a.string(),
+      contactName: a.string().required(),
+      contactEmail: a.string().required(),
+      contactPhone: a.string().required(),
+      contactRole: a.string(),
+      languages: a.string().array().required(),
+      communityOwned: a.boolean().required(),
+      ecoCertification: a.string(),
+      about: a.string().required(),
+      certificationDocs: a.string().array().required()
+    })
+    .returns(a.ref('PartnerApplication'))
+    .authorization(allow => [allow.authenticated()])
+    .handler(a.handler.function(submitApplicationFn)),
 
   // See amplify/functions/delete-account/handler.ts for why this exists as a real backend
   // mutation rather than relying on Cognito's client-side deleteUser(). No arguments: the

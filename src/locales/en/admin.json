@@ -138,7 +138,8 @@
       "submitted": "New",
       "in_review": "In review",
       "approved": "Approved",
-      "rejected": "Rejected"
+      "rejected": "Rejected",
+      "revoked": "Revoked"
     },
     "noApplications": "No applications yet. They arrive from the public “List your business” form.",
     "approve": "Approve",
@@ -151,6 +152,14 @@
       "rejected": "{{name}} rejected.",
       "in_review": "{{name}} is now in review."
     },
+    "decideFailed": "Something went wrong. Please try again.",
+    "viewDoc": "Document {{n}}",
+    "revoke": "Revoke",
+    "revokeReason": "Reason for revoking (required)",
+    "revokeReasonPh": "Why this approval is being revoked",
+    "confirmRevoke": "Confirm revoke",
+    "revoked": "{{name}}'s approval has been revoked.",
+    "revokeFailed": "Something went wrong. Please try again.",
     "checks": "Before approving: verify the tourism licence with the issuing authority, check the business registration, and confirm the contact by phone.",
     "noListings": "No new listings waiting for review.",
     "review": "Review",

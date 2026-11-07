@@ -138,7 +138,8 @@
       "submitted": "Neu",
       "in_review": "In Prüfung",
       "approved": "Angenommen",
-      "rejected": "Abgelehnt"
+      "rejected": "Abgelehnt",
+      "revoked": "Widerrufen"
     },
     "noApplications": "Noch keine Bewerbungen. Sie kommen über das öffentliche Formular „Unternehmen eintragen“ rein.",
     "approve": "Annehmen",
@@ -151,6 +152,14 @@
       "rejected": "{{name}} abgelehnt.",
       "in_review": "{{name}} ist in Prüfung."
     },
+    "decideFailed": "Etwas ist schiefgelaufen. Bitte versuche es erneut.",
+    "viewDoc": "Dokument {{n}}",
+    "revoke": "Widerrufen",
+    "revokeReason": "Grund für den Widerruf (erforderlich)",
+    "revokeReasonPh": "Warum diese Genehmigung widerrufen wird",
+    "confirmRevoke": "Widerruf bestätigen",
+    "revoked": "Die Genehmigung von {{name}} wurde widerrufen.",
+    "revokeFailed": "Etwas ist schiefgelaufen. Bitte versuche es erneut.",
     "checks": "Vor der Annahme: Tourismuslizenz bei der Behörde prüfen, Handelsregister kontrollieren und Ansprechperson telefonisch bestätigen.",
     "noListings": "Keine neuen Angebote zur Prüfung.",
     "review": "Prüfen",

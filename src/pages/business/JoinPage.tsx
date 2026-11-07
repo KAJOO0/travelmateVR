@@ -6,6 +6,7 @@ import { Notice } from '@/components/ui/bits';
 import { usePageTitle } from '@/app/usePageTitle';
 import { applications, type PartnerApplication } from '@/services/business';
 import { usePlatform } from '@/services/platform';
+import { useSession } from '@/services/account';
 import { seedIndex } from '@/services/catalog';
 import { countryName } from '@/lib/content';
 import { useLocale } from '@/i18n/useLocale';
@@ -19,16 +20,23 @@ type Step = (typeof STEPS)[number];
 const KINDS: Partner['kind'][] = ['operator', 'lodge', 'restaurant', 'transport', 'community', 'events', 'guide'];
 const SERVICES: ListingType[] = ['stay', 'safari', 'activity', 'local', 'restaurant', 'transport', 'event'];
 const SPOKEN = ['English', 'Swahili', 'French', 'German', 'Italian', 'Mandarin', 'Spanish', 'Arabic', 'Portuguese', 'Greek', 'Slovene', 'Indonesian', 'Vietnamese', 'Khmer'];
-type Form = Omit<PartnerApplication, 'id' | 'createdAt' | 'status'> & { consent: boolean };
+// Cheap cost/abuse guard, independent of (not a substitute for) the real enforcement in
+// amplify/functions/submit-partner-application/handler.ts, which is what actually makes a
+// certification document mandatory server-side.
+const MAX_CERT_FILE_BYTES = 10 * 1024 * 1024;
+const CERT_FILE_TYPES = ['application/pdf', 'image/jpeg', 'image/png'];
+type Form = Omit<PartnerApplication, 'id' | 'createdAt' | 'status' | 'certificationDocs'> & { consent: boolean; certFiles: File[] };
 
 export default function PartnerJoinPage() {
   const { t } = useTranslation(['business', 'common', 'explore', 'trip']);
   const lang = useLocale();
   usePageTitle(t('business:join.title'));
+  const user = useSession();
   const [step, setStep] = useState<Step>('business');
   const [touched, setTouched] = useState(false);
   const [busy, setBusy] = useState(false);
   const [done, setDone] = useState<PartnerApplication | null>(null);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const applicationsOpen = usePlatform().flags.partnerApplications;
   // Links from a destination page prefill the country and destination (e.g. ?country=jordan&destination=petra).
   const [params] = useSearchParams();
@@ -36,7 +44,7 @@ export default function PartnerJoinPage() {
   const preDest = seedIndex.destinations.find(d => d.id === params.get('destination') && d.countryId === preCountry)?.id;
   const [f, setF] = useState<Form>({
     businessName: '', kind: (KINDS as string[]).includes(params.get('kind') ?? '') ? params.get('kind') as Partner['kind'] : 'operator', countryId: preCountry, area: '', destinations: preDest ? [preDest] : [], services: [], licence: '', registration: '', website: '',
-    contact: { name: '', email: '', phone: '', role: '' }, languages: preCountry === 'tanzania' || preCountry === 'zanzibar' ? ['English', 'Swahili'] : ['English'], communityOwned: false, ecoCertification: '', about: '', consent: false
+    contact: { name: '', email: '', phone: '', role: '' }, languages: preCountry === 'tanzania' || preCountry === 'zanzibar' ? ['English', 'Swahili'] : ['English'], communityOwned: false, ecoCertification: '', about: '', consent: false, certFiles: []
   });
   const up = <K extends keyof Form>(k: K, v: Form[K]) => setF(s => ({ ...s, [k]: v }));
   const toggle = (list: string[], v: string, on: boolean) => (on ? [...list, v] : list.filter(x => x !== v));
@@ -46,7 +54,8 @@ export default function PartnerJoinPage() {
     services: { services: !f.services.length, about: f.about.trim().length < 40 },
     contact: {
       contactName: f.contact.name.trim().length < 2, email: !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.contact.email),
-      phone: !/^\+?[\d\s()-]{7,20}$/.test(f.contact.phone), website: !!f.website && !/^https:\/\/\S+\.\S+$/.test(f.website ?? '')
+      phone: !/^\+?[\d\s()-]{7,20}$/.test(f.contact.phone), website: !!f.website && !/^https:\/\/\S+\.\S+$/.test(f.website ?? ''),
+      certDocs: !f.certFiles.length
     },
     review: { consent: !f.consent }
   };
@@ -54,16 +63,36 @@ export default function PartnerJoinPage() {
   const stepInvalid = Object.values(errs[step]).some(Boolean);
   const err = (k: string) => touched && errs[step][k];
 
+  const onPickFiles = (files: FileList | null) => {
+    const picked = Array.from(files ?? []);
+    const valid = picked.filter(file => CERT_FILE_TYPES.includes(file.type) && file.size <= MAX_CERT_FILE_BYTES);
+    up('certFiles', [...f.certFiles, ...valid]);
+  };
+  const removeFile = (i: number) => up('certFiles', f.certFiles.filter((_, idx2) => idx2 !== i));
+
   const next = async () => {
     setTouched(true);
     if (stepInvalid) return;
     setTouched(false);
     if (step !== 'review') { setStep(STEPS[idx + 1]!); window.scrollTo({ top: 0 }); return; }
     setBusy(true);
-    const { consent: _c, ...data } = f;
-    setDone(await applications.submit({ ...data, businessName: data.businessName.trim(), about: data.about.trim() }));
-    setBusy(false);
+    setSubmitError(null);
+    try {
+      const { consent: _c, certFiles, ...data } = f;
+      const certificationDocs = await Promise.all(certFiles.map(file => applications.uploadCertDoc(file)));
+      setDone(await applications.submit({ ...data, certificationDocs, businessName: data.businessName.trim(), about: data.about.trim() }));
+    } catch {
+      setSubmitError(t('business:join.submitFailed'));
+    } finally {
+      setBusy(false);
+    }
   };
+
+  if (!user) return (
+    <div className="page"><section className="block" style={{ maxWidth: 760, marginInline: 'auto', width: '100%' }}>
+      <div className="state"><span className="ico"><Icon name="user" /></span><h1 className="group-title">{t('business:join.signInRequired')}</h1><p>{t('business:join.signInRequiredText')}</p><Link className="btn solid sm" to={`/signin?next=${encodeURIComponent('/partners/join')}`}>{t('business:join.signInCta')}</Link></div>
+    </section></div>
+  );
 
   if (!applicationsOpen) return (
     <div className="page"><section className="block" style={{ maxWidth: 760, marginInline: 'auto', width: '100%' }}>
@@ -134,6 +163,21 @@ export default function PartnerJoinPage() {
               <label className="field"><span>{t('business:join.role')}</span><input value={f.contact.role} autoComplete="organization-title" placeholder={t('business:join.rolePh')} onChange={e => up('contact', { ...f.contact, role: e.target.value })} /></label>
               <label className="field"><span>{t('trip:book.email')}</span><input type="email" value={f.contact.email} autoComplete="email" onChange={e => up('contact', { ...f.contact, email: e.target.value })} aria-invalid={err('email')} />{err('email') && <span className="err">{t('trip:book.errEmail')}</span>}</label>
               <label className="field"><span>{t('trip:book.phone')}</span><input type="tel" value={f.contact.phone} autoComplete="tel" onChange={e => up('contact', { ...f.contact, phone: e.target.value })} aria-invalid={err('phone')} />{err('phone') && <span className="err">{t('trip:book.errPhone')}</span>}</label>
+              <label className="field full"><span>{t('business:join.certDocs')}</span>
+                <input type="file" multiple accept=".pdf,.jpg,.jpeg,.png" onChange={e => { onPickFiles(e.target.files); e.target.value = ''; }} aria-invalid={err('certDocs')} />
+                <span className="hint">{t('business:join.certDocsHint')}</span>
+                {err('certDocs') && <span className="err">{t('business:join.errCertDocs')}</span>}
+              </label>
+              {f.certFiles.length > 0 && (
+                <ul className="list full" style={{ margin: 0 }}>
+                  {f.certFiles.map((file, i) => (
+                    <li key={`${file.name}-${i}`} className="list-item">
+                      <span className="grow">{file.name}</span>
+                      <button type="button" className="btn ghost sm" onClick={() => removeFile(i)}><Icon name="close" />{t('business:join.removeFile')}</button>
+                    </li>
+                  ))}
+                </ul>
+              )}
               <Notice icon="shield">{t('business:join.docsNote')}</Notice>
             </div>
           )}
@@ -150,6 +194,7 @@ export default function PartnerJoinPage() {
               <label className="check"><input type="checkbox" checked={f.consent} onChange={e => up('consent', e.target.checked)} aria-invalid={err('consent')} />{t('business:join.consent')}</label>
               {err('consent') && <span className="err small">{t('trip:book.errAgree')}</span>}
               <p className="small muted"><Link to="/terms">{t('common:footer.links.terms')}</Link> · <Link to="/privacy">{t('common:footer.links.privacy')}</Link></p>
+              {submitError && <Notice icon="close" tone="warn">{submitError}</Notice>}
             </div>
           )}
           <div className="row-between">

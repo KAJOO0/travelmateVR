@@ -137,7 +137,8 @@
       "submitted": "新申请",
       "in_review": "审核中",
       "approved": "已通过",
-      "rejected": "已拒绝"
+      "rejected": "已拒绝",
+      "revoked": "已撤销"
     },
     "noApplications": "暂无申请。申请来自公开的“商家入驻”表单。",
     "approve": "通过",
@@ -150,6 +151,14 @@
       "rejected": "{{name}} 已拒绝。",
       "in_review": "{{name}} 正在审核。"
     },
+    "decideFailed": "出错了，请重试。",
+    "viewDoc": "文件 {{n}}",
+    "revoke": "撤销",
+    "revokeReason": "撤销原因（必填）",
+    "revokeReasonPh": "说明撤销此批准的原因",
+    "confirmRevoke": "确认撤销",
+    "revoked": "{{name}} 的批准已被撤销。",
+    "revokeFailed": "出错了，请重试。",
     "checks": "通过前：向发证机关核实旅游许可证，核对企业注册信息，并电话确认联系人。",
     "noListings": "暂无待审核的新商品。",
     "review": "审核",

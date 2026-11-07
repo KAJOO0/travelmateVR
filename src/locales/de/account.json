@@ -445,6 +445,10 @@
     "ticketReply": {
       "title": "Neue Antwort auf Anfrage {{id}}",
       "body": "Das TravelMateVR-Team hat auf deine Supportanfrage geantwortet."
+    },
+    "partnerRevoked": {
+      "title": "Partner-Freigabe widerrufen",
+      "body": "Die Freigabe von {{businessName}} wurde widerrufen: {{reason}}"
     }
   }
 }

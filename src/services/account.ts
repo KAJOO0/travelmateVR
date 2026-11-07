@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import type { AppNotification, LocalizedText, MessageThread, Review, Role, SupportTicket, TravelDocument, TravellerProfile, User } from '@/domain/types';
 import { createStore, nowIso, uid, useStore } from '@/lib/store';
 import { AppError, DATA_SOURCE, REAL_BACKEND, demoLatency, http } from './http';
@@ -363,6 +364,37 @@ export const notificationPrefsStore = createStore<Record<AppNotification['kind']
 
 export function pushNotification(n: { kind: AppNotification['kind']; title?: LocalizedText; body?: LocalizedText; i18n?: AppNotification['i18n']; href?: string }) {
   notificationStore.set(list => [{ id: uid('n_'), createdAt: nowIso(), read: false, ...n }, ...list].slice(0, 100));
+}
+
+/** Live, backend-delivered notifications (amplify/data/resource.ts's Notification model) —
+ *  unlike pushNotification() above, these reach the recipient on any device, any time they
+ *  sign in, since they're written server-side (e.g. src/services/admin.ts's
+ *  revokeApplication()) rather than appended to the current browser's local store. Only
+ *  populated in real-backend mode; demo mode has nothing to subscribe to. */
+export function useBackendNotifications(): AppNotification[] {
+  const [list, setList] = useState<AppNotification[]>([]);
+  useEffect(() => {
+    if (!REAL_BACKEND) return;
+    const sub = dataClient().models.Notification.observeQuery().subscribe({
+      next: ({ items }) => setList(items.map(n => ({
+        id: n.id,
+        kind: n.kind as AppNotification['kind'],
+        i18n: { title: n.titleKey, body: n.bodyKey, params: (n.params ?? {}) as Record<string, string> },
+        createdAt: n.createdAt,
+        read: n.read ?? false,
+        href: n.href ?? undefined
+      })))
+    });
+    return () => sub.unsubscribe();
+  }, []);
+  return list;
+}
+
+/** Marks a backend-delivered notification read/unread — update only, no delete, matching the
+ *  Notification model's owner authorization (allow.owner().to(['read','update'])): this is
+ *  meant to stay a durable record of what happened, not a disposable local item. */
+export function setBackendNotificationRead(id: string, read: boolean): Promise<unknown> {
+  return dataClient().models.Notification.update({ id, read });
 }
 
 // ---------------- Reviews written by the traveller ----------------

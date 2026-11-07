@@ -449,6 +449,10 @@
     "ticketReply": {
       "title": "Nuova risposta alla richiesta {{id}}",
       "body": "Il team TravelMateVR ha risposto alla tua richiesta di assistenza."
+    },
+    "partnerRevoked": {
+      "title": "Approvazione partner revocata",
+      "body": "L'approvazione di {{businessName}} è stata revocata: {{reason}}"
     }
   }
 }

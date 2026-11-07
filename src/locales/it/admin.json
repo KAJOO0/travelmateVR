@@ -139,7 +139,8 @@
       "submitted": "Nuova",
       "in_review": "In revisione",
       "approved": "Approvata",
-      "rejected": "Respinta"
+      "rejected": "Respinta",
+      "revoked": "Revocata"
     },
     "noApplications": "Ancora nessuna candidatura. Arrivano dal modulo pubblico “Candida la tua attività”.",
     "approve": "Approva",
@@ -152,6 +153,14 @@
       "rejected": "{{name}} respinto.",
       "in_review": "{{name}} è in revisione."
     },
+    "decideFailed": "Qualcosa è andato storto. Riprova.",
+    "viewDoc": "Documento {{n}}",
+    "revoke": "Revoca",
+    "revokeReason": "Motivo della revoca (obbligatorio)",
+    "revokeReasonPh": "Perché questa approvazione viene revocata",
+    "confirmRevoke": "Conferma revoca",
+    "revoked": "L'approvazione di {{name}} è stata revocata.",
+    "revokeFailed": "Qualcosa è andato storto. Riprova.",
     "checks": "Prima di approvare: verifica la licenza turistica presso l’autorità, controlla la registrazione e conferma il referente per telefono.",
     "noListings": "Nessun nuovo annuncio da revisionare.",
     "review": "Revisiona",

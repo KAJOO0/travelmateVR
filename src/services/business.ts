@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import type { Locale, LocalizedText, MediaId, MessageThread, Partner } from '@/domain/types';
 import { createStore, nowIso, uid, useStore } from '@/lib/store';
 import { addDays, todayIso } from '@/lib/random';
@@ -5,6 +6,12 @@ import { PARTNERS } from '@/data/seed/partners';
 import { demoLatency } from './http';
 import { threadStore } from './account';
 import { partnerAdminStore } from './inventory';
+import { generateClient } from 'aws-amplify/data';
+import { fetchAuthSession } from 'aws-amplify/auth';
+import { uploadData } from 'aws-amplify/storage';
+import type { Schema } from '../../amplify/data/resource';
+
+const dataClient = () => generateClient<Schema>({ authMode: 'userPool' });
 
 // ---------------------------------------------------------------------------------------------
 // Partner portal (demo layer). Every store here is a stand-in for partner-scoped API endpoints;
@@ -197,19 +204,112 @@ export const vrContent = {
 };
 
 // ---------------- Partner applications (public "List your business" form) ----------------
+// Real backend now (Amplify Data's PartnerApplication model + the submitPartnerApplication
+// custom mutation, amplify/functions/submit-partner-application/) — not the localStorage mock
+// this used to be. The only way to create a row is that mutation, which rejects a submission
+// with zero certification documents server-side; see its handler for why that enforcement
+// can't just live in this form's own validation.
 export interface PartnerApplication {
   id: string; businessName: string; kind: Partner['kind']; countryId: string; area: string; destinations: string[];
   services: string[]; licence?: string; registration?: string; website?: string;
   contact: { name: string; email: string; phone: string; role: string };
   languages: string[]; communityOwned: boolean; ecoCertification?: string; about: string;
-  status: 'submitted' | 'in_review' | 'approved' | 'rejected'; createdAt: string; decidedAt?: string; decisionNote?: string;
+  certificationDocs: string[];
+  status: 'submitted' | 'in_review' | 'approved' | 'rejected' | 'revoked'; createdAt: string; decidedAt?: string; decisionNote?: string;
+  revokedAt?: string; revokedReason?: string; linkedPartnerId?: string;
 }
-export const applicationStore = createStore<PartnerApplication[]>('tm.biz.applications', () => []);
+
+type ApplicationRecord = NonNullable<Schema['PartnerApplication']['type']>;
+
+function fromRecord(r: ApplicationRecord): PartnerApplication {
+  return {
+    id: r.id,
+    businessName: r.businessName,
+    kind: r.kind as Partner['kind'],
+    countryId: r.countryId,
+    area: r.area,
+    destinations: [...(r.destinations ?? [])].filter((d): d is string => d !== null),
+    services: [...(r.services ?? [])].filter((s): s is string => s !== null),
+    licence: r.licence ?? undefined,
+    registration: r.registration ?? undefined,
+    website: r.website ?? undefined,
+    contact: { name: r.contactName, email: r.contactEmail, phone: r.contactPhone, role: r.contactRole ?? '' },
+    languages: [...(r.languages ?? [])].filter((l): l is string => l !== null),
+    communityOwned: r.communityOwned,
+    ecoCertification: r.ecoCertification ?? undefined,
+    about: r.about,
+    certificationDocs: [...(r.certificationDocs ?? [])].filter((d): d is string => d !== null),
+    status: (r.status ?? 'submitted') as PartnerApplication['status'],
+    createdAt: r.createdAt,
+    decidedAt: r.decidedAt ?? undefined,
+    decisionNote: r.decisionNote ?? undefined,
+    revokedAt: r.revokedAt ?? undefined,
+    revokedReason: r.revokedReason ?? undefined,
+    linkedPartnerId: r.linkedPartnerId ?? undefined
+  };
+}
+
 export const applications = {
-  async submit(a: Omit<PartnerApplication, 'id' | 'createdAt' | 'status'>): Promise<PartnerApplication> {
-    await demoLatency(700, 1200);
-    const app: PartnerApplication = { ...a, id: `APP-${Date.now().toString(36).toUpperCase().slice(-6)}`, status: 'submitted', createdAt: nowIso() };
-    applicationStore.set(list => [app, ...list]);
-    return app;
+  /** Uploads one certification/licence file to the caller's own prefix
+   *  (partner-docs/{identityId}/..., amplify/storage/resource.ts) and returns the S3 key to
+   *  pass into submit(). identityId here is the Cognito Identity Pool id the storage access
+   *  rule's {entity_id} token resolves to — the same signed-in session also has a separate
+   *  User Pool sub used for the application's own ownership, but both trace back to the one
+   *  authenticated user. */
+  async uploadCertDoc(file: File): Promise<string> {
+    const session = await fetchAuthSession();
+    const identityId = session.identityId;
+    if (!identityId) throw new Error('Sign in to upload documents.');
+    const path = `partner-docs/${identityId}/${Date.now()}-${file.name}`;
+    await uploadData({ path, data: file }).result;
+    return path;
+  },
+  async submit(a: Omit<PartnerApplication, 'id' | 'createdAt' | 'status' | 'decidedAt' | 'decisionNote' | 'revokedAt' | 'revokedReason' | 'linkedPartnerId'>): Promise<PartnerApplication> {
+    const res = await dataClient().mutations.submitPartnerApplication({
+      businessName: a.businessName,
+      kind: a.kind,
+      countryId: a.countryId,
+      area: a.area,
+      destinations: a.destinations,
+      services: a.services,
+      licence: a.licence,
+      registration: a.registration,
+      website: a.website,
+      contactName: a.contact.name,
+      contactEmail: a.contact.email,
+      contactPhone: a.contact.phone,
+      contactRole: a.contact.role,
+      languages: a.languages,
+      communityOwned: a.communityOwned,
+      ecoCertification: a.ecoCertification,
+      about: a.about,
+      certificationDocs: a.certificationDocs
+    });
+    if (res.errors?.length) throw new Error(res.errors.map(e => e.message).join('; '));
+    if (!res.data) throw new Error('The application was not created.');
+    return fromRecord(res.data as ApplicationRecord);
+  },
+  /** Every application, for the admin PartnersPage — authorized by allow.group('admin') on
+   *  the model itself, same as every other admin-only read in this app. */
+  async listAll(): Promise<PartnerApplication[]> {
+    const res = await dataClient().models.PartnerApplication.list();
+    return res.data.map(fromRecord);
+  },
+  async decide(id: string, decision: 'approved' | 'rejected' | 'in_review', note?: string): Promise<void> {
+    const res = await dataClient().models.PartnerApplication.update({ id, status: decision, decidedAt: nowIso(), decisionNote: note });
+    if (res.errors?.length) throw new Error(res.errors.map(e => e.message).join('; '));
   }
 };
+
+/** Live, admin-only view of every application (src/pages/admin/PartnersPage.tsx) — updates
+ *  automatically as applications are decided or revoked, instead of needing a manual refetch. */
+export function useApplications(): PartnerApplication[] {
+  const [list, setList] = useState<PartnerApplication[]>([]);
+  useEffect(() => {
+    const sub = dataClient().models.PartnerApplication.observeQuery().subscribe({
+      next: ({ items }) => setList(items.map(fromRecord))
+    });
+    return () => sub.unsubscribe();
+  }, []);
+  return list;
+}

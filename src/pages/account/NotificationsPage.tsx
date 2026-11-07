@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Icon, type IconName } from '@/components/ui/Icon';
 import { EmptyState } from '@/components/ui/States';
-import { notificationPrefsStore, notificationStore, useNotifications } from '@/services/account';
+import { notificationPrefsStore, notificationStore, setBackendNotificationRead, useBackendNotifications, useNotifications } from '@/services/account';
 import { useStore } from '@/lib/store';
 import { useLocale } from '@/i18n/useLocale';
 import { lt } from '@/lib/content';
@@ -30,7 +30,16 @@ export default function NotificationsPage() {
   const { t } = useTranslation(['account', 'common']);
   const lang = useLocale();
   usePageTitle(t('account:notifications.title'));
-  const list = useNotifications();
+  const local = useNotifications();
+  const backend = useBackendNotifications();
+  // Tagged so the mark-read/delete actions below know which store to write to - the backend
+  // Notification model only grants update (no delete), since it's meant to stay a durable
+  // record (src/services/account.ts's setBackendNotificationRead).
+  const list = useMemo(
+    () => [...local.map(n => ({ ...n, source: 'local' as const })), ...backend.map(n => ({ ...n, source: 'backend' as const }))]
+      .sort((a, b) => b.createdAt.localeCompare(a.createdAt)),
+    [local, backend]
+  );
   const prefs = useStore(notificationPrefsStore);
   const text = useNotificationText();
   const [tab, setTab] = useState<'all' | 'unread' | 'settings'>('all');
@@ -42,7 +51,7 @@ export default function NotificationsPage() {
       <section className="block">
         <div className="head-row">
           <div className="page-head"><span className="eyebrow">{t('common:a11y.notifications')}</span><h1>{t('account:notifications.title')}</h1></div>
-          {unread > 0 && <button type="button" className="btn ghost sm" onClick={() => notificationStore.set(l => l.map(n => ({ ...n, read: true })))}><Icon name="check" />{t('account:notifications.markAll')}</button>}
+          {unread > 0 && <button type="button" className="btn ghost sm" onClick={() => { notificationStore.set(l => l.map(n => ({ ...n, read: true }))); backend.filter(n => !n.read).forEach(n => void setBackendNotificationRead(n.id, true)); }}><Icon name="check" />{t('account:notifications.markAll')}</button>}
         </div>
         <div className="tabs" role="tablist">
           {(['all', 'unread', 'settings'] as const).map(k => <button key={k} type="button" role="tab" aria-selected={tab === k} onClick={() => setTab(k)}>{t(`account:notifications.tab.${k}`)}{k === 'unread' && unread ? ` (${unread})` : ''}</button>)}
@@ -77,13 +86,13 @@ export default function NotificationsPage() {
                 <li key={n.id} className={`list-item${n.read ? '' : ' unread'}`}>
                   <span className="ico"><Icon name={ICON[n.kind]} /></span>
                   <span className="grow">
-                    <b>{n.href ? <Link to={n.href} onClick={() => notificationStore.set(l => l.map(x => (x.id === n.id ? { ...x, read: true } : x)))} style={{ color: 'inherit' }}>{tx.title}</Link> : tx.title}</b>
+                    <b>{n.href ? <Link to={n.href} onClick={() => (n.source === 'backend' ? void setBackendNotificationRead(n.id, true) : notificationStore.set(l => l.map(x => (x.id === n.id ? { ...x, read: true } : x))))} style={{ color: 'inherit' }}>{tx.title}</Link> : tx.title}</b>
                     <small>{tx.body}</small>
                     <small>{dateLabel(n.createdAt, lang, { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })}</small>
                   </span>
                   <span className="actions">
-                    <button type="button" className="btn ghost sm" onClick={() => notificationStore.set(l => l.map(x => (x.id === n.id ? { ...x, read: !x.read } : x)))}>{n.read ? t('account:notifications.markUnread') : t('account:notifications.markRead')}</button>
-                    <button type="button" className="icon-btn" aria-label={t('account:notifications.delete')} onClick={() => notificationStore.set(l => l.filter(x => x.id !== n.id))}><Icon name="close" /></button>
+                    <button type="button" className="btn ghost sm" onClick={() => (n.source === 'backend' ? void setBackendNotificationRead(n.id, !n.read) : notificationStore.set(l => l.map(x => (x.id === n.id ? { ...x, read: !x.read } : x))))}>{n.read ? t('account:notifications.markUnread') : t('account:notifications.markRead')}</button>
+                    {n.source === 'local' && <button type="button" className="icon-btn" aria-label={t('account:notifications.delete')} onClick={() => notificationStore.set(l => l.filter(x => x.id !== n.id))}><Icon name="close" /></button>}
                   </span>
                 </li>
               );

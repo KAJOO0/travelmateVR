@@ -1,12 +1,13 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
+import { getUrl } from 'aws-amplify/storage';
 import { Icon } from '@/components/ui/Icon';
 import { Modal } from '@/components/ui/Modal';
 import { useToast } from '@/app/providers/ToastProvider';
 import { PortalHead, useFmt } from '@/features/portal/shared';
 import { ReadOnly, useAdmin, useAdminT, useAllBookings } from '@/features/portal/admin';
 import { partnersAdmin, platformMetrics, audit } from '@/services/admin';
-import { applicationStore, settingsStore, type PartnerApplication } from '@/services/business';
+import { settingsStore, useApplications, type PartnerApplication } from '@/services/business';
 import { draftStore, partnerAdminStore, type ListingDraft } from '@/services/inventory';
 import { lastMonths } from '@/services/businessAnalytics';
 import { seedIndex } from '@/services/catalog';
@@ -20,13 +21,57 @@ function ApplicationModal({ app, write, onClose }: { app: PartnerApplication; wr
   const f = useFmt();
   const toast = useToast();
   const [note, setNote] = useState(app.decisionNote ?? '');
-  const decide = (d: 'approved' | 'rejected' | 'in_review') => { partnersAdmin.decideApplication(app.id, d, note.trim() || undefined); toast.show({ icon: 'check', text: t(`admin:partners.decided.${d}`, { name: app.businessName }) }); onClose(); };
+  const [busy, setBusy] = useState(false);
+  const [docUrls, setDocUrls] = useState<string[]>([]);
+  const [revoking, setRevoking] = useState(false);
+  const [revokeReason, setRevokeReason] = useState('');
+  useEffect(() => {
+    let cancelled = false;
+    Promise.all(app.certificationDocs.map(path => getUrl({ path }).then(r => r.url.toString())))
+      .then(urls => { if (!cancelled) setDocUrls(urls); })
+      .catch(() => { /* a stale/missing doc shouldn't block viewing the rest of the application */ });
+    return () => { cancelled = true; };
+  }, [app.certificationDocs]);
+  const decide = async (d: 'approved' | 'rejected' | 'in_review') => {
+    setBusy(true);
+    try {
+      await partnersAdmin.decideApplication(app.id, d, note.trim() || undefined);
+      toast.show({ icon: 'check', text: t(`admin:partners.decided.${d}`, { name: app.businessName }) });
+      onClose();
+    } catch {
+      setBusy(false);
+      toast.show({ icon: 'close', text: t('admin:partners.decideFailed') });
+    }
+  };
+  const revoke = async () => {
+    setBusy(true);
+    try {
+      await partnersAdmin.revokeApplication(app.id, revokeReason.trim());
+      toast.show({ icon: 'check', text: t('admin:partners.revoked', { name: app.businessName }) });
+      onClose();
+    } catch {
+      setBusy(false);
+      toast.show({ icon: 'close', text: t('admin:partners.revokeFailed') });
+    }
+  };
   return (
     <Modal title={app.businessName} onClose={onClose} wide footer={write ? (
-      <>
-        <button type="button" className="btn ghost sm danger" onClick={() => decide('rejected')}>{t('admin:partners.reject')}</button>
-        <span className="chip-row"><button type="button" className="btn ghost sm" onClick={() => decide('in_review')}>{t('admin:partners.startReview')}</button><button type="button" className="btn solid sm" onClick={() => decide('approved')}><Icon name="check" />{t('admin:partners.approve')}</button></span>
-      </>
+      revoking ? (
+        <span className="chip-row" style={{ flexWrap: 'nowrap', width: '100%' }}>
+          <button type="button" className="btn ghost sm" disabled={busy} onClick={() => setRevoking(false)}>{t('common:actions.cancel')}</button>
+          <button type="button" className="btn solid sm danger" disabled={busy || !revokeReason.trim()} onClick={revoke}>{t('admin:partners.confirmRevoke')}</button>
+        </span>
+      ) : (
+        <>
+          <button type="button" className="btn ghost sm danger" disabled={busy} onClick={() => decide('rejected')}>{t('admin:partners.reject')}</button>
+          <span className="chip-row">
+            <button type="button" className="btn ghost sm" disabled={busy} onClick={() => decide('in_review')}>{t('admin:partners.startReview')}</button>
+            {app.status === 'approved'
+              ? <button type="button" className="btn ghost sm danger" disabled={busy} onClick={() => setRevoking(true)}>{t('admin:partners.revoke')}</button>
+              : <button type="button" className="btn solid sm" disabled={busy} onClick={() => decide('approved')}><Icon name="check" />{t('admin:partners.approve')}</button>}
+          </span>
+        </>
+      )
     ) : undefined}>
       <dl className="kv">
         <dt>{t('business:listings.type')}</dt><dd>{t(`explore:partnerKind.${app.kind}`)}</dd>
@@ -34,13 +79,15 @@ function ApplicationModal({ app, write, onClose }: { app: PartnerApplication; wr
         <dt>{t('business:join.services')}</dt><dd>{app.services.map(s => t(`common:listingTypePlural.${s}`)).join(', ')}</dd>
         <dt>{t('business:join.licence')}</dt><dd>{app.licence || '—'}</dd>
         <dt>{t('business:join.registration')}</dt><dd>{app.registration || '—'}</dd>
+        <dt>{t('business:join.certDocs')}</dt><dd>{docUrls.length ? docUrls.map((url, i) => <a key={url} href={url} target="_blank" rel="noreferrer">{t('admin:partners.viewDoc', { n: i + 1 })}</a>).reduce((prev, cur) => <>{prev} · {cur}</>) : '—'}</dd>
         <dt>{t('business:join.contactName')}</dt><dd>{app.contact.name} · {app.contact.email} · {app.contact.phone}</dd>
         <dt>{t('admin:partners.submitted')}</dt><dd>{f.dt(app.createdAt)}</dd>
         <dt>{t('business:join.community')}</dt><dd>{app.communityOwned ? t('business:common.yes') : t('business:common.no')}</dd>
         {app.ecoCertification && <><dt>{t('business:join.eco')}</dt><dd>{app.ecoCertification}</dd></>}
       </dl>
       <p>{app.about}</p>
-      {write && <label className="field"><span>{t('admin:partners.note')}</span><textarea rows={2} value={note} onChange={e => setNote(e.target.value)} placeholder={t('admin:partners.notePh')} /></label>}
+      {write && !revoking && <label className="field"><span>{t('admin:partners.note')}</span><textarea rows={2} value={note} onChange={e => setNote(e.target.value)} placeholder={t('admin:partners.notePh')} /></label>}
+      {revoking && <label className="field"><span>{t('admin:partners.revokeReason')}</span><textarea rows={2} value={revokeReason} onChange={e => setRevokeReason(e.target.value)} placeholder={t('admin:partners.revokeReasonPh')} /></label>}
       <p className="small muted">{t('admin:partners.checks')}</p>
     </Modal>
   );
@@ -82,7 +129,7 @@ export default function AdminPartnersPage() {
   const bookings = useAllBookings();
   const admin = useStore(partnerAdminStore);
   const settings = useStore(settingsStore);
-  const apps = useStore(applicationStore);
+  const apps = useApplications();
   const drafts = useStore(draftStore).filter(d => d.status === 'in_review');
   const [params, setParams] = useSearchParams();
   const tab = (TABS.includes(params.get('tab') as Tab) ? params.get('tab') : 'directory') as Tab;
@@ -131,7 +178,7 @@ export default function AdminPartnersPage() {
           <thead><tr><th scope="col">{t('business:join.businessName')}</th><th scope="col">{t('business:listings.type')}</th><th scope="col">{t('business:join.area')}</th><th scope="col">{t('admin:partners.submitted')}</th><th scope="col">{t('business:bookings.status')}</th></tr></thead>
           <tbody>{apps.map(a => (
             <tr key={a.id}><td><button type="button" className="tlink" onClick={() => setOpenApp(a)}><span>{a.businessName}</span></button><small>{a.id}</small></td><td>{t(`explore:partnerKind.${a.kind}`)}</td><td>{a.area}</td><td>{f.d(a.createdAt)}</td>
-              <td><span className={`status ${a.status === 'approved' ? 'paid' : a.status === 'rejected' ? 'refunded' : 'pending'}`}>{t(`admin:partners.appStatus.${a.status}`)}</span></td></tr>
+              <td><span className={`status ${a.status === 'approved' ? 'paid' : a.status === 'rejected' || a.status === 'revoked' ? 'refunded' : 'pending'}`}>{t(`admin:partners.appStatus.${a.status}`)}</span></td></tr>
           ))}</tbody>
         </table></div>
       ) : <p className="muted">{t('admin:partners.noApplications')}</p>)}

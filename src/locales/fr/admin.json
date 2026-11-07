@@ -139,7 +139,8 @@
       "submitted": "Nouvelle",
       "in_review": "En examen",
       "approved": "Approuvée",
-      "rejected": "Refusée"
+      "rejected": "Refusée",
+      "revoked": "Révoquée"
     },
     "noApplications": "Aucune candidature pour le moment. Elles arrivent du formulaire public « Inscrire votre entreprise ».",
     "approve": "Approuver",
@@ -152,6 +153,14 @@
       "rejected": "{{name}} refusé.",
       "in_review": "{{name}} est en examen."
     },
+    "decideFailed": "Une erreur est survenue. Veuillez réessayer.",
+    "viewDoc": "Document {{n}}",
+    "revoke": "Révoquer",
+    "revokeReason": "Motif de la révocation (obligatoire)",
+    "revokeReasonPh": "Pourquoi cette approbation est révoquée",
+    "confirmRevoke": "Confirmer la révocation",
+    "revoked": "L'approbation de {{name}} a été révoquée.",
+    "revokeFailed": "Une erreur est survenue. Veuillez réessayer.",
     "checks": "Avant d’approuver : vérifiez la licence touristique auprès de l’autorité, contrôlez l’immatriculation et confirmez le contact par téléphone.",
     "noListings": "Aucune nouvelle annonce à examiner.",
     "review": "Examiner",

@@ -5,8 +5,10 @@ import * as iam from 'aws-cdk-lib/aws-iam';
 import * as wafv2 from 'aws-cdk-lib/aws-wafv2';
 import { auth } from './auth/resource';
 import { data } from './data/resource';
+import { storage } from './storage/resource';
 import { loginGuardFn } from './functions/login-guard/resource';
 import { deleteAccountFn } from './functions/delete-account/resource';
+import { submitApplicationFn } from './functions/submit-partner-application/resource';
 
 /**
  * @see https://docs.amplify.aws/react/build-a-backend/ to add storage, functions, and more
@@ -14,8 +16,10 @@ import { deleteAccountFn } from './functions/delete-account/resource';
 export const backend = defineBackend({
   auth,
   data,
+  storage,
   loginGuardFn,
-  deleteAccountFn
+  deleteAccountFn,
+  submitApplicationFn
 });
 
 // Match src/lib/security.ts's isAcceptablePassword exactly (length 8–128, no composition
@@ -119,6 +123,27 @@ backend.deleteAccountFn.resources.lambda.addToRolePolicy(new iam.PolicyStatement
   actions: ['cognito-idp:AdminDeleteUser'],
   resources: [backend.auth.resources.userPool.userPoolArn]
 }));
+
+// ---------------- Mandatory partner certification (amplify/functions/submit-partner-application/) ----------------
+
+// S3 read access for this function is granted in amplify/storage/resource.ts's own `access`
+// callback (allow.resource(submitApplicationFn)) — the idiomatic Gen2 way to grant a function
+// storage access, kept there instead of duplicated here.
+backend.submitApplicationFn.addEnvironment('PARTNER_DOCS_BUCKET_NAME', backend.storage.resources.bucket.bucketName);
+
+// backend.data.resources.tables is keyed by CDK logical ID, not the plain model name (confirmed
+// from @aws-amplify/graphql-api-construct's own type: `Record<string, ITable>`, "keyed by
+// logicalId") — found by matching rather than assuming the exact generated id string, since
+// that's exactly the kind of undocumented-naming detail this project has been burned by
+// guessing at before.
+const partnerApplicationTableEntry = Object.entries(backend.data.resources.tables)
+  .find(([logicalId]) => logicalId.includes('PartnerApplication'));
+if (!partnerApplicationTableEntry) {
+  throw new Error('Could not find the generated PartnerApplication table among backend.data.resources.tables.');
+}
+const [, partnerApplicationTable] = partnerApplicationTableEntry;
+partnerApplicationTable.grantWriteData(backend.submitApplicationFn.resources.lambda);
+backend.submitApplicationFn.addEnvironment('PARTNER_APPLICATIONS_TABLE', partnerApplicationTable.tableName);
 
 // ---------------- AppSync rate limiting (pre-launch audit, Area 5) ----------------
 

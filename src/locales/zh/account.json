@@ -441,6 +441,10 @@
     "ticketReply": {
       "title": "请求 {{id}} 有新回复",
       "body": "TravelMateVR 团队已回复您的支持请求。"
+    },
+    "partnerRevoked": {
+      "title": "合作伙伴资格已被撤销",
+      "body": "{{businessName}} 的批准已被撤销：{{reason}}"
     }
   }
 }

@@ -5,11 +5,15 @@ import { downloadFile } from '@/lib/ics';
 import { seedIndex } from './catalog';
 import { pushNotification, sessionStore, ticketStore } from './account';
 import { bookingStore, partnerBookingStore, HOLDS_INVENTORY } from './bookings';
-import { applicationStore, campaignStore, featuredStore, packageStore, settingsStore } from './business';
+import { applications, campaignStore, featuredStore, packageStore, settingsStore } from './business';
 import { boardCampaignStore } from './board';
 import { partnerAdminStore } from './inventory';
 import { messaging } from './messaging';
 import { demoLatency } from './http';
+import { generateClient } from 'aws-amplify/data';
+import type { Schema } from '../../amplify/data/resource';
+
+const dataClient = () => generateClient<Schema>({ authMode: 'userPool' });
 
 // ---------------------------------------------------------------------------------------------
 // TravelMateVR Command Center (demo layer). Role checks here shape the interface only; in
@@ -124,9 +128,38 @@ export const partnersAdmin = {
     settingsStore.set(all => ({ ...all, [id]: { ...(all[id] ?? { plan: 'starter', payout: { connected: false, schedule: 'monthly' }, notify: { newBooking: [], request: [], message: [], review: [] }, autoReply: true, defaultLang: 'en' }), commissionRate: rate } }));
     audit('partner.commission', id, `${Math.round(rate * 100)}%`);
   },
-  decideApplication(id: string, decision: 'approved' | 'rejected' | 'in_review', note?: string) {
-    applicationStore.set(list => list.map(a => (a.id === id ? { ...a, status: decision, decidedAt: nowIso(), decisionNote: note } : a)));
+  async decideApplication(id: string, decision: 'approved' | 'rejected' | 'in_review', note?: string) {
+    await applications.decide(id, decision, note);
     audit(`application.${decision}`, id, note);
+  },
+  /** Revokes an approved application — the safety net for "approved without a valid
+   *  certification" (or any other reason an approval needs undoing). Scoped to the
+   *  application itself rather than a live catalogue Partner row: today every Partner the
+   *  app displays is seed/demo data, not a real backend record (confirmed: nothing writes
+   *  Partner rows through the app yet, and no pipeline turns an approved application into
+   *  one), so there's no real catalogue row to revoke yet. The application's status and the
+   *  applicant's own notification are both real right now, independent of that gap.
+   *  Notifies via a real backend Notification row (src/pages/account/NotificationsPage.tsx),
+   *  not pushNotification() — that only reaches the same browser it's called from, never a
+   *  different person's device. */
+  async revokeApplication(applicationId: string, reason: string) {
+    const now = nowIso();
+    const appRes = await dataClient().models.PartnerApplication.get({ id: applicationId });
+    const app = appRes.data;
+    const updateRes = await dataClient().models.PartnerApplication.update({ id: applicationId, status: 'revoked', revokedAt: now, revokedReason: reason });
+    if (updateRes.errors?.length) throw new Error(updateRes.errors.map(e => e.message).join('; '));
+    if (app?.owner) {
+      await dataClient().models.Notification.create({
+        owner: app.owner,
+        kind: 'partner',
+        titleKey: 'notif.partnerRevoked.title',
+        bodyKey: 'notif.partnerRevoked.body',
+        params: { businessName: app.businessName, reason },
+        href: '/business',
+        read: false
+      });
+    }
+    audit('partner.revoke', applicationId, reason);
   }
 };
 
