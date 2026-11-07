@@ -45,7 +45,7 @@ export default function BookingsPage() {
                     <small>{b.id} · {dateLabel(b.date, lang, { day: 'numeric', month: 'short', year: 'numeric' })}{b.endDate ? ` → ${dateLabel(b.endDate, lang, { day: 'numeric', month: 'short' })}` : ''} · {t('trip:travellers.summary', { adults: b.guests.adults, children: b.guests.children })}</small>
                     <small>{money(b.price.total, lang, 'USD', { maximumFractionDigits: 2 })} · {t('trip:price.paid')}: {money(b.payment.paidUsd, lang, 'USD', { maximumFractionDigits: 2 })}</small>
                   </span>
-                  <span className="actions"><StatusPill status={s} /><Link className="btn ghost sm" to={`/bookings/${b.id}`}>{t('account:bookings.manage')}</Link></span>
+                  <span className="actions">{b.sample && <span className="sample">{t('common:badges.sampleData')}</span>}<StatusPill status={s} /><Link className="btn ghost sm" to={`/bookings/${b.id}`}>{t('account:bookings.manage')}</Link></span>
                 </li>
               );
             })}

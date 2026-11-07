@@ -346,7 +346,12 @@
     "keep": "保留预订",
     "confirmCancel": "取消预订",
     "cancelled": "预订已取消。",
-    "cancelledRefund": "预订已取消，将退还 {{amount}}。"
+    "cancelledRefund": "预订已取消，将退还 {{amount}}。",
+    "delete": "删除预订",
+    "deleteTitle": "删除此预订？",
+    "deleteText": "这将永久删除您账户中的“{{title}}”，无法撤销。",
+    "confirmDelete": "永久删除",
+    "deletedToast": "预订已删除。"
   },
   "trips": {
     "title": "我的行程",

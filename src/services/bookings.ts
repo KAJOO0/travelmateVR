@@ -25,7 +25,8 @@ const seedBookings = (): Booking[] => {
       guests: { adults, children: 0 }, units: 1, extras: [], startTime: listing.startTimes?.[0],
       lead: { firstName: 'Sample', lastName: 'Traveller', email: 'you@example.com', phone: '+255700000000', country: 'TZ' },
       travellers: [{ name: 'Sample Traveller' }, { name: 'Travel Companion' }], price,
-      payment: { method, paidUsd: Math.round(price.total * paidShare * 100) / 100, reference: paidShare ? `PAY-${id.slice(4)}` : undefined, paidAt: paidShare ? '2026-09-10T10:05:00Z' : undefined }
+      payment: { method, paidUsd: Math.round(price.total * paidShare * 100) / 100, reference: paidShare ? `PAY-${id.slice(4)}` : undefined, paidAt: paidShare ? '2026-09-10T10:05:00Z' : undefined },
+      sample: true
     };
   };
   return [
@@ -130,6 +131,13 @@ export const bookings = {
 
   attachReview(id: string, reviewId: string) {
     bookingStore.set(list => list.map(x => (x.id === id ? { ...x, reviewId } : x)));
+  },
+
+  /** Removes the record entirely — unlike cancel(), which only changes status. For a traveller
+   *  who wants a booking gone from their account without using the nuclear "erase my data"
+   *  option (src/pages/account/AccountPage.tsx). */
+  remove(id: string) {
+    bookingStore.set(list => list.filter(x => x.id !== id));
   }
 };
 

@@ -34,7 +34,7 @@ export default function BookingDetailPage() {
   const toast = useToast();
   const list = useBookings();
   const b = list.find(x => x.id === id);
-  const [modal, setModal] = useState<'cancel' | 'review' | null>(null);
+  const [modal, setModal] = useState<'cancel' | 'review' | 'delete' | null>(null);
   const [working, setWorking] = useState(false);
   usePageTitle(b ? t('trip:confirm.title', { id: b.id }) : t('trip:confirm.notFound'));
   if (!b) return <div className="page"><NotFoundState title={t('trip:confirm.notFound')} to="/bookings" label={t('account:nav.bookings')} /></div>;
@@ -63,7 +63,7 @@ export default function BookingDetailPage() {
         <div className="page-head">
           <nav aria-label={t('common:a11y.breadcrumbs')}><ol className="crumbs"><li><Link to="/bookings">{t('common:nav.bookings')}</Link></li><li aria-current="page">{b.id}</li></ol></nav>
           {!isNew && <h1>{title}</h1>}
-          <div className="chip-row"><StatusPill status={status} /><span className="badge">{t('trip:confirm.ref')}: <b>{b.id}</b></span></div>
+          <div className="chip-row"><StatusPill status={status} />{b.sample && <span className="sample">{t('common:badges.sampleData')}</span>}<span className="badge">{t('trip:confirm.ref')}: <b>{b.id}</b></span></div>
         </div>
         <div className="head-actions no-print">
           <button type="button" className="btn ghost sm" onClick={() => window.print()}><Icon name="download" />{t('trip:confirm.receipt')}</button>
@@ -114,6 +114,7 @@ export default function BookingDetailPage() {
               {status === 'completed' && !b.reviewId && <button type="button" className="btn ghost sm" onClick={() => setModal('review')}><Icon name="star" />{t('account:reviews.write')}</button>}
               {canCancel && <button type="button" className="btn ghost sm" onClick={() => setModal('cancel')}><Icon name="close" />{t('trip:confirm.cancel')}</button>}
               <Link className="btn ghost sm" to={`/help?booking=${b.id}`}><Icon name="help" />{t('trip:confirm.help')}</Link>
+              <button type="button" className="btn ghost sm danger" onClick={() => setModal('delete')}><Icon name="trash" />{t('trip:confirm.delete')}</button>
             </div>
           </section>
         </div>
@@ -139,6 +140,15 @@ export default function BookingDetailPage() {
         </Modal>
       )}
       {modal === 'review' && listing && <ReviewForm bookingId={b.id} targetId={listing.id} name={title} onClose={() => setModal(null)} />}
+      {modal === 'delete' && (
+        <Modal title={t('trip:confirm.deleteTitle')} onClose={() => setModal(null)}>
+          <p>{t('trip:confirm.deleteText', { title })}</p>
+          <div className="row-between">
+            <button type="button" className="btn ghost sm" onClick={() => setModal(null)}>{t('common:actions.cancel')}</button>
+            <button type="button" className="btn solid sm danger" onClick={() => { bookings.remove(b.id); setModal(null); navigate('/bookings'); toast.show({ icon: 'check', text: t('trip:confirm.deletedToast') }); }}>{t('trip:confirm.confirmDelete')}</button>
+          </div>
+        </Modal>
+      )}
     </div>
   );
 }

@@ -37,7 +37,7 @@ const seedTrips = (): Trip[] => {
   return [{
     id: 'trip-sample', name: 'Northern Tanzania & Zanzibar', destinationIds: ['tarangire', 'serengeti', 'ngorongoro', 'zanzibar'],
     startDate: '2026-12-07', endDate: '2026-12-16', adults: 2, children: 0, budgetUsd: 9000, interests: ['wildlife', 'beach', 'culture'],
-    days, source: 'manual', notes: 'Sample trip — edit, delete or plan your own.', createdAt: '2026-09-10T10:00:00Z', updatedAt: '2026-09-10T10:00:00Z'
+    days, source: 'manual', notes: 'Sample trip — edit, delete or plan your own.', createdAt: '2026-09-10T10:00:00Z', updatedAt: '2026-09-10T10:00:00Z', sample: true
   }];
 };
 

@@ -188,17 +188,34 @@ export interface VrRequest {
   id: string; partnerId: string; listingId: string; kind: 'upload' | 'capture';
   /** Requested 360° format: video is recommended; photo suits rooms and static views. */
   format?: 'video' | 'photo360';
-  fileName?: string; notes: string; preferredDate?: string;
+  fileName?: string;
+  /** S3 key under vr-media/{identityId}/... — set only for kind:'upload'. Private; nothing
+   *  renders it back in-app. Publishing to the real static pano/video pipeline stays a
+   *  manual ops step. */
+  mediaKey?: string;
+  notes: string; preferredDate?: string;
   status: 'submitted' | 'scheduled' | 'processing' | 'live'; createdAt: string;
 }
 export const vrRequestStore = createStore<VrRequest[]>('tm.biz.vr', () => [
   { id: 'vr-1', partnerId: DEMO_PARTNER_ID, listingId: 'stay-tarangire-eco-lodge', kind: 'capture', notes: 'Pool deck at sunset and one chalet interior.', preferredDate: addDays(todayIso(), 24), status: 'scheduled', createdAt: '2026-09-20T10:00:00Z' }
 ]);
 export const vrContent = {
-  /** Uploads go to TravelMateVR's content team for stitching checks before publishing; files are not stored in the browser. */
-  async submit(r: Omit<VrRequest, 'id' | 'createdAt' | 'status'>) {
-    await demoLatency(500, 900);
-    vrRequestStore.set(list => [{ ...r, id: uid('vr_'), status: 'submitted', createdAt: nowIso() }, ...list]);
+  /** For kind:'upload', really uploads the file now (src/pages/business/VrPage.tsx already
+   *  validates it's genuinely 360° and meets the quality bar before calling this) — it used
+   *  to discard the File object and only keep its name, so nothing ever actually reached
+   *  TravelMateVR's content team. */
+  async submit(r: Omit<VrRequest, 'id' | 'createdAt' | 'status' | 'mediaKey' | 'fileName'> & { file?: File }) {
+    const { file, ...rest } = r;
+    let mediaKey: string | undefined;
+    if (file) {
+      const identityId = (await fetchAuthSession()).identityId;
+      if (!identityId) throw new Error('Sign in to upload 360° media.');
+      mediaKey = `vr-media/${identityId}/${Date.now()}-${file.name}`;
+      await uploadData({ path: mediaKey, data: file }).result;
+    } else {
+      await demoLatency(500, 900);
+    }
+    vrRequestStore.set(list => [{ ...rest, fileName: file?.name, mediaKey, id: uid('vr_'), status: 'submitted', createdAt: nowIso() }, ...list]);
   },
   cancel(id: string) { vrRequestStore.set(list => list.filter(r => r.id !== id)); }
 };

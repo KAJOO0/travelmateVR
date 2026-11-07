@@ -360,7 +360,12 @@
     "keep": "Mantieni la prenotazione",
     "confirmCancel": "Cancella prenotazione",
     "cancelled": "Prenotazione cancellata.",
-    "cancelledRefund": "Prenotazione cancellata. Verranno rimborsati {{amount}}."
+    "cancelledRefund": "Prenotazione cancellata. Verranno rimborsati {{amount}}.",
+    "delete": "Elimina prenotazione",
+    "deleteTitle": "Eliminare questa prenotazione?",
+    "deleteText": "Questo rimuove definitivamente “{{title}}” dal tuo account. Non può essere annullato.",
+    "confirmDelete": "Elimina definitivamente",
+    "deletedToast": "Prenotazione eliminata."
   },
   "trips": {
     "title": "I miei viaggi",

@@ -91,6 +91,7 @@ export default function ItineraryBuilderPage() {
             <span className="badge"><Icon name="users" />{t('trip:travellers.summary', { adults: trip.adults, children: trip.children })}</span>
             {trip.budgetUsd && <span className="badge"><Icon name="ticket" />{t('trip:plan.budgetOf', { amount: m(trip.budgetUsd) })}</span>}
             {trip.source === 'ai' && <span className="badge accent"><Icon name="sparkles" />{t('trip:plan.byAi')}</span>}
+            {trip.sample && <span className="sample">{t('common:badges.sampleData')}</span>}
           </div>
         </div>
         <div className="head-actions no-print">

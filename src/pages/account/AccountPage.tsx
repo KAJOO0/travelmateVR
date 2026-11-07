@@ -12,7 +12,7 @@ import { PartnerLogo } from '@/features/partners/PartnerLogo';
 import { useWishlist } from '@/app/providers/WishlistProvider';
 import { usePreferences, type ThemeMode } from '@/app/providers/PreferencesProvider';
 import { useToast } from '@/app/providers/ToastProvider';
-import { auth, documents, messages, profileStore, useDocuments, useMyReviews, useNotifications, useProfile, useSession, useThreads, DEFAULT_PROFILE } from '@/services/account';
+import { auth, documents, fetchMyBackendData, messages, profileStore, useDocuments, useMyReviews, useNotifications, useProfile, useSession, useThreads, DEFAULT_PROFILE } from '@/services/account';
 import { effectiveStatus, useBookings } from '@/services/bookings';
 import { tripStatus, useTrips } from '@/services/trips';
 import { seedIndex } from '@/services/catalog';
@@ -21,6 +21,7 @@ import { LANGUAGES } from '@/i18n';
 import { lt } from '@/lib/content';
 import { SOCIAL } from '@/config/site';
 import { downloadFile } from '@/lib/ics';
+import { exportPdf } from '@/lib/exportPdf';
 import { usePageTitle } from '@/app/usePageTitle';
 import { dateLabel } from '@/features/trips/format';
 import { useNotificationText } from './NotificationsPage';
@@ -353,10 +354,30 @@ function Security() {
   const [confirm, setConfirm] = useState(false);
   const [deleteConfirm, setDeleteConfirm] = useState(false);
   const [deleting, setDeleting] = useState(false);
+  const [exportingPdf, setExportingPdf] = useState(false);
   const exportData = () => {
     const data: Record<string, unknown> = {};
     for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i)!; if (k.startsWith('tm.')) { try { data[k] = JSON.parse(localStorage.getItem(k)!); } catch { data[k] = localStorage.getItem(k); } } }
     downloadFile('travelmatevr-my-data.json', JSON.stringify(data, null, 2), 'application/json');
+  };
+  /** Same underlying data as exportData() above, as a readable PDF instead of a raw JSON
+   *  dump — plus, unlike that local-only export, whatever this account owns on the real
+   *  backend (src/services/account.ts's fetchMyBackendData), since "my data" is incomplete
+   *  once real backend records exist alongside the local/demo state. */
+  const exportDataPdf = async () => {
+    setExportingPdf(true);
+    try {
+      const local: Record<string, unknown> = {};
+      for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i)!; if (k.startsWith('tm.')) { try { local[k] = JSON.parse(localStorage.getItem(k)!); } catch { local[k] = localStorage.getItem(k); } } }
+      const backend = await fetchMyBackendData();
+      exportPdf('travelmatevr-my-data.pdf', t('account:security.exportPdfTitle'), [
+        { heading: t('account:security.exportPdfLocal'), rows: Object.entries(local).map(([k, v]) => [k, typeof v === 'string' ? v : JSON.stringify(v)]) },
+        { heading: t('account:security.exportPdfApplications'), rows: backend.applications.map(a => [a.businessName, `${a.status} · ${a.createdAt}`]) },
+        { heading: t('account:security.exportPdfNotifications'), rows: backend.notifications.map(n => [n.kind, `${n.read ? 'read' : 'unread'} · ${n.createdAt}`]) }
+      ]);
+    } finally {
+      setExportingPdf(false);
+    }
   };
   const devices = useMemo(() => [{ name: navigator.userAgent.includes('Mobile') ? t('account:security.thisPhone') : t('account:security.thisBrowser'), current: true }], [t]);
   return (
@@ -383,6 +404,7 @@ function Security() {
         <p style={{ color: 'var(--muted)', fontSize: 'var(--fs-small)' }}>{t('account:security.privacyText')}</p>
         <div className="chip-row">
           <button type="button" className="btn ghost sm" onClick={exportData}><Icon name="download" />{t('account:security.export')}</button>
+          <button type="button" className="btn ghost sm" disabled={exportingPdf} onClick={() => void exportDataPdf()}><Icon name="download" />{exportingPdf ? t('account:security.exporting') : t('account:security.exportPdf')}</button>
           <button type="button" className="btn ghost sm" onClick={() => setConfirm(true)}><Icon name="close" />{t('account:security.erase')}</button>
           <Link className="btn ghost sm" to="/privacy">{t('common:footer.links.privacy')}</Link>
         </div>

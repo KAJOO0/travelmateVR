@@ -45,7 +45,7 @@ function TripCard({ trip }: { trip: Trip }) {
   const d = seedIndex.destById.get(trip.destinationIds[0] ?? '');
   return (
     <article className="card lcard">
-      <div className="pic">{d && <Media id={d.media} sizes="400px" decorative />}<div className="badges"><StatusPill status={tripStatus(trip)} /></div></div>
+      <div className="pic">{d && <Media id={d.media} sizes="400px" decorative />}<div className="badges"><StatusPill status={tripStatus(trip)} />{trip.sample && <span className="sample">{t('common:badges.sampleData')}</span>}</div></div>
       <div className="body">
         <h3><Link to={`/trips/${trip.id}`}>{trip.name}</Link></h3>
         <div className="meta">

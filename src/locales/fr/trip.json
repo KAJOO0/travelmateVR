@@ -360,7 +360,12 @@
     "keep": "Conserver la réservation",
     "confirmCancel": "Annuler la réservation",
     "cancelled": "Réservation annulée.",
-    "cancelledRefund": "Réservation annulée. {{amount}} seront remboursés."
+    "cancelledRefund": "Réservation annulée. {{amount}} seront remboursés.",
+    "delete": "Supprimer la réservation",
+    "deleteTitle": "Supprimer cette réservation ?",
+    "deleteText": "Cela supprime définitivement « {{title}} » de votre compte. Cette action est irréversible.",
+    "confirmDelete": "Supprimer définitivement",
+    "deletedToast": "Réservation supprimée."
   },
   "trips": {
     "title": "Mes voyages",

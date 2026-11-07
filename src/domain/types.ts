@@ -301,6 +301,8 @@ export interface Trip {
   notes?: string;
   createdAt: string;
   updatedAt: string;
+  /** Ships with the app as demo content, not something the signed-in user created themselves. */
+  sample?: boolean;
 }
 
 export type BookingStatus = 'pending' | 'confirmed' | 'paid' | 'partially_paid' | 'cancelled' | 'completed' | 'refunded';
@@ -344,6 +346,8 @@ export interface Booking {
     amountTzs?: number;
   };
   reviewId?: string;
+  /** Ships with the app as demo content, not something the signed-in user booked themselves. */
+  sample?: boolean;
 }
 
 export interface AppNotification {

@@ -397,6 +397,25 @@ export function setBackendNotificationRead(id: string, read: boolean): Promise<u
   return dataClient().models.Notification.update({ id, read });
 }
 
+/** Everything this signed-in user owns on the real backend — for the "my data" export
+ *  (AccountPage.tsx), which otherwise only covers local/demo state. allow.owner()'s list()
+ *  is already server-side scoped to the caller's own rows, so no extra filtering is needed
+ *  here. Empty arrays in demo mode (nothing to fetch) or if either read fails. */
+export async function fetchMyBackendData(): Promise<{
+  applications: { businessName: string; status: string; createdAt: string }[];
+  notifications: { kind: string; createdAt: string; read: boolean }[];
+}> {
+  if (!REAL_BACKEND) return { applications: [], notifications: [] };
+  const [apps, notifs] = await Promise.all([
+    dataClient().models.PartnerApplication.list().catch(() => ({ data: [] })),
+    dataClient().models.Notification.list().catch(() => ({ data: [] }))
+  ]);
+  return {
+    applications: apps.data.map(a => ({ businessName: a.businessName, status: a.status ?? 'submitted', createdAt: a.createdAt })),
+    notifications: notifs.data.map(n => ({ kind: n.kind ?? '', createdAt: n.createdAt, read: n.read ?? false }))
+  };
+}
+
 // ---------------- Reviews written by the traveller ----------------
 export const myReviewsStore = createStore<Review[]>('tm.reviews', () => []);
 export const useMyReviews = () => useStore(myReviewsStore);

@@ -354,7 +354,12 @@
     "keep": "Buchung behalten",
     "confirmCancel": "Buchung stornieren",
     "cancelled": "Buchung storniert.",
-    "cancelledRefund": "Buchung storniert. {{amount}} werden erstattet."
+    "cancelledRefund": "Buchung storniert. {{amount}} werden erstattet.",
+    "delete": "Buchung löschen",
+    "deleteTitle": "Diese Buchung löschen?",
+    "deleteText": "Dadurch wird „{{title}}“ dauerhaft aus deinem Konto entfernt. Das kann nicht rückgängig gemacht werden.",
+    "confirmDelete": "Endgültig löschen",
+    "deletedToast": "Buchung gelöscht."
   },
   "trips": {
     "title": "Meine Reisen",

@@ -8,6 +8,8 @@ import { PortalHead, useBizT } from '@/features/portal/shared';
 import { settings as settingsApi, useSettings, type PartnerSettings, type PlanTier } from '@/services/business';
 import { LANGUAGES } from '@/i18n';
 import { demoLatency } from '@/services/http';
+import { fetchMyBackendData } from '@/services/account';
+import { exportPdf } from '@/lib/exportPdf';
 import { Modal } from '@/components/ui/Modal';
 import { seedIndex } from '@/services/catalog';
 import { bookingOpenIn, MOBILE_NETWORKS, normalizeTzMobile, TZ_BANKS, type MobileNetwork } from '@/services/payments';
@@ -29,6 +31,24 @@ export default function BusinessSettingsPage() {
   const [connecting, setConnecting] = useState(false);
   const [payoutForm, setPayoutForm] = useState<{ method: 'mobile_money' | 'bank'; network: MobileNetwork; phone: string; bank: string; account: string; holder: string } | null>(null);
   const [touched, setTouched] = useState(false);
+  const [exportingData, setExportingData] = useState(false);
+  /** tm.biz.* only (not every tm.* key) - a single browser can hold both a traveller account's
+   *  local data and a partner's, and this export is scoped to "clients and partners" as two
+   *  separate asks, not one combined dump. */
+  const exportPartnerData = async () => {
+    setExportingData(true);
+    try {
+      const local: Record<string, unknown> = {};
+      for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i)!; if (k.startsWith('tm.biz.')) { try { local[k] = JSON.parse(localStorage.getItem(k)!); } catch { local[k] = localStorage.getItem(k); } } }
+      const backend = await fetchMyBackendData();
+      exportPdf('travelmatevr-partner-data.pdf', t('business:settings.exportPdfTitle'), [
+        { heading: t('business:settings.exportPdfLocal'), rows: Object.entries(local).map(([k, v]) => [k, typeof v === 'string' ? v : JSON.stringify(v)]) },
+        { heading: t('business:settings.exportPdfApplications'), rows: backend.applications.map(a => [a.businessName, `${a.status} · ${a.createdAt}`]) }
+      ]);
+    } finally {
+      setExportingData(false);
+    }
+  };
   // Payouts are available to businesses operating where bookings and payments are open.
   const payoutsOpen = partner.destinationIds.some(id => bookingOpenIn(seedIndex.destById.get(id)?.countryId));
   const up = (patch: Partial<PartnerSettings>) => { settingsApi.update(partner.id, patch); toast.show({ icon: 'check', text: t('business:settings.saved') }); };
@@ -134,6 +154,14 @@ export default function BusinessSettingsPage() {
         <h2 id="sec-h">{t('business:settings.security')}</h2>
         <ul className="prose" style={{ paddingLeft: 18, display: 'grid', gap: 6 }}>{['s1', 's2', 's3'].map(k => <li key={k}>{t(`business:settings.${k}`)}</li>)}</ul>
         <Link className="tlink" to="/security"><span>{t('common:footer.links.security')}</span><Icon name="arrowRight" /></Link>
+      </section>
+
+      <section className="panel" aria-labelledby="exp-h" style={{ display: 'grid', gap: 10 }}>
+        <h2 id="exp-h">{t('business:settings.exportTitle')}</h2>
+        <p className="small muted">{t('business:settings.exportText')}</p>
+        <div className="chip-row">
+          <button type="button" className="btn ghost sm" disabled={exportingData} onClick={() => void exportPartnerData()}><Icon name="download" />{exportingData ? t('business:common.working') : t('business:settings.exportPdf')}</button>
+        </div>
       </section>
     </>
   );

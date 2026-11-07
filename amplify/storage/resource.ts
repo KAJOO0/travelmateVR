@@ -18,6 +18,13 @@ export const storage = defineStorage({
       // applicant's prefix to do that, not just its own (functions have no identity of their
       // own for {entity_id} to resolve against).
       allow.resource(submitApplicationFn).to(['read'])
+    ],
+    // Raw 360° photo/video submissions (src/pages/business/VrPage.tsx). Stays private —
+    // nothing in the app renders this back publicly; publishing to the real static
+    // pano/video pipeline (scripts/build-videos.mjs) remains a manual ops step.
+    'vr-media/{entity_id}/*': [
+      allow.entity('identity').to(['read', 'write', 'delete']),
+      allow.groups(['admin']).to(['read'])
     ]
   })
 });

@@ -354,7 +354,12 @@
     "keep": "Keep booking",
     "confirmCancel": "Cancel booking",
     "cancelled": "Booking cancelled.",
-    "cancelledRefund": "Booking cancelled. {{amount}} will be refunded."
+    "cancelledRefund": "Booking cancelled. {{amount}} will be refunded.",
+    "delete": "Delete booking",
+    "deleteTitle": "Delete this booking?",
+    "deleteText": "This removes “{{title}}” from your account permanently. It can't be undone.",
+    "confirmDelete": "Delete permanently",
+    "deletedToast": "Booking deleted."
   },
   "trips": {
     "title": "My Trips",
