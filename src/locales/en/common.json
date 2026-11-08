@@ -87,7 +87,9 @@
     "offlineReady": "TravelMateVR is ready to work offline."
   },
   "pwa": {
-    "install": "Install the app"
+    "install": "Install the app",
+    "installPrompt": "Get the TravelMateVR app for a faster, full-screen experience.",
+    "installIosHint": "Add TravelMateVR to your home screen: tap Share, then \"Add to Home Screen\"."
   },
   "social": {
     "whatsapp": "WhatsApp",

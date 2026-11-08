@@ -4,7 +4,7 @@ import { Outlet, ScrollRestoration, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Header } from './Header';
 import { Footer } from './Footer';
-import { FloatingActions, MobileNav, SystemBar } from './Chrome';
+import { FloatingActions, InstallBanner, MobileNav, SystemBar } from './Chrome';
 import { Icon } from '@/components/ui/Icon';
 import { SmartSearch } from '@/features/search/SmartSearch';
 import { ErrorBoundary } from './ErrorBoundary';
@@ -80,6 +80,7 @@ export function AppLayout() {
       <a className="skip" href="#main">{t('a11y.skip')}</a>
       <div className="wrap">
         <SystemBar />
+        <InstallBanner />
         <Header onSearch={() => setSearchOpen(true)} />
         <main id="main" tabIndex={-1} style={{ outline: 'none', paddingTop: 24 }}>
           <ErrorBoundary key={pathname}>

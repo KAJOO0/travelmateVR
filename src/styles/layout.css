@@ -138,6 +138,11 @@
 .sysbar svg { width: 16px; height: 16px; }
 .sysbar.offline { border-color: var(--warning); color: var(--warning); }
 .sysbar .btn { min-height: 32px; padding: 4px 14px; }
+/* Mobile/tablet only - desktop already has a quiet install link in the footer, and this is
+   the install surface that actually matters on a phone/tablet. Same breakpoint as the
+   header's own hamburger-nav collapse, so "mobile and tablet" means one consistent cutoff
+   across the app rather than a second, unrelated number. */
+@media (min-width: 901px) { .install-banner { display: none; } }
 
 .toasts {
   position: fixed; left: 50%; translate: -50% 0; z-index: 80; bottom: calc(24px + var(--bottom-nav-h) + env(safe-area-inset-bottom, 0px));

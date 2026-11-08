@@ -5,7 +5,34 @@ import { useTranslation } from 'react-i18next';
 import { Icon } from '@/components/ui/Icon';
 import { MOBILE_NAV } from '@/app/nav';
 import { useOnline } from '@/lib/hooks';
-import { applyUpdate, dismissPwa, usePwa } from '@/app/pwa';
+import { applyUpdate, dismissPwa, promptInstall, usePwa } from '@/app/pwa';
+
+const INSTALL_DISMISSED_KEY = 'tm.installBannerDismissed';
+
+/** Mobile/tablet "install the app" prompt — desktop already has the footer's quiet link, but
+ *  phone/tablet visitors are the ones this actually matters for, and the footer is easy to
+ *  never scroll to. CSS-hidden above the tablet breakpoint (see .install-banner in layout.css),
+ *  same cutoff the header's own hamburger-nav collapse already uses. */
+export function InstallBanner() {
+  const { t } = useTranslation();
+  const { canInstall, installed, isIos } = usePwa();
+  const [dismissed, setDismissed] = useState(() => {
+    try { return localStorage.getItem(INSTALL_DISMISSED_KEY) === '1'; } catch { return false; }
+  });
+  if (installed || dismissed || !(canInstall || isIos)) return null;
+  const dismiss = () => {
+    setDismissed(true);
+    try { localStorage.setItem(INSTALL_DISMISSED_KEY, '1'); } catch { /* ignore */ }
+  };
+  return (
+    <div className="sysbar install-banner" role="status">
+      <Icon name="install" />
+      <span>{canInstall ? t('pwa.installPrompt') : t('pwa.installIosHint')}</span>
+      {canInstall && <button type="button" className="btn solid" onClick={() => void promptInstall()}>{t('pwa.install')}</button>}
+      <button type="button" className="btn ghost" onClick={dismiss}>{t('system.later')}</button>
+    </div>
+  );
+}
 
 export function MobileNav() {
   const { t } = useTranslation();

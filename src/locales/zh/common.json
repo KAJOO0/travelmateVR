@@ -87,7 +87,9 @@
     "offlineReady": "TravelMateVR 现已支持离线使用。"
   },
   "pwa": {
-    "install": "安装应用"
+    "install": "安装应用",
+    "installPrompt": "安装 TravelMateVR 应用，获得更快的全屏体验。",
+    "installIosHint": "将 TravelMateVR 添加到主屏幕：点击“分享”，然后选择“添加到主屏幕”。"
   },
   "social": {
     "whatsapp": "WhatsApp",

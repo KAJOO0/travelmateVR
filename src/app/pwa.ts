@@ -4,8 +4,13 @@ import { registerSW } from 'virtual:pwa-register';
 // Service worker lifecycle + install prompt, exposed as a tiny observable store.
 interface BeforeInstallPromptEvent extends Event { prompt: () => Promise<void>; userChoice: Promise<{ outcome: 'accepted' | 'dismissed' }> }
 
-type State = { needRefresh: boolean; offlineReady: boolean; canInstall: boolean; installed: boolean };
-let state: State = { needRefresh: false, offlineReady: false, canInstall: false, installed: false };
+type State = { needRefresh: boolean; offlineReady: boolean; canInstall: boolean; installed: boolean; isIos: boolean };
+// iOS Safari never fires 'beforeinstallprompt' (no such API there) - canInstall alone would
+// stay permanently false on iPhone/iPad even though "Add to Home Screen" is available, just
+// through the share sheet instead of a programmatic prompt. isIos lets the UI show manual
+// instructions there instead of silently showing nothing.
+const isIos = typeof navigator !== 'undefined' && /iphone|ipad|ipod/i.test(navigator.userAgent) && !('MSStream' in window);
+let state: State = { needRefresh: false, offlineReady: false, canInstall: false, installed: false, isIos };
 let deferred: BeforeInstallPromptEvent | null = null;
 let update: ((reload?: boolean) => Promise<void>) | null = null;
 const subs = new Set<(s: State) => void>();
