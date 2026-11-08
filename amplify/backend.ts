@@ -24,12 +24,14 @@ export const backend = defineBackend({
   updatePartnerProfileFn
 });
 
-// Match src/lib/security.ts's isAcceptablePassword exactly (length 8–128, no composition
-// rules) so client-side and Cognito-side password validation never disagree.
+// Match src/lib/security.ts's isAcceptablePassword exactly (length 12–128, no composition
+// rules) so client-side and Cognito-side password validation never disagree. Raised from the
+// original 8 (2026-11-08 audit, docs/security/audit-2026-11-08.md #10) - NIST 800-63B doesn't
+// require composition rules, but 8 is thin for a minimum with none at all.
 const { cfnUserPool, cfnUserPoolClient } = backend.auth.resources.cfnResources;
 cfnUserPool.policies = {
   passwordPolicy: {
-    minimumLength: 8,
+    minimumLength: 12,
     requireLowercase: false,
     requireUppercase: false,
     requireNumbers: false,

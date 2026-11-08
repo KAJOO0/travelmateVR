@@ -29,7 +29,7 @@ export function normalizeUsername(value: string): string {
 }
 export const isUsername = (value: string) => USERNAME_RE.test(normalizeUsername(value));
 
-export const PASSWORD_MIN = 8;
+export const PASSWORD_MIN = 12;
 export const PASSWORD_MAX = 128;
 /** Passwords are not altered (no trimming), only checked for length and control characters. */
 export const isAcceptablePassword = (value: string) => value.length >= PASSWORD_MIN && value.length <= PASSWORD_MAX && !HAS_CONTROL.test(value);
