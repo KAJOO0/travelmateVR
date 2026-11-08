@@ -2,6 +2,7 @@ import { StrictMode, Suspense } from 'react';
 import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Amplify } from 'aws-amplify';
+import { fetchAuthSession } from 'aws-amplify/auth';
 import { Hub } from 'aws-amplify/utils';
 import 'aws-amplify/auth/enable-oauth-listener'; // activates Google sign-in's redirect handling (harmless no-op without it configured)
 import '@/i18n';
@@ -37,6 +38,17 @@ if (outputs) {
   const oauth = (outputs as { auth?: { oauth?: { domain?: string } } }).auth?.oauth;
   if (oauth?.domain?.endsWith('.amazoncognito.com')) oauth.domain = 'auth.travelmatevr.com';
   Amplify.configure(outputs);
+  // Prime the guest IAM session once, here, before any page mounts. Home/Explore each fire
+  // several independent catalog.*() calls on mount (authMode: 'identityPool'), and every one
+  // of them needs Cognito Identity credentials - live-confirmed via a real fresh-guest browser
+  // session that firing several concurrent requests before any credentials exist intermittently
+  // throws "NoValidAuthTokens: No federated jwt" from inside Amplify's own credentials
+  // provider (a first-visit-only race, harmless to the eventual result but adds visible delay
+  // while it's retried) and consistently pushes the real data past 10+ seconds to appear. One
+  // single early call here establishes the identity/credentials in the background while the
+  // router/providers are still being set up, so by the time a page's own calls go out they
+  // reuse the same already-resolved session instead of racing to create it from scratch.
+  void fetchAuthSession().catch(() => { /* a guest with no real session yet is expected to throw nothing fatal; swallow and let each page's own call retry normally */ });
 }
 
 const router = createBrowserRouter(routes);
