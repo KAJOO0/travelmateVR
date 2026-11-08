@@ -40,8 +40,25 @@ export function useAsync<T>(fn: () => Promise<T>, deps: unknown[]): { data?: T; 
   const [nonce, setNonce] = useState(0);
   useEffect(() => {
     let alive = true;
-    setState(s => ({ data: s.data, loading: true }));
-    fn().then(data => alive && setState({ data, loading: false }), error => alive && setState({ error, loading: false }));
+    // One silent automatic retry before surfacing an error - live-reproduced against
+    // production with a fresh guest session: Amplify's own IAM-credentials provider can throw
+    // a transient "NoValidAuthTokens: No federated jwt" on the very first call of a brand new
+    // (no cached identity yet) session, which otherwise permanently shows <ErrorState> until
+    // the visitor happens to click "retry" themselves - confirmed the same call reliably
+    // succeeds moments later once the guest identity/credentials exist.
+    let autoRetried = false;
+    const attempt = () => {
+      setState(s => ({ data: s.data, loading: true }));
+      fn().then(
+        data => { if (alive) setState({ data, loading: false }); },
+        error => {
+          if (!alive) return;
+          if (!autoRetried) { autoRetried = true; setTimeout(() => alive && attempt(), 1200); return; }
+          setState({ error, loading: false });
+        }
+      );
+    };
+    attempt();
     return () => { alive = false; };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [...deps, nonce]);
