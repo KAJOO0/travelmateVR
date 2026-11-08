@@ -60,13 +60,9 @@ confirmed live: `src/services/account.ts`'s `finishRealSignIn()` reads the real 
 Cognito `admin` group. `GetUserPoolMfaConfig` shows MFA is entirely unconfigured on the pool
 (`MfaConfiguration: OFF`, no SMS/TOTP block at all) — nobody can enroll even voluntarily today.
 
-This is now directly actionable, not deferred work:
-1. Cognito supports TOTP MFA natively — `amplify/auth/resource.ts`'s `defineAuth` accepts
-   `multifactor: { mode: 'OPTIONAL' | 'REQUIRED', totp: true }`.
-2. Scope it to admin roles specifically (not all travellers) via a Cognito group-based policy
-   or a post-login check that redirects ungated admin accounts to an MFA-setup flow.
-3. Needs a small UI addition: a QR-code enrollment screen (the project already has
-   `src/components/ui/QrCode.tsx` available to reuse for this).
-
-Awaiting a scope decision (admin-mandatory only vs. optional for all users) before
-implementation — see the 2026-11-08 audit's remediation plan.
+**Status: Done (2026-11-08).** TOTP MFA is enabled pool-wide as `OPTIONAL`
+(`amplify/auth/resource.ts`), and the admin group specifically is blocked from `/admin`
+(`src/components/portal/PortalLayout.tsx` + `AdminMfaSetup.tsx`) until they enroll. Server-side
+enforcement is in `amplify/functions/login-guard/handler.ts` (a second custom-auth round for
+enrolled users). Live-tested end-to-end — see `audit-2026-11-08.md` finding #3. Optional/
+mandatory for non-admin travellers remains an open product decision, not implemented.
