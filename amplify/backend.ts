@@ -3,10 +3,12 @@ import * as cognito from 'aws-cdk-lib/aws-cognito';
 import * as dynamodb from 'aws-cdk-lib/aws-dynamodb';
 import * as iam from 'aws-cdk-lib/aws-iam';
 import * as wafv2 from 'aws-cdk-lib/aws-wafv2';
+import * as backup from 'aws-cdk-lib/aws-backup';
 import { auth } from './auth/resource';
 import { data } from './data/resource';
 import { storage } from './storage/resource';
 import { loginGuardFn } from './functions/login-guard/resource';
+import { blockDisposableEmailFn } from './functions/block-disposable-email/resource';
 import { deleteAccountFn } from './functions/delete-account/resource';
 import { submitApplicationFn } from './functions/submit-partner-application/resource';
 import { updatePartnerProfileFn } from './functions/update-partner-profile/resource';
@@ -19,23 +21,24 @@ export const backend = defineBackend({
   data,
   storage,
   loginGuardFn,
+  blockDisposableEmailFn,
   deleteAccountFn,
   submitApplicationFn,
   updatePartnerProfileFn
 });
 
-// Match src/lib/security.ts's isAcceptablePassword exactly (length 12–128, no composition
-// rules) so client-side and Cognito-side password validation never disagree. Raised from the
-// original 8 (2026-11-08 audit, docs/security/audit-2026-11-08.md #10) - NIST 800-63B doesn't
-// require composition rules, but 8 is thin for a minimum with none at all.
+// Match src/lib/security.ts's isAcceptablePassword exactly (length 12–128, upper+lower+number+
+// symbol all required) so client-side and Cognito-side password validation never disagree.
+// Raised from the original 8/no-composition (2026-11-08 audit, docs/security/audit-2026-11-08.md
+// #10) — composition now required too, closing that finding fully.
 const { cfnUserPool, cfnUserPoolClient } = backend.auth.resources.cfnResources;
 cfnUserPool.policies = {
   passwordPolicy: {
     minimumLength: 12,
-    requireLowercase: false,
-    requireUppercase: false,
-    requireNumbers: false,
-    requireSymbols: false
+    requireLowercase: true,
+    requireUppercase: true,
+    requireNumbers: true,
+    requireSymbols: true
   }
 };
 
@@ -173,6 +176,48 @@ backend.updatePartnerProfileFn.addEnvironment('PARTNER_TABLE', partnerTable.tabl
 // amplify/storage/resource.ts's allow.resource(updatePartnerProfileFn) grant on
 // profile-media/* — same reasoning as submitApplicationFn above; adding either manually
 // here would reproduce the exact circular-dependency bug already fixed once.
+
+// ---------------- Storage bucket CORS (2026-11-08 audit #8) ----------------
+
+// Amplify's default CORS rule allows any origin (confirmed live: AllowedOrigins: ["*"]). IAM/
+// Cognito already gate who can call S3 (not a direct account-takeover vector), but a browser
+// page on ANY domain could still drive a signed-in victim's authenticated requests against this
+// bucket cross-origin — tightened to this app's real origins only. Methods/headers/exposed
+// headers/MaxAge kept identical to Amplify's own default (confirmed via GetBucketCors), only
+// AllowedOrigins narrowed.
+const { cfnBucket } = backend.storage.resources.cfnResources;
+cfnBucket.corsConfiguration = {
+  corsRules: [
+    {
+      allowedMethods: ['GET', 'HEAD', 'PUT', 'POST', 'DELETE'],
+      allowedOrigins: [
+        'https://www.travelmatevr.com',
+        'https://travelmatevr.com',
+        'https://main.d1tgxuxxng291h.amplifyapp.com',
+        'http://localhost:5173'
+      ],
+      allowedHeaders: ['*'],
+      exposedHeaders: ['x-amz-server-side-encryption', 'x-amz-request-id', 'x-amz-id-2', 'ETag'],
+      maxAge: 3000
+    }
+  ]
+};
+
+// ---------------- Backup/DR (2026-11-08 audit #6) ----------------
+
+// No AWS Backup plan existed at all (ListBackupPlans/ListBackupVaults both empty, confirmed
+// live) — PITR alone isn't a substitute: it only covers the last 35 days and has no concept of
+// a long-lived, independently-restorable recovery point. dailyMonthly1YearRetention matches
+// the floor the audit recommended (35-day daily rule + 1-year monthly rule) without the added
+// cost/complexity of a cross-region copy, which isn't justified yet at this account's near-
+// empty table sizes — revisit once there's real traveller/partner data to protect.
+const backupPlan = backup.BackupPlan.dailyMonthly1YearRetention(backend.stack, 'TravelMateBackupPlan');
+backupPlan.addSelection('TravelMateBackupSelection', {
+  resources: [
+    ...Object.values(backend.data.resources.tables).map(table => backup.BackupResource.fromDynamoDbTable(table)),
+    backup.BackupResource.fromDynamoDbTable(loginAttemptsTable)
+  ]
+});
 
 // ---------------- AppSync rate limiting (pre-launch audit, Area 5) ----------------
 

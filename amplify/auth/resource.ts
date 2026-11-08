@@ -1,5 +1,6 @@
 import { defineAuth, secret } from '@aws-amplify/backend';
 import { loginGuardFn } from '../functions/login-guard/resource';
+import { blockDisposableEmailFn } from '../functions/block-disposable-email/resource';
 
 /**
  * Real traveller accounts (email + password). Username sign-in is not supported here —
@@ -95,6 +96,7 @@ export const auth = defineAuth({
   // as a second custom-auth round (see handler.ts) - non-enrolled users see no change at all.
   multifactor: { mode: 'OPTIONAL', totp: true },
   triggers: {
+    preSignUp: blockDisposableEmailFn,
     preAuthentication: loginGuardFn,
     defineAuthChallenge: loginGuardFn,
     createAuthChallenge: loginGuardFn,

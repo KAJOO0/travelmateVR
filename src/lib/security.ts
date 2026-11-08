@@ -31,8 +31,17 @@ export const isUsername = (value: string) => USERNAME_RE.test(normalizeUsername(
 
 export const PASSWORD_MIN = 12;
 export const PASSWORD_MAX = 128;
-/** Passwords are not altered (no trimming), only checked for length and control characters. */
-export const isAcceptablePassword = (value: string) => value.length >= PASSWORD_MIN && value.length <= PASSWORD_MAX && !HAS_CONTROL.test(value);
+const HAS_LOWER = /[a-z]/;
+const HAS_UPPER = /[A-Z]/;
+const HAS_NUMBER = /[0-9]/;
+// Cognito's own RequireSymbols character set (docs.aws.amazon.com/cognito, "password policy") -
+// kept to exactly this set, not a broader "any non-alphanumeric", so a password this check
+// accepts is never rejected by the pool's matching composition rule (2026-11-08 audit #10).
+const HAS_SYMBOL = /[\^$*.[\]{}()?"!@#%&/\\,><':;|_~`+=-]/;
+/** Passwords are not altered (no trimming), only checked for length, control characters and composition. */
+export const isAcceptablePassword = (value: string) =>
+  value.length >= PASSWORD_MIN && value.length <= PASSWORD_MAX && !HAS_CONTROL.test(value) &&
+  HAS_LOWER.test(value) && HAS_UPPER.test(value) && HAS_NUMBER.test(value) && HAS_SYMBOL.test(value);
 
 // ---------------- Password hashing (demo store) ----------------
 // The demo keeps simulated accounts on the device, so it hashes passwords with PBKDF2-SHA-256
