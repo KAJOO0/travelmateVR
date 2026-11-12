@@ -3,7 +3,7 @@ import { Icon } from '@/components/ui/Icon';
 import { useToast } from '@/app/providers/ToastProvider';
 import { PortalHead, useFmt, guestName } from '@/features/portal/shared';
 import { ReadOnly, useAdmin, useAdminT, useAllBookings } from '@/features/portal/admin';
-import { downloadCsv, platformMetrics, useAudit, useDirectory } from '@/services/admin';
+import { downloadCsv, platformMetrics, useAudit, useAdminUsers } from '@/services/admin';
 import { lastMonths } from '@/services/businessAnalytics';
 import { useAiLog } from '@/services/aiTelemetry';
 import { effectiveStatus } from '@/services/bookings';
@@ -16,7 +16,7 @@ export default function AdminReportsPage() {
   const toast = useToast();
   const { write } = useAdmin('reports');
   const bookings = useAllBookings();
-  const users = useDirectory();
+  const adminUsers = useAdminUsers();
   const auditLog = useAudit();
   const ai = useAiLog();
   const [from, setFrom] = useState(addDays(todayIso(), -365));
@@ -38,8 +38,10 @@ export default function AdminReportsPage() {
       m.byPartner.map(x => [x.partner.id, x.partner.name, x.partner.kind, x.partner.verified ? 'yes' : 'no', x.partner.real ? 'yes' : 'no', x.listings, x.bookings, x.gmv, x.rating ? x.rating.toFixed(2) : ''])) },
     { key: 'destinations', rows: m.byDestination.length, run: () => downloadCsv(`destinations_${stamp}.csv`, ['id', 'name', 'country', 'bookings', 'gmv', 'interest_index_sample'],
       m.byDestination.map(x => [x.destination.id, x.destination.name, x.destination.countryId, x.bookings, x.gmv, x.interest])) },
-    { key: 'users', rows: users.length, run: () => downloadCsv(`users_${stamp}.csv`, ['id', 'role', 'country', 'status', 'created', 'last_active', 'mfa'],
-      users.map(u => [u.id, u.role, u.country, u.status, u.createdAt, u.lastActive, u.mfa ? 'yes' : 'no'])) },
+    { key: 'users', rows: adminUsers.users.length, run: () => downloadCsv(`users_${stamp}.csv`, ['id', 'role', 'country', 'status', 'created', 'last_active', 'mfa'],
+      adminUsers.real
+        ? adminUsers.users.map(u => [u.id, u.isAdmin ? 'admin' : 'traveller', '', u.enabled ? 'active' : 'suspended', u.createdAt, '', ''])
+        : adminUsers.users.map(u => [u.id, u.role, u.country, u.status, u.createdAt, u.lastActive, u.mfa ? 'yes' : 'no'])) },
     { key: 'ai', rows: ai.length, run: () => downloadCsv(`ai_interactions_${stamp}.csv`, ['id', 'at', 'lang', 'type', 'ok', 'latency_ms', 'feedback', 'flags', 'model', 'prompt_redacted'],
       ai.map(x => [x.id, x.at, x.lang, x.type, x.ok ? 'yes' : 'no', x.latencyMs, x.feedback ?? '', x.flags.join('|'), x.model, x.prompt])) },
     { key: 'audit', rows: auditLog.length, run: () => downloadCsv(`audit_log_${stamp}.csv`, ['at', 'actor', 'role', 'action', 'target', 'detail', 'ip'],

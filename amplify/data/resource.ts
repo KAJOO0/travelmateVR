@@ -2,6 +2,7 @@ import { type ClientSchema, a, defineData } from '@aws-amplify/backend';
 import { deleteAccountFn } from '../functions/delete-account/resource';
 import { submitApplicationFn } from '../functions/submit-partner-application/resource';
 import { updatePartnerProfileFn } from '../functions/update-partner-profile/resource';
+import { adminUsersFn } from '../functions/admin-users/resource';
 
 // Real catalogue data: Country, Destination, Partner, Listing, Experience, Review.
 // Mirrors src/domain/types.ts. Everything else (bookings, admin, partner/board portals,
@@ -64,12 +65,24 @@ const SocialLinks = a.customType({
   linktree: a.string()
 });
 
+// Real Cognito user summary for the admin directory (amplify/functions/admin-users/). Not a
+// model - there's no DynamoDB table backing it, it's just the Lambda's response shape.
+const AdminUserSummary = a.customType({
+  id: a.string().required(),
+  email: a.string().required(),
+  name: a.string(),
+  enabled: a.boolean().required(),
+  createdAt: a.string().required(),
+  isAdmin: a.boolean().required()
+});
+
 const schema = a.schema({
   LocalizedText,
   Coordinates,
   Extra,
   Hotspot,
   SocialLinks,
+  AdminUserSummary,
 
   Country: a
     .model({
@@ -369,7 +382,39 @@ const schema = a.schema({
     .mutation()
     .returns(a.customType({ success: a.boolean() }))
     .authorization(allow => [allow.authenticated()])
-    .handler(a.handler.function(deleteAccountFn))
+    .handler(a.handler.function(deleteAccountFn)),
+
+  // ---------------- Real admin user directory (amplify/functions/admin-users/) ----------------
+  // Replaces src/services/admin.ts's local-browser demo seed with the real Cognito user pool,
+  // for the admin group only. One Lambda serves all four operations below, dispatched on
+  // event.info.fieldName — see admin-users/handler.ts.
+  adminListUsers: a
+    .query()
+    .returns(a.ref('AdminUserSummary').array())
+    .authorization(allow => [allow.group('admin')])
+    .handler(a.handler.function(adminUsersFn)),
+  adminSetUserEnabled: a
+    .mutation()
+    .arguments({ username: a.string().required(), enabled: a.boolean().required() })
+    .returns(a.customType({ success: a.boolean() }))
+    .authorization(allow => [allow.group('admin')])
+    .handler(a.handler.function(adminUsersFn)),
+  // The handler rejects a caller trying to remove their own admin membership — see
+  // admin-users/handler.ts — so this can't lock the signed-in admin out of their own account.
+  adminSetUserAdmin: a
+    .mutation()
+    .arguments({ username: a.string().required(), isAdmin: a.boolean().required() })
+    .returns(a.customType({ success: a.boolean() }))
+    .authorization(allow => [allow.group('admin')])
+    .handler(a.handler.function(adminUsersFn)),
+  // Every invited staff account lands in the 'admin' group — there's no second real Cognito
+  // group yet for a finer-grained staff tier (the demo's 7-role taxonomy has no real backing).
+  adminInviteStaff: a
+    .mutation()
+    .arguments({ email: a.string().required(), name: a.string() })
+    .returns(a.customType({ success: a.boolean(), tempUsername: a.string() }))
+    .authorization(allow => [allow.group('admin')])
+    .handler(a.handler.function(adminUsersFn))
   // Progressive login lockout state lives in a plain CDK-managed DynamoDB table
   // (amplify/backend.ts), not an Amplify Data model — allow.resource() turned out to only be
   // valid for field-level authorization, not a whole model's CRUD rules (confirmed from the

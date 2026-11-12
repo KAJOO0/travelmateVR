@@ -108,11 +108,17 @@
     "allRoles": "All roles",
     "count_one": "{{count}} user",
     "count_other": "{{count}} users",
+    "newThisMonth_one": "{{count}} new signup in the last 30 days",
+    "newThisMonth_other": "{{count}} new signups in the last 30 days",
     "user": "User",
     "role": "Role",
     "roleFor": "Role for {{name}}",
     "joined": "Joined",
     "lastActive": "Last active",
+    "admin": "Admin",
+    "traveller": "Traveller",
+    "makeAdmin": "Make admin",
+    "revokeAdmin": "Revoke admin",
     "status": {
       "active": "Active",
       "suspended": "Suspended"
@@ -125,7 +131,8 @@
     "resetMfa": "Reset 2FA",
     "mfaReset": "Two-step verification reset. The user will set it up again at next sign-in.",
     "inviteStaff": "Invite a staff member",
-    "inviteNote": "Staff must turn on two-step verification at first sign-in. Only super administrators can grant administrator roles."
+    "inviteNote": "Staff must turn on two-step verification at first sign-in. Only super administrators can grant administrator roles.",
+    "realRoleNote": "Invited staff get full admin access — there's no separate staff tier yet on the real account system."
   },
   "partners": {
     "text": "Partner directory, verification, commission and suspensions, plus applications and new listings waiting for review.",

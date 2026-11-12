@@ -12,6 +12,7 @@ import { blockDisposableEmailFn } from './functions/block-disposable-email/resou
 import { deleteAccountFn } from './functions/delete-account/resource';
 import { submitApplicationFn } from './functions/submit-partner-application/resource';
 import { updatePartnerProfileFn } from './functions/update-partner-profile/resource';
+import { adminUsersFn } from './functions/admin-users/resource';
 
 /**
  * @see https://docs.amplify.aws/react/build-a-backend/ to add storage, functions, and more
@@ -24,7 +25,8 @@ export const backend = defineBackend({
   blockDisposableEmailFn,
   deleteAccountFn,
   submitApplicationFn,
-  updatePartnerProfileFn
+  updatePartnerProfileFn,
+  adminUsersFn
 });
 
 // Match src/lib/security.ts's isAcceptablePassword exactly (length 12–128, upper+lower+number+
@@ -131,6 +133,25 @@ new wafv2.CfnWebACLAssociation(backend.stack, 'LoginGuardWafAssoc', {
 backend.deleteAccountFn.addEnvironment('USER_POOL_ID', backend.auth.resources.userPool.userPoolId);
 backend.deleteAccountFn.resources.lambda.addToRolePolicy(new iam.PolicyStatement({
   actions: ['cognito-idp:AdminDeleteUser'],
+  resources: [backend.auth.resources.userPool.userPoolArn]
+}));
+
+// ---------------- Real admin user directory (amplify/functions/admin-users/) ----------------
+
+// Same reasoning as deleteAccountFn just above: this is invoked purely as an AppSync data
+// source (amplify/data/resource.ts), never wired as a Cognito trigger, so referencing the pool
+// directly here doesn't reproduce the login-guard circular-dependency class of issue.
+backend.adminUsersFn.addEnvironment('USER_POOL_ID', backend.auth.resources.userPool.userPoolId);
+backend.adminUsersFn.resources.lambda.addToRolePolicy(new iam.PolicyStatement({
+  actions: [
+    'cognito-idp:ListUsers',
+    'cognito-idp:ListUsersInGroup',
+    'cognito-idp:AdminEnableUser',
+    'cognito-idp:AdminDisableUser',
+    'cognito-idp:AdminAddUserToGroup',
+    'cognito-idp:AdminRemoveUserFromGroup',
+    'cognito-idp:AdminCreateUser'
+  ],
   resources: [backend.auth.resources.userPool.userPoolArn]
 }));
 

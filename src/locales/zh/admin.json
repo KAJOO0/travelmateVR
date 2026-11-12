@@ -107,11 +107,16 @@
     "search": "按姓名或邮箱搜索",
     "allRoles": "全部角色",
     "count_other": "{{count}} 位用户",
+    "newThisMonth_other": "最近 30 天新增 {{count}} 位注册用户",
     "user": "用户",
     "role": "角色",
     "roleFor": "{{name}} 的角色",
     "joined": "注册时间",
     "lastActive": "最近活跃",
+    "admin": "管理员",
+    "traveller": "旅行者",
+    "makeAdmin": "设为管理员",
+    "revokeAdmin": "取消管理员",
     "status": {
       "active": "正常",
       "suspended": "已停用"
@@ -124,7 +129,8 @@
     "resetMfa": "重置两步验证",
     "mfaReset": "两步验证已重置，用户下次登录时需重新设置。",
     "inviteStaff": "邀请员工",
-    "inviteNote": "员工首次登录时必须开启两步验证。只有超级管理员可以授予管理员角色。"
+    "inviteNote": "员工首次登录时必须开启两步验证。只有超级管理员可以授予管理员角色。",
+    "realRoleNote": "受邀员工将获得完整的管理员权限——目前真实账户系统中还没有单独的员工层级。"
   },
   "partners": {
     "text": "合作伙伴名录、认证、佣金和停用，以及待审核的申请和新商品。",

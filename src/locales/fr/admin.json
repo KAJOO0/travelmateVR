@@ -108,11 +108,17 @@
     "allRoles": "Tous les rôles",
     "count_one": "{{count}} utilisateur",
     "count_other": "{{count}} utilisateurs",
+    "newThisMonth_one": "{{count}} nouvelle inscription ces 30 derniers jours",
+    "newThisMonth_other": "{{count}} nouvelles inscriptions ces 30 derniers jours",
     "user": "Utilisateur",
     "role": "Rôle",
     "roleFor": "Rôle de {{name}}",
     "joined": "Inscription",
     "lastActive": "Dernière activité",
+    "admin": "Administrateur",
+    "traveller": "Voyageur",
+    "makeAdmin": "Rendre administrateur",
+    "revokeAdmin": "Retirer les droits d’administrateur",
     "status": {
       "active": "Actif",
       "suspended": "Suspendu"
@@ -126,6 +132,7 @@
     "mfaReset": "Validation en deux étapes réinitialisée. L’utilisateur la configurera à sa prochaine connexion.",
     "inviteStaff": "Inviter un membre de l’équipe",
     "inviteNote": "L’équipe doit activer la validation en deux étapes à la première connexion. Seuls les super administrateurs peuvent attribuer des rôles d’administrateur.",
+    "realRoleNote": "Les membres invités reçoivent un accès administrateur complet : il n’existe pas encore de palier distinct pour l’équipe sur le système de comptes réel.",
     "count_many": "{{count}} utilisateurs"
   },
   "partners": {

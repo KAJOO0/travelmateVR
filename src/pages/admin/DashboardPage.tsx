@@ -6,7 +6,7 @@ import { BarChart, Kpi, LineChart, RankBars, SampleTag } from '@/components/char
 import { usePortal } from '@/components/portal/PortalLayout';
 import { countryLabel, PortalHead, useFmt } from '@/features/portal/shared';
 import { useAdminT, useAllBookings } from '@/features/portal/admin';
-import { platformMetrics, useSupportQueue } from '@/services/admin';
+import { platformMetrics, useAdminUsers, useSupportQueue } from '@/services/admin';
 import { lastMonths } from '@/services/businessAnalytics';
 import { useAiLog } from '@/services/aiTelemetry';
 import { seedIndex } from '@/services/catalog';
@@ -17,6 +17,7 @@ export default function AdminDashboardPage() {
   const f = useFmt();
   const { user } = usePortal();
   const bookings = useAllBookings();
+  const adminUsers = useAdminUsers();
   const aiLog = useAiLog();
   const tickets = useSupportQueue();
   useExperienceStatus();
@@ -29,7 +30,7 @@ export default function AdminDashboardPage() {
       <PortalHead title={t('admin:dashboard.title', { name: user.name.split(' ')[0] })} text={t('admin:dashboard.text')} />
       <Notice icon="info">{t('admin:dashboard.dataNote')}</Notice>
       <div className="kpis">
-        <Kpi icon="users" label={t('admin:kpi.totalUsers')} value={f.n(m.totalUsers)} hint={t('admin:kpi.sampleHint')} />
+        <Kpi icon="users" label={t('admin:kpi.totalUsers')} value={f.n(adminUsers.real ? adminUsers.users.length : m.totalUsers)} hint={adminUsers.real ? undefined : t('admin:kpi.sampleHint')} />
         <Kpi icon="user" label={t('admin:kpi.activeUsers')} value={f.n(m.activeUsers)} hint={t('admin:kpi.sampleHint')} />
         <Kpi icon="briefcase" label={t('admin:kpi.partners')} value={f.n(seedIndex.partners.length)} />
         <Kpi icon="pin" label={t('admin:kpi.destinations')} value={f.n(seedIndex.destinations.length)} />

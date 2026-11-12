@@ -108,11 +108,17 @@
     "allRoles": "Alle Rollen",
     "count_one": "{{count}} Nutzer",
     "count_other": "{{count}} Nutzer",
+    "newThisMonth_one": "{{count}} neue Anmeldung in den letzten 30 Tagen",
+    "newThisMonth_other": "{{count}} neue Anmeldungen in den letzten 30 Tagen",
     "user": "Nutzer",
     "role": "Rolle",
     "roleFor": "Rolle von {{name}}",
     "joined": "Registriert",
     "lastActive": "Zuletzt aktiv",
+    "admin": "Administrator",
+    "traveller": "Reisender",
+    "makeAdmin": "Zum Administrator machen",
+    "revokeAdmin": "Administratorrechte entziehen",
     "status": {
       "active": "Aktiv",
       "suspended": "Gesperrt"
@@ -125,7 +131,8 @@
     "resetMfa": "2FA zurücksetzen",
     "mfaReset": "Zwei-Faktor-Bestätigung zurückgesetzt. Der Nutzer richtet sie bei der nächsten Anmeldung neu ein.",
     "inviteStaff": "Teammitglied einladen",
-    "inviteNote": "Das Team muss bei der ersten Anmeldung die Zwei-Faktor-Bestätigung aktivieren. Nur Super-Administratoren vergeben Administratorrollen."
+    "inviteNote": "Das Team muss bei der ersten Anmeldung die Zwei-Faktor-Bestätigung aktivieren. Nur Super-Administratoren vergeben Administratorrollen.",
+    "realRoleNote": "Eingeladene Teammitglieder erhalten vollen Administratorzugriff - es gibt im echten Kontosystem noch keine eigene Team-Stufe."
   },
   "partners": {
     "text": "Partnerverzeichnis, Verifizierung, Provision und Sperren sowie Bewerbungen und neue Angebote zur Prüfung.",

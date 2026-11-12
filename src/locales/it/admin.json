@@ -108,11 +108,17 @@
     "allRoles": "Tutti i ruoli",
     "count_one": "{{count}} utente",
     "count_other": "{{count}} utenti",
+    "newThisMonth_one": "{{count}} nuova iscrizione negli ultimi 30 giorni",
+    "newThisMonth_other": "{{count}} nuove iscrizioni negli ultimi 30 giorni",
     "user": "Utente",
     "role": "Ruolo",
     "roleFor": "Ruolo di {{name}}",
     "joined": "Iscrizione",
     "lastActive": "Ultima attività",
+    "admin": "Amministratore",
+    "traveller": "Viaggiatore",
+    "makeAdmin": "Rendi amministratore",
+    "revokeAdmin": "Revoca amministratore",
     "status": {
       "active": "Attivo",
       "suspended": "Sospeso"
@@ -126,6 +132,7 @@
     "mfaReset": "Verifica in due passaggi reimpostata. L’utente la configurerà al prossimo accesso.",
     "inviteStaff": "Invita un membro dello staff",
     "inviteNote": "Lo staff deve attivare la verifica in due passaggi al primo accesso. Solo i super amministratori possono assegnare ruoli di amministratore.",
+    "realRoleNote": "Lo staff invitato riceve accesso amministratore completo: non esiste ancora un livello staff separato nel sistema account reale.",
     "count_many": "{{count}} utenti"
   },
   "partners": {

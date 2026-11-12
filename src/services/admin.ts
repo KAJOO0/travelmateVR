@@ -9,9 +9,10 @@ import { applications, campaignStore, featuredStore, packageStore, settingsStore
 import { boardCampaignStore } from './board';
 import { partnerAdminStore } from './inventory';
 import { messaging } from './messaging';
-import { demoLatency } from './http';
+import { REAL_BACKEND, demoLatency } from './http';
 import { generateClient } from 'aws-amplify/data';
 import type { Schema } from '../../amplify/data/resource';
+import { useAsync } from '@/lib/hooks';
 
 const dataClient = () => generateClient<Schema>({ authMode: 'userPool' });
 
@@ -119,6 +120,48 @@ export const usersAdmin = {
     audit('user.invite', email, role);
   }
 };
+
+// ---------------- Real user directory (amplify/functions/admin-users/) ----------------
+// Only the real backend has these operations - a real Cognito user pool, not the local demo
+// seed above. Only two real states exist (no backing Cognito group for the demo's other
+// roles): isAdmin true/false, mapped to the same 'admin' group finishRealSignIn() already
+// reads (src/services/account.ts) to grant the super_admin role at sign-in.
+export interface RealDirectoryUser { id: string; email: string; name?: string | null; enabled: boolean; createdAt: string; isAdmin: boolean }
+
+function orThrow<T>(res: { data: T; errors?: { message: string }[] }): T {
+  if (res.errors?.length) throw new Error(res.errors.map(e => e.message).join('; '));
+  return res.data;
+}
+
+export const adminUsersApi = {
+  async list(): Promise<RealDirectoryUser[]> {
+    const data = orThrow(await dataClient().queries.adminListUsers());
+    return (data ?? []).filter((u): u is NonNullable<typeof u> => !!u);
+  },
+  async setEnabled(username: string, enabled: boolean): Promise<void> {
+    orThrow(await dataClient().mutations.adminSetUserEnabled({ username, enabled }));
+    audit(enabled ? 'user.reactivate' : 'user.suspend', username);
+  },
+  async setAdmin(username: string, isAdmin: boolean): Promise<void> {
+    orThrow(await dataClient().mutations.adminSetUserAdmin({ username, isAdmin }));
+    audit('user.role', username, isAdmin ? 'admin' : 'traveller');
+  },
+  async invite(email: string, name: string): Promise<void> {
+    orThrow(await dataClient().mutations.adminInviteStaff({ email, name: name || undefined }));
+    audit('user.invite', email, 'admin');
+  }
+};
+
+/** Real user directory when REAL_BACKEND, the local demo one otherwise - same split as
+ *  catalog.ts's amplifyCatalog/mockCatalog. Call sites (UsersPage, ReportsPage,
+ *  DashboardPage) don't need their own REAL_BACKEND branches. */
+export function useAdminUsers() {
+  const demo = useDirectory();
+  const real = useAsync(() => (REAL_BACKEND ? adminUsersApi.list() : Promise.resolve([])), []);
+  return REAL_BACKEND
+    ? { users: real.data ?? [], loading: real.loading, error: real.error, retry: real.retry, real: true as const }
+    : { users: demo, loading: false, error: undefined, retry: () => {}, real: false as const };
+}
 
 // ---------------- Partners ----------------
 export const partnersAdmin = {
