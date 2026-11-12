@@ -12,7 +12,10 @@ import { blockDisposableEmailFn } from './functions/block-disposable-email/resou
 import { deleteAccountFn } from './functions/delete-account/resource';
 import { submitApplicationFn } from './functions/submit-partner-application/resource';
 import { updatePartnerProfileFn } from './functions/update-partner-profile/resource';
-import { adminUsersFn } from './functions/admin-users/resource';
+import { adminListUsersFn } from './functions/admin-list-users/resource';
+import { adminSetUserEnabledFn } from './functions/admin-set-user-enabled/resource';
+import { adminSetUserAdminFn } from './functions/admin-set-user-admin/resource';
+import { adminInviteStaffFn } from './functions/admin-invite-staff/resource';
 
 /**
  * @see https://docs.amplify.aws/react/build-a-backend/ to add storage, functions, and more
@@ -26,7 +29,10 @@ export const backend = defineBackend({
   deleteAccountFn,
   submitApplicationFn,
   updatePartnerProfileFn,
-  adminUsersFn
+  adminListUsersFn,
+  adminSetUserEnabledFn,
+  adminSetUserAdminFn,
+  adminInviteStaffFn
 });
 
 // Match src/lib/security.ts's isAcceptablePassword exactly (length 12–128, upper+lower+number+
@@ -136,23 +142,38 @@ backend.deleteAccountFn.resources.lambda.addToRolePolicy(new iam.PolicyStatement
   resources: [backend.auth.resources.userPool.userPoolArn]
 }));
 
-// ---------------- Real admin user directory (amplify/functions/admin-users/) ----------------
+// ---------------- Real admin user directory (amplify/functions/admin-*) ----------------
 
-// Same reasoning as deleteAccountFn just above: this is invoked purely as an AppSync data
-// source (amplify/data/resource.ts), never wired as a Cognito trigger, so referencing the pool
-// directly here doesn't reproduce the login-guard circular-dependency class of issue.
-backend.adminUsersFn.addEnvironment('USER_POOL_ID', backend.auth.resources.userPool.userPoolId);
-backend.adminUsersFn.resources.lambda.addToRolePolicy(new iam.PolicyStatement({
-  actions: [
-    'cognito-idp:ListUsers',
-    'cognito-idp:ListUsersInGroup',
-    'cognito-idp:AdminEnableUser',
-    'cognito-idp:AdminDisableUser',
-    'cognito-idp:AdminAddUserToGroup',
-    'cognito-idp:AdminRemoveUserFromGroup',
-    'cognito-idp:AdminCreateUser'
-  ],
-  resources: [backend.auth.resources.userPool.userPoolArn]
+// Same reasoning as deleteAccountFn just above: each of these is invoked purely as an AppSync
+// data source (amplify/data/resource.ts), never wired as a Cognito trigger, so referencing the
+// pool directly here doesn't reproduce the login-guard circular-dependency class of issue.
+// One function per operation (see admin-list-users/handler.ts for why), each granted only the
+// specific Cognito actions it actually calls.
+const userPoolArn = backend.auth.resources.userPool.userPoolArn;
+const userPoolId = backend.auth.resources.userPool.userPoolId;
+
+backend.adminListUsersFn.addEnvironment('USER_POOL_ID', userPoolId);
+backend.adminListUsersFn.resources.lambda.addToRolePolicy(new iam.PolicyStatement({
+  actions: ['cognito-idp:ListUsers', 'cognito-idp:ListUsersInGroup'],
+  resources: [userPoolArn]
+}));
+
+backend.adminSetUserEnabledFn.addEnvironment('USER_POOL_ID', userPoolId);
+backend.adminSetUserEnabledFn.resources.lambda.addToRolePolicy(new iam.PolicyStatement({
+  actions: ['cognito-idp:AdminEnableUser', 'cognito-idp:AdminDisableUser'],
+  resources: [userPoolArn]
+}));
+
+backend.adminSetUserAdminFn.addEnvironment('USER_POOL_ID', userPoolId);
+backend.adminSetUserAdminFn.resources.lambda.addToRolePolicy(new iam.PolicyStatement({
+  actions: ['cognito-idp:AdminAddUserToGroup', 'cognito-idp:AdminRemoveUserFromGroup'],
+  resources: [userPoolArn]
+}));
+
+backend.adminInviteStaffFn.addEnvironment('USER_POOL_ID', userPoolId);
+backend.adminInviteStaffFn.resources.lambda.addToRolePolicy(new iam.PolicyStatement({
+  actions: ['cognito-idp:AdminCreateUser', 'cognito-idp:AdminAddUserToGroup'],
+  resources: [userPoolArn]
 }));
 
 // ---------------- Mandatory partner certification (amplify/functions/submit-partner-application/) ----------------
