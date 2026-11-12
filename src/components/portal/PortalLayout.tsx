@@ -172,13 +172,23 @@ export function PortalLayout({ kind }: { kind: PortalKind }) {
           {allowed && orgName && (
             <span className="portal-org">
               <b>{orgName}</b>
-              <span className="badge demo">{t('business:shell.demoAccount')}</span>
+              {/* The board portal has no real TourismBoard entity yet - DEMO_BOARD is always a
+                  placeholder, so it's always genuinely demo. A partner, though, is only demo
+                  when its own record is (partner.real is false for seeded/sample partners) or
+                  the whole session is running in mock mode (!REAL_BACKEND) - a real signed-in
+                  partner on the real backend was wrongly getting this label unconditionally. */}
+              {(kind === 'board' || !REAL_BACKEND || (kind === 'partner' && !partner?.real)) && (
+                <span className="badge demo">{t('business:shell.demoAccount')}</span>
+              )}
             </span>
           )}
           <span className="portal-spacer" />
           {allowed && kind === 'partner' && partner && <Link className="btn ghost sm hide-sm" to={`/partner/${partner.slug}`}><Icon name="eye" />{t('business:shell.viewStorefront')}</Link>}
           {allowed && kind === 'board' && <Link className="btn ghost sm hide-sm" to="/destinations"><Icon name="eye" />{t('board:shell.viewSite')}</Link>}
-          {allowed && adminRole && <span className="badge demo">{t('business:shell.demoAccount')}</span>}
+          {/* Same fix as the partner/board badge above: a real Cognito-gated admin session
+              (REAL_BACKEND true) is never a demo account - only the mock one-click admin
+              login (REAL_BACKEND false) is. This badge was showing unconditionally before. */}
+          {allowed && adminRole && !REAL_BACKEND && <span className="badge demo">{t('business:shell.demoAccount')}</span>}
           {allowed && adminRole && <span className="badge">{t(`admin:roles.${adminRole}`)}</span>}
           <PreferencesMenu />
           {user && allowed && <UserMenu user={user} />}
