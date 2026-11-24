@@ -116,7 +116,6 @@ export function Showcase({ cats, index, onIndex }: { cats: ShowcaseCategory[]; i
   return (
     <div className={`stage${playing ? '' : ' paused'}`} ref={stageRef}>
       <section className="rail" aria-label={t('showcase.browse')} {...holdHandlers}>
-        <span className="eyebrow center">{t('showcase.browse')}</span>
         <div className="rail-stage">
           <EdgeButton dir="left" label={t('showcase.prev')} onClick={() => go(-1)} />
           <div
