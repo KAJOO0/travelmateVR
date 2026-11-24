@@ -8,13 +8,6 @@ body {
   padding-top: max(20px, env(safe-area-inset-top));
   padding-bottom: calc(var(--bottom-nav-h) + env(safe-area-inset-bottom, 0px));
   background-color: var(--bg);
-  background-image:
-    radial-gradient(ellipse 460px 290px at 18% 300px, var(--blob-1), transparent 100%),
-    radial-gradient(ellipse 440px 300px at 85% 420px, var(--blob-2), transparent 100%),
-    radial-gradient(ellipse 420px 260px at 22% 800px, var(--blob-1), transparent 100%),
-    radial-gradient(ellipse 380px 220px at 82% 850px, var(--blob-3), transparent 100%);
-  background-size: 100% 1100px;
-  background-repeat: repeat-y;
   color: var(--ink);
   font-family: var(--font);
   font-size: var(--fs-body);
@@ -27,6 +20,7 @@ a { color: inherit; }
 button, input, select, textarea { font: inherit; color: inherit; }
 img { max-width: 100%; display: block; }
 h1, h2, h3, h4, p { margin: 0; }
+p { text-wrap: pretty; }
 ul, ol { margin: 0; padding: 0; }
 :focus-visible { outline: 2px solid var(--ring); outline-offset: 3px; }
 ::selection { background: var(--accent); color: #fff; }

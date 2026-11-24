@@ -409,7 +409,7 @@ a.stat:hover { border-color: var(--ring); }
   .panel, .card { box-shadow: none; border-color: #ccc; background: #fff; }
   .page { gap: 16px; }
 }
-.reply { margin-top: 8px; padding: 10px 14px; border-left: 3px solid var(--accent-bright); background: var(--accent-soft); border-radius: 0 12px 12px 0; font-size: var(--fs-btn); }
+.reply { margin-top: 8px; padding: 10px 14px; border: 1px solid var(--accent-bright); background: var(--accent-soft); border-radius: 12px; font-size: var(--fs-btn); }
 .reply b { display: block; font-size: var(--fs-small); margin-bottom: 2px; }
 .table-wrap { overflow-x: auto; border: 1px solid var(--panel-line); border-radius: var(--r-md); background: var(--panel); }
 .dtable { width: 100%; border-collapse: collapse; font-size: var(--fs-btn); }
@@ -445,8 +445,8 @@ a.stat:hover { border-color: var(--ring); }
 
 /* ---------- Tanzanian payments ---------- */
 .momo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
-.momo { position: relative; display: grid; gap: 2px; padding: 12px 14px 12px 18px; border: 1px solid var(--panel-line); border-radius: 16px; background: var(--panel); cursor: pointer; overflow: hidden; }
-.momo::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 6px; background: var(--brand); }
+.momo { position: relative; display: grid; gap: 2px; padding: 14px; border: 1px solid var(--panel-line); border-radius: 16px; background: var(--panel); cursor: pointer; }
+.momo::before { content: ''; position: absolute; top: 14px; right: 14px; width: 10px; height: 10px; border-radius: 50%; background: var(--brand); }
 .momo input { position: absolute; opacity: 0; pointer-events: none; }
 .momo small { color: var(--muted); font-size: var(--fs-small); }
 .momo.on { border-color: var(--ring); box-shadow: 0 0 0 2px color-mix(in srgb, var(--ring) 45%, transparent); }

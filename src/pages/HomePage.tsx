@@ -103,7 +103,6 @@ export default function HomePage() {
       <div className="block" id="home">
         <Showcase cats={showcase} index={cat} onIndex={setCat} />
         <div className="lead">
-          <span className="eyebrow">{t('hero.eyebrow')}</span>
           <h1>{t('hero.title')}</h1>
           <p>{t('hero.text')}</p>
           <div className="actions">
@@ -130,7 +129,6 @@ export default function HomePage() {
       <section className="block" aria-labelledby="xp-h">
         <div className="sec-head">
           <div>
-            <span className="eyebrow">{t('xp.eyebrow')}</span>
             <h2 className="sec-title" id="xp-h">{t('xp.title')}</h2>
             <p className="lede">{t('xp.text')}</p>
           </div>
@@ -149,7 +147,7 @@ export default function HomePage() {
 
       {/* 5 · Why travellers choose us */}
       <section className="block" aria-labelledby="why-h">
-        <div className="sec-head"><div><span className="eyebrow">{t('why.eyebrow')}</span><h2 className="sec-title" id="why-h">{t('why.title')}</h2></div></div>
+        <div className="sec-head"><div><h2 className="sec-title" id="why-h">{t('why.title')}</h2></div></div>
         <div className="grid3 benefit-grid">
           {BENEFITS.map(b => (
             <div className="card about" key={b.key}><span className="ico"><Icon name={b.icon} /></span><h3>{t(`why.${b.key}.title`)}</h3><p>{t(`why.${b.key}.text`)}</p></div>
@@ -159,7 +157,7 @@ export default function HomePage() {
 
       {/* 6 · How it works */}
       <section className="block" aria-labelledby="how-h">
-        <div className="sec-head"><div><span className="eyebrow">{t('how.eyebrow')}</span><h2 className="sec-title" id="how-h">{t('how.title')}</h2></div></div>
+        <div className="sec-head"><div><h2 className="sec-title" id="how-h">{t('how.title')}</h2></div></div>
         <ol className="how-steps">
           {STEPS.map((icon, i) => (
             <li key={i}>
@@ -176,7 +174,6 @@ export default function HomePage() {
       <section className="block" aria-labelledby="dest-h">
         <div className="sec-head">
           <div>
-            <span className="eyebrow">{t('dest.eyebrow')}</span>
             <h2 className="sec-title" id="dest-h">{t('dest.title')}</h2>
             <p className="lede">{t('dest.text')}</p>
           </div>
@@ -200,7 +197,6 @@ export default function HomePage() {
       {/* 8 · AI planner (supporting the journey, not leading it) */}
       <section className="band" aria-labelledby="ai-h">
         <div>
-          <span className="eyebrow">{t('ai.eyebrow')}</span>
           <h2 id="ai-h">{t('ai.title')}</h2>
           <p>{t('ai.text')}</p>
           <p className="quote">“{t('ai.example')}”</p>
@@ -212,7 +208,6 @@ export default function HomePage() {
       <section className="block partner-split" aria-labelledby="partner-h">
         <div className="pic"><Media id="safari-crew" sizes="(max-width: 900px) 92vw, 600px" decorative focus="50% 40%" /></div>
         <div className="txt">
-          <span className="eyebrow">{t('partners.eyebrow')}</span>
           <h2 className="sec-title" id="partner-h">{t('partners.title')}</h2>
           <p className="lede">{t('partners.text')}</p>
           <ul className="check-list">{PARTNER_BENEFITS.map(k => <li key={k}><Icon name="check" />{t(`partners.b.${k}`)}</li>)}</ul>
@@ -225,7 +220,7 @@ export default function HomePage() {
 
       {/* 10 · Partner types */}
       <section className="block" aria-labelledby="types-h">
-        <div className="sec-head"><div><span className="eyebrow">{t('types.eyebrow')}</span><h2 className="sec-title" id="types-h">{t('types.title')}</h2></div></div>
+        <div className="sec-head"><div><h2 className="sec-title" id="types-h">{t('types.title')}</h2></div></div>
         <div className="grid3 types-grid">
           {PARTNER_TYPES.map(p => (
             <Link key={p.key} className="card about type-card" to={p.to}>
@@ -240,7 +235,7 @@ export default function HomePage() {
 
       {/* 11 · Social proof: real numbers and real partners only */}
       <section className="block" aria-labelledby="proof-h">
-        <div className="sec-head"><div><span className="eyebrow">{t('proof.eyebrow')}</span><h2 className="sec-title" id="proof-h">{t('proof.title')}</h2></div></div>
+        <div className="sec-head"><div><h2 className="sec-title" id="proof-h">{t('proof.title')}</h2></div></div>
         <div className="stat-band">
           {stats.map(s => <div key={s.k}><b>{s.n}</b><span>{t(`proof.stat.${s.k}`)}</span></div>)}
         </div>
@@ -279,7 +274,7 @@ export default function HomePage() {
       {/* FAQ */}
       <section className="block" aria-labelledby="faq-h">
         <div className="sec-head">
-          <div><span className="eyebrow">{t('faq.eyebrow')}</span><h2 className="sec-title" id="faq-h">{t('faq.title')}</h2></div>
+          <div><h2 className="sec-title" id="faq-h">{t('faq.title')}</h2></div>
           <Link className="tlink" to="/faq"><span>{t('faq.all')}</span><Icon name="arrowRight" /></Link>
         </div>
         <div className="faq">{FAQ_KEYS.map(k => <details key={k}><summary>{t(`faq.${k}.q`)}</summary><div>{t(`faq.${k}.a`)}</div></details>)}</div>

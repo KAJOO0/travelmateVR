@@ -434,8 +434,9 @@ export function pushNotification(n: { kind: AppNotification['kind']; title?: Loc
  *  populated in real-backend mode; demo mode has nothing to subscribe to. */
 export function useBackendNotifications(): AppNotification[] {
   const [list, setList] = useState<AppNotification[]>([]);
+  const userId = useSession()?.id;
   useEffect(() => {
-    if (!REAL_BACKEND) return;
+    if (!REAL_BACKEND || !userId) { setList([]); return; }
     const sub = dataClient().models.Notification.observeQuery().subscribe({
       next: ({ items }) => setList(items.map(n => ({
         id: n.id,
@@ -447,7 +448,7 @@ export function useBackendNotifications(): AppNotification[] {
       })))
     });
     return () => sub.unsubscribe();
-  }, []);
+  }, [userId]);
   return list;
 }
 
@@ -496,13 +497,14 @@ function useProfileClient() { return dataClient(); }
 
 export function useMyProfile() {
   const [profile, setProfile] = useState<Schema['UserProfile']['type'] | null>(null);
+  const userId = useSession()?.id;
   useEffect(() => {
-    if (!REAL_BACKEND) return;
+    if (!REAL_BACKEND || !userId) { setProfile(null); return; }
     const sub = useProfileClient().models.UserProfile.observeQuery().subscribe({
       next: ({ items }) => setProfile(items[0] ?? null)
     });
     return () => sub.unsubscribe();
-  }, []);
+  }, [userId]);
   return profile;
 }
 
