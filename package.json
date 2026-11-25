@@ -8,6 +8,7 @@
     "dev": "vite",
     "build": "tsc --noEmit -p . && vite build",
     "preview": "vite preview",
+    "test": "vitest run",
     "typecheck": "tsc --noEmit -p .",
     "media": "node scripts/optimize-media.mjs",
     "videos": "node scripts/build-videos.mjs",
@@ -53,6 +54,7 @@
     "typescript": "^5.9.3",
     "vite": "^8.3.2",
     "vite-plugin-pwa": "^2.0.0",
+    "vitest": "^5.1.2",
     "workbox-window": "^7.4.1"
   }
 }
